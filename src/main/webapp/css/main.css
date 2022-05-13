@@ -1,0 +1,29 @@
+/* /webapp/css/main.css  */
+table {	width : 100%;	border-collapse: collapse;  }
+th,td {
+	border : 3px solid #bcbcbc;
+	text-align: center;
+	padding : 8px;
+}
+th {background-color: #4CAF50;	color : white;}
+td { background-color: #F2F2F2;  }
+input[type=text],input[type=password],textarea {	width : 100%;  }
+caption {
+	color : #111111;
+	font-size : 20px;
+	background-color: #FFFFFF;
+}
+.nopadding {
+	width:280px;
+	table-layout:fixed;
+}
+.nopadding th,.nopadding td {
+	border : 1px solid #bcbcbc;
+	vertical-align : middle;
+	padding : 0px;
+}
+.nopadding caption {
+	color : #111111;
+	font-size : 15px;
+	background-color: #FFFFFF;
+}

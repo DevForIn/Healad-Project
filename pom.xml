@@ -1,0 +1,119 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>kr.kic</groupId>
+  <artifactId>springmvc1</artifactId>
+  <packaging>war</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>springmvc1 Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+  <properties>
+  	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  	<spring.version>4.3.30.RELEASE</spring.version>
+  </properties>
+  <!-- 원격 저장소 설정 : mvnrepository.com -> 기본 원격 저장소 이외의 저장소 사용시 설정 -->
+  <repositories>
+  	<repository>
+  		<id>oracle</id>
+  		<name>ORACLE JDBC Repository</name>
+  		<url>http://maven.jahia.org/maven2</url>  		
+  	</repository>
+  </repositories>
+  
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+   <dependency>
+  	  <groupId>org.springframework</groupId>
+  	  <artifactId>spring-context</artifactId>
+  	  <version>${spring.version}</version>
+	</dependency>
+	<dependency>
+  	  <groupId>org.springframework</groupId>
+  	  <artifactId>spring-web</artifactId>
+  	  <version>${spring.version}</version>
+	</dependency>   
+	<dependency>
+  	  <groupId>org.springframework</groupId>
+  	  <artifactId>spring-webmvc</artifactId>
+  	  <version>${spring.version}</version>
+	</dependency>     
+<!-- spring db 설정 -->
+	<dependency>
+  	  <groupId>org.springframework</groupId>
+  	  <artifactId>spring-jdbc</artifactId>
+  	  <version>${spring.version}</version>
+	</dependency>    
+<!-- 오라클 관련 설정 -->
+	<dependency>
+  	  <groupId>com.oracle</groupId>
+  	  <artifactId>ojdbc5</artifactId>
+  	  <version>11.2.0.2.0</version>
+	</dependency> 
+<!-- jstl 설정 -->
+	<dependency>
+  	  <groupId>jstl</groupId>
+  	  <artifactId>jstl</artifactId>
+  	  <version>1.2</version>
+	</dependency> 
+	
+<!-- 유효성 검증 설정 -->
+	<dependency>
+  	  <groupId>javax.validation</groupId>
+  	  <artifactId>validation-api</artifactId>
+  	  <version>2.0.1.Final</version>
+	</dependency> 
+	<dependency>
+  	  <groupId>org.hibernate</groupId>
+  	  <artifactId>hibernate-validator</artifactId>
+  	  <version>6.1.0.Final</version>
+	</dependency> 
+	
+<!-- 파일 업로드 설정 -->
+	<dependency>
+  	  <groupId>commons-fileupload</groupId>
+  	  <artifactId>commons-fileupload</artifactId>
+  	  <version>1.3.3</version>
+	</dependency> 
+	<dependency>
+  	  <groupId>commons-beanutils</groupId>
+  	  <artifactId>commons-beanutils</artifactId>
+  	  <version>1.9.3</version>
+	</dependency>
+	<dependency>
+  	  <groupId>commons-digester</groupId>
+  	  <artifactId>commons-digester</artifactId>
+  	  <version>2.1</version>
+	</dependency>
+
+<!-- AOP 설정-->
+	<dependency>
+		<groupId>org.aspectj</groupId>
+		<artifactId>aspectjweaver</artifactId>
+		<version>1.9.6</version>
+	</dependency>
+	
+<!-- sitemesh 설정-->
+	<dependency>
+		<groupId>org.sitemesh</groupId>
+		<artifactId>sitemesh</artifactId>
+		<version>3.0.1</version>
+	</dependency>
+  </dependencies>
+ 
+  <build>
+    <finalName>healad</finalName>
+<!-- pom.xml의 첫번째 줄에 maven-war-plugin 관련 오류 발생시 코딩-->
+    	<plugins>
+    		<plugin>
+    			<artifactId>maven-war-plugin</artifactId>
+    			<version>3.2.2</version>
+    			</plugin>
+    	</plugins>   	    		
+  </build>
+</project>

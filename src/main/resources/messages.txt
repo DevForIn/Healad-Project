@@ -1,0 +1,14 @@
+## src/main/resources/messages.txt => src/main/resources/messages.properties 변경
+error.login.password=비밀번호를 확인하세요.
+error.input.user=회원가입 입력항목을 확인하세요
+error.input.login=로그인 입력항목을 확인하세요
+typeMismatch.birthday=생년월일은 YYYY-MM-DD 형식으로 입력해 주세요
+error.duplicate.user=중복된 아이디 입니다.
+error.login.password=비밀번호 오류 입니다.
+error.login.id=아이디가 존재하지 않습니다.
+
+error.userid.search=아이디를 찾을 수 없습니다.
+error.password.search=비밀번호를 찾을 수 없습니다.
+error.required.userid=아이디를 입력하세요
+error.required.email=EMAIL을 입력하세요
+error.required.phoneno=전화번호를 입력하세요
