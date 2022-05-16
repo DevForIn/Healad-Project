@@ -27,8 +27,9 @@ body { padding-top:40px;
     <!-- Right-sided navbar links. Hide them on small screens -->
     <div class="w3-right w3-hide-small">
       <a href="${path}/user/mainInfo" class="w3-bar-item w3-button"><h3>Info</h3></a>
-      <a href="#menu" class="w3-bar-item w3-button"><h3>Menu</h3></a>
-      <a href="#menu" class="w3-bar-item w3-button"><h3>Service</h3></a>
+      <a href="${path}/item/menu" class="w3-bar-item w3-button"><h3>Menu</h3></a>
+      <a href="${path}/board/notice" class="w3-bar-item w3-button"><h3>Service</h3></a>
+      
   	  <c:if test="${empty sessionScope.loginUser}">
        <a href="${path}/user/login" class="w3-bar-item w3-button"><h3>Login</h3></a>
        <a href="${path}/user/userEntry" class="w3-bar-item w3-button"><h3>Sign Up</h3></a>
