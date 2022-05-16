@@ -11,6 +11,7 @@ function win_open(page) {
 	   var op = "width=500, height=350, left=50,top=150";
 	   open(page,"",op);
 }
+//test1
 </script>
 </head><body>
 <h2>사용자 로그인</h2>
