@@ -26,6 +26,7 @@ public class UserController {
 	//@RequestMapping : Get/Post 방식 상관없이 요청인 경우
 	
 	//http://localhost:8088/springmvc1/user/userEntry
+	//git test
 	@GetMapping("*") 	// 그외 모든 Get 방식 요청
 	public ModelAndView getUser() {
 		ModelAndView mav = new ModelAndView();
