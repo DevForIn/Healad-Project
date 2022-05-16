@@ -29,7 +29,7 @@ body { padding-top:40px;
       <a href="${path}/user/mainInfo" class="w3-bar-item w3-button"><h3>Info</h3></a>
       <a href="${path}/item/menu" class="w3-bar-item w3-button"><h3>Menu</h3></a>
       <a href="${path}/board/notice" class="w3-bar-item w3-button"><h3>Service</h3></a>
-      
+      <!-- commit test -->
   	  <c:if test="${empty sessionScope.loginUser}">
        <a href="${path}/user/login" class="w3-bar-item w3-button"><h3>Login</h3></a>
        <a href="${path}/user/userEntry" class="w3-bar-item w3-button"><h3>Sign Up</h3></a>
