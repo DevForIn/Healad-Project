@@ -10,16 +10,6 @@ DROP TABLE NOTICE CASCADE CONSTRAINTS;
 DROP TABLE SALE CASCADE CONSTRAINTS;
 DROP TABLE USER_ACCOUNT CASCADE CONSTRAINTS;
 
-DROP TABLE category;
-DROP TABLE faq;
-DROP TABLE item;
-DROP TABLE notice;
-DROP TABLE review;
-DROP TABLE salehistory;
-DROP TABLE saleinfo;
-DROP TABLE saleitem;
-DROP TABLE useraccount;
-select * from faq
 
 
 
@@ -117,16 +107,16 @@ CREATE TABLE USER_ACCOUNT
 	USER_ID varchar2(20) NOT NULL,
 	PWD varchar2(30),
 	USER_NAME varchar2(30),
-	PHONE_NO varchar2(12),
-	POST_CODE varchar2(6),
+	PHONE_NO varchar2(13),
+	POST_CODE varchar2(7),
 	ADDR varchar2(200),
 	ADDR_DETAIL varchar2(200),
 	EMAIL varchar2(100),
-	BIRTH_DATE varchar2(10),
-	JOIN_DATE varchar2(10),
-	WITHDRAW_YN char(1),
-	WITHDRAW_DATE varchar2(10),
-	Mileage number(10,0),
+	BIRTH_DATE date,
+	JOIN_DATE date,
+	WITHDRAW_YN varchar2(2),
+	WITHDRAW_DATE date,
+	Mileage number,
 	PRIMARY KEY (USER_ID)
 );
 

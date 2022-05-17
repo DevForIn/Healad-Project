@@ -21,12 +21,7 @@ import logic.User;
 public class UserController {
 	@Autowired
 	private ShopService service;
-	//@GetMapping : Get 방식 요청인 경우
-	//@PostMapping : Post 방식 요청인 경우
-	//@RequestMapping : Get/Post 방식 상관없이 요청인 경우
-	
-	//http://localhost:8088/springmvc1/user/userEntry //1
-	//git test
+
 	@GetMapping("*") 	// 그외 모든 Get 방식 요청
 	public ModelAndView getUser() {
 		ModelAndView mav = new ModelAndView();
@@ -34,8 +29,26 @@ public class UserController {
 		return mav;	//	WEB-INF/view/user/userEntry.jsp 뷰로 설정
 	}	
 
-	@RequestMapping("mainInfo")
-	public String mainInfo(HttpSession session) {
-		return null;	// url과 같은 이름의 view 리턴 : user/main.jsp
+	@PostMapping("signUp")
+	public ModelAndView signUp(@Valid User user,BindingResult bresult) {
+		ModelAndView mav = new ModelAndView();
+		if(bresult.hasErrors()) {
+			mav.getModel().putAll(bresult.getModel());
+			bresult.reject("error.input.user");			
+			return mav;	
+		}
+		try {
+			service.userInsert(user);
+			mav.addObject("user",user);
+			
+		  // key 값(userID)이 중복된 경우 예외가 발생
+		} catch(DataIntegrityViolationException e) {
+			e.printStackTrace();
+			bresult.reject("error.duplicate.user");
+			mav.getModel().putAll(bresult.getModel());
+			return mav;
+		}
+		mav.setViewName("redirect:login");
+		return mav;
 	}
 }
