@@ -1,5 +1,6 @@
 package controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -22,11 +23,11 @@ public class UserController {
 	@Autowired
 	private ShopService service;
 
-	@GetMapping("*") 	// 그외 모든 Get 방식 요청
+	@GetMapping("*")
 	public ModelAndView getUser() {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject(new User());	
-		return mav;	//	WEB-INF/view/user/userEntry.jsp 뷰로 설정
+		return mav;	
 	}	
 
 	@PostMapping("signUp")
@@ -41,7 +42,7 @@ public class UserController {
 			service.userInsert(user);
 			mav.addObject("user",user);
 			
-		  // key 값(userID)이 중복된 경우 예외가 발생
+		  // KEY - ID 중복 검증
 		} catch(DataIntegrityViolationException e) {
 			e.printStackTrace();
 			bresult.reject("error.duplicate.user");
@@ -49,6 +50,33 @@ public class UserController {
 			return mav;
 		}
 		mav.setViewName("redirect:login");
+		return mav;
+	}
+	
+	@PostMapping("login")
+	public ModelAndView login(@Valid User user, BindingResult bresult,HttpSession session,HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		if(bresult.hasErrors()) {
+			mav.getModel().putAll(bresult.getModel());
+			bresult.reject("error.input.login");			
+			return mav;	
+		}	
+		
+		try {			
+			User dbUser = service.selectUser(user.getUSER_ID());
+			if(user.getPWD().equals(dbUser.getPWD())) {
+				session.setAttribute("loginUser", dbUser);	
+			} else { 
+				bresult.reject("error.login.password");
+				mav.getModel().putAll(bresult.getModel());
+				return mav;
+			}	
+		} catch(EmptyResultDataAccessException e) {
+			bresult.reject("error.login.id");
+			mav.getModel().putAll(bresult.getModel());
+			return mav;
+		}
+		mav.setViewName("redirect:/");
 		return mav;
 	}
 }

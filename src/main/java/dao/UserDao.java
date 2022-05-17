@@ -33,4 +33,10 @@ public class UserDao {
 				+ " values (:USER_ID, :PWD, :USER_NAME, :PHONE_NO, :POST_CODE, :ADDR, :ADDR_DETAIL, :EMAIL, :BIRTH_DATE,sysdate,'N',:WITHDRAW_DATE,0)";
 		template.update(sql,param);
 	}
+
+	public User selectUser(String USER_ID) {
+		param.clear();
+		param.put("USER_ID", USER_ID);
+		return template.queryForObject("select * from USER_ACCOUNT where USER_ID=:USER_ID", param,mapper);
+	}
 }

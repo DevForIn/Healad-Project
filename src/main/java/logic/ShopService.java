@@ -17,4 +17,8 @@ public class ShopService {
 		
 	}
 
+	public User selectUser(String USER_ID) {
+		return userDao.selectUser(USER_ID);
+	}
+
 }
