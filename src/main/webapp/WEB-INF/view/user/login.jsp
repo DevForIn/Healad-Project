@@ -21,7 +21,7 @@
 	<h2>사용자 로그인</h2>
 	<form:form modelAttribute="user" method="post" action="login"
 		name="loginform">
-		<input type="hidden" name="USER_NAME" value="유효성검증을위한 파라미터">
+		<input type="hidden" name="USER_NAME" value="유효성검증을위한 파라미터"> 
 		<input type="hidden" name="EMAIL" value="valid@aaa.bbb">
 		<spring:hasBindErrors name="user">
 			<font color="red"><c:forEach items="${errors.globalErrors}"

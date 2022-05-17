@@ -52,7 +52,7 @@
 			<tr>
 				<th>주문번호</th>
 				<th>주문일자</th>
-				<th>총주문금액</th>
+				<th>총주문금액</th> 
 			</tr>
 			<c:forEach items="${salelist}" var="sale" varStatus="stat">
 				<tr>

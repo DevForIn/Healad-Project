@@ -80,7 +80,7 @@ public class UserController {
 		}
 		mav.setViewName("redirect:/");
 		return mav;
-	}
+	} 
 	@RequestMapping("logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
