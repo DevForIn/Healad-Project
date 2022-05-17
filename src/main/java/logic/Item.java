@@ -13,7 +13,7 @@ public class Item {
 	
 	private String useYn;
 	
-	private Long itemCatId;
+	private Integer itemCatId;
 	
 	public Long getItemId() {
 		return itemId;
@@ -51,10 +51,10 @@ public class Item {
 	public void setUseYn(String useYn) {
 		this.useYn = useYn;
 	}
-	public Long getItemCatId() {
+	public Integer getItemCatId() {
 		return itemCatId;
 	}
-	public void setItemCatId(Long itemCatId) {
+	public void setItemCatId(Integer itemCatId) {
 		this.itemCatId = itemCatId;
 	}
 	
