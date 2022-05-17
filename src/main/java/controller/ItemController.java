@@ -25,7 +25,7 @@ public class ItemController {
 		mav.addObject(new Item());	
 		return mav;	//	WEB-INF/view/user/userEntry.jsp 뷰로 설정
 	}	
-
+ 
 	@RequestMapping("menu")
 	public ModelAndView menu(Integer itemCatId) {
 		// item list 조회하는거 생성해야함.

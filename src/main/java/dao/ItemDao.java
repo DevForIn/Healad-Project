@@ -25,7 +25,7 @@ public class ItemDao {
 	public void setDateSource(DataSource dataSource) { 
 		template = new NamedParameterJdbcTemplate(dataSource);
 	}
-	
+	 
 	public List<Item> select(Integer itemCatId) {
 		param.put("itemCatId", itemCatId);
 		String sql = "select item_id, item_name, price, description, picture_url, use_yn, item_cat_id"
