@@ -6,20 +6,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import logic.ShopService;
-import logic.User;
+import logic.Item;
+import logic.ItemService;
 
 @Controller
 @RequestMapping("item")
 public class ItemController {
 	
 	@Autowired
-	private ShopService service;
+	private ItemService itemService;
+	
 
 	@GetMapping("*") 	// 그외 모든 Get 방식 요청
-	public ModelAndView getUser() {
+	public ModelAndView getItem() {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject(new User());	
+		mav.addObject(new Item());	
 		return mav;	//	WEB-INF/view/user/userEntry.jsp 뷰로 설정
 	}	
 
