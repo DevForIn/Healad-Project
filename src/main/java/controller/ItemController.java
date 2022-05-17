@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,8 +27,14 @@ public class ItemController {
 	}	
 
 	@RequestMapping("menu")
-	public String menu() {
+	public ModelAndView menu(Integer itemCatId) {
 		// item list 조회하는거 생성해야함.
-		return null;	
+		
+		ModelAndView mav = new ModelAndView();
+		if(itemCatId == null) itemCatId = 1;
+		List<Item> list = itemService.getMenuList(itemCatId);
+		
+		mav.addObject("list", list);
+		return mav;	
 	}
 }
