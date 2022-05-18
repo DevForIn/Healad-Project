@@ -4,26 +4,32 @@ import java.util.Date;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class User {
-	@Size(min=3,max=10,message="아이디는 3자이상 10자 이하로 입력하세요.")
+	@Size(min=5,max=12,message="! - 아이디는 5~12자리로 입력하세요. - !")
 	private String USER_ID;
-	@Size(min=3,max=10,message="비밀번호는 3자이상 10자 이하로 입력하세요.")
+	@Size(min=5,max=14,message="! - 비밀번호는 5~14자로 입력하세요. - !")
 	private String PWD;
-	@NotEmpty(message="사용자이름은 필수 입니다.")
+	@NotEmpty(message="! - 사용자이름을 입력하세요. - !")
 	private String USER_NAME;
+	@NotEmpty(message="! - 전화번호를 입력하세요. - !")
 	private String PHONE_NO;
+	@NotEmpty(message="! - 우편번호를 입력하세요. - !")
 	private String POST_CODE;
+	@NotEmpty(message="! - 주소를 입력하세요. - !")
 	private String ADDR;
+	@NotEmpty(message="! - 상세주소 입력하세요. - !")
 	private String ADDR_DETAIL;
-	@NotEmpty(message="email은 필수 입니다.")
-	@Email(message="email형식으로 입력하세요.")
+	@NotEmpty(message="! - E-mail을 입력하세요. - !")
+	@Email(message="! - E-mail 형식으로 입력하세요. - !")
 	private String EMAIL;
-	@Past(message="생일은 과거 날짜만 가능합니다.")
+	@NotNull(message="! - 생년월일을 입력하세요. - !")
+	@Past(message="! - 생일은 미래일수 없습니다..! - !")	
 	@DateTimeFormat(pattern="yyyy-MM-dd")	// 형식 오류 시 typeMismatch.birthday 코드 값 저장 
 	private Date BIRTH_DATE;
 	private Date JOIN_DATE;

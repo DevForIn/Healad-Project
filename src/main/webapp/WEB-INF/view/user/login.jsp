@@ -18,11 +18,16 @@
 </script>
 </head>
 <body>
-	<h2>사용자 로그인</h2>
+	<h2 align="center">사용자 로그인</h2>
 	<form:form modelAttribute="user" method="post" action="login"
 		name="loginform">
-		<input type="hidden" name="USER_NAME" value="유효성검증을위한 파라미터"> 
+		<input type="hidden" name="USER_NAME" value="검증용"> 
+		<input type="hidden" name="PHONE_NO" value="000-0000-0000">
+		<input type="hidden" name="POST_CODE" value="000-000">
+		<input type="hidden" name="ADDR" value="한국">
+		<input type="hidden" name="ADDR_DETAIL" value="어딘가">
 		<input type="hidden" name="EMAIL" value="valid@aaa.bbb">
+		<input type="hidden" name="BIRTH_DATE" value="1500-01-01">
 		<spring:hasBindErrors name="user">
 			<font color="red"><c:forEach items="${errors.globalErrors}"
 					var="error">
