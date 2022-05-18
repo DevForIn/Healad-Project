@@ -13,15 +13,15 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 <body>
-
 	<c:forEach var="item" items="${list}">
 		<div class="card-group">
 		  <div class="card">
 		    <img class="card-img-top" src="..." alt="Card image cap">
 		    <div class="card-body">
 		      <h5 class="card-title">${item.itemName}</h5>
-		      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-		      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+		      <p class="card-text">${item.price } 원</p>
+		      <p class="card-text">${item.description }</p>
+		      <p class="card-text"><a style="cursor: pointer;" onclick="fnAddCart('${item.itemId}', '${item.itemName}')"><i class="fa fa-shopping-cart"></i></a></small></p>
 		    </div>
 		  </div>
 		</div>
@@ -81,6 +81,24 @@
 	</c:forEach> --%>
 	
 <script>
+
+function fnAddCart(itemId, itemName){
+	$.ajax({
+		url : "${path}/cart/add",
+		success : function(data) {
+			console.log('data', data)
+			alert(itemName + '이 추가되었습니다.');
+		},
+	     error:function(request,status,error){
+	    	 console.log(request);
+	    	 console.log(status);
+	    	 console.log(error);
+	    	 alert('로그인한 사용자만 장바구니 추가가 가능합니다.');
+	     }
+	});	
+	// ajax 로 카트에 추가하는걸 만들어야해. (로그인체크) 로그인 해주셔야 가능합니다.
+}
+
 function openCategory(evt, category) {
   var i, x, tablinks;
   x = document.getElementsByClassName("category");
