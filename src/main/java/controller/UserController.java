@@ -1,7 +1,5 @@
 package controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -12,10 +10,12 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import exception.LoginException;
 import logic.ShopService;
 import logic.User;
 
@@ -87,5 +87,52 @@ public class UserController {
 		session.invalidate();
 		return "redirect:/";
 	}
+	@RequestMapping("mypage")
+	public ModelAndView loginCheckMypage(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		try {
+			User user = (User)session.getAttribute("loginUser");
+			mav.addObject("user",user);
+		} catch(Exception e) {
+			e.printStackTrace();
+			throw new LoginException("비밀번호 정보 수정 오류","password");
+		}
+		return mav;
+	}
+	@PostMapping("{url}search")
+	public ModelAndView search(User user, BindingResult bresult, @PathVariable String url) {
+		ModelAndView mav = new ModelAndView();
+		String code = "error.userid.search";
+		String title="아이디";
+		if(user.getEmail() == null || user.getEmail().equals("")) {
+			bresult.rejectValue("email","error.required");	
+		}
+		if(user.getPhoneNo() == null || user.getPhoneNo().equals("")) {
+			bresult.rejectValue("phoneNo","error.required");
+		}
+		if(url.equals("pw")) {	
+			title="비밀번호";
+			code="error.password.search";	
+			if(user.getUserId() == null || user.getUserId().equals("")) {
+				bresult.rejectValue("userId","error.required");				
+			}	
+		}
+		if(bresult.hasErrors()) {	
+			mav.getModel().putAll(bresult.getModel());
+			return mav;
+		}
+		String result = null;
 
+		result = service.userSearch(user,url);
+		if(result ==null) {
+			bresult.reject(code);	
+			mav.getModel().putAll(bresult.getModel());
+			return mav;
+		}
+		mav.addObject("result",result);
+		mav.addObject("title",title);
+		mav.setViewName("search");				
+		
+		return mav;
+	}
 }

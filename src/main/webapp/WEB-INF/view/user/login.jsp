@@ -10,12 +10,6 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인화면</title>
-<script type="text/javascript">
-	function win_open(page) {
-		var op = "width=500, height=350, left=50,top=150";
-		open(page, "", op);
-	}
-</script>
 </head>
 <body>
 	<h2 align="center">사용자 로그인</h2>
@@ -37,20 +31,19 @@
 		<table border="1" style="border-collapse: collapse;">
 			<tr height="40px">
 				<td>아이디</td>
-				<td><form:input path="userId" /> <font color="red"><form:errors
-							path="userId" /></font></td>
+				<td><form:input path="userId" /> <font color="red">
+				<form:errors path="userId" /></font></td>
 			</tr>
 			<tr height="40px">
 				<td>비밀번호</td>
-				<td><form:password path="pwd" /> <font color="red"><form:errors
-							path="pwd" /></font></td>
+				<td><form:password path="pwd" /> <font color="red">
+				<form:errors path="pwd" /></font></td>
 			</tr>
 			<tr height="40px">
 				<td colspan="2" align="center"><input type="submit" value="로그인">
-					<input type="button" value="회원가입"
-					onclick="location.href='signUp'"> <input type="button"
-					value="아이디찾기" onclick="win_open('idsearch')"> <input
-					type="button" value="비밀번호찾기" onclick="win_open('pwsearch')">
+					<input type="button" value="회원가입" onclick="location.href='signUp'"> 
+					<input type="button" value="아이디찾기" onclick="location.href='idsearch'">
+					<input type="button" value="비밀번호찾기" onclick="location.href='pwsearch'">
 				</td>
 			</tr>
 		</table>

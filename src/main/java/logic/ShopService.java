@@ -20,4 +20,9 @@ public class ShopService {
 		return userDao.selectUser(userId);
 	}
 
+	public String userSearch(User user, String url) {
+		
+		return userDao.search(user,url);
+	}
+
 }

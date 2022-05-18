@@ -28,5 +28,18 @@ public class UserDao {
 	public User selectUser(String userid) {
 		return template.getMapper(cls).selectUser(userid);
 	}
+
+	public String search(User user, String url) {
+		param.clear();
+		param.put("email", user.getEmail());
+		param.put("phoneNo", user.getPhoneNo());
+		if(url.equals("id")) {
+			param.put("col", "substr(USER_ID,1,length(USER_ID)-2)||'**'");			
+		} else if(url.equals("pw")) {
+			param.put("userId", user.getUserId());
+			param.put("col","'**'||substr(PWD,3,length(PWD)-2)");
+		}	
+		return template.getMapper(cls).search(param);
+	}
 	
 }
