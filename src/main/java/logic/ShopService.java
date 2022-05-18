@@ -15,7 +15,7 @@ public class ShopService {
 	UserDao userDao;
 
 	public void userInsert(User user) {
-		userDao.signUp(user);		
+		userDao.signUp(user);
 	}
 
 	public User selectUser(String USER_ID) {

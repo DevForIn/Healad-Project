@@ -12,10 +12,23 @@
    http://www.springframework.org/schema/aop
    http://www.springframework.org/schema/aop/spring-aop.xsd">
    <!-- Connection 객체 -->
-   <bean id="dataSource" class = "org.springframework.jdbc.datasource.DriverManagerDataSource">
-   		<property name="driverClassName"><value>oracle.jdbc.OracleDriver</value></property>
-   		<property name="url"><value>jdbc:oracle:thin:@localhost:1521:xe</value></property>
-   		<property name="username"><value>healad</value></property>
-   		<property name="password"><value>dalaeh</value></property>
-   </bean>
+   <bean id="dataSource" class = "com.mchange.v2.c3p0.ComboPooledDataSource">
+   		<property name="driverClass"><value>oracle.jdbc.OracleDriver</value></property>
+   		<property name="jdbcUrl"><value>jdbc:oracle:thin:@localhost:1521:xe</value></property>
+   		<property name="user"><value>healad</value></property>
+   		<property name="password"><value>dalaeh</value></property>   		
+	   	<property name="maxPoolSize"><value>20</value></property>	<!-- 최대 연결 객체 갯수 -->
+	   	<property name="minPoolSize"><value>3</value></property>	<!-- 최소 연결 객체 갯수 -->
+	   	<property name="initialPoolSize"><value>5</value></property>	<!-- 초기 연결 객체 갯수 -->
+	   	<property name="acquireIncrement"><value>5</value></property>	<!-- 연결 객체 증가 갯수 -->
+	</bean>
+   <!-- mybatis 관련 설정 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />	<!-- db 연결 객체  -->
+		<property name="configLocation" value="classpath:mybatis-config.xml"/>	<!-- mybatis-config.xml -->
+	</bean>
+	
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory"/> 
+	</bean>
 </beans>
