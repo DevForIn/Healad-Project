@@ -65,8 +65,8 @@ public class UserController {
 		}	
 		
 		try {			
-			User dbUser = service.selectUser(user.getUSER_ID());
-			if(user.getPWD().equals(dbUser.getPWD())) {
+			User dbUser = service.selectUser(user.getUserId());
+			if(user.getPwd().equals(dbUser.getPwd())) {
 				session.setAttribute("loginUser", dbUser);	
 			} else { 
 				bresult.reject("error.login.password");
@@ -81,6 +81,7 @@ public class UserController {
 		mav.setViewName("redirect:/");
 		return mav;
 	} 
+	
 	@RequestMapping("logout")
 	public String logout(HttpSession session) {
 		session.invalidate();

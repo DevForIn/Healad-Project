@@ -7,10 +7,27 @@
 <head>
 <meta charset="UTF-8">
 <title>메뉴 목록</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 <body>
-	<div class="w3-row-padding">
+
+	<c:forEach var="item" items="${list}">
+		<div class="card-group">
+		  <div class="card">
+		    <img class="card-img-top" src="..." alt="Card image cap">
+		    <div class="card-body">
+		      <h5 class="card-title">${item.itemName}</h5>
+		      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+		      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+		    </div>
+		  </div>
+		</div>
+	</c:forEach>
+	
+<%-- 	<div class="w3-row-padding">
 	  <div class="w3-col s3 w3-container">
 	    <a href="javascript:void(0)" onclick="openCategory(event, 'Salad');">
 	      <div class="w3-fourth tablink w3-bottombar w3-hover-light-grey w3-padding">Salad</div>
@@ -61,7 +78,7 @@
 			<button class="w3-button w3-green">장바구니</button>
 		  </div>
 		</div>	
-	</c:forEach>
+	</c:forEach> --%>
 	
 <script>
 function openCategory(evt, category) {

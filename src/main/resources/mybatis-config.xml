@@ -4,8 +4,12 @@
  "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
   <!-- null 값 허용 -->
-  <settings> <setting name="jdbcTypeForNull" value="VARCHAR"/></settings>
+  <settings> 
+  	<setting name="jdbcTypeForNull" value="VARCHAR"/>
+  	<setting name="mapUnderscoreToCamelCase" value="true"/>
+  </settings>
   <mappers>	<!-- sql 구문을 저장하는 장소. sql 구문을 작성한 Interface의 패키지 설정 -->
       <package name="dao.mapper"/>
   </mappers>
+  
 </configuration>

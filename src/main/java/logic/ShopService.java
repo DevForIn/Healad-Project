@@ -1,8 +1,6 @@
 package logic;
 
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +16,8 @@ public class ShopService {
 		userDao.signUp(user);
 	}
 
-	public User selectUser(String USER_ID) {
-		return userDao.selectUser(USER_ID);
+	public User selectUser(String userId) {
+		return userDao.selectUser(userId);
 	}
 
 }

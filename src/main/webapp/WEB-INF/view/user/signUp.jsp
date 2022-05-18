@@ -28,48 +28,48 @@
 		<table border="1" style="border-collapse: collapse;">
 			<tr>
 				<td>아이디</td>
-				<td><form:input path="USER_ID" />
-				   <font color="red"><form:errors path="USER_ID" /></font></td>
+				<td><form:input path="userId" />
+				   <font color="red"><form:errors path="userId" /></font></td>
 			</tr>
 			<tr>
 				<td>비밀번호</td>
-				<td><form:password path="PWD" />
-				 <font color="red"><form:errors	path="PWD" /></font></td>
+				<td><form:password path="pwd" />
+				 <font color="red"><form:errors	path="pwd" /></font></td>
 			</tr>
 			<tr>
 				<td>이름</td>
-				<td><form:input path="USER_NAME" />
-				 <font color="red"><form:errors	path="USER_NAME" /></font></td>
+				<td><form:input path="userName" />
+				 <font color="red"><form:errors	path="userName" /></font></td>
 			</tr>
 			<tr>
 				<td>전화번호</td>
-				<td><form:input path="PHONE_NO" />
-				 <font color="red"><form:errors	path="PHONE_NO" /></font></td>
+				<td><form:input path="phoneNo" />
+				 <font color="red"><form:errors	path="phoneNo" /></font></td>
 			</tr>
 			<tr>
 				<td>우편번호</td>
-				<td><form:input path="POST_CODE" />
-				 <font color="red"><form:errors	path="POST_CODE" /></font></td>
+				<td><form:input path="postCode" />
+				 <font color="red"><form:errors	path="postCode" /></font></td>
 			</tr>
 			<tr>
 				<td>주소</td>
-				<td><form:input path="ADDR" />
-				 <font color="red"><form:errors	path="ADDR" /></font></td>
+				<td><form:input path="addr" />
+				 <font color="red"><form:errors	path="addr" /></font></td>
 			</tr>
 			<tr>
 				<td>상세 주소</td>
-				<td><form:input path="ADDR_DETAIL" />
-				 <font color="red"><form:errors	path="ADDR_DETAIL" /></font></td>
+				<td><form:input path="addrDetail" />
+				 <font color="red"><form:errors	path="addrDetail" /></font></td>
 			</tr>
 			<tr>
 				<td>이메일</td>
-				<td><form:input path="EMAIL" />
-				 <font color="red"><form:errors	path="EMAIL" /></font></td>
+				<td><form:input path="email" />
+				 <font color="red"><form:errors	path="email" /></font></td>
 			</tr>
 			<tr>
 				<td>생년월일</td>
-				<td><form:input path="BIRTH_DATE" />
-				 <font color="red"><form:errors	path="BIRTH_DATE" /></font></td>
+				<td><form:input path="birthDate" />
+				 <font color="red"><form:errors	path="birthDate" /></font></td>
 			</tr>			
 			<tr>
 				<td colspan="2" align="center">

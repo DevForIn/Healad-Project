@@ -11,118 +11,131 @@ import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class User {
+	
 	@Size(min=5,max=12,message="! - 아이디는 5~12자리로 입력하세요. - !")
-	private String USER_ID;
+	private String userId;
+	
 	@Size(min=5,max=14,message="! - 비밀번호는 5~14자로 입력하세요. - !")
-	private String PWD;
+	private String pwd;
+	
 	@NotEmpty(message="! - 사용자이름을 입력하세요. - !")
-	private String USER_NAME;
+	private String userName;
+	
 	@NotEmpty(message="! - 전화번호를 입력하세요. - !")
-	private String PHONE_NO;
+	private String phoneNo;
+	
 	@NotEmpty(message="! - 우편번호를 입력하세요. - !")
-	private String POST_CODE;
+	private String postCode;
+	
 	@NotEmpty(message="! - 주소를 입력하세요. - !")
-	private String ADDR;
+	private String addr;
+	
 	@NotEmpty(message="! - 상세주소 입력하세요. - !")
-	private String ADDR_DETAIL;
+	private String addrDetail;
+	
 	@NotEmpty(message="! - E-mail을 입력하세요. - !")
 	@Email(message="! - E-mail 형식으로 입력하세요. - !")
-	private String EMAIL;
+	private String email;
+	
 	@NotNull(message="! - 생년월일을 입력하세요. - !")
 	@Past(message="! - 생일은 미래일수 없습니다..! - !")	
 	@DateTimeFormat(pattern="yyyy-MM-dd")	// 형식 오류 시 typeMismatch.birthday 코드 값 저장 
-	private Date BIRTH_DATE;
-	private Date JOIN_DATE;
-	private String WITHDRAW_YN;
-	private Date WITHDRAW_DATE;
-	private int Mileage;	
+	private Date birthDate;
 	
-	//setter,getter, toString	
+	private Date joinDate;
 	
-	public String getUSER_ID() {
-		return USER_ID;
+	private String withdrawYn;
+	
+	private Date withdrawDate;
+	
+	private int mileage;
+	
+	public String getUserId() {
+		return userId;
 	}
-	public void setUSER_ID(String uSER_ID) {
-		USER_ID = uSER_ID;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
-	public String getPWD() {
-		return PWD;
+	public String getPwd() {
+		return pwd;
 	}
-	public void setPWD(String pWD) {
-		PWD = pWD;
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
-	public String getUSER_NAME() {
-		return USER_NAME;
+	public String getUserName() {
+		return userName;
 	}
-	public void setUSER_NAME(String uSER_NAME) {
-		USER_NAME = uSER_NAME;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
-	public String getPHONE_NO() {
-		return PHONE_NO;
+	public String getPhoneNo() {
+		return phoneNo;
 	}
-	public void setPHONE_NO(String pHONE_NO) {
-		PHONE_NO = pHONE_NO;
+	public void setPhoneNo(String phoneNo) {
+		this.phoneNo = phoneNo;
 	}
-	public String getPOST_CODE() {
-		return POST_CODE;
+	public String getPostCode() {
+		return postCode;
 	}
-	public void setPOST_CODE(String pOST_CODE) {
-		POST_CODE = pOST_CODE;
+	public void setPostCode(String postCode) {
+		this.postCode = postCode;
 	}
-	public String getADDR() {
-		return ADDR;
+	public String getAddr() {
+		return addr;
 	}
-	public void setADDR(String aDDR) {
-		ADDR = aDDR;
+	public void setAddr(String addr) {
+		this.addr = addr;
 	}
-	public String getADDR_DETAIL() {
-		return ADDR_DETAIL;
+	public String getAddrDetail() {
+		return addrDetail;
 	}
-	public void setADDR_DETAIL(String aDDR_DETAIL) {
-		ADDR_DETAIL = aDDR_DETAIL;
+	public void setAddrDetail(String addrDetail) {
+		this.addrDetail = addrDetail;
 	}
-	public String getEMAIL() {
-		return EMAIL;
+	public String getEmail() {
+		return email;
 	}
-	public void setEMAIL(String eMAIL) {
-		EMAIL = eMAIL;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public Date getBIRTH_DATE() {
-		return BIRTH_DATE;
+	public Date getBirthDate() {
+		return birthDate;
 	}
-	public void setBIRTH_DATE(Date bIRTH_DATE) {
-		BIRTH_DATE = bIRTH_DATE;
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
 	}
-	public Date getJOIN_DATE() {
-		return JOIN_DATE;
+	public Date getJoinDate() {
+		return joinDate;
 	}
-	public void setJOIN_DATE(Date jOIN_DATE) {
-		JOIN_DATE = jOIN_DATE;
+	public void setJoinDate(Date joinDate) {
+		this.joinDate = joinDate;
 	}
-	public String getWITHDRAW_YN() {
-		return WITHDRAW_YN;
+	public String getWithdrawYn() {
+		return withdrawYn;
 	}
-	public void setWITHDRAW_YN(String wITHDRAW_YN) {
-		WITHDRAW_YN = wITHDRAW_YN;
+	public void setWithdrawYn(String withdrawYn) {
+		this.withdrawYn = withdrawYn;
 	}
-	public Date getWITHDRAW_DATE() {
-		return WITHDRAW_DATE;
+	public Date getWithdrawDate() {
+		return withdrawDate;
 	}
-	public void setWITHDRAW_DATE(Date wITHDRAW_DATE) {
-		WITHDRAW_DATE = wITHDRAW_DATE;
+	public void setWithdrawDate(Date withdrawDate) {
+		this.withdrawDate = withdrawDate;
 	}
 	public int getMileage() {
-		return Mileage;
+		return mileage;
 	}
 	public void setMileage(int mileage) {
-		Mileage = mileage;
+		this.mileage = mileage;
 	}
 	
 	@Override
 	public String toString() {
-		return "User [USER_ID=" + USER_ID + ", PWD=" + PWD + ", USER_NAME=" + USER_NAME + ", PHONE_NO=" + PHONE_NO
-				+ ", POST_CODE=" + POST_CODE + ", ADDR=" + ADDR + ", ADDR_DETAIL=" + ADDR_DETAIL + ", EMAIL=" + EMAIL
-				+ ", BIRTH_DATE=" + BIRTH_DATE + ", JOIN_DATE=" + JOIN_DATE + ", WITHDRAW_YN=" + WITHDRAW_YN
-				+ ", WITHDRAW_DATE=" + WITHDRAW_DATE + ", Mileage=" + Mileage + "]";
+		return "User [userId=" + userId + ", pwd=" + pwd + ", userName=" + userName + ", phoneNo=" + phoneNo
+				+ ", postCode=" + postCode + ", addr=" + addr + ", addrDetail=" + addrDetail + ", email=" + email
+				+ ", birthDate=" + birthDate + ", joinDate=" + joinDate + ", withdrawYn=" + withdrawYn
+				+ ", withdrawDate=" + withdrawDate + ", mileage=" + mileage + "]";
 	}	
+	
+	
 }
