@@ -12,7 +12,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class User {
 	
-	@Size(min=5,max=12,message="! - 아이디는 5~12자리로 입력하세요. - !")
+	@Size(min=5,max=12)
 	private String userId;
 	
 	@Size(min=5,max=14,message="! - 비밀번호는 5~14자로 입력하세요. - !")
