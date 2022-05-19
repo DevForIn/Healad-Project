@@ -30,7 +30,14 @@
 		<c:forEach var="item" items="${list}">
 			<div class="card-group">
 			  <div class="card">
-			    <img class="card-img-top" src="file/${item.pictureUrl }" alt="Card image cap" style="width: 150px;">
+			  	<c:choose>
+			  		<c:when test="${empty item.pictureUrl}">
+			  			<img class="card-img-top" src="../img/sal1.png" alt="Card image cap" style="width: 300px;">	
+			  		</c:when>
+			  		<c:otherwise>
+			  			<img class="card-img-top" src="file/${item.pictureUrl }" alt="Card image cap" style="width: 150px;">
+			  		</c:otherwise>
+			  	</c:choose>
 			    <div class="card-body">
 			      <h5 class="card-title">${item.itemName}</h5>
 			      <p class="card-text">${item.price } 원</p>
