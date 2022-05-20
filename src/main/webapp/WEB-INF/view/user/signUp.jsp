@@ -43,18 +43,14 @@ function idchk(){
 function y_c(year) {
 	const y = year.value;  
 	day1=y;
-	alert(day1)
 }
 function m_c(month) {
 	const m = month.value;  		
 	day2="-"+m;
-	alert(day2)
 }
 function d_c(day) {
 	const d = day.value;  
-	day3="-"+d;
-	alert(day3)
-	
+	day3="-"+d;	
 }	
 function BD(){
 	document.getElementById("birthDate").value=day1+day2+day3;
@@ -120,7 +116,7 @@ function BD(){
                 <td>
 				<form:input type="hidden" path="birthDate" name="birthDate"/>
                     <select name="yaer" onchange="y_c(this)">
-                    	<option value="none">-YEAR-</option>
+                    	<option value="none">-Year-</option>
                     	<c:set var="nowYear" value="2022" />
                     	<c:forEach var="i" begin="1900" end="${nowYear}">
                         	<option value="${nowYear - i + 1900}">${nowYear - i + 1900}</option>
