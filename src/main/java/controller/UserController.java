@@ -131,7 +131,7 @@ public class UserController {
 		}
 		mav.addObject("result",result);
 		mav.addObject("title",title);
-		mav.setViewName("search");				
+		mav.setViewName("user/search");				
 		
 		return mav;
 	}
