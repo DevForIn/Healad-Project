@@ -3,15 +3,15 @@ package controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import logic.Item;
 import logic.ItemService;
 
-@Controller
+@RestController
 @RequestMapping("item")
 public class ItemController {
 	
@@ -28,13 +28,14 @@ public class ItemController {
  
 	@RequestMapping("menu")
 	public ModelAndView menu(Integer itemCatId) {
-		// item list 조회하는거 생성해야함.
-		
 		ModelAndView mav = new ModelAndView();
+		return mav;	
+	}
+	
+	@GetMapping("list")
+	public List<Item> list(Integer itemCatId) {
 		if(itemCatId == null) itemCatId = 1;
 		List<Item> list = itemService.getMenuList(itemCatId);
-		
-		mav.addObject("list", list);
-		return mav;	
+		return list;	
 	}
 }

@@ -10,71 +10,40 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style type="text/css">
+.active{
+	background-color: red;
+}
+</style>
 </head>
 <body>
 
 	<ul class="nav nav-tabs">
 	  <li class="nav-item">
-	    <a class="nav-link active" data-toggle="tab" href="#qwe">Salad</a>
+	    <a class="nav-link active" data-toggle="tab" href="#salad" onclick="fnSearchMenu('1')">Salad</a>
 	  </li>
 	  <li class="nav-item">
-	    <a class="nav-link" data-toggle="tab" href="#asd">Topping</a>
+	    <a class="nav-link" data-toggle="tab" href="#salad" onclick="fnSearchMenu('2')">Topping</a>
 	  </li>
 	  <li class="nav-item">
-	    <a class="nav-link" data-toggle="tab" href="#zxc">Drink</a>
+	    <a class="nav-link" data-toggle="tab" href="#salad" onclick="fnSearchMenu('3')">Dressing</a>
+	  </li>
+	  <li class="nav-item">
+	    <a class="nav-link" data-toggle="tab" href="#salad" onclick="fnSearchMenu('4')">Drink</a>
 	  </li>
 	</ul>
 	
 	<div class="tab-content">
-	  <div class="tab-pane fade show active" id="qwe">
-		<c:forEach var="item" items="${list}">
-			<div class="card-group">
-			  <div class="card">
-			  	<c:choose>
-			  		<c:when test="${empty item.pictureUrl}">
-			  			<img class="card-img-top" src="../img/sal1.png" alt="Card image cap" style="width: 300px;">	
-			  		</c:when>
-			  		<c:otherwise>
-			  			<img class="card-img-top" src="file/${item.pictureUrl }" alt="Card image cap" style="width: 150px;">
-			  		</c:otherwise>
-			  	</c:choose>
-			    <div class="card-body">
-			      <h5 class="card-title">${item.itemName}</h5>
-			      <p class="card-text">${item.price } 원</p>
-			      <p class="card-text">${item.description }</p>
-			      <p class="card-text"><a style="cursor: pointer;" onclick="fnAddCart('${item.itemId}', '${item.itemName}')"><i class="fa fa-shopping-cart"></i></a></small></p>
-			    </div>
-			  </div>
-			</div>
-		</c:forEach>	  
-	  </div>
-	  <div class="tab-pane fade" id="asd">
-	    <p>Nunc vitae turpis id nibh sodales commodo et non augue. Proin fringilla ex nunc. Integer tincidunt risus ut facilisis tristique.</p>
-	  </div>
-	  <div class="tab-pane fade" id="zxc">
-	    <p>Curabitur dignissim quis nunc vitae laoreet. Etiam ut mattis leo, vel fermentum tellus. Sed sagittis rhoncus venenatis. Quisque commodo consectetur faucibus. Aenean eget ultricies justo.</p>
+	  <div class="tab-pane fade show active" id="salad">
 	  </div>
 	</div>	
 <script>
 
+// 최초 메뉴 조회 (1: 샐러드, 2: 토핑, 3: 드레싱, 4: 드링크)
+fnSearchMenu('1');
+
+
 function fnAddCart(itemId, itemName){
-	console.log('카트 추가 전', $.cookie('cart'));
-	
-	if($.cookie('cart') != 'undefined') {
-		let carts = [];
-		carts.push($.cookie('cart'));
-		carts.push(itemId);
-		console.log('cart exists', carts);
-		$.cookie('cart', carts);
-	}
-	else {
-		console.log('NEW CART')
-		$.cookie('cart', itemId);
-	}
-	
-	console.log('카트 추가 후', $.cookie('cart'));
-	console.log('카트 추가 후', $.cookie());
-	
 	$.ajax({
 		url : "${path}/cart/add",
 		data: {
@@ -89,22 +58,48 @@ function fnAddCart(itemId, itemName){
 	    	 alert('로그인한 사용자만 장바구니 추가가 가능합니다.');
 	     }
 	});	
-	// ajax 로 카트에 추가하는걸 만들어야해. (로그인체크) 로그인 해주셔야 가능합니다.
 }
 
-function openCategory(evt, category) {
-  var i, x, tablinks;
-  x = document.getElementsByClassName("category");
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablink");
-  for (i = 0; i < x.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" w3-border-red", "");
-  }
-  document.getElementById(category).style.display = "block";
-  evt.currentTarget.firstElementChild.className += " w3-border-red";
+function fnSearchMenu(itemCatId){
+	// 데이터 조회하러 가기
+	$.ajax({
+		url : "${path}/item/list",
+		data: {
+			'itemCatId': itemCatId
+		},
+		success : function(datas) {
+			console.log('datas', datas)
+			var contents  = '';
+			for(var i=0; i < datas.length; i++) {
+				console.log('datas[i]',datas[i]);
+			    contents += '<div class="card-group">';
+				contents += 	'<div class="card">';
+				if(datas[i].pictureUrl == null) {
+					contents +='<img class="card-img-top" src="../img/sal1.png" alt="Card image cap" style="width: 300px;">';
+				}
+				else {
+					contents +='<img class="card-img-top" src="file/"' + datas[i].pictureUrl + 'alt="Card image cap" style="width: 150px;">';
+				}
+				contents += 		'<div class="card-body">';
+				contents += 			'<h5 class="card-title">'+datas[i].itemName +'</h5>';
+				contents += 			'<p class="card-text">'+datas[i].price +' 원</p>';
+				contents += 			'<p class="card-text">'+datas[i].description+'</p>';
+				contents += 			'<button type="button" class="btn btn-warning"><i class="fa fa-truck"> 주문하기</i></button> ';
+				contents += 			'<button type="button" class="btn btn-primary" onclick="fnAddCart(\''+ datas[i].itemId +'\', \''+ datas[i].itemName +'\')"><i class="fa fa-shopping-cart"></i> 장바구니</button>';
+				contents += 		'</div>';
+				contents += 	'</div>';
+				contents += '</div>';				
+			}
+
+			console.log('contents', contents);
+			$('#salad').html(contents);
+		},
+	    error:function(request,status,error){
+	    }
+	});	
+	
 }
+
 </script>	
 </body>
 
