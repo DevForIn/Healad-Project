@@ -27,3 +27,27 @@ caption {
 	font-size : 15px;
 	background-color: #FFFFFF;
 }
+/* MyPage */
+.a ul {
+	background-color : #ffff80;
+	list-style-type : none;
+	margin:0;
+	padding : 0;	
+}
+.a li a{
+	display : block;
+	color : #000000;
+	padding : 10px;
+	text-align : center;
+	text-decoration : none;
+	font-weight : bold;
+}
+.a li a.current {
+	background-color : #64e18f;
+	color : white;
+}
+.a li a:hover:not(.current) { 
+	background-color: #c8c800; 
+	color : white;
+}
+	

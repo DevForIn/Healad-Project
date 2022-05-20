@@ -3,7 +3,6 @@ package dao;
 import java.util.HashMap;
 import java.util.Map;
 
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -40,6 +39,10 @@ public class UserDao {
 			param.put("col","'****'||substr(PWD,5,length(PWD)-2)");
 		}	
 		return template.getMapper(cls).search(param);
+	}
+
+	public void update(User user) {
+		template.getMapper(cls).update(param);		
 	}
 	
 }

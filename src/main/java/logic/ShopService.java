@@ -1,6 +1,5 @@
 package logic;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +22,10 @@ public class ShopService {
 	public String userSearch(User user, String url) {
 		
 		return userDao.search(user,url);
+	}
+
+	public void userUpdate(User user) {
+		userDao.update(user);		
 	}
 
 }

@@ -135,4 +135,38 @@ public class UserController {
 		
 		return mav;
 	}
+	@GetMapping("modifyUser")
+	public ModelAndView loginCheckChange(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		User user = (User)session.getAttribute("loginUser");
+		mav.addObject("user",user);
+		return mav;	
+	}
+	@PostMapping("modifyUser")
+	public ModelAndView loginCheckModifyUser(@Valid User user, BindingResult bresult,HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		if(bresult.hasErrors()) {
+			mav.getModel().putAll(bresult.getModel());		
+			return mav;	
+		}
+		User loginUser = (User)session.getAttribute("loginUser");
+		if(!user.getPwd().equals(loginUser.getPwd())) {
+			bresult.reject("error.login.password");
+			mav.getModel().putAll(bresult.getModel());
+			return mav;			
+		}
+		try {
+			service.userUpdate(user);
+			if(user.getUserId().equals(loginUser.getUserId())) 
+				session.setAttribute("loginUser", user);
+			
+			mav.setViewName("redirect:/user/mypage?id="+user.getUserId());	
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+			throw new LoginException("고객 정보 수정 실패","modifyUser?id="+user.getUserId());
+		}
+
+		return mav;
+	}
 }

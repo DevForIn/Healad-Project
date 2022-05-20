@@ -74,7 +74,7 @@ function BirthDate(){
 				 <font color="red"><form:errors	path="pwd" /></font></td>
 			</tr>
 			<tr>
-				<th>이름</th>
+				<th>닉네임</th>
 				<td><form:input path="userName" />
 				 <font color="red"><form:errors	path="userName" /></font></td>
 			</tr>

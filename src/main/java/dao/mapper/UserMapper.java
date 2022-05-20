@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import logic.User;
 
@@ -24,5 +25,11 @@ public interface UserMapper {
 	  + " and EMAIL=#{email} and PHONE_NO=#{phoneNo}</trim>",
 	  "</script>"})	
 	String search(Map<String, Object> param);
+
+	@Update("update USER_ACCOUNT "
+	+ " set userName=#{userName}, phoneNo=#{phoneNo}, postCode=#{postCode}, "
+	+ " addr=#{addr}, addrDetail=#{addrDetail}, email=#{email}, "
+	+ " where userId =#{userId}" )
+	void update(Map<String, Object> param);
 
 }
