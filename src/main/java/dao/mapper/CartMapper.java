@@ -18,5 +18,5 @@ public interface CartMapper {
 
 	@Update("update cart set quantity = quantity + 1 where item_id = #{itemId} and user_id = #{userId}")
 	void updateCartItem(Cart cart);
-
+//1
 }
