@@ -37,21 +37,28 @@ function idchk(){
 		})
 	}	
 }
-	let str=""
+	let day1=""
+	let day2=""
+	let day3=""
 function y_c(year) {
 	const y = year.value;  
-	str=y;
+	day1=y;
+	alert(day1)
 }
 function m_c(month) {
 	const m = month.value;  		
-	str+="-"+m;
+	day2="-"+m;
+	alert(day2)
 }
 function d_c(day) {
 	const d = day.value;  
-	str+="-"+d;
-	document.getElementById("birthDate").value=str;
+	day3="-"+d;
+	alert(day3)
+	
 }	
-
+function BD(){
+	document.getElementById("birthDate").value=day1+day2+day3;
+}
 
 </script>
 	<h2 align="center">! - 회원 가입 - !</h2>
@@ -150,7 +157,7 @@ function d_c(day) {
             </tr>
 			<tr>
 				<td colspan="2" align="center">
-				  <input type="submit" value="가입하기">
+				  <input type="submit" value="가입하기" onclick="BD()">
 				  <input type="button" value="메인으로" onclick="location.href='${path}'">
 				</td>
 			</tr>

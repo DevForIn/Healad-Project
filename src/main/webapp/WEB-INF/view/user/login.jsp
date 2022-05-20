@@ -31,13 +31,11 @@
 		<table border="1" style="border-collapse: collapse;">
 			<tr height="40px">
 				<td>아이디</td>
-				<td><form:input path="userId" /> <font color="red">
-				<form:errors path="userId" /></font></td>
+				<td><form:input path="userId" /> 
 			</tr>
 			<tr height="40px">
 				<td>비밀번호</td>
-				<td><form:password path="pwd" /> <font color="red">
-				<form:errors path="pwd" /></font></td>
+				<td><form:password path="pwd" />
 			</tr>
 			<tr height="40px">
 				<td colspan="2" align="center"><input type="submit" value="로그인">
