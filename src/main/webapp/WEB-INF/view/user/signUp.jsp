@@ -148,7 +148,6 @@ function BD(){
 	                        </c:choose>
 	                    </c:forEach>
                     </select>
-                     <font color="red"><form:errors	path="birthDate" /></font>
                 </td>
             </tr>
 			<tr>
