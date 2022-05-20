@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import exception.LoginException;
 import logic.Cart;
 import logic.CartService;
 import logic.User;
@@ -19,6 +20,7 @@ public class CartController {
 	private CartService cartService;
 	
 	
+	@SuppressWarnings("unused")
 	@RequestMapping("add")
 	public String add(Integer itemId, Integer quantity, HttpSession session, HttpServletRequest request) {
 		
@@ -34,10 +36,10 @@ public class CartController {
 			cart.setUserId(user.getUserId());
 		
 			cartService.addCart(cart);
-			
-			
 		}
-		
+		else {
+			throw new LoginException("회원만 주문 가능합니다. 로그인 하세요","../user/login");
+		}
 
 		return null;
 	}
