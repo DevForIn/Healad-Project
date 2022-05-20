@@ -38,23 +38,14 @@ function idchk(){
 		})
 	}	
 }
+function BirthDate(){
 	let day1=""
 	let day2=""
 	let day3=""
-function y_c(year) {
-	const y = year.value;  
-	day1=y;
-}
-function m_c(month) {
-	const m = month.value;  		
-	day2="-"+m;
-}
-function d_c(day) {
-	const d = day.value;  
-	day3="-"+d;	
-}	
-function BD(){
-	document.getElementById("birthDate").value=day1+day2+day3;
+	day1=$("select[name=year]").val();
+	day2=$("select[name=month]").val();
+	day3=$("select[name=day]").val();	
+	document.getElementById("birthDate").value=day1+"-"+day2+"-"+day3;	
 }
 
 </script>
@@ -115,15 +106,15 @@ function BD(){
 			<tr>
                 <th>생년월일</th>
                 <td>
+                <fmt:formatDate var="date" value="${now}" pattern="yyyy" />
 				<form:input type="hidden" path="birthDate" name="birthDate"/>
-                    <select name="yaer" onchange="y_c(this)">
-                    	<option value="none">-Year-</option>
-                    	<fmt:formatDate var="date" value="${now}" pattern="yyyy" />
+                    <select name="year">
+                    	<option value="none">-Year-</option>                    	
                     	<c:forEach var="i" begin="${date-120}" end="${date}">  
                         	<option value="${date - i + (date-120)}"> ${date - i + (date-120)}</option>
                     	</c:forEach>
                     </select>
-                    <select name="month" onchange="m_c(this)">
+                    <select name="month">
                     	<option value="none">-Month-</option>
                   		<c:forEach var="i" begin="1" end="12">        
 							<c:choose>
@@ -136,7 +127,7 @@ function BD(){
 	                        </c:choose>
                    		</c:forEach>
                     </select>
-                    <select name="day" onchange="d_c(this)">
+                    <select name="day">
 	                    <option value="none">-Day-</option>
 	                    <c:forEach var="i" begin="1" end="31">
 							<c:choose>
@@ -153,7 +144,7 @@ function BD(){
             </tr>
 			<tr>
 				<td colspan="2" align="center">
-				  <input type="submit" value="가입하기" onclick="BD()">
+				  <input type="submit" value="가입하기" onclick="BirthDate()">
 				  <input type="button" value="메인으로" onclick="location.href='${path}'">
 				</td>
 			</tr>
