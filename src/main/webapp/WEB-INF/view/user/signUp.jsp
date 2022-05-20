@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />   
-
+<c:set var="now" value="<%= new java.util.Date() %>" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -117,9 +118,9 @@ function BD(){
 				<form:input type="hidden" path="birthDate" name="birthDate"/>
                     <select name="yaer" onchange="y_c(this)">
                     	<option value="none">-Year-</option>
-                    	<c:set var="nowYear" value="2022" />
-                    	<c:forEach var="i" begin="1900" end="${nowYear}">
-                        	<option value="${nowYear - i + 1900}">${nowYear - i + 1900}</option>
+                    	<fmt:formatDate var="date" value="${now}" pattern="yyyy" />
+                    	<c:forEach var="i" begin="${date-120}" end="${date}">  
+                        	<option value="${date - i + (date-120)}"> ${date - i + (date-120)}</option>
                     	</c:forEach>
                     </select>
                     <select name="month" onchange="m_c(this)">
