@@ -13,6 +13,12 @@
 </head>
 <body>
 	<h3 align="center">비밀번호찾기</h3>
+			<input type="hidden" name="userName" value="검증용"> 
+		<input type="hidden" name="pwd" value="PWD검증용">
+		<input type="hidden" name="postCode" value="000-000">
+		<input type="hidden" name="addr" value="한국">
+		<input type="hidden" name="addrDetail" value="어딘가">		
+		<input type="hidden" name="birthDate" value="1500-01-01">
 	<form:form modelAttribute="user" action="pwsearch" method="post">
 		<spring:hasBindErrors name="user">
 			<font color="red">
@@ -23,17 +29,17 @@
 		<table>
 			<tr>
 				<th>아이디</th>
-				<td><input type="text" name="userId"><font color="red">
+				<td><form:input path="userId"/><font color="red">
 				<form:errors path="userId" /></font></td>
 			</tr>
 			<tr>
 				<th>이메일</th>
-				<td><input type="text" name="email"><font color="red">
+				<td><form:input path="email" /><font color="red">
 				<form:errors path="email" /></font></td>
 			</tr>
 			<tr>
 				<th>전화번호</th>
-				<td><input type="text" name="phoneNo"><font color="red">
+				<td><form:input path="phoneNo" /><font color="red">
 				<form:errors path="phoneNo" /></font></td>
 			</tr>
 			<tr>
