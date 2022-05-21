@@ -25,7 +25,7 @@
 	<div style="width: 80%; float: right;">
 	<table style="width: 1400px;">
 		<tr>
-			<th colspan="13">HEALAD_회원목록</th>
+			<th colspan="12">HEALAD_회원목록</th>
 		</tr>
 		<tr>
 			<th>ID <a href="userList?sort=0" class="noline">▲</a>
@@ -40,7 +40,6 @@
 			<th>마일리지</th>
 			<th>가입날짜</th>
 			<th>탈퇴여부</th>
-			<th>탈퇴날짜</th>
 			<th>정보관리</th>
 		</tr>
 		<c:forEach items="${userList}" var="user">
@@ -64,7 +63,6 @@
 				</c:choose></td>				
 				<td><fmt:formatDate value="${user.joinDate}" pattern="yyyy-MM-dd" /></td>
 				<td>${user.withdrawYn}</td>
-				<td><fmt:formatDate value="${user.withdrawDate}" pattern="yyyy-MM-dd" /></td>
 				<td><a href="../user/modifyUser?id=${user.userId}"><strong>정보수정</strong></a><br>
 				 <a	href="../user/deleteUser?id=${user.userId}"><strong>강제탈퇴</strong></a>
 			</tr></c:if>
