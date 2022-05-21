@@ -21,7 +21,7 @@ public class MasterAspect {
 		if(loginUser == null) {
 			throw new LoginException("[Admin]로그인이 필요합니다.","../user/login");
 		} else if(!loginUser.getUserId().equals("admin")) {
-			throw new LoginException("[Admin]관리자 계정이 필요합니다.","../user/main");
+			throw new LoginException("[Admin]관리자 계정이 필요합니다.","../user/login");
 		}
 		return joinPoint.proceed();	// 다음 메서드 호출 -> UserController.loginCheckmain
 	}

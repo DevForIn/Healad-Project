@@ -27,7 +27,7 @@ public class MasterController {
 		return mav;	
 	}
 
-	@RequestMapping("userList")
+	@RequestMapping({"userList","outUserList"})
 	public ModelAndView userList(Integer sort, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		List<User> userList = service.userList();
@@ -36,6 +36,10 @@ public class MasterController {
 		case 0 : Collections.sort(userList,(u1,u2) -> u1.getUserId().compareTo(u2.getUserId()));
 				break;
 		case 1 : Collections.sort(userList,(u1,u2) -> u2.getUserId().compareTo(u1.getUserId()));
+				break;
+		case 2 : Collections.sort(userList,(u1,u2) -> u1.getUserId().compareTo(u2.getUserId()));
+				break;
+		case 3 : Collections.sort(userList,(u1,u2) -> u2.getUserId().compareTo(u1.getUserId()));
 				break;
 		}
 		mav.addObject("userList",userList);
