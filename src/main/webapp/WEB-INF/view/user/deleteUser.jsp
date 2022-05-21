@@ -19,27 +19,11 @@
 		</ul>
 </div>
 <div style="width: 60%; float: right;">
+	<form method="post" action="deleteUser" name="deleteform">
 	<table style="width: 500px;">
 		<tr>
 			<th colspan="2"><h3>[ ${user.userId}님 ] 탈퇴 확인</h3></th>
 		</tr>
-		<tr>
-			<td>닉네임</td>
-			<td>${user.userName}</td>
-		</tr>
-		<tr>
-			<td>전화번호</td>
-			<td>${user.phoneNo}</td>
-		</tr>
-		<tr>
-			<td>생년월일</td>
-			<td><fmt:formatDate value="${user.birthDate}"
-					pattern="yyyy-MM-dd" /></td>
-		</tr>
-	</table>
-	<br><br><br>
-	<form method="post" action="deleteUser" name="deleteform">
-	<table style="width: 500px;">
 		<tr>
 			<th><input type="hidden" name="userId" value="${param.id}">비밀번호</th> 
 			<td><input type="password" name="pwd"></td><tr>
