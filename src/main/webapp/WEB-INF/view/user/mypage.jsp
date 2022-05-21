@@ -21,10 +21,8 @@
 <div style="width:60%; float:right;" >
 	<table style="width:500px;">
 		<tr>
-			<th><h3>[ ${loginUser.userId} ]님의 프로필</h3></th>
+			<th colspan="2"><h3>[ ${user.userId} ]님의 프로필</h3></th>
 		</tr>
-	</table>
-	<table style="width:500px;">
 		<tr>
 			<td>아이디</td><td>${user.userId}</td>
 		</tr>
@@ -55,12 +53,7 @@
 	<br>
 	<a href="modifyUser?id=${user.userId}">[회원정보수정]</a>&nbsp;
 	<a href="modifyPW?id=${user.userId}">[비밀번호수정]</a>&nbsp;
-	<c:if test="${user.userId != 'admin'}">
-		<a href="deleteUser?id=${user.userId}">[회원탈퇴]</a>&nbsp;
-			</c:if>
-	<c:if test="${user.userId == 'admin'}">
-		<a href="../admin/list">[회원목록]</a>&nbsp;
-			</c:if>
+	<a href="deleteUser?id=${user.userId}">[회원탈퇴]</a>&nbsp;
 </div>
 </body>
 </html>

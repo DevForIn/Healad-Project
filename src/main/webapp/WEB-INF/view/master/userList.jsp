@@ -13,46 +13,62 @@
 		$(".idchks").prop("checked", allchk.checked)
 	}
 </script>
-<style>
-.noline {
-	text-decoration: none;
-}
-</style>
 </head>
 <body>
 	<div class="a"
 		style="background-color: #ffff80; height: 100%; width: 15%; float: left;">
 		<ul>
-			<li><a href="userList=${loginUser.userId == 'admin'}" class="current">User List</a></li>
+			<li><a href="userList" class="current">User List</a></li>
 			<li><a href="">Order List</a></li>
 			<li><a href="">My Review</a></li>
 		</ul>
 	</div>
-	<table>
+	<div style="width: 80%; float: right;">
+	<table style="width: 1400px;">
 		<tr>
-			<td colspan="7">회원목록</td>
+			<th colspan="13">HEALAD_회원목록</th>
 		</tr>
 		<tr>
-			<th>아이디<a href="userList?sort=0" class="noline">▲</a>
+			<th>ID<a href="userList?sort=0" class="noline">▲</a>
 				<a href="userList?sort=1" class="noline">▼</a></th>
-			<th>이름<a href="userList?sort=2" class="noline">▲</a>
-				<a href="userList?sort=3" class="noline">▼</a></th>
+			<th>닉네임</th>
+			<th>PASS</th>
 			<th>전화</th>
+			<th>E-mail</th>
 			<th>생일</th>
-			<th>이메일</th>
-			<th>&nbsp;</th>
+			<th>주소</th>
+			<th>총 주문 금액</th>
+			<th>마일리지</th>
+			<th>가입날짜</th>
+			<th>탈퇴여부</th>
+			<th>탈퇴날짜</th>
+			<th>정보관리</th>
 		</tr>
-		<c:forEach items="${list}" var="user">
+		<c:forEach items="${userList}" var="user">
 			<tr>
-				<td>${user.userid}</td>
-				<td>${user.username}</td>
-				<td>${user.phoneno}</td>
-				<td><fmt:formatDate value="${user.birthday}" pattern="yyyy-MM-dd" /></td>
+				<td>${user.userId}</td>
+				<td>${user.userName}</td>
+				<td><a href="../user/modifyPW?id=${user.userId}"><strong>${user.pwd}</strong></a></td>
+				<td>${user.phoneNo}</td>
 				<td>${user.email}</td>
-				<td><a href="../user/update?id=${user.userid}">수정</a>
-				 <a	href="../user/delete?id=${user.userid}">강제탈퇴</a>
-				 <a href="../user/mypage?id=${user.userid}">회원정보</a></td>
-		</c:forEach>
+				<td><fmt:formatDate value="${user.birthDate}" pattern="yyyy-MM-dd" /></td>
+				<td>${user.addr} ${user.addrDetail}</td>
+				<td><c:choose>
+					<c:when test="${user.pwd == null}"></c:when>
+					<c:otherwise>total 구현필요</c:otherwise>
+				</c:choose></td>
+				<td><c:choose>
+					<c:when test="${user.pwd == null}"></c:when>
+					<c:otherwise>${user.mileage} 포인트</c:otherwise>
+				</c:choose></td>				
+				<td><fmt:formatDate value="${user.joinDate}" pattern="yyyy-MM-dd" /></td>
+				<td>${user.withdrawYn}</td>
+				<td><fmt:formatDate value="${user.withdrawDate}" pattern="yyyy-MM-dd" /></td>
+				<td><a href="../user/modifyUser?id=${user.userId}"><strong>정보수정</strong></a><br>
+				 <a	href="../user/deleteUser?id=${user.userId}"><strong>강제탈퇴</strong></a>
+			</tr>
+		</c:forEach>		
 	</table>
+	</div>
 </body>
 </html>

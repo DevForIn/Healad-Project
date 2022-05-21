@@ -24,12 +24,11 @@
 				<spring:message code="${error.code }" />
 			</c:forEach></font>
 	</spring:hasBindErrors>	
+	<input type="hidden" name="userId" value="${user.userId}">
  <table style="width:500px;">
 		<tr>
-			<th><h3>[ ${loginUser.userId} ]님의 정보 수정</h3></th>
+			<th colspan="2"><h3>[ ${user.userId} ]님의 정보 수정</h3></th>
 		</tr>
-	</table>
- <table style="width:500px;">
     <tr><td>비밀번호확인</td><td><form:password path="pwd"  />
       <font color="red"><form:errors path="pwd" /></font></td></tr>
     <tr><td>닉네임</td><td><form:input path="userName" />
@@ -47,8 +46,9 @@
     <tr><td>생년월일</td><td><form:input path="birthDate" />
       <font color="red"><form:errors path="birthDate" /></font></td></tr>
     <tr><td colspan="2" align="center">
-       <input type="submit" value="수정"> 
-       <a href="mypage?id=${loginUser.userId}"><input type="button" value="돌아가기"></a></td></tr>
+       <input type="submit" value="회원 정보 수정"> 
+       	<a href="#" onclick="history.back()"><input type="button" value="돌아가기"></a>
+       </td></tr>
        
   </table></form:form>
  </div>

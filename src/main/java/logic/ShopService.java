@@ -1,5 +1,7 @@
 package logic;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +36,10 @@ public class ShopService {
 
 	public void deleteUser(String userId) {
 		userDao.deleteUser(userId);				
+	}
+
+	public List<User> userList() {		
+		return  userDao.userList();
 	}
 
 }

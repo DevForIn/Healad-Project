@@ -1,5 +1,6 @@
 package dao.mapper;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
@@ -14,7 +15,7 @@ public interface UserMapper {
 	
 	@Insert("insert into USER_ACCOUNT "
 			+ " (USER_ID, PWD, USER_NAME, PHONE_NO, POST_CODE, ADDR, ADDR_DETAIL, EMAIL, BIRTH_DATE,JOIN_DATE,WITHDRAW_YN,WITHDRAW_DATE,Mileage)"
-			+ " values (#{userId}, #{pwd}, #{userName}, #{phoneNo}, #{postCode}, #{addr}, #{addrDetail}, #{email}, #{birthDate}, sysdate, 'n', #{withdrawDate}, 0)")
+			+ " values (#{userId}, #{pwd}, #{userName}, #{phoneNo}, #{postCode}, #{addr}, #{addrDetail}, #{email}, #{birthDate}, sysdate, 'N', #{withdrawDate}, 0)")
 	void signUp(User user);
 
 	@Select("select * from USER_ACCOUNT where USER_ID=#{value}")
@@ -37,6 +38,12 @@ public interface UserMapper {
 	@Update("update USER_ACCOUNT set PWD=#{pwd} where USER_ID = #{userId}")
 	void updatePwd(Map<String, Object> param);
 
-	@Delete("delete from USER_ACCOUNT where USER_ID=#{value}")
+	@Update("update USER_ACCOUNT set "
+	+ " PWD=null, USER_NAME=null, PHONE_NO=null, POST_CODE=null, ADDR=null, ADDR_DETAIL=null, "
+	+ " EMAIL=null, BIRTH_DATE=null,JOIN_DATE=null,WITHDRAW_YN='Y',WITHDRAW_DATE=sysdate,Mileage=null "
+	+ " where USER_ID = #{userId}")
 	void deleteUser(String userId);
+
+	@Select("select * from USER_ACCOUNT")
+	List<User> userList();
 }

@@ -159,28 +159,33 @@ public class UserController {
 		try {
 			service.modifyUser(user);
 			if(user.getUserId().equals(loginUser.getUserId())) 
-				session.setAttribute("loginUser", user);
-			
-			mav.setViewName("redirect:/user/mypage?id="+user.getUserId());	
-			
+				session.setAttribute("loginUser", user);			
+			mav.setViewName("redirect:/user/mypage?id="+loginUser.getUserId());	
+			if(loginUser.getUserId().equals("admin")) {
+				mav.setViewName("redirect:../master/userList");	
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
-			throw new LoginException("고객 정보 수정실패","modifyUser?id="+user.getUserId());
+			throw new LoginException("고객 정보 수정실패","modifyUser?id="+loginUser.getUserId());
 		}
 		return mav;
 	}
 	@PostMapping("modifyPW")
-	public ModelAndView modifyPW(@Param("pwd") String pwd,@Param("newpwd1") String newpwd1,HttpSession session) {
+	public ModelAndView modifyPW(User user,@Param("pwd") String pwd,@Param("newpwd1") String newpwd1,HttpSession session) {
 		User loginUser = (User)session.getAttribute("loginUser");
-		
+		String userId = user.getUserId();
 		if(!pwd.equals(loginUser.getPwd())) {
 			throw new LoginException("비밀번호 오류입니다.","modifyPW?id="+loginUser.getUserId());
 		}
 		ModelAndView mav = new ModelAndView();
 		try {
-			service.modifyPwd(loginUser.getUserId(),newpwd1);
+			service.modifyPwd(userId,newpwd1);
 			loginUser.setPwd(newpwd1); // session의 loginUser 객체의 비밀번호 수정
-			mav.setViewName("redirect:/user/mypage?id="+loginUser.getUserId());
+			if(loginUser.getUserId().equals("admin")){
+				mav.setViewName("redirect:../master/userList");
+			} else {
+				mav.setViewName("redirect:/user/mypage?id="+loginUser.getUserId());
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
 			throw new LoginException("비밀번호 정보 수정 오류","modifyPW?id="+loginUser.getUserId());
@@ -208,7 +213,7 @@ public class UserController {
 		}		
 		
 		if(loginUser.getUserId().equals("admin")){
-			mav.setViewName("redirect:../admin/userList");
+			mav.setViewName("redirect:../master/userList");
 		} else {
 			mav.setViewName("redirect:login");
 			session.invalidate();

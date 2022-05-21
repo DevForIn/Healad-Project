@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -54,5 +55,9 @@ public class UserDao {
 
 	public void deleteUser(String userId) {
 		template.getMapper(cls).deleteUser(userId);			
+	}
+
+	public List<User> userList() {
+		return template.getMapper(cls).userList();
 	}	
 }

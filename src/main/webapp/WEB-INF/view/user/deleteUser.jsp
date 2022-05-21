@@ -21,10 +21,8 @@
 <div style="width: 60%; float: right;">
 	<table style="width: 500px;">
 		<tr>
-			<th><h3>[ ${loginUser.userId}님 ] 탈퇴 확인</h3></th>
+			<th colspan="2"><h3>[ ${user.userId}님 ] 탈퇴 확인</h3></th>
 		</tr>
-	</table>
-	<table style="width: 500px;">
 		<tr>
 			<td>닉네임</td>
 			<td>${user.userName}</td>
@@ -47,7 +45,8 @@
 			<td><input type="password" name="pwd"></td><tr>
 		<tr>
 			<td colspan="2">
-			<a href="javascript:deleteform.submit()">[회원탈퇴확인]</a></td>
+			<a href="javascript:deleteform.submit()">[회원탈퇴확인]</a>
+			<a href="#" onclick="history.back()">[돌아가기]</a></td>
 		</tr>
 	</table>
 	</form>

@@ -45,7 +45,7 @@ body { padding-top:40px;
         <a href="${path}/item/cart" class="w3-bar-item w3-button"><h3>Cart</h3></a>
       	<c:choose>
       		<c:when test="${loginUser.userId == 'admin'}">
-      			<a href="${path}/user/mypage?id=${loginUser.userId}" class="w3-bar-item w3-button"><h3>Setting</h3></a>
+      			<a href="${path}/master/userList" class="w3-bar-item w3-button"><h3>Setting</h3></a>
       		</c:when>
       		<c:otherwise>
       			<a href="${path}/user/mypage?id=${loginUser.userId}" class="w3-bar-item w3-button"><h3>MyPage</h3></a>
