@@ -1,7 +1,5 @@
 package controller;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import exception.LoginException;
@@ -66,10 +63,14 @@ public class UserController {
 			mav.getModel().putAll(bresult.getModel());
 			bresult.reject("error.input.login");			
 			return mav;	
-		}	
-		
+		}		
 		try {			
 			User dbUser = service.selectUser(user.getUserId());
+			if(dbUser == null) {
+				mav.getModel().putAll(bresult.getModel());
+				bresult.reject("error.input.login");			
+				return mav;	
+			}
 			if(user.getPwd().equals(dbUser.getPwd())) {
 				session.setAttribute("loginUser", dbUser);	
 			} else { 
@@ -135,7 +136,7 @@ public class UserController {
 		
 		return mav;
 	}
-	@GetMapping({"modifyUser","modifyPW"})
+	@GetMapping({"modifyUser","modifyPW","deleteUser"})
 	public ModelAndView idCheckChange(String id,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		User user = service.selectUser(id);
@@ -183,6 +184,34 @@ public class UserController {
 		} catch(Exception e) {
 			e.printStackTrace();
 			throw new LoginException("비밀번호 정보 수정 오류","modifyPW?id="+loginUser.getUserId());
+		}
+		return mav;
+	}
+	@PostMapping("deleteUser")
+	public ModelAndView idCheckdeleteUser(String pwd,String userId,HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		User loginUser = (User)session.getAttribute("loginUser");
+		
+		if(userId.equals("admin")) {
+			throw new LoginException("관리자는 탈퇴가 불가합니다.","userList");
+		}
+		
+		if(!pwd.equals(loginUser.getPwd())) {			
+			throw new LoginException("비밀번호를 확인하세요.","deleteUser?id="+loginUser.getUserId());
+		} 				
+		
+		try {
+			service.deleteUser(userId);
+		} catch(Exception e) {
+			e.printStackTrace();
+			throw new LoginException("탈퇴 오류","deleteUser?id="+loginUser.getUserId());
+		}		
+		
+		if(loginUser.getUserId().equals("admin")){
+			mav.setViewName("redirect:../admin/userList");
+		} else {
+			mav.setViewName("redirect:login");
+			session.invalidate();
 		}
 		return mav;
 	}

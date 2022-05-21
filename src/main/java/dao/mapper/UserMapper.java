@@ -2,6 +2,7 @@ package dao.mapper;
 
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -35,4 +36,7 @@ public interface UserMapper {
 
 	@Update("update USER_ACCOUNT set PWD=#{pwd} where USER_ID = #{userId}")
 	void updatePwd(Map<String, Object> param);
+
+	@Delete("delete from USER_ACCOUNT where USER_ID=#{value}")
+	void deleteUser(String userId);
 }

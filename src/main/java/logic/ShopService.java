@@ -32,4 +32,8 @@ public class ShopService {
 		userDao.updatePwd(userId,newpwd1);		
 	}
 
+	public void deleteUser(String userId) {
+		userDao.deleteUser(userId);				
+	}
+
 }

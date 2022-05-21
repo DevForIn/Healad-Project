@@ -11,6 +11,11 @@
 <body>
 <script type="text/javascript">
    function inchk(f) {
+	   if(f.pwd.value == null) {
+		   alert("정보를 입력해주세요.");
+		   f.pwd.focus();
+		   return false; 
+	   }
 	   if(f.newpwd1.value != f.newpwd2.value) {
 		   alert("변경 비밀번호 와 변경 비밀번호 재입력이 다릅니다.");
 		   f.newpwd2.value="";

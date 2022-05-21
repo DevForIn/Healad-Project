@@ -50,5 +50,9 @@ public class UserDao {
 		param.put("userId", userId);
 		param.put("pwd", newpwd1);
 		template.getMapper(cls).updatePwd(param);			
+	}
+
+	public void deleteUser(String userId) {
+		template.getMapper(cls).deleteUser(userId);			
 	}	
 }

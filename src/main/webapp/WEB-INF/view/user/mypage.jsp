@@ -21,7 +21,7 @@
 <div style="width:60%; float:right;" >
 	<table style="width:500px;">
 		<tr>
-			<td><h3>나의 정보</h3></td>
+			<th><h3>[ ${loginUser.userId} ]님의 프로필</h3></th>
 		</tr>
 	</table>
 	<table style="width:500px;">
