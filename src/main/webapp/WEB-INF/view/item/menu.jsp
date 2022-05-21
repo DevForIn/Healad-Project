@@ -81,7 +81,7 @@ function fnSearchMenu(itemCatId){
 					contents +='<img class="card-img-top" src="file/"' + datas[i].pictureUrl + 'alt="Card image cap" style="width: 150px;">';
 				}
 				contents += 		'<div class="card-body">';
-				contents += 			'<h5 class="card-title">'+datas[i].itemName +'</h5>';
+				contents += 			'<h5 class="card-title"><a href="${path}/item/detail?itemId='+datas[i].itemId +'"> '+datas[i].itemName +' </a></h5>';
 				contents += 			'<p class="card-text">'+datas[i].price +' 원</p>';
 				contents += 			'<p class="card-text">'+datas[i].description+'</p>';
 				contents += 			'<button type="button" class="btn btn-warning"><i class="fa fa-truck"> 주문하기</i></button> ';

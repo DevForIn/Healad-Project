@@ -24,5 +24,9 @@ public class ItemDao {
 	public List<Item> select(Integer itemCatId) {				
 		return template.getMapper(cls).select(itemCatId);		
 	}
+
+	public Item selectOne(Integer itemId) {
+		return template.getMapper(cls).selectOne(itemId);
+	}
 }
 

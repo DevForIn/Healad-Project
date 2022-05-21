@@ -17,6 +17,11 @@ public class ItemService {
 		// TODO Auto-generated method stub
 		return itemDao.select(itemCatId);
 	}
+
+	public Item selectOne(Integer itemId) {
+		// TODO Auto-generated method stub
+		return itemDao.selectOne(itemId);
+	}
 	
 	
 }

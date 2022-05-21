@@ -34,8 +34,19 @@ public class ItemController {
 	
 	@GetMapping("list")
 	public List<Item> list(Integer itemCatId) {
+		// 카테고리 조회조건이 안넘어왔을때 기본 카테고리 1 (샐러드)로 지정
 		if(itemCatId == null) itemCatId = 1;
 		List<Item> list = itemService.getMenuList(itemCatId);
 		return list;	
 	}
+
+	 
+	@RequestMapping("detail")
+	public ModelAndView detail(Integer itemId) {
+		ModelAndView mav = new ModelAndView();
+		// 아이템 아이디 기준 상세내용 조회
+		Item item = itemService.selectOne(itemId);
+		mav.addObject("item", item);
+		return mav;	
+	}	
 }
