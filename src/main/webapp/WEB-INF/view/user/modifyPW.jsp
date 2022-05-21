@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>비밀번호 변경</title>
+</head>
+<body>
 <script type="text/javascript">
    function inchk(f) {
 	   if(f.newpwd1.value != f.newpwd2.value) {
@@ -15,21 +17,26 @@
 		   f.newpwd2.focus();
 		   return false; 
 	   }
-	   //chgpass 값이 3자리 미만경우 오류 발생하기
 	   let passlen = f.newpwd1.value.length
 	   if(passlen < 5 || passlen > 14) {
 		   alert("변경 비밀번호는 5자 이상 14자 미만 이어야 합니다.");
 		   f.newpwd1.focus();
 		   return false; 
 	   }
+	   if(f.newpwd1.value == f.pwd.value) {
+		   alert("현재 비밀번호와 다른 비밀번호를 입력해주세요.");
+		   f.newpwd1.value="";
+		   f.newpwd2.value="";
+		   f.newpwd1.focus();
+		   return false; 
+	   }
 	   return true;
-   }</script>
-</head>
-<body>
+   }
+</script>
 	<div class="a"
 		style="background-color: #ffff80; height: 100%; width: 15%; float: left;">
 		<ul>
-			<li><a href="${path}/user/mypage?id=${user.userId}" class="current">My Profile</a></li>
+			<li><a href="mypage?id=${loginUser.userId}" class="current">My Profile</a></li>
 			<li><a href="">Order List</a></li>
 			<li><a href="">My Review</a></li>
 		</ul>

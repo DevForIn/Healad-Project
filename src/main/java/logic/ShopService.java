@@ -28,8 +28,8 @@ public class ShopService {
 		userDao.updateUser(user);		
 	}
 
-	public void modifyPwd(String userId, String chgpass) {
-		userDao.updatePwd(userId,chgpass);		
+	public void modifyPwd(String userId, String newpwd1) {
+		userDao.updatePwd(userId,newpwd1);		
 	}
 
 }

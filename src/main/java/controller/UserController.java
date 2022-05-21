@@ -169,15 +169,16 @@ public class UserController {
 		return mav;
 	}
 	@PostMapping("modifyPW")
-	public ModelAndView modifyPW(@Param("pwd") String pwd,@Param("chgpass") String chgpass,HttpSession session) {
+	public ModelAndView modifyPW(@Param("pwd") String pwd,@Param("newpwd1") String newpwd1,HttpSession session) {
 		User loginUser = (User)session.getAttribute("loginUser");
+		
 		if(!pwd.equals(loginUser.getPwd())) {
 			throw new LoginException("비밀번호 오류입니다.","modifyPW?id="+loginUser.getUserId());
 		}
 		ModelAndView mav = new ModelAndView();
 		try {
-			service.modifyPwd(loginUser.getUserId(),chgpass);
-			loginUser.setPwd(chgpass); // session의 loginUser 객체의 비밀번호 수정
+			service.modifyPwd(loginUser.getUserId(),newpwd1);
+			loginUser.setPwd(newpwd1); // session의 loginUser 객체의 비밀번호 수정
 			mav.setViewName("redirect:/user/mypage?id="+loginUser.getUserId());
 		} catch(Exception e) {
 			e.printStackTrace();

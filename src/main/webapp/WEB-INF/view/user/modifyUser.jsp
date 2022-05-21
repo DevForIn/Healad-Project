@@ -11,7 +11,7 @@
 <body>
 <div class="a" style="background-color:#ffff80; height:100%; width:15%; float:left;">
 <ul>
-	<li><a href="${path}/user/mypage?id=${user.userId}" class="current">My Profile</a></li>
+	<li><a href="mypage?id=${loginUser.userId}" class="current">My Profile</a></li>
 	<li><a href="">Order List</a></li>
 	<li><a href="">My Review</a></li>
 </ul>
