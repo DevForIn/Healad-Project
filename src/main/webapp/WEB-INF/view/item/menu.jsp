@@ -75,10 +75,10 @@ function fnSearchMenu(itemCatId){
 			    contents += '<div class="card-group">';
 				contents += 	'<div class="card">';
 				if(datas[i].pictureUrl == null) {
-					contents +='<img class="card-img-top" src="../img/sal1.png" alt="Card image cap" style="width: 300px;">';
+					contents +='<a href="${path}/item/detail?itemId='+datas[i].itemId +'"><img class="card-img-top" src="../img/sal1.png" alt="Card image cap" style="width: 300px; cursor: pointer;"></a>';
 				}
 				else {
-					contents +='<img class="card-img-top" src="file/"' + datas[i].pictureUrl + 'alt="Card image cap" style="width: 150px;">';
+					contents +='<a href="${path}/item/detail?itemId='+datas[i].itemId +'"><img class="card-img-top" src="file/"' + datas[i].pictureUrl + 'alt="Card image cap" style="width: 300px; cursor: pointer;"></a>';
 				}
 				contents += 		'<div class="card-body">';
 				contents += 			'<h5 class="card-title"><a href="${path}/item/detail?itemId='+datas[i].itemId +'"> '+datas[i].itemName +' </a></h5>';
