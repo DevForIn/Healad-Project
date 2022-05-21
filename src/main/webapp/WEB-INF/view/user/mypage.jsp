@@ -13,7 +13,7 @@
 <body>
 <div class="a" style="background-color:#ffff80; height:100%; width:15%; float:left;">
 <ul>
-	<li><a href="${path}/user/mypage?id=${user.userId}" class="current">My Profile</a></li>
+	<li><a href="mypage?id=${loginUser.userId}" class="current">My Profile</a></li>
 	<li><a href="">Order List</a></li>
 	<li><a href="">My Review</a></li>
 </ul>
@@ -52,14 +52,9 @@
 				<c:if test="${user.mileage != 0}">${user.mileage} 포인트</c:if></td>
 		</tr>
 	</table>
-	<input type="hidden" name="joinDate" value="${user.joinDate }">
-	<input type="hidden" name="withdrawYn" value="${user.withdrawYn }">
-	<input type="hidden" name="withdrawDate" value="${user.withdrawDate }">
-	<input type="hidden" name="mileage" value="${user.mileage }">
-	<input type="hidden" name="pwd" value="${user.pwd }">
 	<br>
 	<a href="modifyUser?id=${user.userId}">[회원정보수정]</a>&nbsp;
-	<a href="modifyPW">[비밀번호수정]</a>&nbsp;
+	<a href="modifyPW?id=${user.userId}">[비밀번호수정]</a>&nbsp;
 	<c:if test="${user.userId != 'admin'}">
 		<a href="deleteUser?id=${user.userId}">[회원탈퇴]</a>&nbsp;
 			</c:if>

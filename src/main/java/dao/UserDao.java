@@ -41,8 +41,14 @@ public class UserDao {
 		return template.getMapper(cls).search(param);
 	}
 
-	public void update(User user) {
-		template.getMapper(cls).update(param);		
+	public void updateUser(User user) {
+		template.getMapper(cls).updateUser(user);		
 	}
-	
+
+	public void updatePwd(String userId, String chgpass) {
+		param.clear();
+		param.put("userId", userId);
+		param.put("pwd", chgpass);
+		template.getMapper(cls).updatePwd(param);			
+	}	
 }

@@ -16,6 +16,7 @@ public class User {
 	private String userId;
 	
 	@Size(min=5,max=14,message="! - 비밀번호는 5~14자로 입력하세요. - !")
+	@NotEmpty
 	private String pwd;
 	
 	@NotEmpty(message="! - 닉네임을 입력하세요. - !")

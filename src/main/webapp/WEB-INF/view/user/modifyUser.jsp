@@ -24,10 +24,9 @@
 				<spring:message code="${error.code }" />
 			</c:forEach></font>
 	</spring:hasBindErrors>	
-		<input type="hidden" name="userId" value="${user.userId}">
  <table style="width:500px;">
 		<tr>
-			<td><h3>[ ${user.userId} ]님의 정보 수정</h3></td>
+			<th><h3>[ ${loginUser.userId} ]님의 정보 수정</h3></th>
 		</tr>
 	</table>
  <table style="width:500px;">
@@ -49,7 +48,7 @@
       <font color="red"><form:errors path="birthDate" /></font></td></tr>
     <tr><td colspan="2" align="center">
        <input type="submit" value="수정"> 
-       <input type="reset" value="초기화"></td></tr>
+       <a href="mypage?id=${loginUser.userId}"><input type="button" value="돌아가기"></a></td></tr>
        
   </table></form:form>
  </div>

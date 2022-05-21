@@ -24,8 +24,12 @@ public class ShopService {
 		return userDao.search(user,url);
 	}
 
-	public void userUpdate(User user) {
-		userDao.update(user);		
+	public void modifyUser(User user) {
+		userDao.updateUser(user);		
+	}
+
+	public void modifyPwd(String userId, String chgpass) {
+		userDao.updatePwd(userId,chgpass);		
 	}
 
 }

@@ -3,6 +3,7 @@ package dao.mapper;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -27,9 +28,11 @@ public interface UserMapper {
 	String search(Map<String, Object> param);
 
 	@Update("update USER_ACCOUNT "
-	+ " set userName=#{userName}, phoneNo=#{phoneNo}, postCode=#{postCode}, "
-	+ " addr=#{addr}, addrDetail=#{addrDetail}, email=#{email}, "
-	+ " where userId =#{userId}" )
-	void update(Map<String, Object> param);
+	+ " set USER_NAME=#{userName}, PHONE_NO=#{phoneNo}, POST_CODE=#{postCode}, "
+	+ " ADDR=#{addr}, ADDR_DETAIL=#{addrDetail}, EMAIL=#{email}, BIRTH_DATE=#{birthDate} "
+	+ " where USER_ID = #{userId}")
+	void updateUser(User user);
 
+	@Update("update USER_ACCOUNT set PWD=#{pwd} where USER_ID = #{userId}")
+	void updatePwd(Map<String, Object> param);
 }
