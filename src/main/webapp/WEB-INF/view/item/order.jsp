@@ -72,15 +72,15 @@
 				                <p class="lead fw-normal mb-2">${item.itemName }</p>
 				              </div>
 				              <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-				                <button class="btn btn-link px-2" onclick="">
+				                <a class="btn btn-link px-2" onclick="fnUpdateOrderQuantity('${item.itemId}', 'down')">
 				                  <i class="fa fa-minus"></i>
-				                </button>
+				                </a>
 				
-				                <input id="form1" min="0" name="quantity" value="1" type="number" class="form-control form-control-sm" />
+				                <input id="quantity" min="0" name="quantity" value="1" type="number" class="form-control form-control-sm" />
 				
-				                <button class="btn btn-link px-2" onclick="">
+				                <a class="btn btn-link px-2" onclick="fnUpdateOrderQuantity('${item.itemId}', 'plus')">
 				                  <i class="fa fa-plus"></i>
-				                </button>
+				                </a>
 				              </div>
 				              <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
 				                <h5 class="mb-0">${item.price }</h5>
@@ -151,6 +151,16 @@
 		alert(itemId);
 	}
 
+	
+	function fnUpdateOrderQuantity(itemId, upDown){
+		if(upDown == 'plus') {
+			$('#quantity').val(Number($('#quantity').val()) + 1);	
+		}
+		else {
+			// 0 불가능
+			if($('#quantity').val() != 1) $('#quantity').val(Number($('#quantity').val()) - 1);
+		}
+	}
 	
 	function fnUpdateCartQuantity(itemId, upDown){
 		
