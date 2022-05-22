@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -45,6 +46,15 @@ public class ItemController {
 	public ModelAndView detail(Integer itemId) {
 		ModelAndView mav = new ModelAndView();
 		// 아이템 아이디 기준 상세내용 조회
+		Item item = itemService.selectOne(itemId);
+		mav.addObject("item", item);
+		return mav;	
+	}	
+	
+	
+	@RequestMapping("order")
+	public ModelAndView order(Integer itemId) {
+		ModelAndView mav = new ModelAndView("item/order");
 		Item item = itemService.selectOne(itemId);
 		mav.addObject("item", item);
 		return mav;	

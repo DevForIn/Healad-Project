@@ -13,6 +13,8 @@
 </style>
 </head>
 <body>
+	<form action="../item/order">
+	<input type="hidden" name="itemId" value="${item.itemId}">
 	<div class="container">
 	    <div class="card">
 	        <div class="card-body">
@@ -39,7 +41,7 @@
 	                    <button class="btn btn-primary btn-rounded mr-1" onclick="fnAddCart('${item.itemId}','${item.itemName }')">
 	                        <i class="fa fa-shopping-cart"></i>
 	                    </button>
-	                    <button class="btn btn-warning btn-rounded" onclick="fnOrderMenu('${item.itemId}')"><i class="fa fa-truck"></i> 주문하기</button>
+	                    <button type="submit" class="btn btn-warning btn-rounded" ><i class="fa fa-truck"></i> 주문하기</button>
 	                    <button class="btn btn-dark btn-rounded" onclick="location.href='${path}/item/menu'">목록</button>
 <!-- 	                    <h3 class="box-title mt-5">Key Highlights</h3>
 	                    <ul class="list-unstyled">
@@ -52,7 +54,7 @@
 	        </div>
 	    </div>
 	</div>
-
+	</form>
 <script>
 
 /**
@@ -79,7 +81,8 @@ function fnAddCart(itemId, itemName){
  * 주문하기 
  */
 function fnOrderMenu(itemId){
-	
+	var x = document.getElementsByTagName("form");
+	x[0].submit();
 }
 </script>	
 </body>

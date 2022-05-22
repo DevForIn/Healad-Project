@@ -70,8 +70,14 @@ http://localhost:8088/springmvc1/item/list
 <bean id="exceptionHandler" 
 	class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 	<property name="exceptionMappings">
-		<value>exception.LoginException=exception
-			   exception.CartException=exception</value>
+		<value>exception.LoginException=exception</value>
 	</property>	
 </bean>
+
+ <mvc:interceptors>
+ 	<mvc:interceptor>
+ 		<mvc:mapping path="/item/order"/> <!-- 요청 URL 정보 -->
+ 		<bean class="interceptor.ItemInterceptor" /> <!-- 인터셉터 클래스 객체 -->
+ 	</mvc:interceptor>
+ </mvc:interceptors>
 </beans>
