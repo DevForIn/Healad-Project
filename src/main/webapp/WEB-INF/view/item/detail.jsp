@@ -16,7 +16,7 @@
 	<form action="../item/order">
 	<input type="hidden" name="itemId" value="${item.itemId}">
 	<!-- order type (주문타입) D: 단건주문, C: 카트 주문  -->
-	<input type="hidden" name="orderType" value="C">
+	<input type="hidden" name="orderType" value="D">
 	<div class="container">
 	    <div class="card">
 	        <div class="card-body">
