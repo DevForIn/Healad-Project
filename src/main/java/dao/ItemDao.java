@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import dao.mapper.ItemMapper;
 
 import logic.Item;
+import logic.User;
 
 @Repository
 public class ItemDao {
@@ -28,5 +29,12 @@ public class ItemDao {
 	public Item selectOne(Integer itemId) {
 		return template.getMapper(cls).selectOne(itemId);
 	}
-}
 
+	public List<Item> itemList() {
+		return template.getMapper(cls).itemList();
+	}
+
+	public List<Item> itemListCat(Integer cat_no) {
+		return template.getMapper(cls).itemListCat(cat_no);
+	}
+}

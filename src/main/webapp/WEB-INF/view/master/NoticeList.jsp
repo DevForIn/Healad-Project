@@ -19,8 +19,8 @@
 		<ul>
 			<li><a href="userList" class="current">User List</a></li>
 			<li><a href="outUserList">OutUser List</a></li>
-			<li><a href="itemList">Item set</a></li>
-			<li><a href="noticeList">Notice set</a></li>
+			<li><a href="ItemList">Item set</a></li>
+			<li><a href="NoticeList">Notice set</a></li>
 		</ul>
 	</div>
 	<div style="width: 80%; float: right;">

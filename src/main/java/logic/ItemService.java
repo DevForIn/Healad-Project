@@ -14,13 +14,19 @@ public class ItemService {
 	ItemDao itemDao;
 
 	public List<Item> getMenuList(Integer itemCatId) {
-		// TODO Auto-generated method stub
 		return itemDao.select(itemCatId);
 	}
 
 	public Item selectOne(Integer itemId) {
-		// TODO Auto-generated method stub
 		return itemDao.selectOne(itemId);
+	}
+
+	public List<Item> itemList() {
+		return itemDao.itemList();
+	}
+
+	public List<Item> itemListCat(Integer cat_no) {
+		return itemDao.itemListCat(cat_no);
 	}
 	
 	

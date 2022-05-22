@@ -14,11 +14,13 @@
 </script>
 </head>
 <body>
-	<div class="a"
-		style="background-color: #ffff80; height: 100%; width: 15%; float: left;">
+	<div class="a" style="background-color: #ffff80; height: 100%; width: 15%; float: left;">
 		<ul>
 			<li><a href="userList">User List</a></li>
 			<li><a href="outUserList" class="current">OutUser List</a></li>
+			<li><a href="itemList">Item set</a></li>
+			<li><a href="noticeList">Notice set</a></li>
+
 		</ul>
 	</div>
 	<div style="width: 60%; float: right;">

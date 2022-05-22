@@ -19,7 +19,8 @@ DROP TABLE SALE CASCADE CONSTRAINTS;
 DROP TABLE USER_ACCOUNT CASCADE CONSTRAINTS;
 
 select * from USER_ACCOUNT
-
+select * from item
+select item_id , item_name, price, description, picture_url, use_yn, item_cat_id from item where item_id = 1
 
 /* Create Tables */
 
