@@ -2,15 +2,19 @@ package controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import logic.Cart;
+import logic.CartService;
 import logic.Item;
 import logic.ItemService;
+import logic.User;
 
 @RestController
 @RequestMapping("item")
@@ -18,6 +22,9 @@ public class ItemController {
 	
 	@Autowired
 	private ItemService itemService;
+	
+	@Autowired
+	private CartService cartService;
 	
 
 	@GetMapping("*") 	// 그외 모든 Get 방식 요청
@@ -53,10 +60,47 @@ public class ItemController {
 	
 	
 	@RequestMapping("order")
-	public ModelAndView order(Integer itemId) {
+	public ModelAndView order(Integer itemId, HttpSession session, String orderType) {
 		ModelAndView mav = new ModelAndView("item/order");
-		Item item = itemService.selectOne(itemId);
-		mav.addObject("item", item);
+		
+		
+		if("".equals(orderType)) orderType = "C";
+
+		if("C".equals(orderType)) {
+			User user = (User) session.getAttribute("loginUser");
+			System.out.println("user=" + user.getUserId());
+			List<Cart> items = cartService.getList(user.getUserId());
+			mav.addObject("items", items);
+		}
+		else {
+			Item item = itemService.selectOne(itemId);
+			mav.addObject("item", item);
+		}
+		
+		mav.addObject("orderType", orderType);
+		
 		return mav;	
-	}	
+	}
+	
+	
+	@RequestMapping("purchase")
+	public ModelAndView purchase(Cart cart, HttpSession session, String orderType) {
+		ModelAndView mav = new ModelAndView("item/purchase");
+		
+		if("".equals(orderType)) orderType = "C";
+
+		if("C".equals(orderType)) {
+			User user = (User) session.getAttribute("loginUser");
+			System.out.println("user=" + user.getUserId());
+			List<Cart> items = cartService.getList(user.getUserId());
+		}
+		else {
+		
+		
+		}
+		
+		mav.addObject("orderType", orderType);
+		
+		return mav;	
+	}		
 }

@@ -15,6 +15,8 @@
 <body>
 	<form action="../item/order">
 	<input type="hidden" name="itemId" value="${item.itemId}">
+	<!-- order type (주문타입) D: 단건주문, C: 카트 주문  -->
+	<input type="hidden" name="orderType" value="C">
 	<div class="container">
 	    <div class="card">
 	        <div class="card-body">
@@ -43,12 +45,6 @@
 	                    </button>
 	                    <button type="submit" class="btn btn-warning btn-rounded" ><i class="fa fa-truck"></i> 주문하기</button>
 	                    <button class="btn btn-dark btn-rounded" onclick="location.href='${path}/item/menu'">목록</button>
-<!-- 	                    <h3 class="box-title mt-5">Key Highlights</h3>
-	                    <ul class="list-unstyled">
-	                        <li><i class="fa fa-check text-success"></i>Sturdy structure</li>
-	                        <li><i class="fa fa-check text-success"></i>Designed to foster easy portability</li>
-	                        <li><i class="fa fa-check text-success"></i>Perfect furniture to flaunt your wonderful collectibles</li>
-	                    </ul> -->
 	                </div>
 	            </div>
 	        </div>
@@ -61,7 +57,6 @@
  * 장바구니 담기
  */
 function fnAddCart(itemId, itemName){
-	console.log('fnAddCart',itemId);
 	$.ajax({
 		url : "${path}/cart/add",
 		data: {
@@ -77,13 +72,6 @@ function fnAddCart(itemId, itemName){
 	});	
 }
 
-/**
- * 주문하기 
- */
-function fnOrderMenu(itemId){
-	var x = document.getElementsByTagName("form");
-	x[0].submit();
-}
 </script>	
 </body>
 

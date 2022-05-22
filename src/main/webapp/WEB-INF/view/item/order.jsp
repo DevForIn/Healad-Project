@@ -14,7 +14,7 @@
 </head>
 <body>
 	<form action="../item/purchase">
-		<input type="hidden" name="itemId" value="${item.itemId}">
+		<input type="hidden" name="orderType" value="${orderType}">
 		<section class="h-100" style="background-color: #eee;">
 		  <div class="container h-100 py-5">
 		    <div class="row d-flex justify-content-center align-items-center h-100">
@@ -23,37 +23,77 @@
 		        <div class="d-flex justify-content-between align-items-center mb-4">
 		          <h3 class="fw-normal mb-0 text-black">주문서 작성</h3>
 		        </div>
-		
-		        <div class="card rounded-3 mb-4">
-		          <div class="card-body p-4">
-		            <div class="row d-flex justify-content-between align-items-center">
-		              <div class="col-md-2 col-lg-2 col-xl-2">
-		                <img src="../img/sal1.png" class="img-fluid rounded-3" alt="Cotton T-shirt">
-		              </div>
-		              <div class="col-md-3 col-lg-3 col-xl-3">
-		                <p class="lead fw-normal mb-2">${item.itemName }</p>
-		              </div>
-		              <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-		                <button class="btn btn-link px-2" onclick="">
-		                  <i class="fa fa-minus"></i>
-		                </button>
-		
-		                <input id="form1" min="0" name="quantity" value="1" type="number"
-		                  class="form-control form-control-sm" />
-		
-		                <button class="btn btn-link px-2" onclick="">
-		                  <i class="fa fa-plus"></i>
-		                </button>
-		              </div>
-		              <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-		                <h5 class="mb-0">${item.price }</h5>
-		              </div>
-		              <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-		                <a onclick="fnRemoveItem('${item.itemId }')" class="text-danger"><i class="fa fa-trash fa-lg"></i></a>
-		              </div>
-		            </div>
-		          </div>
-		        </div>
+				<c:choose>
+					<c:when test="${orderType =='C' }">
+						<!-- 카트 주문의 경우 -->
+						<c:forEach var="item" items="${items}">
+					        <div class="card rounded-3 mb-4">
+					          <div class="card-body p-4">
+					            <div class="row d-flex justify-content-between align-items-center">
+					              <div class="col-md-2 col-lg-2 col-xl-2">
+					                <img src="../img/sal1.png" class="img-fluid rounded-3" alt="Cotton T-shirt">
+					              </div>
+					              <div class="col-md-3 col-lg-3 col-xl-3">
+					                <p class="lead fw-normal mb-2">${item.itemName }</p>
+					              </div>
+					              <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+					                <a class="btn btn-link px-2" onclick="fnUpdateCartQuantity('${item.itemId}','down')">
+					                  <i class="fa fa-minus"></i>
+					                </a>
+					
+					                <input min="1" id="quantity_${item.itemId }" name="quantity" value="${item.quantity }" type="number"
+					                  class="form-control form-control-sm" />
+					
+					                <a class="btn btn-link px-2" onclick="fnUpdateCartQuantity('${item.itemId}', 'plus')">
+					                  <i class="fa fa-plus"></i>
+					                </a>
+					              </div>
+					              <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+					                <h5 class="mb-0">${item.price }</h5>
+					              </div>
+					              <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+					                <a onclick="fnRemoveItem('${item.itemId }')" class="text-danger"><i class="fa fa-trash fa-lg"></i></a>
+					              </div>
+					            </div>
+					          </div>
+					        </div>	
+						</c:forEach>						
+					</c:when>
+					<c:otherwise>
+						<!-- 바로 주문하기 클릭했을 경우,  -->
+						<input type="hidden" name="itemId" value="${item.itemId}">
+				        <div class="card rounded-3 mb-4">
+				          <div class="card-body p-4">
+				            <div class="row d-flex justify-content-between align-items-center">
+				              <div class="col-md-2 col-lg-2 col-xl-2">
+				                <img src="../img/sal1.png" class="img-fluid rounded-3" alt="Cotton T-shirt">
+				              </div>
+				              <div class="col-md-3 col-lg-3 col-xl-3">
+				                <p class="lead fw-normal mb-2">${item.itemName }</p>
+				              </div>
+				              <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+				                <button class="btn btn-link px-2" onclick="">
+				                  <i class="fa fa-minus"></i>
+				                </button>
+				
+				                <input id="form1" min="0" name="quantity" value="1" type="number" class="form-control form-control-sm" />
+				
+				                <button class="btn btn-link px-2" onclick="">
+				                  <i class="fa fa-plus"></i>
+				                </button>
+				              </div>
+				              <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+				                <h5 class="mb-0">${item.price }</h5>
+				              </div>
+				              <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+				                <a onclick="fnRemoveItem('${item.itemId }')" class="text-danger"><i class="fa fa-trash fa-lg"></i></a>
+				              </div>
+				            </div>
+				          </div>
+				        </div>					
+					</c:otherwise>
+				</c:choose>
+
 
 		
  		        <div class="card mb-4 px-5 py-5">
@@ -109,6 +149,35 @@
 <script>
 	function fnRemoveItem(itemId){
 		alert(itemId);
+	}
+
+	
+	function fnUpdateCartQuantity(itemId, upDown){
+		
+		if(upDown == 'plus') {
+			$('#quantity_' + itemId).val(Number($('#quantity_' + itemId).val()) + 1);	
+		}
+		else {
+			// 0 불가능
+			if($('#quantity_' + itemId).val() != 1) $('#quantity_' + itemId).val(Number($('#quantity_' + itemId).val()) - 1);
+		}
+		
+		console.log('itemId 수량 = ',$('#quantity_' + itemId).val());
+		
+		
+ 		$.ajax({
+			url : "${path}/cart/quantity-update",
+			data: {
+				'itemId': itemId,
+				'quantity': $('#quantity_' + itemId).val(),
+			},
+			success : function(data) {
+				console.log('data', data)
+			},
+		    error:function(request,status,error){
+		    	alert('에러가 발생했습니다.');
+		    }
+		});	 		
 	}
 </script>	
 </body>

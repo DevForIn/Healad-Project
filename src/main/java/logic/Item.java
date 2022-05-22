@@ -1,7 +1,7 @@
 package logic;
 
 public class Item {
-	private Long itemId;
+	private Integer itemId;
 	
 	private String itemName;
 	
@@ -15,10 +15,12 @@ public class Item {
 	
 	private Integer itemCatId;
 	
-	public Long getItemId() {
+	
+	
+	public Integer getItemId() {
 		return itemId;
 	}
-	public void setItemId(Long itemId) {
+	public void setItemId(Integer itemId) {
 		this.itemId = itemId;
 	}
 	public String getItemName() {

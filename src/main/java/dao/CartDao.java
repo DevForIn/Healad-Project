@@ -42,4 +42,14 @@ public class CartDao {
 	public void updateCartItem(Cart cart) {
 		template.getMapper(cls).updateCartItem(cart);
 	}
+
+
+	public List<Cart> getList(String userId) {
+		return template.getMapper(cls).getList(userId);
+	}
+
+
+	public void updateCartQuantity(Cart cart) {
+		template.getMapper(cls).updateCartQuantity(cart);
+	}
 }

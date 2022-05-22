@@ -43,4 +43,24 @@ public class CartController {
 
 		return null;
 	}
+	
+	@RequestMapping("quantity-update")
+	public String quantityUpdate(Integer itemId, Integer quantity, HttpSession session, HttpServletRequest request) {
+		
+		// 1. 사용자 정보 조회
+		User user = (User) session.getAttribute("loginUser");
+		System.out.println("user=" + user.getUserId());
+		
+		// 2. 유저 정보가 존재하면 카트에 아이템 추가
+		if(user != null) {
+			Cart cart = new Cart();
+			cart.setItemId(itemId);
+			cart.setQuantity(quantity);
+			cart.setUserId(user.getUserId());
+			
+			cartService.updateCart(cart);
+		}
+		
+		return null;
+	}
 }
