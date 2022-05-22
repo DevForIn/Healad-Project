@@ -44,7 +44,7 @@
 	                        <i class="fa fa-shopping-cart"></i>
 	                    </button>
 	                    <button type="submit" class="btn btn-warning btn-rounded" ><i class="fa fa-truck"></i> 주문하기</button>
-	                    <button class="btn btn-dark btn-rounded" onclick="location.href='${path}/item/menu'">목록</button>
+	                    <button class="btn btn-dark btn-rounded" onclick="fnMoveList()">목록</button>
 	                </div>
 	            </div>
 	        </div>
@@ -53,6 +53,10 @@
 	</form>
 <script>
 
+function fnMoveList(){
+	window.location.href='${path}/item/menu';
+	event.preventDefault();
+}
 /**
  * 장바구니 담기
  */

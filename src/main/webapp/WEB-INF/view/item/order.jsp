@@ -148,7 +148,7 @@
 	
 <script>
 	function fnRemoveItem(itemId){
-		alert(itemId);
+		alert(itemId + ' 삭제 작업중');
 	}
 
 	

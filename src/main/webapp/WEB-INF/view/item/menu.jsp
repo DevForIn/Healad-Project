@@ -43,6 +43,9 @@
 fnSearchMenu('1');
 
 
+function fnOrder(itemId, itemName){
+	alert('주문하기 작업중'); 
+}
 function fnAddCart(itemId, itemName){
 	$.ajax({
 		url : "${path}/cart/add",
@@ -84,7 +87,7 @@ function fnSearchMenu(itemCatId){
 				contents += 			'<h5 class="card-title"><a href="${path}/item/detail?itemId='+datas[i].itemId +'"> '+datas[i].itemName +' </a></h5>';
 				contents += 			'<p class="card-text">'+datas[i].price +' 원</p>';
 				contents += 			'<p class="card-text">'+datas[i].description+'</p>';
-				contents += 			'<button type="button" class="btn btn-warning"><i class="fa fa-truck"> 주문하기</i></button> ';
+				contents += 			'<button type="button" class="btn btn-warning" onclick="fnOrder(\''+ datas[i].itemId +'\', \''+ datas[i].itemName +'\')"><i class="fa fa-truck"> 주문하기</i></button> ';
 				contents += 			'<button type="button" class="btn btn-primary" onclick="fnAddCart(\''+ datas[i].itemId +'\', \''+ datas[i].itemName +'\')"><i class="fa fa-shopping-cart"></i> 장바구니</button>';
 				contents += 		'</div>';
 				contents += 	'</div>';
