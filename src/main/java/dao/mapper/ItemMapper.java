@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Select;
 
 import logic.Item;
-import logic.User;
 
 public interface ItemMapper {
 	

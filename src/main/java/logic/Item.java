@@ -5,7 +5,7 @@ public class Item {
 	
 	private String itemName;
 	
-	private Long price;
+	private Integer price;
 	
 	private String description;
 	
@@ -29,10 +29,11 @@ public class Item {
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
-	public Long getPrice() {
+	
+	public Integer getPrice() {
 		return price;
 	}
-	public void setPrice(Long price) {
+	public void setPrice(Integer price) {
 		this.price = price;
 	}
 	public String getDescription() {

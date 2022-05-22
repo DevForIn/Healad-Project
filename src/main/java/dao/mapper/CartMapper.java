@@ -2,6 +2,7 @@ package dao.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -29,4 +30,7 @@ public interface CartMapper {
 
 	@Update("update cart set quantity = #{quantity} where item_id = #{itemId} and user_id = #{userId}")
 	void updateCartQuantity(Cart cart);
+
+	@Delete("delete from cart where user_id = #{userId}")
+	void deleteByUserId(String userId);
 }

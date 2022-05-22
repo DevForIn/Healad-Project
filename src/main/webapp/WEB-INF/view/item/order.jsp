@@ -13,7 +13,7 @@
 </style>
 </head>
 <body>
-	<form action="../item/purchase">
+	<form action="../sale/purchase">
 		<input type="hidden" name="orderType" value="${orderType}">
 		<section class="h-100" style="background-color: #eee;">
 		  <div class="container h-100 py-5">
@@ -99,35 +99,35 @@
  		        <div class="card mb-4 px-5 py-5">
                     <div class="mb-3">
                         <label for="saleUserName">주문자명</label>
-                        <input type="text" class="form-control" id="saleUserName" placeholder="" value="" required="">
+                        <input type="text" class="form-control" id="saleUserName" name="saleUserName" placeholder="" value="" required="">
                         <div class="invalid-feedback"> Valid first name is required. </div>
                     </div>
 	                <div class="mb-3">
 	                    <label for="username">연락처</label>
 	                    <div class="input-group">
-	                        <input type="text" class="form-control" id="salePhoneNo"  required="">
+	                        <input type="text" class="form-control" id="salePhoneNo" name="salePhoneNo"  required="">
 	                        <div class="invalid-feedback" style="width: 100%;"> Your username is required. </div>
 	                    </div>
 	                </div>
 	                <div class="row">
 	                    <div class="col-md-2 mb-3">
 	                        <label for="salePostCode">주소</label>
-	                        <input type="text" class="form-control" id="salePostCode" placeholder="" value="" required="">
+	                        <input type="text" class="form-control" id="salePostCode" name="salePostCode"  placeholder="" value="" required="">
 	                        <div class="invalid-feedback"> 우편번호를 입력해주세요. </div>
 	                    </div>
 	                    <div class="col-md-10 mb-3">
 	                        <label for="saleAddr">.</label>
-	                        <input type="text" class="form-control" id="saleAddr" placeholder="" value="" required="">
+	                        <input type="text" class="form-control" id="saleAddr"  name="saleAddr" placeholder="" value="" required="">
 	                        <div class="invalid-feedback"> 주소를 입력해주세요 </div>
 	                    </div>
 	                </div>	                
 	                <div class="mb-3">
-	                    <input type="text" class="form-control" id="saleAddrDetail"  required="" class="mt-2">
+	                    <input type="text" class="form-control" id="saleAddrDetail" name="saleAddrDetail" required="" class="mt-2">
 	                    <div class="invalid-feedback"> Please enter your shipping address. </div>
 	                </div>
 	                <div class="mb-3">
-	                    <label for="address2">비고사항 </label>
-	                    <input type="text" class="form-control" id="address2" placeholder="부재시 경비실에 맡겨주세요.">
+	                    <label for="remark">비고사항 </label>
+	                    <input type="text" class="form-control" id="remark" name="remark" placeholder="부재시 경비실에 맡겨주세요.">
 	                </div>
 	                <hr class="mb-4">
 		        </div> 

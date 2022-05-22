@@ -25,7 +25,6 @@ public class ItemController {
 	
 	@Autowired
 	private CartService cartService;
-	
 
 	@GetMapping("*") 	// 그외 모든 Get 방식 요청
 	public ModelAndView getItem() {
@@ -82,25 +81,5 @@ public class ItemController {
 		return mav;	
 	}
 	
-	
-	@RequestMapping("purchase")
-	public ModelAndView purchase(Cart cart, HttpSession session, String orderType) {
-		ModelAndView mav = new ModelAndView("item/purchase");
-		
-		if("".equals(orderType)) orderType = "C";
 
-		if("C".equals(orderType)) {
-			User user = (User) session.getAttribute("loginUser");
-			System.out.println("user=" + user.getUserId());
-			List<Cart> items = cartService.getList(user.getUserId());
-		}
-		else {
-		
-		
-		}
-		
-		mav.addObject("orderType", orderType);
-		
-		return mav;	
-	}		
 }
