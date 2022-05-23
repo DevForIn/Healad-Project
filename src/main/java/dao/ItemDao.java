@@ -37,4 +37,8 @@ public class ItemDao {
 	public List<Item> itemListCat(Integer cat_no) {
 		return template.getMapper(cls).itemListCat(cat_no);
 	}
+
+	public void insertItem(Item item) {
+		template.getMapper(cls).insertItem(item);		
+	}
 }

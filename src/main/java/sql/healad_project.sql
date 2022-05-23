@@ -5,7 +5,9 @@ set userName='테스터1임', phoneNo='010-1234-1234', postCode='123-123'
 ,addr='서울시', addrDetail='펜트하우스', email='t@t.t', birthDate='1992-06-01'
 where userId = tester1
 
-
+select * from cart
+select * from sale
+select * from SALE_ITEM
 
 /* Drop Tables */
 
