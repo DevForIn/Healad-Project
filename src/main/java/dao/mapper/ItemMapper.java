@@ -12,4 +12,14 @@ public interface ItemMapper {
 			+ " from item where item_cat_id = #{value}")
 	List<Item> select(Integer itemCatId);
 
+	@Select("select item_id , item_name, price, description, picture_url, use_yn, item_cat_id"
+			+ " from item where item_id = #{value}")
+	Item selectOne(Integer itemId);
+
+	@Select("select * from item")
+	List<Item> itemList();
+	
+	@Select("select * from item where item_cat_id = #{value}")
+	List<Item> itemListCat(Integer cat_no);
+
 }

@@ -1,5 +1,7 @@
 package logic;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,14 @@ public class CartService {
 			cartDao.addCart(cart);	
 		}
 		
+	}
+
+	public List<Cart> getList(String userId) {
+		return cartDao.getList(userId);
+	}
+
+	public void updateCart(Cart cart) {
+		cartDao.updateCartQuantity(cart);
 	}
 	
 	

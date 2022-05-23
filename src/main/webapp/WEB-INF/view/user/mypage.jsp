@@ -1,29 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%-- /springmvc1/src/main/webapp/WEB-INF/view/user/mypage.jsp --%>
-
-<%-- 			수정중 			--%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="path" value="${pageContext.request.contextPath }" />  
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>My page</title>
+<head>
 </head>
 <body>
-	<table>
+<div class="a" style="background-color:#ffff80; height:100%; width:15%; float:left;">
+<ul>
+	<li><a href="mypage?id=${loginUser.userId}" class="current">My Profile</a></li>
+	<li><a href="">Order List</a></li>
+	<li><a href="">My Review</a></li>
+</ul>
+</div>
+<div style="width:60%; float:right;" >
+	<table style="width:500px;">
 		<tr>
-			<td><h4>나의 정보</h4></td>
+			<th colspan="2"><h3>[ ${user.userId} ]님의 프로필</h3></th>
 		</tr>
-	</table>
-	<table>
 		<tr>
 			<td>아이디</td><td>${user.userId}</td>
 		</tr>
 		<tr>
-			<td>이름</td><td>${user.userName}</td>
+			<td>닉네임</td><td>${user.userName}</td>
 		</tr>
 		<tr>
 			<td>연락처</td><td>${user.phoneNo}</td>
@@ -47,13 +51,9 @@
 		</tr>
 	</table>
 	<br>
-	<a href="update?id=${user.userId}">[회원정보수정]</a>&nbsp;
-	<a href="password">[비밀번호수정]</a>&nbsp;
-	<c:if test="${loginUser.userId != 'admin'}">
-		<a href="delete?id=${user.userId}">[회원탈퇴]</a>&nbsp;
-			</c:if>
-	<c:if test="${loginUser.userId == 'admin'}">
-		<a href="../admin/list">[회원목록]</a>&nbsp;
-			</c:if>
+	<a href="modifyUser?id=${user.userId}">[회원정보수정]</a>&nbsp;
+	<a href="modifyPW?id=${user.userId}">[비밀번호수정]</a>&nbsp;
+	<a href="deleteUser?id=${user.userId}">[회원탈퇴]</a>&nbsp;
+</div>
 </body>
 </html>

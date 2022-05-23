@@ -1,5 +1,8 @@
 package dao.mapper;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -18,5 +21,16 @@ public interface CartMapper {
 
 	@Update("update cart set quantity = quantity + 1 where item_id = #{itemId} and user_id = #{userId}")
 	void updateCartItem(Cart cart);
-//1
+
+	@Select("SELECT C.CART_ID, C.USER_ID, C.ITEM_ID, I.ITEM_NAME, I.PRICE, C.QUANTITY, C.REG_DATE "
+			+ "FROM CART C, ITEM I "
+			+ "WHERE C.ITEM_ID = I.ITEM_ID "
+			+ "AND C.USER_ID = #{userId}")
+	List<Cart> getList(String userId);
+
+	@Update("update cart set quantity = #{quantity} where item_id = #{itemId} and user_id = #{userId}")
+	void updateCartQuantity(Cart cart);
+
+	@Delete("delete from cart where user_id = #{userId}")
+	void deleteByUserId(String userId);
 }

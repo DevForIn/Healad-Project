@@ -1,8 +1,8 @@
 package dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +41,23 @@ public class UserDao {
 		}	
 		return template.getMapper(cls).search(param);
 	}
-	
+
+	public void updateUser(User user) {
+		template.getMapper(cls).updateUser(user);		
+	}
+
+	public void updatePwd(String userId, String newpwd1) {
+		param.clear();
+		param.put("userId", userId);
+		param.put("pwd", newpwd1);
+		template.getMapper(cls).updatePwd(param);			
+	}
+
+	public void deleteUser(String userId) {
+		template.getMapper(cls).deleteUser(userId);			
+	}
+
+	public List<User> userList() {
+		return template.getMapper(cls).userList();
+	}	
 }

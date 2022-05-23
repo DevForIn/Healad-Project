@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <c:set var="path" value="${pageContext.request.contextPath }" />   
+    <c:set var="path" value="${pageContext.request.contextPath }" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +18,6 @@
 </style>
 </head>
 <body>
-
 	<ul class="nav nav-tabs">
 	  <li class="nav-item">
 	    <a class="nav-link active" data-toggle="tab" href="#salad" onclick="fnSearchMenu('1')">Salad</a>
@@ -43,6 +43,9 @@
 fnSearchMenu('1');
 
 
+function fnOrder(itemId, itemName){
+	alert('주문하기 작업중'); 
+}
 function fnAddCart(itemId, itemName){
 	$.ajax({
 		url : "${path}/cart/add",
@@ -68,30 +71,29 @@ function fnSearchMenu(itemCatId){
 			'itemCatId': itemCatId
 		},
 		success : function(datas) {
-			console.log('datas', datas)
 			var contents  = '';
+			
+			//contents += '<div class="card-group">';
 			for(var i=0; i < datas.length; i++) {
-				console.log('datas[i]',datas[i]);
-			    contents += '<div class="card-group">';
-				contents += 	'<div class="card">';
+				if(i == 0 || i%3 == 0) {console.log('i%3=0이다'); contents += '<div class="card-group">';}
+			    contents += 	'<div class="card">';
 				if(datas[i].pictureUrl == null) {
-					contents +='<img class="card-img-top" src="../img/sal1.png" alt="Card image cap" style="width: 300px;">';
+					contents +='<a href="${path}/item/detail?itemId='+datas[i].itemId +'"><img class="card-img-top" src="../img/sal1.png" alt="Card image cap" style="width: 300px; cursor: pointer;"></a>';
 				}
 				else {
-					contents +='<img class="card-img-top" src="file/"' + datas[i].pictureUrl + 'alt="Card image cap" style="width: 150px;">';
+					contents +='<a href="${path}/item/detail?itemId='+datas[i].itemId +'"><img class="card-img-top" src="file/"' + datas[i].pictureUrl + 'alt="Card image cap" style="width: 300px; cursor: pointer;"></a>';
 				}
 				contents += 		'<div class="card-body">';
-				contents += 			'<h5 class="card-title">'+datas[i].itemName +'</h5>';
+				contents += 			'<h5 class="card-title"><a href="${path}/item/detail?itemId='+datas[i].itemId +'"> '+datas[i].itemName +' </a></h5>';
 				contents += 			'<p class="card-text">'+datas[i].price +' 원</p>';
 				contents += 			'<p class="card-text">'+datas[i].description+'</p>';
-				contents += 			'<button type="button" class="btn btn-warning"><i class="fa fa-truck"> 주문하기</i></button> ';
+				contents += 			'<button type="button" class="btn btn-warning" onclick="fnOrder(\''+ datas[i].itemId +'\', \''+ datas[i].itemName +'\')"><i class="fa fa-truck"> 주문하기</i></button> ';
 				contents += 			'<button type="button" class="btn btn-primary" onclick="fnAddCart(\''+ datas[i].itemId +'\', \''+ datas[i].itemName +'\')"><i class="fa fa-shopping-cart"></i> 장바구니</button>';
 				contents += 		'</div>';
 				contents += 	'</div>';
-				contents += '</div>';				
+				if( (i !=0 && i%3 == 2) || i == datas.length) {console.log('종료 i=',i); contents += '</div>';}
 			}
-
-			console.log('contents', contents);
+			
 			$('#salad').html(contents);
 		},
 	    error:function(request,status,error){

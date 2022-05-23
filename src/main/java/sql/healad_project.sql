@@ -1,4 +1,12 @@
 
+
+update USER_ACCOUNT 
+set userName='테스터1임', phoneNo='010-1234-1234', postCode='123-123'
+,addr='서울시', addrDetail='펜트하우스', email='t@t.t', birthDate='1992-06-01'
+where userId = tester1
+
+
+
 /* Drop Tables */
 
 DROP TABLE CART CASCADE CONSTRAINTS;
@@ -11,7 +19,8 @@ DROP TABLE SALE CASCADE CONSTRAINTS;
 DROP TABLE USER_ACCOUNT CASCADE CONSTRAINTS;
 
 select * from USER_ACCOUNT
-
+select * from item
+select item_id , item_name, price, description, picture_url, use_yn, item_cat_id from item where item_id = 1
 
 /* Create Tables */
 
@@ -165,6 +174,11 @@ ALTER TABLE SALE
 	ADD FOREIGN KEY (USER_ID)
 	REFERENCES USER_ACCOUNT (USER_ID)
 ;
+
+-- 시퀀스 추가
+CREATE SEQUENCE SEQ_SALE_ID INCREMENT BY 1 MINVALUE 0 NOCYCLE NOCACHE NOORDER ;
+CREATE SEQUENCE SEQ_SALE_ITEM_ID INCREMENT BY 1 MINVALUE 0 NOCYCLE NOCACHE NOORDER ;
+
 
 
 

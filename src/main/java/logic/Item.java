@@ -1,11 +1,11 @@
 package logic;
 
 public class Item {
-	private Long itemId;
+	private Integer itemId;
 	
 	private String itemName;
 	
-	private Long price;
+	private Integer price;
 	
 	private String description;
 	
@@ -15,10 +15,12 @@ public class Item {
 	
 	private Integer itemCatId;
 	
-	public Long getItemId() {
+	
+	
+	public Integer getItemId() {
 		return itemId;
 	}
-	public void setItemId(Long itemId) {
+	public void setItemId(Integer itemId) {
 		this.itemId = itemId;
 	}
 	public String getItemName() {
@@ -27,10 +29,11 @@ public class Item {
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
-	public Long getPrice() {
+	
+	public Integer getPrice() {
 		return price;
 	}
-	public void setPrice(Long price) {
+	public void setPrice(Integer price) {
 		this.price = price;
 	}
 	public String getDescription() {

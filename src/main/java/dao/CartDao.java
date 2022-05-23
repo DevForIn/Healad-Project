@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import dao.mapper.CartMapper;
 import logic.Cart;
-import logic.Item;
 
 @Repository
 public class CartDao {
@@ -41,5 +40,20 @@ public class CartDao {
 
 	public void updateCartItem(Cart cart) {
 		template.getMapper(cls).updateCartItem(cart);
+	}
+
+
+	public List<Cart> getList(String userId) {
+		return template.getMapper(cls).getList(userId);
+	}
+
+
+	public void updateCartQuantity(Cart cart) {
+		template.getMapper(cls).updateCartQuantity(cart);
+	}
+
+
+	public void deleteByUserId(String userId) {
+		template.getMapper(cls).deleteByUserId(userId);		
 	}
 }
