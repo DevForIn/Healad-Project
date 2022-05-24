@@ -3,12 +3,13 @@ package controller;
 import java.util.Collections;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -82,6 +83,21 @@ public class MasterController {
 		}
 		mav.addObject("ctn",ctn);
 		mav.addObject("itemList",itemList);
+		return mav;
+	}
+	@GetMapping("newItem")
+	public ModelAndView getnewItem() {
+		ModelAndView mav = new ModelAndView();
+		Item item = new Item();
+		mav.addObject("item",item);
+		return mav;
+	}
+	
+	@PostMapping("newItem")
+	public ModelAndView postnewItem(Item item,HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		itemService.insertItem(item,request);
+		mav.addObject("item",item);
 		return mav;
 	}
 }

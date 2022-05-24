@@ -2,6 +2,7 @@ package dao.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
 import logic.Item;
@@ -20,6 +21,10 @@ public interface ItemMapper {
 	List<Item> itemList();
 	
 	@Select("select * from item where item_cat_id = #{value}")
-	List<Item> itemListCat(Integer cat_no);
+	List<Item> itemListCat(Integer cat_no);
+	@Insert("insert into item (ITEM_ID, ITEM_NAME, PRICE, "
+	+ " DESCRIPTION, PICTURE_URL, USE_YN, ITEM_CAT_ID"
+	+ " values (SEQ_ITEM_ID.nextval, #{itemName},#{price},#{description},#{pictureUrl},'Y',#{itemCatId})")
+	void insertItem(Item item);
 
 }

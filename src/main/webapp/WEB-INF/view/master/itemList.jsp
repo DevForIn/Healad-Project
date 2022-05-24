@@ -26,7 +26,8 @@ function CI(){
 	<div style="width: 80%; float: right;">
 	<table style="width: 1400px;">
 		<tr>
-			<th colspan="7">HEALAD_상품</th>
+			<th colspan="6"><h3>HEALAD_상품</h3></th>
+			<th><a href="${path}/master/newItem"><font color="black">[ ITEM 추가 ]</font></a></th>
 		</tr>
 		<tr>
 			<th>카테고리  <select name="Cat_ID" onchange="CI()">
