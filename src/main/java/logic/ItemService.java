@@ -48,11 +48,16 @@ public class ItemService {
 	}
 		
 	public void insertItem(Item item, HttpServletRequest request) {
-		if(item.getPictureUrl() != null && !item.getPictureUrl().isEmpty()) {	
+		if(item.getPicture() != null && !item.getPicture().isEmpty()) {	
 			uploadFileCreate(item.getPicture(),request,"img/");
 			item.setPictureUrl(item.getPicture().getOriginalFilename());
 		}
 		itemDao.insertItem(item);		
+	}
+
+
+	public void YNchange(Integer itemId, String useYn) {
+		itemDao.YNchange(itemId,useYn);	
 	}	
 	
 }

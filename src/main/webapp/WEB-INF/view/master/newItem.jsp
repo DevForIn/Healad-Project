@@ -10,8 +10,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form:form modelAttribute="item" method="post" action="newItem" enctype="multipart/form-data">
-
 	<div class="a" style="background-color: #ffff80; height: 100%; width: 15%; float: left;">
 		<ul>
 			<li><a href="userList">User List</a></li>
@@ -20,6 +18,7 @@
 			<li><a href="noticeList">Notice set</a></li>
 		</ul>
 	</div>
+<form:form modelAttribute="item" method="post" enctype="multipart/form-data">
 	<div style="width: 80%; float: right;">
 	<table style="width: 1400px;">
 		<tr><th colspan="2"><h3>ITEM 등록</h3></th></tr>
@@ -34,7 +33,7 @@
 
 		<tr>
 			<th>상품이미지</th>
-			<td colspan="2"><input type="file" name="pictureUrl"></td>
+			<td colspan="2"><input type="file" name="picture"></td>
 		</tr>
 		<tr>
 			<th>상품설명</th>

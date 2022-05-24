@@ -41,4 +41,12 @@ public class ItemDao {
 	public void insertItem(Item item) {
 		template.getMapper(cls).insertItem(item);		
 	}
+
+	public void YNchange(Integer itemId, String useYn) {
+		param.clear();
+		if(useYn.equals("Y")) param.put("useYn", "N");
+		if(useYn.equals("N")) param.put("useYn", "Y");
+		param.put("itemId", itemId);		
+		template.getMapper(cls).YNchange(param);			
+	}
 }

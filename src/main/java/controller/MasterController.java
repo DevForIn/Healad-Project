@@ -86,7 +86,7 @@ public class MasterController {
 		return mav;
 	}
 	@GetMapping("newItem")
-	public ModelAndView getnewItem() {
+	public ModelAndView getnewItem(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		Item item = new Item();
 		mav.addObject("item",item);
@@ -94,10 +94,30 @@ public class MasterController {
 	}
 	
 	@PostMapping("newItem")
-	public ModelAndView postnewItem(Item item,HttpServletRequest request) {
+	public ModelAndView postnewItem(Item item,HttpServletRequest request,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		itemService.insertItem(item,request);
+		mav.setViewName("redirect:itemList");
+		return mav;
+	}
+	@GetMapping("itemYN")
+	public ModelAndView getItemYN(Integer id,HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		Item item = itemService.selectOne(id);
 		mav.addObject("item",item);
+		return mav;
+	}
+	@PostMapping("itemYN")
+	public ModelAndView postItemYN(Item item,HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		String chk = "";
+		try{
+			itemService.YNchange(item.getItemId(),item.getUseYn());
+			chk = "ok";
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		mav.addObject("chk",chk);
 		return mav;
 	}
 }

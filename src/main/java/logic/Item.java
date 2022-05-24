@@ -68,6 +68,13 @@ public class Item {
 	public void setItemCatId(Integer itemCatId) {
 		this.itemCatId = itemCatId;
 	}
+	@Override
+	public String toString() {
+		return "Item [itemId=" + itemId + ", itemName=" + itemName + ", price=" + price + ", description=" + description
+				+ ", pictureUrl=" + pictureUrl + ", useYn=" + useYn + ", itemCatId=" + itemCatId + ", picture="
+				+ picture + "]";
+	}
+	
 	
 	
 }

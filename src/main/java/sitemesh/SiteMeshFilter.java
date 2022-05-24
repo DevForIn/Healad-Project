@@ -15,6 +15,6 @@ public class SiteMeshFilter extends ConfigurableSiteMeshFilter{
 	@Override
 	protected void applyCustomConfiguration(SiteMeshFilterBuilder builder) {
 		builder.addDecoratorPath("/*", "/layout/layout.jsp");
-		builder.addExcludedPath("/board/imgupload*");
+		builder.addExcludedPath("/master/itemYN*");
 	}
 }
