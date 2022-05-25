@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+    <c:set var="path" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +17,15 @@
 			<li><a href="outUserList">OutUser List</a></li>
 			<li><a href="itemList" class="current">Item set</a></li>
 			<li><a href="noticeList">Notice set</a></li>
+			<li><a href="#">Order Status</a></li>
+		</ul><br><br><br><br><br>
+		<ul>
+			<li><a href="${path}/item/menu"><h3>Menu Page</h3></a></li>
+			<li>&nbsp;</li>
+			<li>&nbsp;</li>
+			<li>&nbsp;</li>
+			<li>&nbsp;</li>
+			<li>&nbsp;</li>
 		</ul>
 	</div>
 <form:form modelAttribute="item" method="post" enctype="multipart/form-data">

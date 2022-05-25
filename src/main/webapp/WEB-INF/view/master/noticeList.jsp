@@ -17,10 +17,19 @@
 <body>
 	<div class="a" style="background-color: #ffff80; height: 100%; width: 15%; float: left;">
 		<ul>
-			<li><a href="userList" class="current">User List</a></li>
+			<li><a href="userList">User List</a></li>
 			<li><a href="outUserList">OutUser List</a></li>
-			<li><a href="ItemList">Item set</a></li>
-			<li><a href="NoticeList">Notice set</a></li>
+			<li><a href="itemList">Item set</a></li>
+			<li><a href="noticeList"  class="current">Notice set</a></li>
+			<li><a href="#">Order Status</a></li>
+		</ul><br><br><br><br><br>
+		<ul>
+			<li><a href="${path}/borad/notice"><h3>Board Page</h3></a></li>
+			<li>&nbsp;</li>
+			<li>&nbsp;</li>
+			<li>&nbsp;</li>
+			<li>&nbsp;</li>
+			<li>&nbsp;</li>
 		</ul>
 	</div>
 	<div style="width: 80%; float: right;">

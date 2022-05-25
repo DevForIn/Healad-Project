@@ -73,6 +73,10 @@ public class UserController {
 			}
 			if(user.getPwd().equals(dbUser.getPwd())) {
 				session.setAttribute("loginUser", dbUser);	
+				mav.setViewName("redirect:/");
+				if(dbUser.getUserId().equals("admin")) {
+					mav.setViewName("redirect:/master/userList");
+				}
 			} else { 
 				bresult.reject("error.login.password");
 				mav.getModel().putAll(bresult.getModel());
@@ -82,8 +86,7 @@ public class UserController {
 			bresult.reject("error.login.id");
 			mav.getModel().putAll(bresult.getModel());
 			return mav;
-		}
-		mav.setViewName("redirect:/");
+		}	
 		return mav;
 	} 
 	

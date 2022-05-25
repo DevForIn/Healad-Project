@@ -123,7 +123,7 @@ CREATE TABLE USER_ACCOUNT
 	POST_CODE varchar2(7),
 	ADDR varchar2(200),
 	ADDR_DETAIL varchar2(200),
-	EMAIL varchar2(100),
+	EMAIL varchar2(100) UNIQUE,
 	BIRTH_DATE date,
 	JOIN_DATE date,
 	WITHDRAW_YN varchar2(2),

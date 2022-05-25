@@ -21,6 +21,15 @@ function CI(){
 			<li><a href="outUserList">OutUser List</a></li>
 			<li><a href="itemList" class="current">Item set</a></li>
 			<li><a href="noticeList">Notice set</a></li>
+			<li><a href="#">Order Status</a></li>
+		</ul><br><br><br><br><br>
+		<ul>
+			<li><a href="${path}/item/menu"><h3>Menu Page</h3></a></li>
+			<li>&nbsp;</li>
+			<li>&nbsp;</li>
+			<li>&nbsp;</li>
+			<li>&nbsp;</li>
+			<li>&nbsp;</li>
 		</ul>
 	</div>
 	<div style="width: 80%; float: right;">

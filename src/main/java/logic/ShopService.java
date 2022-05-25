@@ -41,5 +41,5 @@ public class ShopService {
 	public List<User> userList() {		
 		return  userDao.userList();
 	}
-
+	
 }
