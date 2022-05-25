@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath }" />   
 <!DOCTYPE html>
 <html>
@@ -29,7 +30,7 @@
 	                    			<img src="https://via.placeholder.com/430x600/00CED1/000000" class="img-responsive">
 	                    		</c:when>
 	                    		<c:otherwise>
-									<img class="card-img-top" src="${item.pictureUrl }" alt="${item.itemName }" >
+									<img class="card-img-top" src="../img/${item.pictureUrl}" alt="${item.itemName }" >
 	                    		</c:otherwise>
 	                    	</c:choose>
 	                    </div>
@@ -38,7 +39,7 @@
 	                    <h4 class="box-title mt-5">상세 설명</h4>
 	                    <p>${item.description }</p>
 	                    <h2 class="mt-5 mb-5">
-	                        가격: ${item.price }<!-- <small class="text-success">(36%off)</small> -->
+	                        가격 :  <fmt:formatNumber value="${item.price}"/>원<!-- <small class="text-success">(36%off)</small> -->
 	                    </h2>
 	                    <button class="btn btn-primary btn-rounded mr-1" onclick="fnAddCart('${item.itemId}','${item.itemName }')">
 	                        <i class="fa fa-shopping-cart"></i>
