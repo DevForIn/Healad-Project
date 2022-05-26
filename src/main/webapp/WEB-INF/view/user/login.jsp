@@ -11,12 +11,6 @@
 <meta charset="UTF-8">
 <title>로그인화면</title>
 </head>
-<script type="text/javascript">
-  <c:if test="${!empty message}">
-//	function
-   alert(${message})
-  </c:if>	
-</script>
 <body>
 <div class="loginF">
 	<h2 align="center">사용자 로그인</h2>
