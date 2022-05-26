@@ -10,9 +10,9 @@
 <head>
 <meta charset="UTF-8">
 <title>아이디찾기</title>
-<link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
+<div class="loginF">
 	<h3 align="center">아이디찾기</h3>
 		<input type="hidden" name="userName" value="검증용"> 
 		<input type="hidden" name="userId" value="아이디검증용">
@@ -40,9 +40,13 @@
 				<form:errors path="phoneNo" /></font></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="submit" value="아이디찾기"></td>
+				<td colspan="2">
+					<input type="submit" value="아이디찾기">
+					<input type="button" value="돌아가기" onclick="history.back()">
+				</td>
 			</tr>
 		</table>
 	</form:form>
+</div>
 </body>
 </html>

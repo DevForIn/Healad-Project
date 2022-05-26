@@ -11,7 +11,14 @@
 <meta charset="UTF-8">
 <title>로그인화면</title>
 </head>
+<script type="text/javascript">
+  <c:if test="${!empty message}">
+//	function
+   alert(${message})
+  </c:if>	
+</script>
 <body>
+<div class="loginF">
 	<h2 align="center">사용자 로그인</h2>
 	<form:form modelAttribute="user" method="post" action="login"
 		name="loginform">
@@ -38,7 +45,7 @@
 				<td><form:password path="pwd" />
 			</tr>
 			<tr height="40px">
-				<td colspan="2" align="center"><input type="submit" value="로그인">
+				<td colspan="2" align="center"><input type="submit" value="로그인" onclick="weComeH()">
 					<input type="button" value="회원가입" onclick="location.href='signUp'"> 
 					<input type="button" value="아이디찾기" onclick="location.href='idsearch'">
 					<input type="button" value="비밀번호찾기" onclick="location.href='pwsearch'">
@@ -46,5 +53,6 @@
 			</tr>
 		</table>
 	</form:form>
+	</div>
 </body>
 </html>

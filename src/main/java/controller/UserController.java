@@ -34,8 +34,9 @@ public class UserController {
 	}	
 
 	@PostMapping("signUp")
-	public ModelAndView signUp(@Valid User user,BindingResult bresult) {
+	public ModelAndView signUp(@Valid User user,BindingResult bresult,HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
+
 		if(bresult.hasErrors()) {
 			mav.getModel().putAll(bresult.getModel());
 			bresult.reject("error.input.user");			
@@ -44,7 +45,11 @@ public class UserController {
 		try {
 			service.userInsert(user);
 			mav.addObject("user",user);
-			
+			String message = user.getUserId()+"님의 회원가입이 완료되었습니다 !";
+			mav.addObject("message",message);
+			mav.addObject("url",request.getContextPath()+"/user/login");
+			mav.setViewName("alert");
+				
 		  // KEY - ID 중복 검증
 		} catch(DataIntegrityViolationException e) {
 			e.printStackTrace();
@@ -52,7 +57,6 @@ public class UserController {
 			mav.getModel().putAll(bresult.getModel());
 			return mav;
 		}
-		mav.setViewName("redirect:login");
 		return mav;
 	}
 	
@@ -64,18 +68,26 @@ public class UserController {
 			bresult.reject("error.input.login");			
 			return mav;	
 		}		
+
 		try {			
 			User dbUser = service.selectUser(user.getUserId());
+			
 			if(dbUser == null) {
 				mav.getModel().putAll(bresult.getModel());
 				bresult.reject("error.input.login");			
 				return mav;	
 			}
 			if(user.getPwd().equals(dbUser.getPwd())) {
+				String message= dbUser.getUserId()+"님 환영합니다 :D !";
 				session.setAttribute("loginUser", dbUser);	
-				mav.setViewName("redirect:/");
+				mav.addObject("message",message);
+				mav.addObject("url",request.getContextPath()+"/");
+				mav.setViewName("alert");
 				if(dbUser.getUserId().equals("admin")) {
-					mav.setViewName("redirect:/master/userList");
+					message = "관리자 계정으로 로그인 하셨습니다.";
+					mav.addObject("message",message);
+					mav.addObject("url",request.getContextPath()+"/master/userList");
+					mav.setViewName("alert");
 				}
 			} else { 
 				bresult.reject("error.login.password");
@@ -86,14 +98,20 @@ public class UserController {
 			bresult.reject("error.login.id");
 			mav.getModel().putAll(bresult.getModel());
 			return mav;
-		}	
+		}
 		return mav;
 	} 
 	
 	@RequestMapping("logout")
-	public String logout(HttpSession session) {
+	public ModelAndView logout(HttpSession session,HttpServletRequest request) {
 		session.invalidate();
-		return "redirect:/";
+		
+		ModelAndView mav = new ModelAndView();
+		String message= "로그아웃 되었습니다.";
+		mav.addObject("message",message);
+		mav.addObject("url",request.getContextPath()+"/");
+		mav.setViewName("alert");
+		return mav;
 	}
 	@RequestMapping("mypage")
 	public ModelAndView idCheckMypage(String id,HttpSession session) {

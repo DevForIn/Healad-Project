@@ -5,7 +5,7 @@ th,td {
 	text-align: center;
 	padding : 8px;
 }
-th {background-color : #f4ffaf;	color : #604949;}
+th {background-color : #ffffd5;	color : #604949;}
 td { background-color: #D9F3FE;  }
 input[type=text],input[type=password],textarea {	width : 100%;  }
 caption {
@@ -49,4 +49,14 @@ caption {
 .a li a:hover:not(.current) { 
 	background-color: #c8c800; 
 	color : white;
+}
+/* 로그인,아이디찾기,비밀번호찾기,회원가입 */
+.loginF{
+	position : adbsolute;
+    height: 10px;
+    width: 600px;
+    margin: 0px auto;
+    top: 50%;
+    left: 50%;
+    padding: 5px;
 }

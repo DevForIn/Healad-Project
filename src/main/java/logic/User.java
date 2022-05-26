@@ -36,8 +36,8 @@ public class User {
 	@Email(message="! - E-mail 형식으로 입력하세요. - !")
 	private String email;
 
-	@NotNull(message="! - 생년월일을 입력하세요. - !")
-	@Past(message="! - 생일은 미래일수 없습니다..! - !")	
+	@NotNull(message="( ! ) 날짜 선택 필요.")
+	@Past(message="( ! ) 미래 선택 불가, 재입력 필요.")
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	// 형식 오류 시 typeMismatch.birthday 코드 값 저장 
 	private Date birthDate;
