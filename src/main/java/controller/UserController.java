@@ -25,7 +25,7 @@ import logic.User;
 public class UserController {
 	@Autowired
 	private ShopService service;
-
+	
 	@GetMapping("*")
 	public ModelAndView getUser() {
 		ModelAndView mav = new ModelAndView();
@@ -165,8 +165,9 @@ public class UserController {
 		return mav;	
 	}
 	@PostMapping("modifyUser")
-	public ModelAndView ModifyUser(@Valid User user, BindingResult bresult,HttpSession session) {
+	public ModelAndView ModifyUser(@Valid User user, BindingResult bresult,HttpServletRequest request,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
+		String message = "";
 		if(bresult.hasErrors()) {
 			mav.getModel().putAll(bresult.getModel());		
 			return mav;	
@@ -179,34 +180,41 @@ public class UserController {
 		}
 		try {
 			service.modifyUser(user);
-			if(user.getUserId().equals(loginUser.getUserId())) 
-				session.setAttribute("loginUser", user);			
-			mav.setViewName("redirect:/user/mypage?id="+loginUser.getUserId());	
+
+			if(user.getUserId().equals(loginUser.getUserId())) {
+				session.setAttribute("loginUser", user);	
+				message= "정보 수정이 완료되었습니다.";
+				mav.addObject("url",request.getContextPath()+"/user/mypage?id="+loginUser.getUserId());
+			}
 			if(loginUser.getUserId().equals("admin")) {
-				mav.setViewName("redirect:../master/userList");	
+				message= user.getUserId()+"님의 정보 수정이 완료되었습니다.";
+				mav.addObject("url",request.getContextPath()+"/master/userList");	
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
 			throw new LoginException("고객 정보 수정실패","modifyUser?id="+loginUser.getUserId());
 		}
+		mav.addObject("message",message);
+		mav.setViewName("alert");
 		return mav;
 	}
 	@PostMapping("modifyPW")
-	public ModelAndView modifyPW(User user,@Param("pwd") String pwd,@Param("newpwd1") String newpwd1,HttpSession session) {
+	public ModelAndView modifyPW(User user,@Param("pwd") String pwd,@Param("newpwd1") String newpwd1,HttpServletRequest request,HttpSession session) {
 		User loginUser = (User)session.getAttribute("loginUser");
-
 		if(!pwd.equals(loginUser.getPwd())) {
 			throw new LoginException("비밀번호 오류입니다.","modifyPW?id="+user.getUserId());
 		}
 		ModelAndView mav = new ModelAndView();
-		
+		String message = "";
 		try {
 			service.modifyPwd(user.getUserId(),newpwd1);
 			user.setPwd(newpwd1); // session의 loginUser 객체의 비밀번호 수정
-			if(loginUser.getUserId().equals("admin")){
-				mav.setViewName("redirect:../master/userList");
+			if(loginUser.getUserId().equals("admin")) {
+				message= user.getUserId()+"님의 비밀번호 수정이 완료되었습니다.";
+				mav.addObject("url",request.getContextPath()+"/master/userList");	
 			} else {
-				mav.setViewName("redirect:/user/mypage?id="+loginUser.getUserId());
+				message= "비밀번호 수정이 완료되었습니다.";
+				mav.addObject("url",request.getContextPath()+"/user/mypage?id="+loginUser.getUserId());
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -216,13 +224,15 @@ public class UserController {
 				throw new LoginException("비밀번호 정보 수정 오류","modifyPW?id="+loginUser.getUserId());
 			}
 		}
+		mav.addObject("message",message);
+		mav.setViewName("alert");
 		return mav;
 	}
 	@PostMapping("deleteUser")
-	public ModelAndView idCheckdeleteUser(String pwd,String userId,HttpSession session) {
+	public ModelAndView idCheckdeleteUser(User user,String pwd,String userId,HttpServletRequest request,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		User loginUser = (User)session.getAttribute("loginUser");
-		
+		String message = "";
 		if(userId.equals("admin")) {
 			throw new LoginException("관리자는 탈퇴가 불가합니다.","userList");
 		}
@@ -239,11 +249,15 @@ public class UserController {
 		}		
 		
 		if(loginUser.getUserId().equals("admin")){
-			mav.setViewName("redirect:../master/userList");
+			message= user.getUserId()+"님의 강제 탈퇴처리가 완료되었습니다.";
+			mav.addObject("url",request.getContextPath()+"/master/userList");
 		} else {
-			mav.setViewName("redirect:login");
-			session.invalidate();
+			message= "정상적으로 탈퇴 되었습니다.";
+			mav.addObject("url",request.getContextPath()+"/");
+			session.invalidate();			
 		}
+		mav.addObject("message",message);
+		mav.setViewName("alert");
 		return mav;
 	}
 }
