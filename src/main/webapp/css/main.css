@@ -1,12 +1,12 @@
 /* /webapp/css/main.css  */
 table {	width : 100%;	border-collapse: collapse;  }
 th,td {
-	border : 3px solid #bcbcbc;
+	border : 3px solid #BDC7FF;
 	text-align: center;
 	padding : 8px;
 }
-th {background-color: #4CAF50;	color : white;}
-td { background-color: #F2F2F2;  }
+th {background-color : #f4ffaf;	color : #604949;}
+td { background-color: #D9F3FE;  }
 input[type=text],input[type=password],textarea {	width : 100%;  }
 caption {
 	color : #111111;
@@ -18,7 +18,7 @@ caption {
 	table-layout:fixed;
 }
 .nopadding th,.nopadding td {
-	border : 1px solid #bcbcbc;
+	border : 1px solid #9375c061;
 	vertical-align : middle;
 	padding : 0px;
 }
@@ -50,4 +50,3 @@ caption {
 	background-color: #c8c800; 
 	color : white;
 }
-	

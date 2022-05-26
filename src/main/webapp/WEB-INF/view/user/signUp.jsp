@@ -45,7 +45,7 @@ function BirthDate(){
 	day1=$("select[name=year]").val();
 	day2=$("select[name=month]").val();
 	day3=$("select[name=day]").val();	
-	document.getElementById("birthDate").value=day1+"-"+day2+"-"+day3;	
+	document.getElementById("birthDate").value=day1+day2+day3;	
 }
 
 </script>
@@ -55,7 +55,7 @@ function BirthDate(){
 		<spring:hasBindErrors name="user">
 			<font color="red">
 			 <c:forEach items="${errors.globalErrors }"	var="error">
-					<spring:message code="${error.code }" />
+					<h6 align="center"><spring:message code="${error.code }" /></h6>
 			 </c:forEach></font>
 		</spring:hasBindErrors>
 		
@@ -109,26 +109,26 @@ function BirthDate(){
                 <fmt:formatDate var="date" value="${now}" pattern="yyyy" />
 				<form:input type="hidden" path="birthDate" name="birthDate"/>
                     <select name="year">
-                    	<option value="none">-Year-</option>                    	
+                    	<option value="">-Year-</option>                    	
                     	<c:forEach var="i" begin="${date-120}" end="${date}">  
-                        	<option value="${date - i + (date-120)}"> ${date - i + (date-120)}</option>
+                        	<option value="${date - i + (date-120)}-"> ${date - i + (date-120)}</option>
                     	</c:forEach>
                     </select>
                     <select name="month">
-                    	<option value="none">-Month-</option>
+                    	<option value="">-Month-</option>
                   		<c:forEach var="i" begin="1" end="12">        
 							<c:choose>
 	                        	<c:when test="${i<10}">
-	                        		<option value="0${i}">0${i}</option>
+	                        		<option value="0${i}-">0${i}</option>
 	                        	</c:when>
 	                        	<c:otherwise>
-	                        		<option value="${i}">${i}</option>
+	                        		<option value="${i}-">${i}</option>
 	                        	</c:otherwise>
 	                        </c:choose>
                    		</c:forEach>
                     </select>
                     <select name="day">
-	                    <option value="none">-Day-</option>
+	                    <option value="">-Day-</option>
 	                    <c:forEach var="i" begin="1" end="31">
 							<c:choose>
 	                        	<c:when test="${i<10}">
@@ -140,6 +140,7 @@ function BirthDate(){
 	                        </c:choose>
 	                    </c:forEach>
                     </select>
+                    <br><font color="red"><form:errors	path="birthDate" /></font>
                 </td>
             </tr>
 			<tr>

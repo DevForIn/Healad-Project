@@ -25,7 +25,7 @@
 		<spring:hasBindErrors name="user">
 			<font color="red"><c:forEach items="${errors.globalErrors}"
 					var="error">
-					<spring:message code="${error.code}" />
+						<h6 align="right"><spring:message code="${error.code }" /></h6>
 				</c:forEach></font>
 		</spring:hasBindErrors>
 		<table border="1" style="border-collapse: collapse;">

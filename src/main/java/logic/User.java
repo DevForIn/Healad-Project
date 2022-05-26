@@ -11,36 +11,35 @@ import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class User {
-	
 	@Size(min=5,max=12)
 	private String userId;
 	
 	@Size(min=5,max=14,message="! - 비밀번호는 5~14자로 입력하세요. - !")
-	@NotEmpty
 	private String pwd;
 	
-	@NotEmpty(message="! - 닉네임을 입력하세요. - !")
+	@NotEmpty(message="( ! ) 정보 입력 필요.")
 	private String userName;
 	
-	@NotEmpty(message="! - 전화번호를 입력하세요. - !")
+	@NotEmpty(message="( ! ) 정보 입력 필요.")
 	private String phoneNo;
 	
-	@NotEmpty(message="! - 우편번호를 입력하세요. - !")
+	@NotEmpty(message="( ! ) 정보 입력 필요.")
 	private String postCode;
 	
-	@NotEmpty(message="! - 주소를 입력하세요. - !")
+	@NotEmpty(message="( ! ) 정보 입력 필요.")
 	private String addr;
 	
-	@NotEmpty(message="! - 상세주소 입력하세요. - !")
+	@NotEmpty(message="( ! ) 정보 입력 필요.")
 	private String addrDetail;
 	
-	@NotEmpty(message="! - E-mail을 입력하세요. - !")
+	@NotEmpty(message="( ! ) 정보 입력 필요.")
 	@Email(message="! - E-mail 형식으로 입력하세요. - !")
 	private String email;
-	
+
 	@NotNull(message="! - 생년월일을 입력하세요. - !")
 	@Past(message="! - 생일은 미래일수 없습니다..! - !")	
-	@DateTimeFormat(pattern="yyyy-MM-dd")	// 형식 오류 시 typeMismatch.birthday 코드 값 저장 
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	// 형식 오류 시 typeMismatch.birthday 코드 값 저장 
 	private Date birthDate;
 	
 	private Date joinDate;
