@@ -194,14 +194,15 @@ public class UserController {
 	@PostMapping("modifyPW")
 	public ModelAndView modifyPW(User user,@Param("pwd") String pwd,@Param("newpwd1") String newpwd1,HttpSession session) {
 		User loginUser = (User)session.getAttribute("loginUser");
-		String userId = user.getUserId();
+
 		if(!pwd.equals(loginUser.getPwd())) {
-			throw new LoginException("비밀번호 오류입니다.","modifyPW?id="+loginUser.getUserId());
+			throw new LoginException("비밀번호 오류입니다.","modifyPW?id="+user.getUserId());
 		}
 		ModelAndView mav = new ModelAndView();
+		
 		try {
-			service.modifyPwd(userId,newpwd1);
-			loginUser.setPwd(newpwd1); // session의 loginUser 객체의 비밀번호 수정
+			service.modifyPwd(user.getUserId(),newpwd1);
+			user.setPwd(newpwd1); // session의 loginUser 객체의 비밀번호 수정
 			if(loginUser.getUserId().equals("admin")){
 				mav.setViewName("redirect:../master/userList");
 			} else {
@@ -209,7 +210,11 @@ public class UserController {
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
-			throw new LoginException("비밀번호 정보 수정 오류","modifyPW?id="+loginUser.getUserId());
+			if(loginUser.getUserId().equals("admin")){
+				throw new LoginException("비밀번호 정보 수정 오류","../master/userList");
+			} else {
+				throw new LoginException("비밀번호 정보 수정 오류","modifyPW?id="+loginUser.getUserId());
+			}
 		}
 		return mav;
 	}
@@ -223,14 +228,14 @@ public class UserController {
 		}
 		
 		if(!pwd.equals(loginUser.getPwd())) {			
-			throw new LoginException("비밀번호를 확인하세요.","deleteUser?id="+loginUser.getUserId());
+			throw new LoginException("비밀번호를 확인하세요.","deleteUser?id="+userId);
 		} 				
 		
 		try {
 			service.deleteUser(userId);
 		} catch(Exception e) {
 			e.printStackTrace();
-			throw new LoginException("탈퇴 오류","deleteUser?id="+loginUser.getUserId());
+			throw new LoginException("탈퇴 오류","deleteUser?id="+userId);
 		}		
 		
 		if(loginUser.getUserId().equals("admin")){
