@@ -13,7 +13,7 @@
 </style>
 </head>
 <body>
-	<form action="../sale/purchase">
+	<form action="../sale/purchase" method="post">
 		<input type="hidden" name="orderType" value="${orderType}">
 		<section class="h-100" style="background-color: #eee;">
 		  <div class="container h-100 py-5">
