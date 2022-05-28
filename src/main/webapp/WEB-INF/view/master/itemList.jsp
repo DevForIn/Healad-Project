@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-    <c:set var="path" value="${pageContext.request.contextPath }" />  
+  <c:set var="path" value="${pageContext.request.contextPath }" />  
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +21,15 @@ function CI(){
 			<li><a href="outUserList">OutUser List</a></li>
 			<li><a href="itemList" class="current">Item set</a></li>
 			<li><a href="noticeList">Notice set</a></li>
+			<li><a href="#">Order Status</a></li>
+		</ul><br><br><br><br><br>
+		<ul>
+			<li><a href="${path}/item/menu"><h3>Menu Page</h3></a></li>
+			<li>&nbsp;</li>
+			<li>&nbsp;</li>
+			<li>&nbsp;</li>
+			<li>&nbsp;</li>
+			<li>&nbsp;</li>
 		</ul>
 	</div>
 	<div style="width: 80%; float: right;">
@@ -66,7 +75,12 @@ function CI(){
 				<td>${item.description}</td>				
 				<td>
 				<a href="${path}/img/${item.pictureUrl}">${item.pictureUrl}</a></td>
-				<td>${item.useYn}</td>			
+				<td>${item.useYn}			
+					<a href="itemYN?id=${item.itemId}" 
+						onclick="window.open(this.href, '_blank', 'top=350, left=500, width=480, height=400'); return false;">
+					<c:if test="${item.useYn == 'Y'}"><strong>[활성화]</strong></c:if>
+					<c:if test="${item.useYn == 'N'}"><strong>[비활성화]</strong></c:if></a>
+				</td>			
 			</tr>
 		</c:forEach>		
 	</table>

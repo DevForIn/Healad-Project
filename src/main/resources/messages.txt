@@ -3,7 +3,7 @@ error.login.password=비밀번호를 확인하세요.
 error.input.user=회원가입 입력항목을 확인하세요.
 error.input.login=로그인 입력항목을 확인하세요.
 typeMismatch.birthday=생년월일은 YYYY-MM-DD 형식으로 입력해 주세요.
-error.duplicate.user=중복된 아이디 입니다.
+error.duplicate.user=중복된 아이디 or 이메일이 입력되었습니다.
 error.login.password=비밀번호 오류 입니다.
 error.login.id=아이디가 존재하지 않습니다.
 

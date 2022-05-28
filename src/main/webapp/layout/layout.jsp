@@ -29,35 +29,34 @@ body { padding-top:40px;
 
 <!-- Navbar (sit on top) -->
 <div class="w3-top">
-  <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
-    <a href="${path}" class="w3-bar-item w3-button"><h3>Healad</h3></a>
-    <!-- Right-sided navbar links. Hide them on small screens -->
-    <div class="w3-right w3-hide-small">
-      <a href="${path}/user/mainInfo" class="w3-bar-item w3-button"><h3>Info</h3></a>
-      <a href="${path}/item/menu" class="w3-bar-item w3-button"><h3>Menu</h3></a>
-      <a href="${path}/board/notice" class="w3-bar-item w3-button"><h3>Service</h3></a>
-      
-  	  <c:if test="${empty sessionScope.loginUser}">
-       <a href="${path}/user/login" class="w3-bar-item w3-button"><h3>Login</h3></a>
-       <a href="${path}/user/signUp" class="w3-bar-item w3-button"><h3>Sign Up</h3></a>
-		</c:if>  
-   	 <c:if test="${!empty sessionScope.loginUser}">
-        <a href="${path}/item/cart" class="w3-bar-item w3-button"><h3>Cart</h3></a>
-      	<c:choose>
-      		<c:when test="${loginUser.userId == 'admin'}">
-      			<a href="${path}/master/userList" class="w3-bar-item w3-button"><h3>Setting</h3></a>
-      		</c:when>
-      		<c:otherwise>
-      			<a href="${path}/user/mypage?id=${loginUser.userId}" class="w3-bar-item w3-button"><h3>MyPage</h3></a>
-      		</c:otherwise>
-		</c:choose>	
-	</c:if> 
-		
-	<c:if test="${!empty sessionScope.loginUser}"> 
-       <a href="${path}/user/logout" class="w3-bar-item w3-button"><h3>Logout</h3></a>
-	</c:if> 
-    </div>
-  </div>
+	<div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
+		<a href="${path}" class="w3-bar-item w3-button"><h3>Healad</h3></a>
+<!-- Right-sided navbar links. Hide them on small screens -->
+		<div class="w3-right w3-hide-small">
+		<c:choose>
+			<c:when test="${loginUser.userId == 'admin'}">			
+				<a href="${path}/master/userList" class="w3-bar-item w3-button"><h3>Setting</h3></a>
+				<a href="${path}/user/logout" class="w3-bar-item w3-button"><h3>Logout</h3></a>
+			</c:when>
+			<c:otherwise>
+				<a href="${path}/user/mainInfo" class="w3-bar-item w3-button"><h3>Info</h3></a>
+				<a href="${path}/item/menu" class="w3-bar-item w3-button"><h3>Menu</h3></a>
+				<a href="${path}/board/notice" class="w3-bar-item w3-button"><h3>Service</h3></a>
+				<c:if test="${empty sessionScope.loginUser}">
+					<a href="${path}/user/login" class="w3-bar-item w3-button"><h3>Login</h3></a>
+					<a href="${path}/user/signUp" class="w3-bar-item w3-button"><h3>Sign Up</h3></a>
+				</c:if>  
+				<c:if test="${!empty sessionScope.loginUser}">
+					<a href="${path}/item/cart" class="w3-bar-item w3-button"><h3>Cart</h3></a>
+					<a href="${path}/user/mypage?id=${loginUser.userId}" class="w3-bar-item w3-button"><h3>MyPage</h3></a>
+				</c:if> 		
+				<c:if test="${!empty sessionScope.loginUser}"> 
+					<a href="${path}/user/logout" class="w3-bar-item w3-button"><h3>Logout</h3></a>
+				</c:if>
+			</c:otherwise> 
+		</c:choose>
+		</div>
+	</div>
 </div>
 
 

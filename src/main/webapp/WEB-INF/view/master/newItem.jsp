@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+    <c:set var="path" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,16 +11,24 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form:form modelAttribute="item" method="post" action="newItem" enctype="multipart/form-data">
-
 	<div class="a" style="background-color: #ffff80; height: 100%; width: 15%; float: left;">
 		<ul>
 			<li><a href="userList">User List</a></li>
 			<li><a href="outUserList">OutUser List</a></li>
 			<li><a href="itemList" class="current">Item set</a></li>
 			<li><a href="noticeList">Notice set</a></li>
+			<li><a href="#">Order Status</a></li>
+		</ul><br><br><br><br><br>
+		<ul>
+			<li><a href="${path}/item/menu"><h3>Menu Page</h3></a></li>
+			<li>&nbsp;</li>
+			<li>&nbsp;</li>
+			<li>&nbsp;</li>
+			<li>&nbsp;</li>
+			<li>&nbsp;</li>
 		</ul>
 	</div>
+<form:form modelAttribute="item" method="post" enctype="multipart/form-data">
 	<div style="width: 80%; float: right;">
 	<table style="width: 1400px;">
 		<tr><th colspan="2"><h3>ITEM 등록</h3></th></tr>
@@ -34,7 +43,7 @@
 
 		<tr>
 			<th>상품이미지</th>
-			<td colspan="2"><input type="file" name="pictureUrl"></td>
+			<td colspan="2"><input type="file" name="picture"></td>
 		</tr>
 		<tr>
 			<th>상품설명</th>

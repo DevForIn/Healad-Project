@@ -71,11 +71,16 @@ public class Item {
 	@Override
 	public String toString() {
 		return "Item [itemId=" + itemId + ", itemName=" + itemName + ", price=" + price + ", description=" + description
+<<<<<<< HEAD
 				+ ", pictureUrl=" + pictureUrl + ", useYn=" + useYn + ", itemCatId=" + itemCatId + ", getItemId()="
 				+ getItemId() + ", getItemName()=" + getItemName() + ", getPrice()=" + getPrice()
 				+ ", getDescription()=" + getDescription() + ", getPictureUrl()=" + getPictureUrl() + ", getUseYn()="
 				+ getUseYn() + ", getItemCatId()=" + getItemCatId() + ", getClass()=" + getClass() + ", hashCode()="
 				+ hashCode() + ", toString()=" + super.toString() + "]";
+=======
+				+ ", pictureUrl=" + pictureUrl + ", useYn=" + useYn + ", itemCatId=" + itemCatId + ", picture="
+				+ picture + "]";
+>>>>>>> branch 'master' of https://github.com/DevForIn/Healad-Project.git
 	}
 	
 	

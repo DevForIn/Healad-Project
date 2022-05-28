@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <c:set var="path" value="${pageContext.request.contextPath }" />
 
 <!DOCTYPE html>
@@ -75,25 +76,28 @@ function fnSearchMenu(itemCatId){
 			
 			//contents += '<div class="card-group">';
 			for(var i=0; i < datas.length; i++) {
-				if(i == 0 || i%3 == 0) {console.log('i%3=0이다'); contents += '<div class="card-group">';}
-			    contents += 	'<div class="card">';
-				if(datas[i].pictureUrl == null) {
-					contents +='<a href="${path}/item/detail?itemId='+datas[i].itemId +'"><img class="card-img-top" src="../img/sal1.png" alt="Card image cap" style="width: 300px; cursor: pointer;"></a>';
+				if(datas[i].useYn == 'Y'){
+					if(i == 0 || i%3 == 0) {console.log('i%3=0이다'); contents += '<div class="card-group">';}
+				    contents += 	'<div class="card">';
+					if(datas[i].pictureUrl == null) {
+						contents +='<a href="${path}/item/detail?itemId='+datas[i].itemId +'"><img class="card-img-top" src="../img/sal1.png" alt="Card image cap" style="width: 300px; cursor: pointer;"></a>';
+					}
+					else {
+						contents +='<a href="${path}/item/detail?itemId='+datas[i].itemId +'"><img class="card-img-top" src="../img/' + datas[i].pictureUrl + '" alt="Card image cap" style="width: 300px; cursor: pointer;"></a>';
+					}
+					
+					var price = datas[i].price;
+					contents += 		'<div class="card-body">';
+					contents += 			'<h5 class="card-title"><a href="${path}/item/detail?itemId='+datas[i].itemId +'"> '+datas[i].itemName +' </a></h5>';
+					contents += 			'<p class="card-text">'+price.toLocaleString()+'원</p>';
+					contents += 			'<p class="card-text">'+datas[i].description+'</p>';
+					contents += 			'<button type="button" class="btn btn-warning" onclick="fnOrder(\''+ datas[i].itemId +'\', \''+ datas[i].itemName +'\')"><i class="fa fa-truck"> 주문하기</i></button> ';
+					contents += 			'<button type="button" class="btn btn-primary" onclick="fnAddCart(\''+ datas[i].itemId +'\', \''+ datas[i].itemName +'\')"><i class="fa fa-shopping-cart"></i> 장바구니</button>';
+					contents += 		'</div>';
+					contents += 	'</div>';
+					if( (i !=0 && i%3 == 2) || i == datas.length) {console.log('종료 i=',i); contents += '</div>';}
 				}
-				else {
-					contents +='<a href="${path}/item/detail?itemId='+datas[i].itemId +'"><img class="card-img-top" src="file/"' + datas[i].pictureUrl + 'alt="Card image cap" style="width: 300px; cursor: pointer;"></a>';
-				}
-				contents += 		'<div class="card-body">';
-				contents += 			'<h5 class="card-title"><a href="${path}/item/detail?itemId='+datas[i].itemId +'"> '+datas[i].itemName +' </a></h5>';
-				contents += 			'<p class="card-text">'+datas[i].price +' 원</p>';
-				contents += 			'<p class="card-text">'+datas[i].description+'</p>';
-				contents += 			'<button type="button" class="btn btn-warning" onclick="fnOrder(\''+ datas[i].itemId +'\', \''+ datas[i].itemName +'\')"><i class="fa fa-truck"> 주문하기</i></button> ';
-				contents += 			'<button type="button" class="btn btn-primary" onclick="fnAddCart(\''+ datas[i].itemId +'\', \''+ datas[i].itemName +'\')"><i class="fa fa-shopping-cart"></i> 장바구니</button>';
-				contents += 		'</div>';
-				contents += 	'</div>';
-				if( (i !=0 && i%3 == 2) || i == datas.length) {console.log('종료 i=',i); contents += '</div>';}
 			}
-			
 			$('#salad').html(contents);
 		},
 	    error:function(request,status,error){
