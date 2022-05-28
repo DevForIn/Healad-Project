@@ -45,17 +45,21 @@ function BirthDate(){
 	day1=$("select[name=year]").val();
 	day2=$("select[name=month]").val();
 	day3=$("select[name=day]").val();	
-	document.getElementById("birthDate").value=day1+"-"+day2+"-"+day3;	
+	if(day1=="" || day2=="" || day3 == ""){
+		return false;
+	}else{
+	document.getElementById("birthDate").value=day1+"-"+day2+"-"+day3;
+	}
 }
-
 </script>
-	<h2 align="center">! - 회원 가입 - !</h2>
+<div class="loginF">
+	<h2 align="center">회원 정보 입력</h2>
 	<form:form modelAttribute="user" method="post" action="signUp">
 
 		<spring:hasBindErrors name="user">
 			<font color="red">
 			 <c:forEach items="${errors.globalErrors }"	var="error">
-					<spring:message code="${error.code }" />
+					<h6 align="center"><spring:message code="${error.code }" /></h6>
 			 </c:forEach></font>
 		</spring:hasBindErrors>
 		
@@ -109,13 +113,13 @@ function BirthDate(){
                 <fmt:formatDate var="date" value="${now}" pattern="yyyy" />
 				<form:input type="hidden" path="birthDate" name="birthDate"/>
                     <select name="year">
-                    	<option value="none">-Year-</option>                    	
+                    	<option value="">-Year-</option>                    	
                     	<c:forEach var="i" begin="${date-120}" end="${date}">  
                         	<option value="${date - i + (date-120)}"> ${date - i + (date-120)}</option>
                     	</c:forEach>
                     </select>
                     <select name="month">
-                    	<option value="none">-Month-</option>
+                    	<option value="">-Month-</option>
                   		<c:forEach var="i" begin="1" end="12">        
 							<c:choose>
 	                        	<c:when test="${i<10}">
@@ -128,7 +132,7 @@ function BirthDate(){
                    		</c:forEach>
                     </select>
                     <select name="day">
-	                    <option value="none">-Day-</option>
+	                    <option value="">-Day-</option>
 	                    <c:forEach var="i" begin="1" end="31">
 							<c:choose>
 	                        	<c:when test="${i<10}">
@@ -140,16 +144,17 @@ function BirthDate(){
 	                        </c:choose>
 	                    </c:forEach>
                     </select>
+                <br><font color="red"><form:errors	path="birthDate" /></font>
                 </td>
             </tr>
 			<tr>
 				<td colspan="2" align="center">
-				  <input type="submit" value="가입하기" onclick="BirthDate()">
-				  <input type="button" value="메인으로" onclick="location.href='${path}'">
+				  <input type="submit" value="가입하기" onclick="BirthDate()">				 	
+				  <input type="button" value="돌아가기" onclick="history.back()">
 				</td>
 			</tr>
 		</table>
 	</form:form>
+</div>
 </body>
-
 </html>

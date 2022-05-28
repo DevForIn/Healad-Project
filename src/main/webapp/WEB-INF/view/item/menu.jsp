@@ -19,34 +19,40 @@
 </style>
 </head>
 <body>
-	<ul class="nav nav-tabs">
-	  <li class="nav-item">
-	    <a class="nav-link active" data-toggle="tab" href="#salad" onclick="fnSearchMenu('1')">Salad</a>
-	  </li>
-	  <li class="nav-item">
-	    <a class="nav-link" data-toggle="tab" href="#salad" onclick="fnSearchMenu('2')">Topping</a>
-	  </li>
-	  <li class="nav-item">
-	    <a class="nav-link" data-toggle="tab" href="#salad" onclick="fnSearchMenu('3')">Dressing</a>
-	  </li>
-	  <li class="nav-item">
-	    <a class="nav-link" data-toggle="tab" href="#salad" onclick="fnSearchMenu('4')">Drink</a>
-	  </li>
-	</ul>
-	
-	<div class="tab-content">
-	  <div class="tab-pane fade show active" id="salad">
-	  </div>
-	</div>	
+	<form id="frm" action="../item/order" method="post">
+		
+		<input type="hidden" id="itemId" name="itemId" value="">
+		<ul class="nav nav-tabs">
+		  <li class="nav-item">
+		    <a class="nav-link active" data-toggle="tab" href="#salad" onclick="fnSearchMenu('1')">Salad</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" data-toggle="tab" href="#salad" onclick="fnSearchMenu('2')">Topping</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" data-toggle="tab" href="#salad" onclick="fnSearchMenu('3')">Dressing</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" data-toggle="tab" href="#salad" onclick="fnSearchMenu('4')">Drink</a>
+		  </li>
+		</ul>
+		
+		<div class="tab-content">
+		  <div class="tab-pane fade show active" id="salad">
+		  </div>
+		</div>	
+	</form>
 <script>
 
 // 최초 메뉴 조회 (1: 샐러드, 2: 토핑, 3: 드레싱, 4: 드링크)
 fnSearchMenu('1');
 
-
 function fnOrder(itemId, itemName){
-	alert('주문하기 작업중'); 
+	$('#itemId').val(itemId);
+	document.getElementById('frm').submit();
+	return false;
 }
+
 function fnAddCart(itemId, itemName){
 	$.ajax({
 		url : "${path}/cart/add",

@@ -77,7 +77,7 @@ function CI(){
 				<a href="${path}/img/${item.pictureUrl}">${item.pictureUrl}</a></td>
 				<td>${item.useYn}			
 					<a href="itemYN?id=${item.itemId}" 
-						onclick="window.open(this.href, '_blank', 'top=350, left=500, width=480, height=400'); return false;">
+						onclick="window.open(this.href, '_blank', 'top=280, left=700, width=480, height=400'); return false;">
 					<c:if test="${item.useYn == 'Y'}"><strong>[활성화]</strong></c:if>
 					<c:if test="${item.useYn == 'N'}"><strong>[비활성화]</strong></c:if></a>
 				</td>			

@@ -25,7 +25,7 @@ import logic.User;
 public class UserController {
 	@Autowired
 	private ShopService service;
-
+	
 	@GetMapping("*")
 	public ModelAndView getUser() {
 		ModelAndView mav = new ModelAndView();
@@ -34,8 +34,9 @@ public class UserController {
 	}	
 
 	@PostMapping("signUp")
-	public ModelAndView signUp(@Valid User user,BindingResult bresult) {
+	public ModelAndView signUp(@Valid User user,BindingResult bresult,HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
+
 		if(bresult.hasErrors()) {
 			mav.getModel().putAll(bresult.getModel());
 			bresult.reject("error.input.user");			
@@ -44,7 +45,11 @@ public class UserController {
 		try {
 			service.userInsert(user);
 			mav.addObject("user",user);
-			
+			String message = user.getUserId()+"님의 회원가입이 완료되었습니다 !";
+			mav.addObject("message",message);
+			mav.addObject("url",request.getContextPath()+"/user/login");
+			mav.setViewName("alert");
+				
 		  // KEY - ID 중복 검증
 		} catch(DataIntegrityViolationException e) {
 			e.printStackTrace();
@@ -52,7 +57,6 @@ public class UserController {
 			mav.getModel().putAll(bresult.getModel());
 			return mav;
 		}
-		mav.setViewName("redirect:login");
 		return mav;
 	}
 	
@@ -64,18 +68,26 @@ public class UserController {
 			bresult.reject("error.input.login");			
 			return mav;	
 		}		
+
 		try {			
 			User dbUser = service.selectUser(user.getUserId());
+			
 			if(dbUser == null) {
 				mav.getModel().putAll(bresult.getModel());
 				bresult.reject("error.input.login");			
 				return mav;	
 			}
 			if(user.getPwd().equals(dbUser.getPwd())) {
+				String message= dbUser.getUserId()+"님 환영합니다 :D !";
 				session.setAttribute("loginUser", dbUser);	
-				mav.setViewName("redirect:/");
+				mav.addObject("message",message);
+				mav.addObject("url",request.getContextPath()+"/");
+				mav.setViewName("alert");
 				if(dbUser.getUserId().equals("admin")) {
-					mav.setViewName("redirect:/master/userList");
+					message = "관리자 계정으로 로그인 하셨습니다.";
+					mav.addObject("message",message);
+					mav.addObject("url",request.getContextPath()+"/master/userList");
+					mav.setViewName("alert");
 				}
 			} else { 
 				bresult.reject("error.login.password");
@@ -86,14 +98,20 @@ public class UserController {
 			bresult.reject("error.login.id");
 			mav.getModel().putAll(bresult.getModel());
 			return mav;
-		}	
+		}
 		return mav;
 	} 
 	
 	@RequestMapping("logout")
-	public String logout(HttpSession session) {
+	public ModelAndView logout(HttpSession session,HttpServletRequest request) {
 		session.invalidate();
-		return "redirect:/";
+		
+		ModelAndView mav = new ModelAndView();
+		String message= "로그아웃 되었습니다.";
+		mav.addObject("message",message);
+		mav.addObject("url",request.getContextPath()+"/");
+		mav.setViewName("alert");
+		return mav;
 	}
 	@RequestMapping("mypage")
 	public ModelAndView idCheckMypage(String id,HttpSession session) {
@@ -147,8 +165,9 @@ public class UserController {
 		return mav;	
 	}
 	@PostMapping("modifyUser")
-	public ModelAndView ModifyUser(@Valid User user, BindingResult bresult,HttpSession session) {
+	public ModelAndView ModifyUser(@Valid User user, BindingResult bresult,HttpServletRequest request,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
+		String message = "";
 		if(bresult.hasErrors()) {
 			mav.getModel().putAll(bresult.getModel());		
 			return mav;	
@@ -161,66 +180,84 @@ public class UserController {
 		}
 		try {
 			service.modifyUser(user);
-			if(user.getUserId().equals(loginUser.getUserId())) 
-				session.setAttribute("loginUser", user);			
-			mav.setViewName("redirect:/user/mypage?id="+loginUser.getUserId());	
+
+			if(user.getUserId().equals(loginUser.getUserId())) {
+				session.setAttribute("loginUser", user);	
+				message= "정보 수정이 완료되었습니다.";
+				mav.addObject("url",request.getContextPath()+"/user/mypage?id="+loginUser.getUserId());
+			}
 			if(loginUser.getUserId().equals("admin")) {
-				mav.setViewName("redirect:../master/userList");	
+				message= user.getUserId()+"님의 정보 수정이 완료되었습니다.";
+				mav.addObject("url",request.getContextPath()+"/master/userList");	
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
 			throw new LoginException("고객 정보 수정실패","modifyUser?id="+loginUser.getUserId());
 		}
+		mav.addObject("message",message);
+		mav.setViewName("alert");
 		return mav;
 	}
 	@PostMapping("modifyPW")
-	public ModelAndView modifyPW(User user,@Param("pwd") String pwd,@Param("newpwd1") String newpwd1,HttpSession session) {
+	public ModelAndView modifyPW(User user,@Param("pwd") String pwd,@Param("newpwd1") String newpwd1,HttpServletRequest request,HttpSession session) {
 		User loginUser = (User)session.getAttribute("loginUser");
-		String userId = user.getUserId();
 		if(!pwd.equals(loginUser.getPwd())) {
-			throw new LoginException("비밀번호 오류입니다.","modifyPW?id="+loginUser.getUserId());
+			throw new LoginException("비밀번호 오류입니다.","modifyPW?id="+user.getUserId());
 		}
 		ModelAndView mav = new ModelAndView();
+		String message = "";
 		try {
-			service.modifyPwd(userId,newpwd1);
-			loginUser.setPwd(newpwd1); // session의 loginUser 객체의 비밀번호 수정
-			if(loginUser.getUserId().equals("admin")){
-				mav.setViewName("redirect:../master/userList");
+			service.modifyPwd(user.getUserId(),newpwd1);
+			user.setPwd(newpwd1); // session의 loginUser 객체의 비밀번호 수정
+			if(loginUser.getUserId().equals("admin")) {
+				message= user.getUserId()+"님의 비밀번호 수정이 완료되었습니다.";
+				mav.addObject("url",request.getContextPath()+"/master/userList");	
 			} else {
-				mav.setViewName("redirect:/user/mypage?id="+loginUser.getUserId());
+				message= "비밀번호 수정이 완료되었습니다.";
+				mav.addObject("url",request.getContextPath()+"/user/mypage?id="+loginUser.getUserId());
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
-			throw new LoginException("비밀번호 정보 수정 오류","modifyPW?id="+loginUser.getUserId());
+			if(loginUser.getUserId().equals("admin")){
+				throw new LoginException("비밀번호 정보 수정 오류","../master/userList");
+			} else {
+				throw new LoginException("비밀번호 정보 수정 오류","modifyPW?id="+loginUser.getUserId());
+			}
 		}
+		mav.addObject("message",message);
+		mav.setViewName("alert");
 		return mav;
 	}
 	@PostMapping("deleteUser")
-	public ModelAndView idCheckdeleteUser(String pwd,String userId,HttpSession session) {
+	public ModelAndView idCheckdeleteUser(User user,String pwd,String userId,HttpServletRequest request,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		User loginUser = (User)session.getAttribute("loginUser");
-		
+		String message = "";
 		if(userId.equals("admin")) {
 			throw new LoginException("관리자는 탈퇴가 불가합니다.","userList");
 		}
 		
 		if(!pwd.equals(loginUser.getPwd())) {			
-			throw new LoginException("비밀번호를 확인하세요.","deleteUser?id="+loginUser.getUserId());
+			throw new LoginException("비밀번호를 확인하세요.","deleteUser?id="+userId);
 		} 				
 		
 		try {
 			service.deleteUser(userId);
 		} catch(Exception e) {
 			e.printStackTrace();
-			throw new LoginException("탈퇴 오류","deleteUser?id="+loginUser.getUserId());
+			throw new LoginException("탈퇴 오류","deleteUser?id="+userId);
 		}		
 		
 		if(loginUser.getUserId().equals("admin")){
-			mav.setViewName("redirect:../master/userList");
+			message= user.getUserId()+"님의 강제 탈퇴처리가 완료되었습니다.";
+			mav.addObject("url",request.getContextPath()+"/master/userList");
 		} else {
-			mav.setViewName("redirect:login");
-			session.invalidate();
+			message= "정상적으로 탈퇴 되었습니다.";
+			mav.addObject("url",request.getContextPath()+"/");
+			session.invalidate();			
 		}
+		mav.addObject("message",message);
+		mav.setViewName("alert");
 		return mav;
 	}
 }

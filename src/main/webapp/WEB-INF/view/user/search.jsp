@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
+<div class="loginF">
 	<h3 align="center">${title} 정보 확인</h3>
 		<table>
 			<tr>
@@ -27,5 +28,6 @@
 				</td>
 			</tr>
 	</table>
+</div>
 </body>
 </html>
