@@ -7,6 +7,7 @@ public class Faq {
 	private String question; //질문
 	private String answer; //답변
 	private Date fqregdate; //등록일자(?) 필요한지 모르겠음
+	
 	public int getFqid() {
 		return fqid;
 	}

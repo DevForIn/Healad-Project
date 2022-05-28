@@ -5,7 +5,9 @@ import java.util.Date;
 import org.springframework.web.multipart.MultipartFile;
 
 public class Notice {
-	private int noid; // id
+	private int num;
+	private int noid; 
+	private String userid; // id
 	private String nosuject; //제목
 	private String nocontent; //내용
 	private int nocnt; //조회수
@@ -13,6 +15,18 @@ public class Notice {
 	private String nofileurl; //파일url
 	private Date noregdate; //등록일자
 	
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	public int getNoid() {
 		return noid;
 	}

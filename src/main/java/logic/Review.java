@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 public class Review {
+	private int num;
 	private String rvid; //리뷰 아이디
 	private String userid; //user id
 	@NotEmpty(message="비밀번호를 입력하세요")
@@ -23,6 +24,13 @@ public class Review {
 	private Date rvupdate; //수정일자(관리자 댓글)
 	private int rvreadcnt; //조회수
 	private int rvscore; //추천수
+	
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	public String getRvid() {
 		return rvid;
 	}
