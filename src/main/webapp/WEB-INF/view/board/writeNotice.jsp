@@ -11,9 +11,10 @@
 <title>공지 작성</title>
 </head>
 <body>
+<div class="loginF">
 	<form:form modelAttribute="notice" action="writeNotice" enctype="multipart/form-data" name="f">
-		<table>
-			<caption>공지 작성</caption>
+		<caption>공지 작성</caption>
+		<table>			
 			<tr>
 				<td>제목</td>
 				<td><form:input path="noSubject" /> <font color="red"><form:errors path="noSubject" /></font></td>
@@ -29,17 +30,11 @@
 				<td><input type="file" name="noFile"></td>
 			</tr>
 			<tr>
-				<td colspan="2"><a href="javascript:document.f.submit()">[게시글등록]</a>
-					<a href="list">[게시글목록]</a></td>
+				<td colspan="2"><a href="javascript:document.f.submit()">[공지 등록]</a>
+					<a href="mainBoard">[공지 목록]</a></td>
 			</tr>
 		</table>
-				<p align="right">
-			<c:if test="${loginUser.userId == 'admin'}" >
-				<p align="right">
-					<a href="${path }/board/writeNotice">공지 작성</a>
-				</p>
-			 </c:if>
-		</p>
 	</form:form>
+</div>
 </body>
 </html>

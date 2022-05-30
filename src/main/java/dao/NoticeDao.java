@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -21,5 +22,18 @@ public class NoticeDao {
 	
 	public void write(Notice notice) {
 		template.getMapper(cls).write(notice);
+	}
+
+	public int count() {
+		return template.getMapper(cls).count();
+	}
+
+	public List<Notice> noticelist(Integer pageNum, int limit) {
+		param.clear();
+		int start = (pageNum - 1) * limit +1;
+		int end = start + limit -1;
+		param.put("start", start);
+		param.put("end", end);
+		return template.getMapper(cls).list(param);
 	}
 }

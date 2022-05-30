@@ -1,6 +1,7 @@
 package logic;
 
 import java.io.File;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -37,6 +38,14 @@ public class BoardService {
 			notice.setNoFileUrl(notice.getNoFile().getOriginalFilename());
 		}
 		noticeDao.write(notice);		
+	}
+
+	public int count() {
+		return noticeDao.count();
+	}
+
+	public List<Notice> noticelist(Integer pageNum, int limit) {
+		return noticeDao.noticelist(pageNum,limit);
 	}
 	
 }

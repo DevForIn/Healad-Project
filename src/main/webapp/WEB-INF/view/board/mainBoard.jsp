@@ -19,12 +19,12 @@
 </script>
 </head>
 <body>
-	<hr>
+
 	<div class="container">
 		<h2 id="center"> 
 			공 지 사 항 
 		</h2>
-		<form class="form-inline" action="list?boardid=${boardid}" 
+		<form class="form-inline" action="noticeDetail?id=${noticeId}" 
 			   method="post" name="sf">
 		<div class="container justify-content-end text-center">
                 <input type="hidden" name="pageNum" value="1">
@@ -42,8 +42,8 @@
 
 		
 		<p align="right">
-		<c:if test="${boardcount > 0 }">글개수:${boardcount}</c:if>
-		<c:if test="${boardcount == 0 }">등록된 게시물이 없습니다</c:if>
+		<c:if test="${count > 0 }">글개수:${count}</c:if>
+		<c:if test="${count == 0 }">등록된 글이 없습니다</c:if>
 	
 		</p>
 		<table class="table table-hover">
@@ -57,24 +57,23 @@
 				</tr>
 			</thead>
 			<tbody>
-			<c:forEach   var="b"  items="${list}">
+			<c:forEach   var="N"  items="${Noticelist}">
 				<tr>
-					<td>${b.noticeId}</td>
-					<c:set var="boardnum" value="${boardnum - 1}"/>
+					<td>${N.noticeId}</td>
 					<td>		
-					<a href="${path }/board/info?num=${b.num}">${b.noSubject}</a>
+					<a href="${path }/board/info?num=${N.num}">${b.noSubject}</a>
 					</td>
 					<td>
-					<fmt:formatDate value="${b.noRegDate}" pattern="yyyy-MM-dd" var="rday"/>
+					<fmt:formatDate value="${N.noRegDate}" pattern="yyyy-MM-dd" var="rday"/>
 					<fmt:formatDate value="${today}" pattern="yyyy-MM-dd" var="nday"/>					
 					<c:if test="${rday==nday}">
-						<fmt:formatDate value="${b.noRegDate}" pattern="HH:mm:ss"/>
+						<fmt:formatDate value="${N.noRegDate}" pattern="HH:mm:ss"/>
 					</c:if>
 					<c:if test="${rday!=nday}">
-						<fmt:formatDate value="${b.noRegDate}" pattern="yy-MM-dd HH:mm:ss"/>
+						<fmt:formatDate value="${N.noRegDate}" pattern="yy-MM-dd HH:mm:ss"/>
 					</c:if>					
-					<td><a href="${path}/upload/${b.noFile}">${b.noFile}</a></td>
-					<td>${b.noReadCount}</td>
+					<td><a href="${path}/upload/${N.noFile}">${N.noFile}</a></td>
+					<td>${N.noReadCount}</td>
 
 				</tr>
 				</c:forEach>	
@@ -84,7 +83,7 @@
 		<p align="right">
 			<c:if test="${loginUser.userId=='admin'}">
 				<p align="right">
-					<a href="${path }/board/writeNotice">공지 작성</a>
+					<a href="${path}/board/writeNotice">공지 작성</a>
 				</p>
 			 </c:if>
 		</p>
