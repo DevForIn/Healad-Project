@@ -39,6 +39,18 @@ public class ItemController {
 		return mav;	
 	}
 	
+	 
+	@RequestMapping("cart")
+	public ModelAndView cart(Integer itemCatId, HttpSession session) {
+		ModelAndView mav = new ModelAndView("item/cart");
+		User user = (User) session.getAttribute("loginUser");
+		System.out.println("user=" + user.getUserId());
+		List<Cart> items = cartService.getList(user.getUserId());
+		mav.addObject("items", items);
+		
+		return mav;	
+	}	
+	
 	@GetMapping("list")
 	public List<Item> list(Integer itemCatId) {
 		// 카테고리 조회조건이 안넘어왔을때 기본 카테고리 1 (샐러드)로 지정
