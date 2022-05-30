@@ -13,7 +13,7 @@
 </style>
 </head>
 <body>
-	<form action="../sale/purchase" method="post">
+	<form id="frm" action="" method="post">
 		<input type="hidden" name="orderType" value="C">
 		<section class="h-100" style="background-color: #eee;">
 		  <div class="container h-100 py-5">
@@ -60,8 +60,8 @@
 		
 				        <div class="card">
 				          <div class="card-body">
-				            <button type="button" class="btn btn-warning btn-block btn-lg">주문하기</button>
-				            <button type="button" class="btn btn-primary btn-block btn-lg">장바구니 비우기</button>
+				            <button type="button" class="btn btn-warning btn-block btn-lg" onclick="fnOrder()"><i class="fa fa-truck"></i> 주문하기</button>
+				            <button type="button" class="btn btn-primary btn-block btn-lg" onclick="fnDeleteCart()"><i class="fa fa-shopping-cart"></i> 장바구니 비우기</button>
 				          </div>
 				        </div>		        	
 		        	</c:when>
@@ -123,6 +123,22 @@
 		    	alert('에러가 발생했습니다.');
 		    }
 		});	 		
+	}
+	
+	function fnOrder(){
+		// 주문하기
+		var form = document.getElementById('frm');
+		form.action = "../item/order";
+		form.submit();
+		
+	}
+	
+	function fnDeleteCart(){
+		// 장바구니 전체 비우기
+		var isDelete = confirm("장바구니를 비우시겠습니까?");
+		if(isDelete){
+			alert('삭제처리 작업중');
+		}
 	}
 </script>	
 </body>
