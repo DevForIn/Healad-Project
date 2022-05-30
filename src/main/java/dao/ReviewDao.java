@@ -1,18 +1,6 @@
 package dao;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
-
-
-import dao.mapper.ReviewMapper;
-import logic.Notice;
-import logic.Review;
-
-public class ReviewDao {
+public class ReviewDao {/*
 	@Autowired
 	private SqlSessionTemplate template;
 	private Map<String,Object> param = new HashMap<String,Object>();
@@ -33,7 +21,7 @@ public class ReviewDao {
 	public void write(Review review) {
 		int num = maxNum() +1; 
 		review.setNum(num);
-		review.setGrp(num); 
+		
 		template.getMapper(cls).write(review);
 	}
 	private int maxNum() {
@@ -53,17 +41,17 @@ public class ReviewDao {
 		template.getMapper(cls).grpStepAdd(review);
 		
 	}
-/*	public void reply(Review review) {
+	public void reply(Review review) {
 		review.setNum(maxNum()+1);
 		review.setGrplevel(review.getGrplevel()+1);
 		review.setGrpstep(review.getGrpstep()+1); 
 		template.getMapper(cls).reply(review);
 		
 	}
-	*/
+	
 	public void delete(int num) {
 		template.getMapper(cls).delete(num);
 		
 	}
-
+*/
 }

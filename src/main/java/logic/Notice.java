@@ -2,81 +2,74 @@ package logic;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotEmpty;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class Notice {
-	private int num;
-	private int noid; 
-	private String userid; // id
-	private String nosuject; //제목
-	private String nocontent; //내용
-	private int nocnt; //조회수
-	private MultipartFile nofile; //파일
-	private String nofileurl; //파일url
-	private Date noregdate; //등록일자
+	private int noticeId; 
 	
-	public String getUserid() {
-		return userid;
+	@NotEmpty(message="( ! ) 정보 입력 필요.")
+	private String noSubject; //제목
+	
+	@NotEmpty(message="( ! ) 정보 입력 필요.")
+	private String noContent; //내용
+	
+	private int noReadCount; //조회수
+	
+	private MultipartFile noFile; //파일
+	
+	private String noFileUrl; //파일url
+	
+	private Date noRegDate; //등록일자
+	
+	public int getNoticeId() {
+		return noticeId;
 	}
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setNoticeId(int noticeId) {
+		this.noticeId = noticeId;
 	}
-	public int getNum() {
-		return num;
+	public String getNoSubject() {
+		return noSubject;
 	}
-	public void setNum(int num) {
-		this.num = num;
+	public void setNoSubject(String noSubject) {
+		this.noSubject = noSubject;
 	}
-	public int getNoid() {
-		return noid;
+	public String getNoContent() {
+		return noContent;
 	}
-	public void setNoid(int noid) {
-		this.noid = noid;
+	public void setNoContent(String noContent) {
+		this.noContent = noContent;
 	}
-	public String getNosuject() {
-		return nosuject;
+	public int getNoReadCount() {
+		return noReadCount;
 	}
-	public void setNosuject(String nosuject) {
-		this.nosuject = nosuject;
+	public void setNoReadCount(int noReadCount) {
+		this.noReadCount = noReadCount;
 	}
-	public String getNocontent() {
-		return nocontent;
+	public MultipartFile getNoFile() {
+		return noFile;
 	}
-	public void setNocontent(String nocontent) {
-		this.nocontent = nocontent;
+	public void setNoFile(MultipartFile noFile) {
+		this.noFile = noFile;
 	}
-	public int getNocnt() {
-		return nocnt;
+	public String getNoFileUrl() {
+		return noFileUrl;
 	}
-	public void setNocnt(int nocnt) {
-		this.nocnt = nocnt;
+	public void setNoFileUrl(String noFileUrl) {
+		this.noFileUrl = noFileUrl;
 	}
-	public MultipartFile getNofile() {
-		return nofile;
+	public Date getNoRegDate() {
+		return noRegDate;
 	}
-	public void setNofile(MultipartFile nofile) {
-		this.nofile = nofile;
-	}
-	public String getNofileurl() {
-		return nofileurl;
-	}
-	public void setNofileurl(String nofileurl) {
-		this.nofileurl = nofileurl;
-	}
-	public Date getNoregdate() {
-		return noregdate;
-	}
-	public void setNoregdate(Date noregdate) {
-		this.noregdate = noregdate;
+	public void setNoRegDate(Date noRegDate) {
+		this.noRegDate = noRegDate;
 	}
 	@Override
 	public String toString() {
-		return "Notice [noid=" + noid + ", nosuject=" + nosuject + ", nocontent=" + nocontent + ", nocnt=" + nocnt
-				+ ", nofile=" + nofile + ", nofileurl=" + nofileurl + ", noregdate=" + noregdate + ", getNoid()="
-				+ getNoid() + ", getNosuject()=" + getNosuject() + ", getNocontent()=" + getNocontent()
-				+ ", getNocnt()=" + getNocnt() + ", getNofile()=" + getNofile() + ", getNofileurl()=" + getNofileurl()
-				+ ", getNoregdate()=" + getNoregdate() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ ", toString()=" + super.toString() + "]";
+		return "Notice [noticeId=" + noticeId + ", noSubject=" + noSubject + ", noContent=" + noContent
+				+ ", noReadCount=" + noReadCount + ", noFile=" + noFile + ", noFileUrl=" + noFileUrl + ", noRegDate="
+				+ noRegDate + "]";
 	}
 	
 	

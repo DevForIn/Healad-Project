@@ -1,18 +1,6 @@
 package dao.mapper;
 
-import java.util.List;
-import java.util.Map;
-
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-
-import logic.Review;
-
-
-
-public interface ReviewMapper {
+public interface ReviewMapper {/*
 	@Select("select count(*) from board where rvid=#{rvid}")
 	int count(String boardid);
 	
@@ -57,5 +45,5 @@ public interface ReviewMapper {
 	@Delete("delete from review")
 	void delete(int num);
 
-
+*/
 }
