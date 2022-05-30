@@ -77,12 +77,16 @@ function fnSearchMenu(itemCatId){
 		data: {
 			'itemCatId': itemCatId
 		},
-		success : function(datas) {
+		success : function(items) {
 			var contents  = '';
+			
+			// 사용중인 데이터만 표시하기 
+			let datas = _.filter(items, function(item) {
+				return item.useYn == 'Y' 
+			});
 			
 			//contents += '<div class="card-group">';
 			for(var i=0; i < datas.length; i++) {
-				if(datas[i].useYn == 'Y'){
 					if(i == 0 || i%3 == 0) {console.log('i%3=0이다'); contents += '<div class="card-group">';}
 				    contents += 	'<div class="card">';
 					if(datas[i].pictureUrl == null) {
@@ -102,7 +106,6 @@ function fnSearchMenu(itemCatId){
 					contents += 		'</div>';
 					contents += 	'</div>';
 					if( (i !=0 && i%3 == 2) || i == datas.length) {console.log('종료 i=',i); contents += '</div>';}
-				}
 			}
 			$('#salad').html(contents);
 		},
