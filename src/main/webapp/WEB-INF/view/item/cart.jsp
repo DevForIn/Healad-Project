@@ -38,7 +38,7 @@
 						                <p class="lead fw-normal mb-2">${item.itemName }</p>
 						              </div>
 						              <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-						                <a class="btn btn-link px-2" onclick="fnUpdateCartQuantity('${item.itemId}','down', '${item.price })">
+						                <a class="btn btn-link px-2" onclick="fnUpdateCartQuantity('${item.itemId}','down', '${item.price }')">
 						                  <i class="fa fa-minus"></i>
 						                </a>
 						
