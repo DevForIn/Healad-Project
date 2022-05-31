@@ -20,12 +20,13 @@
 
 <!-- 
 http://localhost:8088/springmvc1/item/list
- => ItemController 클래스를 선택 -->
+ => ItemController 클래스를 선택
 <bean class=
 "org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping" />
-
+ -->
 <!-- controller,logic,dao 패키지를 먼저 scan 하여 @Component 를 가진 클래스의 객체 생성 -->
 <context:component-scan base-package="controller,logic,dao,aop" />
+
 
 <!-- annotation-driven : web 환경에서 객체 주입을 위한 설정 : 
 		@Autowired, @Controller ..기능을 사용할 수 있도록 하는 것 -->
@@ -66,6 +67,7 @@ http://localhost:8088/springmvc1/item/list
 		<list><value>messages</value></list>
 	</property>
 </bean>
+ 
 <!-- 예외처리 -->
 <bean id="exceptionHandler" 
 	class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
@@ -74,10 +76,13 @@ http://localhost:8088/springmvc1/item/list
 	</property>	
 </bean>
 
+
  <mvc:interceptors>
  	<mvc:interceptor>
- 		<mvc:mapping path="/item/order"/> <!-- 요청 URL 정보 -->
- 		<bean class="interceptor.ItemInterceptor" /> <!-- 인터셉터 클래스 객체 -->
+ 		<mvc:mapping path="/item/order"/> 
+ 		<mvc:mapping path="/item/cart"/> 
+ 		<bean class="interceptor.ItemInterceptor" /> 
  	</mvc:interceptor>
  </mvc:interceptors>
+ 
 </beans>

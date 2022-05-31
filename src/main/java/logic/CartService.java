@@ -39,6 +39,10 @@ public class CartService {
 	public void deleteAll(String userId) {
 		cartDao.deleteByUserId(userId);
 	}
+
+	public void delete(Cart cart) {
+		cartDao.delete(cart);		
+	}
 	
 	
 	

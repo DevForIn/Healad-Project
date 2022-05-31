@@ -29,7 +29,7 @@
 			        	<c:when test="${!empty items }">
 							<c:forEach var="item" items="${items}">
 						        <div class="card rounded-3 mb-4">
-						          <div class="card-body p-4">
+						          <div id="row_${item.itemId }" class="card-body p-4">
 						            <div class="row d-flex justify-content-between align-items-center">
 						              <div class="col-md-2 col-lg-2 col-xl-2">
 						                <img src="../img/sal1.png" class="img-fluid rounded-3" alt="Cotton T-shirt">
@@ -86,7 +86,37 @@
 	
 <script>
 	function fnRemoveItem(itemId){
-		alert(itemId + ' 삭제 작업중');
+		// 장바구니 아이템 삭제
+		console.log('itemId',itemId);
+		if(confirm("삭제하시겠습니까?")){
+			// ajax로 삭제처리
+			$.ajax({
+				url : "${path}/cart/delete",
+				type : "POST",
+				data: {
+					'itemId': itemId
+				},
+				success : function(items) {
+					alert('삭제되었습니다.');
+					// html 변경하기
+					console.log('length=' , $("div[id*='row_']").length);
+					if($("div[id*='row_']").length > 1) {
+						$('#row_' + itemId).html('');
+					}
+					else{
+						var contents = '<div class="card rounded-3 mb-4">' + 
+          				'<div class="card-body p-4">' +
+          				'<h5>장바구니에 담긴 상품이 없습니다.</h5>' +
+          				'</div>' +
+        				'</div>';
+						$('#cartContents').html(contents);						
+					}
+				},
+			    error:function(request,status,error){
+					alert('삭제 중 오류가 발생하였습니다.');
+			    }
+			});				
+		}
 	}
 
 	

@@ -77,5 +77,21 @@ public class CartController {
 		}
 		
 		return null;
+	}
+	
+	@RequestMapping("delete")
+	public String delete(Integer itemId, HttpSession session) {
+		// 1. 사용자 정보 조회
+		User user = (User) session.getAttribute("loginUser");
+		
+		// 2. 유저 정보가 존재하면 카트에 해당 유저 아이디로 카트 아이템 삭제
+		if(user != null) {
+			Cart cart = new Cart();
+			cart.setUserId(user.getUserId());
+			cart.setItemId(itemId);
+			cartService.delete(cart);
+		}
+		
+		return null;
 	}	
 }
