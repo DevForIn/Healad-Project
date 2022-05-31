@@ -28,8 +28,8 @@
 			        <c:choose>
 			        	<c:when test="${!empty items }">
 							<c:forEach var="item" items="${items}">
-						        <div class="card rounded-3 mb-4">
-						          <div id="row_${item.itemId }" class="card-body p-4">
+						        <div id="row_${item.itemId }" class="card rounded-3 mb-4">
+						          <div class="card-body p-4">
 						            <div class="row d-flex justify-content-between align-items-center">
 						              <div class="col-md-2 col-lg-2 col-xl-2">
 						                <img src="../img/sal1.png" class="img-fluid rounded-3" alt="Cotton T-shirt">
@@ -53,7 +53,7 @@
 						                <h5 class="mb-0">${item.quantityPrice } </h5>
 						              </div>
 						              <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-						                <a onclick="fnRemoveItem('${item.itemId }')" class="text-danger"><i class="fa fa-trash fa-lg"></i></a>
+						                <a onclick="fnRemoveItem('${item.itemId }')" class="text-danger"><i class="fa fa-trash fa-lg" style="cursor:pointer;"></i></a>
 						              </div>
 						            </div>
 						          </div>
