@@ -11,11 +11,7 @@
 <meta charset="UTF-8">
 <title>Notice board</title>
 <script type="text/javascript">
-	function listsubmit(page){
-		f = document.sf;
-		f.pageNum.value=page;
-		f.submit();
-	}
+
 </script>
 </head>
 <body>
@@ -61,7 +57,7 @@
 				<tr>
 					<td>${N.noticeId}</td>
 					<td>		
-					<a href="${path }/board/info?num=${N.num}">${b.noSubject}</a>
+					<a href="#">${N.noSubject}</a>
 					</td>
 					<td>
 					<fmt:formatDate value="${N.noRegDate}" pattern="yyyy-MM-dd" var="rday"/>
@@ -72,7 +68,7 @@
 					<c:if test="${rday!=nday}">
 						<fmt:formatDate value="${N.noRegDate}" pattern="yy-MM-dd HH:mm:ss"/>
 					</c:if>					
-					<td><a href="${path}/upload/${N.noFile}">${N.noFile}</a></td>
+					<td><a href="${path}/board/file/${N.noFileUrl}">${N.noFileUrl}</a></td>
 					<td>${N.noReadCount}</td>
 
 				</tr>
@@ -89,19 +85,33 @@
 		</p>
 		<div class="container">
 			<ul class="pagination justify-content-center">
-
-				<li	 class='page-item <c:if test="${startPage <= bottomLine}"> disabled </c:if>'>
-			<%-- 	<a class="page-link" href="<%=request.getContextPath()%>/board/list?pageNum=${startPage - bottomLine}">Previous</a></li>--%>
-				<a class="page-link" href="javascript:listsubmit(${startPage -bottomLine})">
-				Previous</a></li>
+				
+				<c:if test="${pageNum > 1 }">						
+					<li	 class='page-item'>
+					<a class="page-link" href="mainBoard?pageNum=${pageNum-1}">Previous</a></li>
+				</c:if>
+				<c:if test="${pageNum <= 1}">
+					<li class='page-item disabled'>
+					<a class="page-link" href="mainBoard?pageNum=${pageNum-1}">Previous</a></li>
+				</c:if>	
+						
 			<c:forEach  var="i" begin="${startPage}"  end="${endPage}">
-				<li class='page-item  <c:if test ="${i == pageInt }" > active   </c:if>'>
-				<%-- <a 	class="page-link" href="${path }/board/list?pageNum=${i}">${i}</a></li>--%>
-				<a class="page-link" href="javascript:listsubmit(${i})">${i}</a></li>
+					<c:if test="${i == pageNum}">
+						<li class='page-item active'>
+						<a class="page-link" href="#">${i}</a></li>
+					</c:if>
+					<c:if test="${i != pageNum}">
+						<a class="page-link" href="mainBoard?pageNum=${i}">${i}</a>
+					</c:if>
 				</c:forEach>
-				<li  class='page-item <c:if test="${endPage >= maxPage}">  disabled </c:if>'>
-					<%--<a class="page-link" href="${path }/board/list?pageNum=${startPage + bottomLine}">Next</a></li> --%>
-					<a class="page-link" href="javascript:listsubmit(${startPage +bottomLine})">Next</a></li>
+				<c:if test="${pageNum < maxPage}">
+					<li  class='page-item'>
+					<a class="page-link" href="mainBoard?pageNum=${pageNum+1}">Next</a></li>
+				</c:if>
+				<c:if test="${pageNum >= maxPage}">
+					<li  class='page-item disabled'>
+					<a class="page-link" href="mainBoard?pageNum=${pageNum+1}">Next</a></li>
+				</c:if>
 			</ul>
 		</div>
 	</div>
