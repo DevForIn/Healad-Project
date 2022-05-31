@@ -31,7 +31,7 @@
 						if($("select[name=column]").val() == "" || $("input[type=text]").val() == ""){
 							alert("검색항목을 선택해주세요."+$("select[name=column]").val()+$("input[type=text]").val())							
 							return false;
-						}					
+						}					 
 					}
 				</script>
 				<input class="form-control mr-sm-2" type="text" placeholder="Search"
