@@ -36,4 +36,36 @@ public class NoticeDao {
 		param.put("end", end);
 		return template.getMapper(cls).list(param);
 	}
+
+	public Notice Info(Integer num) {
+		return template.getMapper(cls).Info(num);
+	}
+
+	public void cntAdd(Integer num) {
+		template.getMapper(cls).cntAdd(num);		
+	}
+
+	public int selectCount(String column, String find) {
+		param.clear();
+		if(column.equals("x") || find.equals("x")) {
+			return template.getMapper(cls).count();
+		}
+		param.put("column", column);
+		param.put("find", find);
+		return template.getMapper(cls).selectCount(param);
+	}
+
+	public List<Notice> selectlist(Integer pageNum, int limit, String column, String find) {
+		param.clear();
+		int start = (pageNum - 1) * limit +1;
+		int end = start + limit -1;
+		param.put("start", start);
+		param.put("end", end);
+		if(column.equals("x") || find.equals("x")) {
+			return template.getMapper(cls).list(param);
+		}
+		param.put("column", column);
+		param.put("find", find);
+		return template.getMapper(cls).selectlist(param);	
+	}
 }

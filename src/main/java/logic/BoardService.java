@@ -18,14 +18,11 @@ public class BoardService {
 	NoticeDao noticeDao;
 
 	private void uploadFileCreate(MultipartFile file, HttpServletRequest request, String upath) {
-		// 업르도된 파일의 원래 이름 
 		String orgFile = file.getOriginalFilename();
-		// 업로드 될 폴더의 절대 경로 - 
 		String uploadPath = request.getServletContext().getRealPath("/")+upath;
 		File fpath = new File(uploadPath);
 		if(!fpath.exists()) fpath.mkdirs();	
 		try {
-			// transferTo : file(업로드되는 파일내용)을 업로드폴더의 원래파일이름으로 저장
 			file.transferTo(new File(uploadPath + orgFile));
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -46,6 +43,22 @@ public class BoardService {
 
 	public List<Notice> noticelist(Integer pageNum, int limit) {
 		return noticeDao.noticelist(pageNum,limit);
+	}
+
+	public Notice noticeInfo(Integer num) {	
+		return noticeDao.Info(num);
+	}
+
+	public void cntAdd(Integer num) {
+		noticeDao.cntAdd(num);		
+	}
+
+	public int selectCount(String column, String find) {
+		return noticeDao.selectCount(column,find);
+	}
+
+	public List<Notice> selectlist(Integer pageNum, int limit, String column, String find) {
+		return noticeDao.selectlist(pageNum,limit,column,find);
 	}
 	
 }

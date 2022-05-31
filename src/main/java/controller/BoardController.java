@@ -27,30 +27,60 @@ public class BoardController {
 	
 	@GetMapping("mainBoard")
 	public ModelAndView getBoard(@Param("pageNum") Integer pageNum,HttpSession session) {
-		ModelAndView mav = new ModelAndView();
+		ModelAndView mav = new ModelAndView();		
+
 		if(pageNum == null || pageNum.toString().equals("")) {
 			pageNum=1;
-		}
-		int limit = 10;	
-		int count = boardService.count();	// 게시판 구분 별 전체 게시물 등록 건수
-		List<Notice> Noticelist = boardService.noticelist(pageNum, limit); // 페이지에 출력한 게시물
-		int maxPage = (int)((double)count/limit + 0.95); // 최대 필요한 페이지 수
-		int startPage = (int)((pageNum/10.0 + 0.9) - 1) * 10 + 1; // 화면에 표시할 페이지의 시작 번호
-		int endPage = startPage + 9;
-		if(endPage > maxPage) endPage = maxPage;
+		}		
+		int limit = 10;		
 		
-		// 화면에 보여주기 위한 게시물 번호
-		int boardno = count - (pageNum -1) * limit;
-		mav.addObject("pageNum",pageNum);	// 현재 페이지 값
-		mav.addObject("maxPage",maxPage);	// 등록된 게시물의 건수에 따른 최대 페이지 갯수
-		mav.addObject("startPage",startPage);	// 화면에 표시될 시작 페이지 번호
-		mav.addObject("endPage",endPage);	//화면에 표시될 종료 페이지 번호. 한 화면에 10의 페이지 표시
-		mav.addObject("count",count); 	// 게시판 종류별 등록된 게시물 건수
-		mav.addObject("Noticelist",Noticelist);	// 화면에 출력할 게시물 데이터 목록.
-		mav.addObject("boardno",boardno);
+		int count = boardService.count();		
+		List<Notice> Noticelist = boardService.noticelist(pageNum,limit);
+		
+		int maxPage = (int)((double)count/limit + 0.95);
+		int startPage = (int)((pageNum/10.0 + 0.9) - 1) * 10 + 1;
+		int endPage = startPage + 9;
+		if(endPage > maxPage) endPage = maxPage;		
+		mav.addObject("pageNum",pageNum);
+		mav.addObject("maxPage",maxPage);
+		mav.addObject("startPage",startPage);	
+		mav.addObject("endPage",endPage);	
+		mav.addObject("count",count); 	
+		mav.addObject("Noticelist",Noticelist);
 		return mav;	
 	}
 	
+	@PostMapping("mainBoard")
+	public ModelAndView postBoard(@Param("column") String column,@Param("find") String find,@Param("pageNum") Integer pageNum,HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		
+		if(column==null || column.trim().equals("")) {
+			column="x";
+			find="x";
+		}
+		if(find==null || find.trim().equals("")) {
+			column="x";
+			find="x";
+		}
+		if(pageNum == null || pageNum.toString().equals("")) {
+			pageNum=1;
+		}		
+		int limit = 10;	
+		
+		int count = boardService.selectCount(column,find);		
+		List<Notice> Noticelist = boardService.selectlist(pageNum,limit,column,find);
+		int maxPage = (int)((double)count/limit + 0.95);
+		int startPage = (int)((pageNum/10.0 + 0.9) - 1) * 10 + 1;
+		int endPage = startPage + 9;
+		if(endPage > maxPage) endPage = maxPage;
+		mav.addObject("pageNum",pageNum);
+		mav.addObject("maxPage",maxPage);
+		mav.addObject("startPage",startPage);	
+		mav.addObject("endPage",endPage);	
+		mav.addObject("count",count); 	
+		mav.addObject("Noticelist",Noticelist);
+		return mav;	
+	}
 	@GetMapping("writeNotice")
 	public ModelAndView writeNotice() {
 		ModelAndView mav = new ModelAndView();
@@ -69,5 +99,17 @@ public class BoardController {
 		boardService.noticeWrite(notice,request);
 		mav.setViewName("redirect:mainBoard");
 		return mav;		
-	}	
+	}
+	
+	@RequestMapping("noticeInfo")
+	public ModelAndView noticeCall(Integer num) {
+		ModelAndView mav = new ModelAndView();
+		if(num != null) {
+			Notice notice = boardService.noticeInfo(num);
+			boardService.cntAdd(num);	
+			mav.addObject("notice",notice);
+		}
+		return mav;
+
+	}
 }

@@ -43,8 +43,7 @@ body { padding-top:40px;
 				<a href="${path}/item/menu" class="w3-bar-item w3-button"><h3>Menu</h3></a>
 				<a href="${path}/board/mainBoard" class="w3-bar-item w3-button"><h3>Service</h3></a>
 				<c:if test="${empty sessionScope.loginUser}">
-					<a href="${path}/user/login" class="w3-bar-item w3-button"><h3>Login</h3></a>
-					<a href="${path}/user/signUp" class="w3-bar-item w3-button"><h3>Sign Up</h3></a>
+					<a href="${path}/user/login" class="w3-bar-item w3-button"><h3>Login</h3></a>					
 				</c:if>  
 				<c:if test="${!empty sessionScope.loginUser}">
 					<a href="${path}/item/cart" class="w3-bar-item w3-button"><h3>Cart</h3></a>

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import logic.Notice;
 
@@ -20,5 +21,17 @@ public interface NoticeMapper {
 
 	@Select("select * from NOTICE where NOTICE_ID >= #{start} and NOTICE_ID <= #{end}")
 	List<Notice> list(Map<String, Object> param);
+
+	@Select("select * from NOTICE where NOTICE_ID = #{value}")
+	Notice Info(Integer num);
+	
+	@Update("update NOTICE set NO_READ_CNT=NO_READ_CNT+1 where NOTICE_ID = #{value}")
+	void cntAdd(Integer num);
+
+	@Select("select count(*) from NOTICE where ${column} like '%${find}%' ")
+	int selectCount(Map<String, Object> param);
+
+	@Select("select * from NOTICE where ${column} like '%${find}%' ")
+	List<Notice> selectlist(Map<String, Object> param);
 
 }
