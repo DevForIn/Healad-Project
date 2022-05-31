@@ -68,8 +68,4 @@ public class NoticeDao {
 		param.put("find", find);
 		return template.getMapper(cls).selectlist(param);	
 	}
-
-	public List<Notice> noticeListMaster() {
-		return template.getMapper(cls).noticeListMaster();
-	}
 }

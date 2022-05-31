@@ -60,9 +60,5 @@ public class BoardService {
 	public List<Notice> selectlist(Integer pageNum, int limit, String column, String find) {
 		return noticeDao.selectlist(pageNum,limit,column,find);
 	}
-
-	public List<Notice> noticeListMaster() {
-		return noticeDao.noticeListMaster();
-	}
 	
 }

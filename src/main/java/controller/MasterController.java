@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -125,10 +126,37 @@ public class MasterController {
 		return mav;
 	}
 	@GetMapping("masterBoard")
-	public ModelAndView masterBoard(HttpSession session) {
+	public ModelAndView masterBoard(@Param("pageNum")Integer pageNum,HttpSession session) {
+		ModelAndView mav = new ModelAndView();	
+
+		if(pageNum == null || pageNum.toString().equals("")) {
+			pageNum=1;
+		}		
+		int limit = 10;				
+		int count = boardService.count();		
+		List<Notice> MasterList = boardService.noticelist(pageNum,limit);
+		
+		int maxPage = (int)((double)count/limit + 0.95);
+		int startPage = (int)((pageNum/10.0 + 0.9) - 1) * 10 + 1;
+		int endPage = startPage + 9;
+		if(endPage > maxPage) endPage = maxPage;		
+		mav.addObject("pageNum",pageNum);
+		mav.addObject("maxPage",maxPage);
+		mav.addObject("startPage",startPage);	
+		mav.addObject("endPage",endPage);	
+		mav.addObject("noCount",count); 	
+		mav.addObject("notice",MasterList);		
+		
+		return mav;		
+	}
+	
+	@RequestMapping("modifyNotice")
+	public ModelAndView modifyNotice(Integer num) {
 		ModelAndView mav = new ModelAndView();
-		List<Notice> MasterList = boardService.noticeListMaster();
-		mav.addObject("notice",MasterList);
+		if(num != null) {
+			Notice notice = boardService.noticeInfo(num);	
+			mav.addObject("notice",notice);
+		}
 		return mav;
 	}
 }

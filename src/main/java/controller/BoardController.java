@@ -102,6 +102,5 @@ public class BoardController {
 			mav.addObject("notice",notice);
 		}
 		return mav;
-
 	}
 }

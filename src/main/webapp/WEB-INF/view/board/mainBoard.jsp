@@ -76,13 +76,6 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		<p align="right">
-			<c:if test="${loginUser.userId=='admin'}">
-				<p align="right">
-					<a href="${path}/board/writeNotice">공지 작성</a>
-				</p>
-			</c:if>
-		</p>
 		<div class="container">			
 			<ul class="pagination justify-content-center">
 				<c:choose>

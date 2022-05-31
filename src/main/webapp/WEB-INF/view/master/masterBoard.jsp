@@ -15,6 +15,7 @@
 </script>
 </head>
 <body>
+<input type="hidden" name="pageNum" value="1"> 
 	<div class="a" style="background-color: #ffff80; height: 100%; width: 15%; float: left;">
 		<ul>
 			<li><a href="userList">User List</a></li>
@@ -35,7 +36,7 @@
 	<div style="width: auto; float: left; padding:0px 5px;">
 		<table style="width: 600px;">
 		<tr>
-			<th colspan="12">HEALAD_FAQ 목록</th>
+			<th colspan="7">HEALAD_공지 목록&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${noCount} 개</th>
 		</tr>
 		<tr>
 			<th>공지 ID</th>
@@ -52,13 +53,45 @@
 				<td>${notice.noSubject}</td>
 				<td><a href="../board/noticeInfo?num=${notice.noticeId}"><strong>[내용확인]</strong></a></td>
 				<td>${notice.noReadCnt}</td>
-				<td>${notice.noFile}</td>
+				<td><a href="${path}/board/file/${notice.noFileUrl}">${notice.noFileUrl}</a></td>
 				<td><fmt:formatDate value="${notice.noRegDate}" pattern="yyyy-MM-dd" /></td>
-				<td><a href="../user/modifyUser?id=${user.userId}"><strong>수정</strong></a><br>
-				 <a	href="../user/deleteUser?id=${user.userId}"><strong>삭제</strong></a>
+				<td><a href="modifyNotice?num=${notice.noticeId}"><strong>수정</strong></a><br>
+				 <a	href="#"><strong>삭제</strong></a>
 			</tr>
-		</c:forEach>		
+		</c:forEach>	
+		<tr><th colspan="7"><a href="${path}/board/writeNotice">공지 작성</a></th></tr>
 	</table>
+	<div class="container">			
+			<ul class="pagination justify-content-center">
+					<c:if test="${pageNum > 1 }">
+						<li class='page-item'>
+						<a class="page-link" href="masterBoard?pageNum=${pageNum-1}">Previous</a></li>
+					</c:if>
+					<c:if test="${pageNum <= 1}">
+						<li class='page-item disabled'>
+						<a class="page-link"	href="masterBoard?pageNum=${pageNum-1}">Previous</a></li>
+					</c:if>
+					<c:forEach var="i" begin="${startPage}" end="${endPage}">
+						<c:if test="${i == pageNum}">
+							<li class='page-item active'>
+							<a class="page-link" href="#">${i}</a></li>
+						</c:if>
+						<c:if test="${i != pageNum}">
+							<a class="page-link" href="masterBoard?pageNum=${i}">${i}</a>
+						</c:if>
+					</c:forEach>
+					<c:if test="${pageNum < maxPage}">
+						<li class='page-item'>
+						<a class="page-link" href="masterBoard?pageNum=${pageNum+1}">Next</a></li>
+					</c:if>
+					<c:if test="${pageNum >= maxPage}">
+						<li class='page-item disabled'>
+						<a class="page-link" href="masterBoard?pageNum=${pageNum+1}">Next</a></li>
+					</c:if>
+					<c:if test="${param.column != ''}"></c:if>		
+	
+			</ul>
+		</div>
 	</div>
 	<div style="width: auto; float: left; padding:0px 5px;">
 	<table style="width: 400px;">

@@ -34,7 +34,4 @@ public interface NoticeMapper {
 	@Select("select * from NOTICE where ${column} like '%${find}%' ")
 	List<Notice> selectlist(Map<String, Object> param);
 
-	@Select("select * from NOTICE order by NOTICE_ID ")
-	List<Notice> noticeListMaster();
-
 }
