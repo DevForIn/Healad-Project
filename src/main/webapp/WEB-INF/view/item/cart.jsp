@@ -23,56 +23,59 @@
 		        <div class="d-flex justify-content-between align-items-center mb-4">
 		          <h3 class="fw-normal mb-0 text-black">장바구니</h3>
 		        </div>
-		        <c:choose>
-		        	<c:when test="${!empty items }">
-						<c:forEach var="item" items="${items}">
+		        <!-- 장바구니 하단 영억 -->
+		        <div id="cartContents">
+			        <c:choose>
+			        	<c:when test="${!empty items }">
+							<c:forEach var="item" items="${items}">
+						        <div class="card rounded-3 mb-4">
+						          <div class="card-body p-4">
+						            <div class="row d-flex justify-content-between align-items-center">
+						              <div class="col-md-2 col-lg-2 col-xl-2">
+						                <img src="../img/sal1.png" class="img-fluid rounded-3" alt="Cotton T-shirt">
+						              </div>
+						              <div class="col-md-3 col-lg-3 col-xl-3">
+						                <p class="lead fw-normal mb-2">${item.itemName }</p>
+						              </div>
+						              <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+						                <a class="btn btn-link px-2" onclick="fnUpdateCartQuantity('${item.itemId}','down', '${item.price })">
+						                  <i class="fa fa-minus"></i>
+						                </a>
+						
+						                <input min="1" id="quantity_${item.itemId }" name="quantity" value="${item.quantity }" type="number"
+						                  class="form-control form-control-sm" />
+						
+						                <a class="btn btn-link px-2" onclick="fnUpdateCartQuantity('${item.itemId}', 'plus','${item.price }')">
+						                  <i class="fa fa-plus"></i>
+						                </a>
+						              </div>
+						              <div id="price_${item.itemId }" class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+						                <h5 class="mb-0">${item.quantityPrice } </h5>
+						              </div>
+						              <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+						                <a onclick="fnRemoveItem('${item.itemId }')" class="text-danger"><i class="fa fa-trash fa-lg"></i></a>
+						              </div>
+						            </div>
+						          </div>
+						        </div>	
+							</c:forEach>						
+			
+					        <div class="card">
+					          <div class="card-body">
+					            <button type="button" class="btn btn-warning btn-block btn-lg" onclick="fnOrder()"><i class="fa fa-truck"></i> 주문하기</button>
+					            <button type="button" class="btn btn-primary btn-block btn-lg" onclick="fnDeleteCart()"><i class="fa fa-shopping-cart"></i> 장바구니 비우기</button>
+					          </div>
+					        </div>		        	
+			        	</c:when>
+			        	<c:otherwise>
 					        <div class="card rounded-3 mb-4">
 					          <div class="card-body p-4">
-					            <div class="row d-flex justify-content-between align-items-center">
-					              <div class="col-md-2 col-lg-2 col-xl-2">
-					                <img src="../img/sal1.png" class="img-fluid rounded-3" alt="Cotton T-shirt">
-					              </div>
-					              <div class="col-md-3 col-lg-3 col-xl-3">
-					                <p class="lead fw-normal mb-2">${item.itemName }</p>
-					              </div>
-					              <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-					                <a class="btn btn-link px-2" onclick="fnUpdateCartQuantity('${item.itemId}','down')">
-					                  <i class="fa fa-minus"></i>
-					                </a>
-					
-					                <input min="1" id="quantity_${item.itemId }" name="quantity" value="${item.quantity }" type="number"
-					                  class="form-control form-control-sm" />
-					
-					                <a class="btn btn-link px-2" onclick="fnUpdateCartQuantity('${item.itemId}', 'plus')">
-					                  <i class="fa fa-plus"></i>
-					                </a>
-					              </div>
-					              <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-					                <h5 class="mb-0">${item.price }</h5>
-					              </div>
-					              <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-					                <a onclick="fnRemoveItem('${item.itemId }')" class="text-danger"><i class="fa fa-trash fa-lg"></i></a>
-					              </div>
-					            </div>
+					          	<h5>장바구니에 담긴 상품이 없습니다.</h5>
 					          </div>
-					        </div>	
-						</c:forEach>						
-		
-				        <div class="card">
-				          <div class="card-body">
-				            <button type="button" class="btn btn-warning btn-block btn-lg" onclick="fnOrder()"><i class="fa fa-truck"></i> 주문하기</button>
-				            <button type="button" class="btn btn-primary btn-block btn-lg" onclick="fnDeleteCart()"><i class="fa fa-shopping-cart"></i> 장바구니 비우기</button>
-				          </div>
-				        </div>		        	
-		        	</c:when>
-		        	<c:otherwise>
-				        <div class="card rounded-3 mb-4">
-				          <div class="card-body p-4">
-				          	<h5>장바구니에 담긴 상품이 없습니다.</h5>
-				          </div>
-				        </div>		        	
-		        	</c:otherwise>
-		        </c:choose>
+					        </div>		        	
+			        	</c:otherwise>
+			        </c:choose>
+		        </div>
 		      </div>
 		    </div>
 		  </div>
@@ -87,17 +90,7 @@
 	}
 
 	
-	function fnUpdateOrderQuantity(itemId, upDown){
-		if(upDown == 'plus') {
-			$('#quantity').val(Number($('#quantity').val()) + 1);	
-		}
-		else {
-			// 0 불가능
-			if($('#quantity').val() != 1) $('#quantity').val(Number($('#quantity').val()) - 1);
-		}
-	}
-	
-	function fnUpdateCartQuantity(itemId, upDown){
+	function fnUpdateCartQuantity(itemId, upDown, price){
 		
 		if(upDown == 'plus') {
 			$('#quantity_' + itemId).val(Number($('#quantity_' + itemId).val()) + 1);	
@@ -107,7 +100,8 @@
 			if($('#quantity_' + itemId).val() != 1) $('#quantity_' + itemId).val(Number($('#quantity_' + itemId).val()) - 1);
 		}
 		
-		console.log('itemId 수량 = ',$('#quantity_' + itemId).val());
+		// 가격 변경
+		$('#price_' + itemId).html('<h5 class="mb-0">'+ price * $('#quantity_' + itemId).val() + '</h5>');
 		
 		
  		$.ajax({
@@ -135,10 +129,26 @@
 	
 	function fnDeleteCart(){
 		// 장바구니 전체 비우기
-		var isDelete = confirm("장바구니를 비우시겠습니까?");
-		if(isDelete){
-			alert('삭제처리 작업중');
+		if(confirm("장바구니를 비우시겠습니까?")){
+			// ajax로 삭제처리
+			$.ajax({
+				url : "${path}/cart/deleteAll",
+				type : "DELETE",
+				success : function(items) {
+					alert('삭제되었습니다.');
+					var contents = '<div class="card rounded-3 mb-4">' + 
+			          				'<div class="card-body p-4">' +
+			          				'<h5>장바구니에 담긴 상품이 없습니다.</h5>' +
+			          				'</div>' +
+			        				'</div>';
+					$('#cartContents').html(contents);
+				},
+			    error:function(request,status,error){
+					alert('삭제 중 오류가 발생하였습니다.');
+			    }
+			});				
 		}
+		
 	}
 </script>	
 </body>

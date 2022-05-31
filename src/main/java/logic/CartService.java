@@ -35,6 +35,10 @@ public class CartService {
 	public void updateCart(Cart cart) {
 		cartDao.updateCartQuantity(cart);
 	}
+
+	public void deleteAll(String userId) {
+		cartDao.deleteByUserId(userId);
+	}
 	
 	
 	
