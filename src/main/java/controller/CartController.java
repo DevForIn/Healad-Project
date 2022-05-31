@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -63,4 +64,18 @@ public class CartController {
 		
 		return null;
 	}
+	
+	@DeleteMapping("deleteAll")
+	public String deleteAll(HttpSession session) {
+		
+		// 1. 사용자 정보 조회
+		User user = (User) session.getAttribute("loginUser");
+		
+		// 2. 유저 정보가 존재하면 카트에 아이템 추가
+		if(user != null) {
+			cartService.deleteAll(user.getUserId());
+		}
+		
+		return null;
+	}	
 }

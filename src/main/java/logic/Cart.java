@@ -13,8 +13,17 @@ public class Cart {
 	
 	private String itemName;
 	private int price;
+	private int quantityPrice;
+	
+	
 
 	
+	public int getQuantityPrice() {
+		return quantityPrice;
+	}
+	public void setQuantityPrice(int quantityPrice) {
+		this.quantityPrice = quantityPrice;
+	}
 	public int getPrice() {
 		return price;
 	}

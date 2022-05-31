@@ -56,4 +56,5 @@ public class CartDao {
 	public void deleteByUserId(String userId) {
 		template.getMapper(cls).deleteByUserId(userId);		
 	}
+
 }
