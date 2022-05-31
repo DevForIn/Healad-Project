@@ -23,6 +23,7 @@
 		        <div class="d-flex justify-content-between align-items-center mb-4">
 		          <h3 class="fw-normal mb-0 text-black">주문서 작성</h3>
 		        </div>
+		        <c:set var="total" value="${0}"/>
 				<c:choose>
 					<c:when test="${orderType =='C' }">
 						<!-- 카트 주문의 경우 -->
@@ -50,6 +51,8 @@
 					              </div>
 					              <div id="price_${item.itemId } class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
 					                <h5 class="mb-0">${item.quantityPrice }</h5>
+					                <c:set var="point" value="${total+(item.quantityPrice*1/100)}"/>
+					                
 					              </div>
 					              <div class="col-md-1 col-lg-1 col-xl-1 text-end">
 					                <a onclick="fnCartRemoveItem('${item.itemId }')" class="text-danger"><i class="fa fa-trash fa-lg" style="cursor: pointer;"></i></a>
@@ -57,8 +60,8 @@
 					            </div>
 					          </div>
 					        </div>	
-						</c:forEach>						
-					</c:when>
+						</c:forEach>
+						</c:when>
 					<c:otherwise>
 						<!-- 바로 주문하기 클릭했을 경우,  -->
 						<input type="hidden" name="itemId" value="${item.itemId}">

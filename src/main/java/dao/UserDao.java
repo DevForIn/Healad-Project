@@ -59,5 +59,12 @@ public class UserDao {
 
 	public List<User> userList() {
 		return template.getMapper(cls).userList();
+	}
+
+	public void pointAdd(Integer point, String userId) {
+		param.clear();
+		param.put("userId", userId);
+		param.put("Mileage", point);
+		template.getMapper(cls).pointAdd(param);
 	}	
 }

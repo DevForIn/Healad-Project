@@ -41,5 +41,9 @@ public class ShopService {
 	public List<User> userList() {		
 		return  userDao.userList();
 	}
+	public void pointAdd(Integer point, String userId) {
+		userDao.pointAdd(point,userId);	
+		
+	}
 	
 }
