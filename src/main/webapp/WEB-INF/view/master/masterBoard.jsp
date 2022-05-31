@@ -20,7 +20,7 @@
 			<li><a href="userList">User List</a></li>
 			<li><a href="outUserList">OutUser List</a></li>
 			<li><a href="itemList">Item set</a></li>
-			<li><a href="noticeList"  class="current">Notice set</a></li>
+			<li><a href="masterBoard"  class="current">Notice set</a></li>
 			<li><a href="#">Order Status</a></li>
 		</ul><br><br><br><br><br>
 		<ul>
@@ -32,10 +32,57 @@
 			<li>&nbsp;</li>
 		</ul>
 	</div>
-	<div style="width: 80%; float: right;">
-	<table style="width: 1400px;">
+	<div style="width: auto; float: left; padding:0px 5px;">
+		<table style="width: 600px;">
 		<tr>
-			<th colspan="12">HEALAD_회원목록</th>
+			<th colspan="12">HEALAD_FAQ 목록</th>
+		</tr>
+		<tr>
+			<th>공지 ID</th>
+			<th>제목</th>
+			<th>내용</th>
+			<th>조회수</th>
+			<th>첨부파일</th>
+			<th>등록일자</th>
+			<th>Modify</th>
+		</tr>
+		<c:forEach items="${notice}" var="notice">
+			<tr>
+				<td>${notice.noticeId}</td>
+				<td>${notice.noSubject}</td>
+				<td><a href="../board/noticeInfo?num=${notice.noticeId}"><strong>[내용확인]</strong></a></td>
+				<td>${notice.noReadCnt}</td>
+				<td>${notice.noFile}</td>
+				<td><fmt:formatDate value="${notice.noRegDate}" pattern="yyyy-MM-dd" /></td>
+				<td><a href="../user/modifyUser?id=${user.userId}"><strong>수정</strong></a><br>
+				 <a	href="../user/deleteUser?id=${user.userId}"><strong>삭제</strong></a>
+			</tr>
+		</c:forEach>		
+	</table>
+	</div>
+	<div style="width: auto; float: left; padding:0px 5px;">
+	<table style="width: 400px;">
+		<tr>
+			<th colspan="12">HEALAD_FAQ 목록</th>
+		</tr>
+		<tr>
+			<th>공지 ID</th>
+			<th>제목</th>
+			<th>내용</th>
+			<th>조회수</th>
+			<th>첨부파일</th>
+			<th>등록일자</th>
+			<th>Modify</th>
+		</tr>
+		<c:forEach items="">
+
+		</c:forEach>		
+	</table>
+	</div>
+	<div style="width: auto; float: left; padding:0px 5px;">
+	<table style="width: 200px;">
+		<tr>
+			<th colspan="12">HEALAD_Review 목록</th>
 		</tr>
 		<tr>
 			<th>ID <a href="userList?sort=0" class="noline">▲</a>

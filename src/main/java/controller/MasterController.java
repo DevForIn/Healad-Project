@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import logic.BoardService;
 import logic.Item;
 import logic.ItemService;
+import logic.Notice;
 import logic.ShopService;
 import logic.User;
 
@@ -26,6 +28,8 @@ public class MasterController {
 	private ShopService service;
 	@Autowired
 	private ItemService itemService;
+	@Autowired
+	private BoardService boardService;
 	
 	
 	@GetMapping("*")
@@ -118,6 +122,13 @@ public class MasterController {
 			e.printStackTrace();
 		}
 		mav.addObject("chk",chk);
+		return mav;
+	}
+	@GetMapping("masterBoard")
+	public ModelAndView masterBoard(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		List<Notice> MasterList = boardService.noticeListMaster();
+		mav.addObject("notice",MasterList);
 		return mav;
 	}
 }

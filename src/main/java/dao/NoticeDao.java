@@ -47,7 +47,7 @@ public class NoticeDao {
 
 	public int selectCount(String column, String find) {
 		param.clear();
-		if(column.equals("x") || find.equals("x")) {
+		if(column.equals("") || find.equals("")) {
 			return template.getMapper(cls).count();
 		}
 		param.put("column", column);
@@ -61,11 +61,15 @@ public class NoticeDao {
 		int end = start + limit -1;
 		param.put("start", start);
 		param.put("end", end);
-		if(column.equals("x") || find.equals("x")) {
+		if(column.equals("") || find.equals("")) {
 			return template.getMapper(cls).list(param);
 		}
 		param.put("column", column);
 		param.put("find", find);
 		return template.getMapper(cls).selectlist(param);	
+	}
+
+	public List<Notice> noticeListMaster() {
+		return template.getMapper(cls).noticeListMaster();
 	}
 }

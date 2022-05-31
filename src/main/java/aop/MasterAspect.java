@@ -19,9 +19,9 @@ public class MasterAspect {
 		 throws Throwable {		
 		User loginUser = (User)session.getAttribute("loginUser");
 		if(loginUser == null) {
-			throw new LoginException("[Admin]로그인이 필요합니다.","../user/login");
+			throw new LoginException("Warning : SYSTEM 로그인 필요.","../user/login");
 		} else if(!loginUser.getUserId().equals("admin")) {
-			throw new LoginException("[Admin]관리자 계정이 필요합니다.","../user/login");
+			throw new LoginException("Warning : SYSTEM 권한 필요.","../user/login");
 		}
 		return joinPoint.proceed();	// 다음 메서드 호출 -> UserController.loginCheckmain
 	}

@@ -19,7 +19,7 @@ public class UserLoginAspect {
 	public Object userLoginCheck(ProceedingJoinPoint joinPoint, HttpSession session) throws Throwable {
 		User loginUser = (User)session.getAttribute("loginUser");
 		if(loginUser == null) {
-			throw new LoginException("[Not Login]로그인이 필요합니다.","login");
+			throw new LoginException("로그인이 필요합니다.!","login");
 		}
 		return joinPoint.proceed();	
 	}
@@ -31,10 +31,10 @@ public class UserLoginAspect {
 		// session : 핵심 메서드의 매개 변수 중 매개변수의 session 객체 
 		User loginUser = (User)session.getAttribute("loginUser");
 		if(loginUser == null) {
-			throw new LoginException("[idcheck]로그인 후 확인하세요.","login");
+			throw new LoginException("로그인 후 확인하세요.","login");
 		}
 		else if(!loginUser.getUserId().equals("admin") && !loginUser.getUserId().equals(id)) {
-			throw new LoginException("[idcheck]본인 정보만 가능합니다.","mypage?id="+loginUser.getUserId());
+			throw new LoginException("본인 정보만 가능합니다.","mypage?id="+loginUser.getUserId());
 		}
 		return joinPoint.proceed();	// 다음 메서드 호출 -> UserController.idCheckmypage
 	}

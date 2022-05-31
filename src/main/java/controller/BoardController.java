@@ -53,15 +53,6 @@ public class BoardController {
 	@PostMapping("mainBoard")
 	public ModelAndView postBoard(@Param("column") String column,@Param("find") String find,@Param("pageNum") Integer pageNum,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		
-		if(column==null || column.trim().equals("")) {
-			column="x";
-			find="x";
-		}
-		if(find==null || find.trim().equals("")) {
-			column="x";
-			find="x";
-		}
 		if(pageNum == null || pageNum.toString().equals("")) {
 			pageNum=1;
 		}		
@@ -73,6 +64,7 @@ public class BoardController {
 		int startPage = (int)((pageNum/10.0 + 0.9) - 1) * 10 + 1;
 		int endPage = startPage + 9;
 		if(endPage > maxPage) endPage = maxPage;
+		mav.addObject("bottomLine",3);
 		mav.addObject("pageNum",pageNum);
 		mav.addObject("maxPage",maxPage);
 		mav.addObject("startPage",startPage);	

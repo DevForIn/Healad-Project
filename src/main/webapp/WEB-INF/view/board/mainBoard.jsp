@@ -21,15 +21,19 @@
 			<div class="container justify-content-end text-center">
 				<input type="hidden" name="pageNum" value="1"> 
 				<select name="column" id="sel1" class="form-control">
-					<option value="">-선택-</option>
+					<option value="">Option</option>
 					<option value="NO_SUBJECT">제목</option>
 					<option value="NO_CONTENT">내용</option>
 				</select>
 				<script>
+
 				document.sf.column.value = "${param.column}";
 					function ifNull(){
-						if($("select[name=column]").val() == "" || $("input[type=text]").val() == ""){
-							alert("검색항목을 선택해주세요."+$("select[name=column]").val()+$("input[type=text]").val())							
+						if($("select[name=column]").val() == "" && $("input[type=text]").val() == ""){	
+							return true;
+						}
+						else if($("select[name=column]").val() == "" || $("input[type=text]").val() == ""){
+							alert("검색항목을 선택해주세요.")							
 							return false;
 						}					 
 					}
@@ -79,39 +83,44 @@
 				</p>
 			</c:if>
 		</p>
-		<c:if test="${param.column != 'x'}">
-		<div class="container">
+		<div class="container">			
 			<ul class="pagination justify-content-center">
-
-				<c:if test="${pageNum > 1 }">
-					<li class='page-item'><a class="page-link"
-						href="mainBoard?pageNum=${pageNum-1}">Previous</a></li>
-				</c:if>
-				<c:if test="${pageNum <= 1}">
-					<li class='page-item disabled'>
-					<a class="page-link"	href="mainBoard?pageNum=${pageNum-1}">Previous</a></li>
-				</c:if>
-
-				<c:forEach var="i" begin="${startPage}" end="${endPage}">
-					<c:if test="${i == pageNum}">
-						<li class='page-item active'>
-						<a class="page-link" href="#">${i}</a></li>
+				<c:choose>
+					<c:when test="${!empty param.column and !empty param.find}">
+						<li class='page-item'>
+						<a class="page-link" href="mainBoard">다시 전체보기</a></li>
+					</c:when>
+				<c:otherwise>
+					<c:if test="${pageNum > 1 }">
+						<li class='page-item'>
+						<a class="page-link" href="mainBoard?pageNum=${pageNum-1}">Previous</a></li>
 					</c:if>
-					<c:if test="${i != pageNum}">
-						<a class="page-link" href="mainBoard?pageNum=${i}">${i}</a>
+					<c:if test="${pageNum <= 1}">
+						<li class='page-item disabled'>
+						<a class="page-link"	href="mainBoard?pageNum=${pageNum-1}">Previous</a></li>
 					</c:if>
-				</c:forEach>
-				<c:if test="${pageNum < maxPage}">
-					<li class='page-item'>
-					<a class="page-link" href="mainBoard?pageNum=${pageNum+1}">Next</a></li>
-				</c:if>
-				<c:if test="${pageNum >= maxPage}">
-					<li class='page-item disabled'>
-					<a class="page-link" href="mainBoard?pageNum=${pageNum+1}">Next</a></li>
-				</c:if>
+					<c:forEach var="i" begin="${startPage}" end="${endPage}">
+						<c:if test="${i == pageNum}">
+							<li class='page-item active'>
+							<a class="page-link" href="#">${i}</a></li>
+						</c:if>
+						<c:if test="${i != pageNum}">
+							<a class="page-link" href="mainBoard?pageNum=${i}">${i}</a>
+						</c:if>
+					</c:forEach>
+					<c:if test="${pageNum < maxPage}">
+						<li class='page-item'>
+						<a class="page-link" href="mainBoard?pageNum=${pageNum+1}">Next</a></li>
+					</c:if>
+					<c:if test="${pageNum >= maxPage}">
+						<li class='page-item disabled'>
+						<a class="page-link" href="mainBoard?pageNum=${pageNum+1}">Next</a></li>
+					</c:if>
+					<c:if test="${param.column != ''}"></c:if>			
+					</c:otherwise>	
+				</c:choose>			
 			</ul>
 		</div>
-		</c:if>
 	</div>
 </body>
 </html>
