@@ -248,11 +248,11 @@
 		var mileage = 0;
 		
 		$.each($("div[id*='price_']"), function(index, item){
-			total += total + Number(item.innerText);
+			total += Number(item.innerText);
 		});
 		
-		var totalContents = '<h4>총 금액: '+ total +' 원</h4>';
-		var mileageContents = '적립예정 마일리지: '+ total * 0.05 +' 원';
+		var totalContents = '<h4>총 금액: '+ total.toLocaleString('ko-KR') +' 원</h4>';
+		var mileageContents = '적립예정 마일리지: '+ (total * 0.05).toLocaleString('ko-KR') +' 원';
 		$("#total").html(totalContents);
 		$("#mileage").html(mileageContents);
 	}
