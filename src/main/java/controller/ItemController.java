@@ -77,9 +77,9 @@ public class ItemController {
 		
 		if("".equals(orderType)) orderType = "C";
 
+		User user = (User) session.getAttribute("loginUser");
+		
 		if("C".equals(orderType)) {
-			User user = (User) session.getAttribute("loginUser");
-			System.out.println("user=" + user.getUserId());
 			List<Cart> items = cartService.getList(user.getUserId());
 			mav.addObject("items", items);
 		}
@@ -89,6 +89,7 @@ public class ItemController {
 		}
 		
 		mav.addObject("orderType", orderType);
+		mav.addObject("user", user);
 		
 		return mav;	
 	}

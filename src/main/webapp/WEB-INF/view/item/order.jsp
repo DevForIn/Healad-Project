@@ -49,7 +49,7 @@
 					                  <i class="fa fa-plus"></i>
 					                </a>
 					              </div>
-					              <div id="price_${item.itemId } class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+					              <div id="price_${item.itemId }" class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
 					                <h5 class="mb-0">${item.quantityPrice }</h5>
 					                <c:set var="point" value="${total+(item.quantityPrice*1/100)}"/>
 					                
@@ -75,7 +75,7 @@
 				                <p class="lead fw-normal mb-2">${item.itemName }</p>
 				              </div>
 				              <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-				                <a class="btn btn-link px-2" onclick="fnUpdateOrderQuantity('${item.itemId}', 'down')">
+				                <a class="btn btn-link px-2" onclick="fnUpdateOrderQuantity('${item.itemId}', 'down', '${item.price}')">
 				                  <i class="fa fa-minus"></i>
 				                </a>
 				
@@ -101,30 +101,30 @@
  		        <div class="card mb-4 px-5 py-5">
                     <div class="mb-3">
                         <label for="saleUserName">주문자명</label>
-                        <input type="text" class="form-control" id="saleUserName" name="saleUserName" placeholder="" value="" required="">
+                        <input type="text" class="form-control" id="saleUserName" name="saleUserName" placeholder="" value="${user.userName }" required="">
                         <div class="invalid-feedback"> Valid first name is required. </div>
                     </div>
 	                <div class="mb-3">
 	                    <label for="username">연락처</label>
 	                    <div class="input-group">
-	                        <input type="text" class="form-control" id="salePhoneNo" name="salePhoneNo"  required="">
+	                        <input type="text" class="form-control" id="salePhoneNo" name="salePhoneNo"  required="" value="${user.phoneNo }">
 	                        <div class="invalid-feedback" style="width: 100%;"> Your username is required. </div>
 	                    </div>
 	                </div>
 	                <div class="row">
 	                    <div class="col-md-2 mb-3">
 	                        <label for="salePostCode">주소</label>
-	                        <input type="text" class="form-control" id="salePostCode" name="salePostCode"  onclick="findPostCode()">
+	                        <input type="text" class="form-control" id="salePostCode" name="salePostCode"  value="${user.postCode }" onclick="findPostCode()">
 	                        <div class="invalid-feedback"> 우편번호를 입력해주세요. </div>
 	                    </div>
 	                    <div class="col-md-10 mb-3">
 	                        <label for="saleAddr">.</label>
-	                        <input type="text" class="form-control" id="saleAddr"  name="saleAddr" placeholder="" value="" required="">
+	                        <input type="text" class="form-control" id="saleAddr"  name="saleAddr" placeholder="" value="${user.addr }" required="">
 	                        <div class="invalid-feedback"> 주소를 입력해주세요 </div>
 	                    </div>
 	                </div>	                
 	                <div class="mb-3">
-	                    <input type="text" class="form-control" id="saleAddrDetail" name="saleAddrDetail" required="" class="mt-2">
+	                    <input type="text" class="form-control" id="saleAddrDetail" name="saleAddrDetail" required="" value="${user.addrDetail }" class="mt-2">
 	                    <div class="invalid-feedback"> Please enter your shipping address. </div>
 	                </div>
 	                <div class="mb-3">
@@ -240,17 +240,18 @@
 	}
 
 	
-	function fnUpdateOrderQuantity(itemId, upDown){
+	function fnUpdateOrderQuantity(itemId, upDown, price){
 		if(upDown == 'plus') {
 			$('#quantity').val(Number($('#quantity').val()) + 1);	
-			// 가격 변경
-			$('#price_' + itemId).html('<h5 class="mb-0">'+ price * Number($('#quantity').val()) + '</h5>');
-			
 		}
 		else {
 			// 0 불가능
 			if($('#quantity').val() != 1) $('#quantity').val(Number($('#quantity').val()) - 1);
 		}
+		// 가격 변경
+		console.log('price=', $('#price_' + itemId));
+		$('#price_' + itemId).html('<h5 class="mb-0">'+ price * Number($('#quantity').val()) + '</h5>');
+		
 	}
 	
 	function fnUpdateCartQuantity(itemId, upDown, price){
@@ -263,6 +264,7 @@
 			if($('#quantity_' + itemId).val() != 1) $('#quantity_' + itemId).val(Number($('#quantity_' + itemId).val()) - 1);
 		}
 		
+		console.log('aa',$('#price_' + itemId));
 		// 가격 변경
 		$('#price_' + itemId).html('<h5 class="mb-0">'+ price * $('#quantity_' + itemId).val() + '</h5>');
 		
