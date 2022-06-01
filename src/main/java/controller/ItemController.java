@@ -74,6 +74,8 @@ public class ItemController {
 	public ModelAndView order(Integer itemId, HttpSession session, String orderType) {
 		ModelAndView mav = new ModelAndView("item/order");
 		
+		int total = 0;
+		double mileage = 0;
 		
 		if("".equals(orderType)) orderType = "C";
 
@@ -82,14 +84,27 @@ public class ItemController {
 		if("C".equals(orderType)) {
 			List<Cart> items = cartService.getList(user.getUserId());
 			mav.addObject("items", items);
+			
+			if(items != null) {
+				total = items.stream()
+						.mapToInt(Cart::getQuantityPrice)
+						.sum();
+				mileage = total * 0.05;
+			}
+			
 		}
 		else {
 			Item item = itemService.selectOne(itemId);
 			mav.addObject("item", item);
+			total = item.getPrice();
+			mileage = total * 0.05;
 		}
 		
 		mav.addObject("orderType", orderType);
 		mav.addObject("user", user);
+		mav.addObject("total", total);
+		mav.addObject("mileage", mileage);
+		
 		
 		return mav;	
 	}

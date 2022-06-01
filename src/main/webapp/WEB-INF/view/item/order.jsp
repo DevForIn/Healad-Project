@@ -23,7 +23,6 @@
 		        <div class="d-flex justify-content-between align-items-center mb-4">
 		          <h3 class="fw-normal mb-0 text-black">주문서 작성</h3>
 		        </div>
-		        <c:set var="total" value="${0}"/>
 				<c:choose>
 					<c:when test="${orderType =='C' }">
 						<!-- 카트 주문의 경우 -->
@@ -51,8 +50,6 @@
 					              </div>
 					              <div id="price_${item.itemId }" class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
 					                <h5 class="mb-0">${item.quantityPrice }</h5>
-					                <c:set var="point" value="${total+(item.quantityPrice*1/100)}"/>
-					                
 					              </div>
 					              <div class="col-md-1 col-lg-1 col-xl-1 text-end">
 					                <a onclick="fnCartRemoveItem('${item.itemId }')" class="text-danger"><i class="fa fa-trash fa-lg" style="cursor: pointer;"></i></a>
@@ -86,7 +83,7 @@
 				                </a>
 				              </div>
 				              <div id="price_${item.itemId }" class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-				                <h5 class="mb-0">${item.quantityPrice }</h5>
+				                <h5 class="mb-0">${item.price }</h5>
 				              </div>
 				              <div class="col-md-1 col-lg-1 col-xl-1 text-end">
 				              </div>
@@ -96,8 +93,15 @@
 					</c:otherwise>
 				</c:choose>
 
-
+				<!-- total 영역 -->
+				<div class="card rounded-3 mb-4">
+					<div class="card-body p-4" style="text-align: right;">
+						<div id="total"><h4>총 금액: ${total } 원</h4></div>
+						<div id="mileage">적립예정 마일리지: ${mileage } 원</div>
+					</div>
+				</div>
 		
+				<!-- 주문서 작성 영역 -->
  		        <div class="card mb-4 px-5 py-5">
                     <div class="mb-3">
                         <label for="saleUserName">주문자명</label>
@@ -234,11 +238,22 @@
 		}		
 	}
 	
-	
-	function fnRemoveItem(itemId){
-		alert(itemId + ' 삭제 작업중');
+	// 총 금액 및 마일리지 구하기
+	function fnGetTotalAndMileage(){
+		var total = 0;
+		var mileage = 0;
+		
+		$.each($("div[id*='price_']"), function(index, item){
+			total += total + Number(item.innerText);
+		});
+		
+		var totalContents = '<h4>총 금액: '+ total +' 원</h4>';
+		var mileageContents = '적립예정 마일리지: '+ total * 0.05 +' 원';
+		$("#total").html(totalContents);
+		$("#mileage").html(mileageContents);
 	}
-
+	
+	
 	
 	function fnUpdateOrderQuantity(itemId, upDown, price){
 		if(upDown == 'plus') {
@@ -249,9 +264,8 @@
 			if($('#quantity').val() != 1) $('#quantity').val(Number($('#quantity').val()) - 1);
 		}
 		// 가격 변경
-		console.log('price=', $('#price_' + itemId));
 		$('#price_' + itemId).html('<h5 class="mb-0">'+ price * Number($('#quantity').val()) + '</h5>');
-		
+		fnGetTotalAndMileage();
 	}
 	
 	function fnUpdateCartQuantity(itemId, upDown, price){
@@ -264,7 +278,6 @@
 			if($('#quantity_' + itemId).val() != 1) $('#quantity_' + itemId).val(Number($('#quantity_' + itemId).val()) - 1);
 		}
 		
-		console.log('aa',$('#price_' + itemId));
 		// 가격 변경
 		$('#price_' + itemId).html('<h5 class="mb-0">'+ price * $('#quantity_' + itemId).val() + '</h5>');
 		
@@ -280,9 +293,10 @@
 		    error:function(request,status,error){
 		    	alert('에러가 발생했습니다.');
 		    }
-		});	 		
+		});	
+ 		
+ 		fnGetTotalAndMileage();
 	}
 </script>	
 </body>
-
 </html>
