@@ -22,7 +22,7 @@
 			<li><a href="outUserList">OutUser List</a></li>
 			<li><a href="itemList">Item set</a></li>
 			<li><a href="masterBoard"  class="current">Notice set</a></li>
-			<li><a href="#">Order Status</a></li>
+			<li><a href="masterOrder">Order Status</a></li>
 		</ul><br><br><br><br><br>
 		<ul>
 			<li><a href="${path}/board/mainBoard"><h3>Board Page</h3></a></li>
@@ -56,7 +56,6 @@
 				<td><a href="${path}/board/file/${notice.noFileUrl}">${notice.noFileUrl}</a></td>
 				<td><fmt:formatDate value="${notice.noRegDate}" pattern="yyyy-MM-dd" /></td>
 				<td><a href="modifyNotice?num=${notice.noticeId}"><strong>수정</strong></a><br>
-				 <a	href="#"><strong>삭제</strong></a>
 			</tr>
 		</c:forEach>	
 		<tr><th colspan="7"><a href="${path}/board/writeNotice">공지 작성</a></th></tr>
@@ -87,9 +86,7 @@
 					<c:if test="${pageNum >= maxPage}">
 						<li class='page-item disabled'>
 						<a class="page-link" href="masterBoard?pageNum=${pageNum+1}">Next</a></li>
-					</c:if>
-					<c:if test="${param.column != ''}"></c:if>		
-	
+					</c:if>	
 			</ul>
 		</div>
 	</div>

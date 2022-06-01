@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import dao.mapper.SaleItemMapper;
 import logic.Item;
+import logic.Sale;
 import logic.SaleItem;
 
 @Repository
@@ -30,6 +31,10 @@ public class SaleItemDao {
 
 	public List<Item> getSaleItemsRank() {
 		return template.getMapper(cls).getSaleItemsRank();
+	}
+
+	public List<Sale> allList() {
+		return template.getMapper(cls).allList();
 	}
 
 }

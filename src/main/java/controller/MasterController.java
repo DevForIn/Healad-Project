@@ -197,4 +197,18 @@ public class MasterController {
 		
 		return mav;
 	}
+	@RequestMapping("masterOrder")
+	public ModelAndView masterOrder(Integer sort, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		List<Sale> saleList  = saleService.allList();
+		if(sort==null) sort=1;
+		switch(sort) {
+		case 1 : Collections.sort(saleList,(u1,u2) -> u1.getSaleId().compareTo(u2.getSaleId()));
+				break;
+		case 2 : Collections.sort(saleList,(u1,u2) -> u2.getSaleId().compareTo(u1.getSaleId()));
+				break;	
+		}
+		mav.addObject("saleList",saleList);
+		return mav;
+	}
 }

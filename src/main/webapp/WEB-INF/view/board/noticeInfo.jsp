@@ -14,7 +14,7 @@
 <body>
 	<hr>
 	<div class="container">
-		<h2 align="center">게시판 상세보기</h2>
+		<h2 align="center">공지 상세</h2>
 		<table class="table table-hover">
 			<tr>
 				<th style="width: 10%;">작성자:</th>

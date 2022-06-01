@@ -92,7 +92,7 @@ public class UserController {
 				if(dbUser.getUserId().equals("admin")) {
 					message = "관리자 계정으로 로그인 하셨습니다.";
 					mav.addObject("message",message);
-					mav.addObject("url",request.getContextPath()+"/master/userList");
+					mav.addObject("url",request.getContextPath()+"/");
 					mav.setViewName("alert");
 				}
 			} else { 

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
 import logic.Item;
+import logic.Sale;
 import logic.SaleItem;
 
 public interface SaleItemMapper {
@@ -34,5 +35,8 @@ public interface SaleItemMapper {
 			+ " ) a where rownum < 4"
 			)
 	List<Item> getSaleItemsRank();
+
+	@Select("select * from SALE")
+	List<Sale> allList();
 
 }

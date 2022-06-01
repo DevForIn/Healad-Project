@@ -21,7 +21,7 @@ function CI(){
 			<li><a href="outUserList">OutUser List</a></li>
 			<li><a href="itemList" class="current">Item set</a></li>
 			<li><a href="masterBoard">Notice set</a></li>
-			<li><a href="#">Order Status</a></li>
+			<li><a href="masterOrder">Order Status</a></li>
 		</ul><br><br><br><br><br>
 		<ul>
 			<li><a href="${path}/item/menu"><h3>Menu Page</h3></a></li>
@@ -32,10 +32,10 @@ function CI(){
 			<li>&nbsp;</li>
 		</ul>
 	</div>
-	<div style="width: 80%; float: right;">
-	<table style="width: 1400px;">
+	<div style="width: auto; float: right;">
+	<table style="width: 1500px;">
 		<tr>
-			<th colspan="6"><h3>HEALAD_상품</h3></th>
+			<th colspan="6">HEALAD_상품</th>
 			<th><a href="${path}/master/newItem"><font color="black">[ ITEM 추가 ]</font></a></th>
 		</tr>
 		<tr>
@@ -83,7 +83,7 @@ function CI(){
 				</td>			
 			</tr>
 		</c:forEach>		
-	</table>
+	</table>			
 	</div>
 </body>
 </html>

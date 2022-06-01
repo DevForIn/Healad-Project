@@ -35,8 +35,7 @@ public class BoardController {
 		int limit = 10;		
 		
 		int count = boardService.count();		
-		List<Notice> Noticelist = boardService.noticelist(pageNum,limit);
-		
+		List<Notice> Noticelist = boardService.noticelist(pageNum,limit);		
 		int maxPage = (int)((double)count/limit + 0.95);
 		int startPage = (int)((pageNum/10.0 + 0.9) - 1) * 10 + 1;
 		int endPage = startPage + 9;
