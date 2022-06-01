@@ -181,7 +181,6 @@ public class MasterController {
 	public ModelAndView PostgetModifyNotice(@Valid Notice notice,Integer num, BindingResult bresult,HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();		
 		notice.setNoticeId(num);
-		System.out.println(notice);
 		
 		if(bresult.hasErrors()) {
 			mav.getModel().putAll(bresult.getModel());
