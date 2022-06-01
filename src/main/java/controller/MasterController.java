@@ -1,20 +1,22 @@
 package controller;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import exception.BoardException;
 import logic.BoardService;
 import logic.Item;
 import logic.ItemService;
@@ -165,13 +167,35 @@ public class MasterController {
 		return mav;		
 	}
 	
-	@RequestMapping("modifyNotice")
-	public ModelAndView modifyNotice(Integer num) {
+	@GetMapping("modifyNotice")
+	public ModelAndView getModifyNotice(Integer num) {
 		ModelAndView mav = new ModelAndView();
 		if(num != null) {
 			Notice notice = boardService.noticeInfo(num);	
 			mav.addObject("notice",notice);
 		}
+		return mav;
+	}
+	
+	@PostMapping("modifyNotice")
+	public ModelAndView PostgetModifyNotice(@Valid Notice notice,Integer num, BindingResult bresult,HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();		
+		notice.setNoticeId(num);
+		System.out.println(notice);
+		
+		if(bresult.hasErrors()) {
+			mav.getModel().putAll(bresult.getModel());
+			return mav;			}
+	
+		try {
+			notice.setNoFileUrl(request.getParameter("file2"));
+			boardService.updateNotice(notice, request);
+			mav.setViewName("redirect:masterBoard");
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new BoardException("공지사항 수정을 실패했습니다.","modifyNotice?num="+notice.getNoticeId());
+		}
+		
 		return mav;
 	}
 }

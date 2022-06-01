@@ -34,4 +34,7 @@ public interface NoticeMapper {
 	@Select("select * from NOTICE where ${column} like '%${find}%' ")
 	List<Notice> selectlist(Map<String, Object> param);
 
+	@Update("update NOTICE set NO_SUBJECT=#{noSubject},NO_CONTENT=#{noContent},NO_FILE_URL=#{noFileUrl} where NOTICE_ID=#{noticeId}")
+	void updateNotice(Notice notice);
+
 }

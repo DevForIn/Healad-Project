@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,6 +60,15 @@ public class BoardService {
 
 	public List<Notice> selectlist(Integer pageNum, int limit, String column, String find) {
 		return noticeDao.selectlist(pageNum,limit,column,find);
+	}
+
+
+	public void updateNotice(Notice notice, HttpServletRequest request) {
+		if(notice.getNoFile() != null && !notice.getNoFile().isEmpty()) {	
+			uploadFileCreate(notice.getNoFile(),request,"board/file/");
+			notice.setNoFileUrl(notice.getNoFile().getOriginalFilename());
+		}
+		noticeDao.updateNotice(notice);		
 	}
 	
 }

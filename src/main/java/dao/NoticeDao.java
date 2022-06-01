@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -67,5 +69,9 @@ public class NoticeDao {
 		param.put("column", column);
 		param.put("find", find);
 		return template.getMapper(cls).selectlist(param);	
+	}
+	
+	public void updateNotice(Notice notice) {
+		template.getMapper(cls).updateNotice(notice);			
 	}
 }
