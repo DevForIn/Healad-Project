@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import exception.LoginException;
+import logic.Sale;
+import logic.SaleService;
 import logic.ShopService;
 import logic.User;
 
@@ -25,6 +29,8 @@ import logic.User;
 public class UserController {
 	@Autowired
 	private ShopService service;
+	@Autowired
+	private SaleService saleService;
 	
 	@GetMapping("*")
 	public ModelAndView getUser() {
@@ -258,6 +264,16 @@ public class UserController {
 		}
 		mav.addObject("message",message);
 		mav.setViewName("alert");
+		return mav;
+	}
+	
+	@RequestMapping("orderList")
+	public ModelAndView idCheckOrderList(String id,HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		User user = service.selectUser(id);
+		List<Sale> salelist = saleService.saleList(id);	
+		mav.addObject("user",user);
+		mav.addObject("salelist",salelist);
 		return mav;
 	}
 }

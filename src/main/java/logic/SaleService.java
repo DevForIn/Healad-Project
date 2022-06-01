@@ -65,4 +65,18 @@ public class SaleService {
 		saleItemDao.insert(saleItem);
 	}
 
+	public List<Sale> saleList(String id) {
+		// 사용자 id에 해당하는 주문 목록
+		List<Sale> list = saleDao.list(id);
+		for(Sale sl : list) {
+			List<SaleItem> saleitemlist = saleItemDao.list(sl.getSaleId());
+			for(SaleItem slit : saleitemlist) {
+				Item item = itemDao.selectOne(slit.getItemId()); // 주문상품의 상품데이터(item) 조회
+				slit.setItem(item);
+			}
+			sl.setItemList(saleitemlist);
+		}
+		return list;
+	}
+
 }

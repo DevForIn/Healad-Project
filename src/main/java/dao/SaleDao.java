@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -26,6 +27,10 @@ public class SaleDao {
 
 	public void insert(Sale sale) {
 		template.getMapper(cls).insert(sale);
-	} 
+	}
 
+
+	public List<Sale> list(String id) {		
+		return template.getMapper(cls).list(id);
+	}
 }

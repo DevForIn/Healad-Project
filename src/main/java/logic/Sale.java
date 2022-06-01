@@ -1,6 +1,8 @@
 package logic;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 public class Sale {
@@ -12,8 +14,23 @@ public class Sale {
 	private String salePostCode;
 	private String saleAddr;
 	private String saleAddrDetail;
-	private String remark;
+	private String remark;	
+	private List<SaleItem> itemList = new ArrayList<SaleItem>();
 	
+	public int getTotal() {
+		int sum=0;
+		for(SaleItem si : itemList) {
+			sum+= si.getItem().getPrice() * si.getQuantity();
+		}
+		return sum;
+	}
+	
+	public List<SaleItem> getItemList() {
+		return itemList;
+	}
+	public void setItemList(List<SaleItem> itemList) {
+		this.itemList = itemList;
+	}
 	public Long getSaleId() {
 		return saleId;
 	}

@@ -39,7 +39,6 @@ body { padding-top:40px;
 				<a href="${path}/user/logout" class="w3-bar-item w3-button"><h3>Logout</h3></a>
 			</c:when>
 			<c:otherwise>
-				<a href="${path}/user/mainInfo" class="w3-bar-item w3-button"><h3>Info</h3></a>
 				<a href="${path}/item/menu" class="w3-bar-item w3-button"><h3>Menu</h3></a>
 				<a href="${path}/board/mainBoard" class="w3-bar-item w3-button"><h3>Service</h3></a>
 				<c:if test="${empty sessionScope.loginUser}">
