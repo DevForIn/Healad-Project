@@ -43,7 +43,7 @@
 					                </a>
 					
 					                <input min="1" id="quantity_${item.itemId }" name="quantity" value="${item.quantity }" type="number"
-					                  class="form-control form-control-sm" />
+					                  class="form-control form-control-sm" onblur="fnUpdateCartQuantity('${item.itemId}','change', '${item.price }')"/>
 					
 					                <a class="btn btn-link px-2" onclick="fnUpdateCartQuantity('${item.itemId}', 'plus', '${item.price }')">
 					                  <i class="fa fa-plus"></i>
@@ -77,7 +77,7 @@
 				                  <i class="fa fa-minus"></i>
 				                </a>
 				
-				                <input id="quantity" min="0" name="quantity" value="1" type="number" class="form-control form-control-sm" />
+				                <input id="quantity" min="0" name="quantity" value="1" type="number" class="form-control form-control-sm" onblur="fnUpdateOrderQuantity('${item.itemId}', 'change', '${item.price}')" />
 				
 				                <a class="btn btn-link px-2" onclick="fnUpdateOrderQuantity('${item.itemId}', 'plus', '${item.price}')">
 				                  <i class="fa fa-plus"></i>
@@ -263,7 +263,7 @@
 		if(upDown == 'plus') {
 			$('#quantity').val(Number($('#quantity').val()) + 1);	
 		}
-		else {
+		else if(upDown == 'down') {
 			// 0 불가능
 			if($('#quantity').val() != 1) $('#quantity').val(Number($('#quantity').val()) - 1);
 		}
@@ -277,7 +277,7 @@
 		if(upDown == 'plus') {
 			$('#quantity_' + itemId).val(Number($('#quantity_' + itemId).val()) + 1);	
 		}
-		else {
+		else if(upDown == 'down'){
 			// 0 불가능
 			if($('#quantity_' + itemId).val() != 1) $('#quantity_' + itemId).val(Number($('#quantity_' + itemId).val()) - 1);
 		}
