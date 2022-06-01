@@ -52,109 +52,129 @@ function BirthDate(){
 	}
 }
 </script>
-<div class="loginF">
-	<h2 align="center">회원 정보 입력</h2>
 	<form:form modelAttribute="user" method="post" action="signUp">
-
 		<spring:hasBindErrors name="user">
 			<font color="red">
 			 <c:forEach items="${errors.globalErrors }"	var="error">
 					<h6 align="center"><spring:message code="${error.code }" /></h6>
 			 </c:forEach></font>
-		</spring:hasBindErrors>
+		</spring:hasBindErrors>	
+				<section class="vh-100"">
+		  <div class="container py-5 h-100">
+		    <div class="row d-flex justify-content-center align-items-center h-100">
+		      <div class="col col-xl-10">
+		        <div class="card" style="border-radius: 1rem;">
+		          <div class="row g-0">
+		            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+		              <div class="card-body p-4 p-lg-5 text-black">
+		                <form>
+		                  <div class="d-flex align-items-center mb-3 pb-1">
+		                    <i class="fa fa-user-circle-o fa-2x me-3" style="color: #ff6219;"></i>
+		                    <span class="h1 fw-bold ml-2 mb-0">HEALAD</span>
+		                  </div>		
+		                  <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">회원 가입</h5>
+
+		                  <div class="form-outline mb-4">
+		                  	<label class="form-label" for="form2Example17">아이디</label>
+		                    <form:input path="userId" class="form-control form-control-lg" /> 
+							<input type="button" value="ID Check" onclick="idchk()">
+							<span id="result"></span>		                    
+		                  </div>
 		
-		<table border="1" style="border-collapse: collapse;">
-			<tr>
-				<th>아이디</th>
-				<td>			
-					<form:input path="userId"/>
-					<input type="button" value="ID Check" onclick="idchk()">
-					<span id="result"></span>
-				</td>				
-			</tr>
-			<tr>
-				<th>비밀번호</th>
-				<td><form:password path="pwd" />
-				 <font color="red"><form:errors	path="pwd" /></font></td>
-			</tr>
-			<tr>
-				<th>닉네임</th>
-				<td><form:input path="userName" />
-				 <font color="red"><form:errors	path="userName" /></font></td>
-			</tr>
-			<tr>
-				<th>전화번호</th>
-				<td><form:input path="phoneNo" />
-				 <font color="red"><form:errors	path="phoneNo" /></font></td>
-			</tr>
-			<tr>
-				<th>우편번호</th>
-				<td><form:input path="postCode" />
-				 <font color="red"><form:errors	path="postCode" /></font></td>
-			</tr>
-			<tr>
-				<th>주소</th>
-				<td><form:input path="addr" />
-				 <font color="red"><form:errors	path="addr" /></font></td>
-			</tr>
-			<tr>
-				<th>상세 주소</th>
-				<td><form:input path="addrDetail" />
-				 <font color="red"><form:errors	path="addrDetail" /></font></td>
-			</tr>
-			<tr>
-				<th>이메일</th>
-				<td><form:input path="email" />
-				 <font color="red"><form:errors	path="email" /></font></td>
-			</tr>
-			<tr>
-                <th>생년월일</th>
-                <td>
-                <fmt:formatDate var="date" value="${now}" pattern="yyyy" />
-				<form:input type="hidden" path="birthDate" name="birthDate"/>
-                    <select name="year">
-                    	<option value="">-Year-</option>                    	
-                    	<c:forEach var="i" begin="${date-120}" end="${date}">  
-                        	<option value="${date - i + (date-120)}"> ${date - i + (date-120)}</option>
-                    	</c:forEach>
-                    </select>
-                    <select name="month">
-                    	<option value="">-Month-</option>
-                  		<c:forEach var="i" begin="1" end="12">        
-							<c:choose>
-	                        	<c:when test="${i<10}">
-	                        		<option value="0${i}">0${i}</option>
-	                        	</c:when>
-	                        	<c:otherwise>
-	                        		<option value="${i}">${i}</option>
-	                        	</c:otherwise>
-	                        </c:choose>
-                   		</c:forEach>
-                    </select>
-                    <select name="day">
-	                    <option value="">-Day-</option>
-	                    <c:forEach var="i" begin="1" end="31">
-							<c:choose>
-	                        	<c:when test="${i<10}">
-	                        		<option value="0${i}">0${i}</option>
-	                        	</c:when>
-	                        	<c:otherwise>
-	                        		<option value="${i}">${i}</option>
-	                        	</c:otherwise>
-	                        </c:choose>
-	                    </c:forEach>
-                    </select>
-                <br><font color="red"><form:errors	path="birthDate" /></font>
-                </td>
-            </tr>
-			<tr>
-				<td colspan="2" align="center">
-				  <input type="submit" value="가입하기" onclick="BirthDate()">				 	
-				  <input type="button" value="돌아가기" onclick="history.back()">
-				</td>
-			</tr>
-		</table>
-	</form:form>
-</div>
+		                  <div class="form-outline mb-4" >
+		                  	<label class="form-label" for="form2Example27">비밀번호</label>
+		                  	<form:password path="pwd" class="form-control form-control-lg"/>
+		                   	<font color="red"><form:errors	path="pwd" /></font>
+		                  </div>
+		                  
+		                  <div class="form-outline mb-4" >
+		                  <label class="form-label" for="form2Example27">닉네임</label>
+		                  	<form:input path="userName" class="form-control form-control-lg"/>
+		                    <font color="red"><form:errors	path="userName" /></font>
+		                  </div>
+		                  
+		                  <div class="form-outline mb-4" >
+		                  	<label class="form-label" for="form2Example27">전화번호</label>
+		                  	<form:input path="phoneNo" class="form-control form-control-lg"/>
+		                    <font color="red"><form:errors	path="phoneNo" /></font>
+		                  </div>
+		                  
+		                  <div class="form-outline mb-4" >
+		                  	<label class="form-label" for="form2Example27">우편번호</label>
+		                  	<form:input path="postCode" class="form-control form-control-lg"/>
+		                    <font color="red"><form:errors	path="postCode" /></font>
+		                  </div>
+		                  
+		                  <div class="form-outline mb-4" >
+		                  	<label class="form-label" for="form2Example27">주소</label>
+		                  	<form:input path="addr" class="form-control form-control-lg"/>
+		                    <font color="red"><form:errors	path="addr" /></font>
+		                  </div>
+		                  
+		                  <div class="form-outline mb-4" >
+		                  	<label class="form-label" for="form2Example27">상세 주소</label>
+		                  	<form:input path="addrDetail" class="form-control form-control-lg"/>
+		                  	<font color="red"><form:errors	path="addrDetail" /></font>		                   
+		                  </div>
+		                  
+		                  <div class="form-outline mb-4" >
+		                  	<label class="form-label" for="form2Example27">이메일</label>
+		                  	<form:input path="email" class="form-control form-control-lg"/>
+		                  	<font color="red"><form:errors	path="email" /></font>		                    
+		                  </div>
+		                  
+		                  <div class="form-outline mb-4" >
+		                  	<label class="form-label" for="form2Example27">생년월일</label>		                  	
+							<fmt:formatDate var="date" value="${now}" pattern="yyyy" />
+							<form:input type="hidden" path="birthDate" name="birthDate"/>
+			                    <select name="year">
+			                    	<option value="">-Year-</option>                    	
+			                    	<c:forEach var="i" begin="${date-120}" end="${date}">  
+			                        	<option value="${date - i + (date-120)}"> ${date - i + (date-120)}</option>
+			                    	</c:forEach>
+			                    </select>
+			                    <select name="month">
+			                    	<option value="">-Month-</option>
+			                  		<c:forEach var="i" begin="1" end="12">        
+										<c:choose>
+				                        	<c:when test="${i<10}">
+				                        		<option value="0${i}">0${i}</option>
+				                        	</c:when>
+				                        	<c:otherwise>
+				                        		<option value="${i}">${i}</option>
+				                        	</c:otherwise>
+				                        </c:choose>
+			                   		</c:forEach>
+			                    </select>
+			                    <select name="day">
+				                    <option value="">-Day-</option>
+				                    <c:forEach var="i" begin="1" end="31">
+										<c:choose>
+				                        	<c:when test="${i<10}">
+				                        		<option value="0${i}">0${i}</option>
+				                        	</c:when>
+				                        	<c:otherwise>
+				                        		<option value="${i}">${i}</option>
+				                        	</c:otherwise>
+				                        </c:choose>
+				                    </c:forEach>
+			                    </select>
+		                    <font color="red"><form:errors	path="birthDate" /></font>
+		                  </div>		                  
+		
+		                  <div class="pt-1 mb-4">
+		                    <button class="btn btn-dark btn-lg btn-block" type="submit" onclick="BirthDate()">가입하기</button>
+		                    <button class="btn btn-dark btn-lg btn-block" type="button" onclick="history.back()">돌아가기</button>
+		                  </div>
+		                </form>		
+		              </div>
+		            </div>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		</section>			
+	</form:form>	
 </body>
 </html>
