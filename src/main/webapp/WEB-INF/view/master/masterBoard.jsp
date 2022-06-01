@@ -98,15 +98,6 @@
 		<tr>
 			<th colspan="12">HEALAD_FAQ 목록</th>
 		</tr>
-		<tr>
-			<th>공지 ID</th>
-			<th>제목</th>
-			<th>내용</th>
-			<th>조회수</th>
-			<th>첨부파일</th>
-			<th>등록일자</th>
-			<th>Modify</th>
-		</tr>
 		<c:forEach items="">
 
 		</c:forEach>		
@@ -118,45 +109,10 @@
 			<th colspan="12">HEALAD_Review 목록</th>
 		</tr>
 		<tr>
-			<th>ID <a href="userList?sort=0" class="noline">▲</a>
-				<a href="userList?sort=1" class="noline">▼</a></th>
-			<th>닉네임</th>
-			<th>PASS</th>
-			<th>전화</th>
-			<th>E-mail</th>
-			<th>생년월일</th>
-			<th>주소</th>
-			<th>총 주문 금액</th>
-			<th>마일리지</th>
-			<th>가입날짜</th>
-			<th>탈퇴여부</th>
-			<th>정보관리</th>
+
 		</tr>
 		<c:forEach items="${userList}" var="user">
-			<c:if test="${user.withdrawYn == 'N'}">
-			<c:if test="${user.userId != 'admin'}">
-			<tr>
-				<td>${user.userId}</td>
-				<td>${user.userName}</td>
-				<td><a href="../user/modifyPW?id=${user.userId}"><strong>${user.pwd}</strong></a></td>
-				<td>${user.phoneNo}</td>
-				<td>${user.email}</td>
-				<td><fmt:formatDate value="${user.birthDate}" pattern="yyyy-MM-dd" /></td>
-				<td>${user.addr} ${user.addrDetail}</td>
-				<td><c:choose>
-					<c:when test="${user.pwd == null}"></c:when>
-					<c:otherwise>total 구현필요</c:otherwise>
-				</c:choose></td>
-				<td><c:choose>
-					<c:when test="${user.pwd == null}"></c:when>
-					<c:otherwise>${user.mileage} 포인트</c:otherwise>
-				</c:choose></td>				
-				<td><fmt:formatDate value="${user.joinDate}" pattern="yyyy-MM-dd" /></td>
-				<td>${user.withdrawYn}</td>
-				<td><a href="../user/modifyUser?id=${user.userId}"><strong>정보수정</strong></a><br>
-				 <a	href="../user/deleteUser?id=${user.userId}"><strong>강제탈퇴</strong></a>
-			</tr></c:if>
-			</c:if>
+
 		</c:forEach>		
 	</table>
 	</div>

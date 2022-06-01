@@ -55,13 +55,11 @@
 				<td>${user.email}</td>
 				<td><fmt:formatDate value="${user.birthDate}" pattern="yyyy-MM-dd" /></td>
 				<td>${user.addr} ${user.addrDetail}</td>
+				<td>				
+					<fmt:formatNumber value="${user.total}" pattern="###,###,###"/> 원</td>				
 				<td><c:choose>
 					<c:when test="${user.pwd == null}"></c:when>
-					<c:otherwise>total 구현필요</c:otherwise>
-				</c:choose></td>
-				<td><c:choose>
-					<c:when test="${user.pwd == null}"></c:when>
-					<c:otherwise>${user.mileage} 포인트</c:otherwise>
+					<c:otherwise>${user.mileage} Point</c:otherwise>
 				</c:choose></td>				
 				<td><fmt:formatDate value="${user.joinDate}" pattern="yyyy-MM-dd" /></td>
 				<td>${user.withdrawYn}</td>

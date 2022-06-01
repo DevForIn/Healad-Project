@@ -16,6 +16,7 @@ public class Sale {
 	private String saleAddrDetail;
 	private String remark;	
 	private List<SaleItem> itemList = new ArrayList<SaleItem>();
+
 	
 	public int getTotal() {
 		int sum=0;

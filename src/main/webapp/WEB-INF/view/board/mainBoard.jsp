@@ -13,7 +13,7 @@
 </head>
 <body>
 	<div class="container">
-		<h2 align="center">H E A L A D _ 구현중</h2>
+		<h2 align="center">H E A L A D _ 공지사항</h2>
 		<p align="right">
 			<c:if test="${count > 0 }"> ${count}건</c:if>
 		</p>

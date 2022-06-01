@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -18,6 +19,8 @@ import logic.BoardService;
 import logic.Item;
 import logic.ItemService;
 import logic.Notice;
+import logic.Sale;
+import logic.SaleService;
 import logic.ShopService;
 import logic.User;
 
@@ -31,6 +34,8 @@ public class MasterController {
 	private ItemService itemService;
 	@Autowired
 	private BoardService boardService;
+	@Autowired
+	private SaleService saleService;
 	
 	
 	@GetMapping("*")
@@ -42,8 +47,18 @@ public class MasterController {
 
 	@RequestMapping({"userList","outUserList"})
 	public ModelAndView userList(Integer sort, HttpSession session) {
-		ModelAndView mav = new ModelAndView();
-		List<User> userList = service.userList();
+		ModelAndView mav = new ModelAndView();		
+		List<User> userList = service.userList();	
+		for(User us : userList) {
+			int total = 0;
+			if(us.getWithdrawYn().equals("N")) {
+			List<Sale> salelist = saleService.saleList(us.getUserId());
+			for(Sale si : salelist) {
+				total+=si.getTotal();				
+			}
+			us.setTotal(total);
+			}
+		}
 		if(sort==null) sort=0;
 		switch(sort) {
 		case 0 : Collections.sort(userList,(u1,u2) -> u1.getUserId().compareTo(u2.getUserId()));
