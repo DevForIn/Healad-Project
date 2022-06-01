@@ -39,11 +39,11 @@ td {
 	
 	        <div class="col-lg-6 col-md-6">
 	          <div class="single-feature">
-	            <a href="#" class="title">
+	            <a href="${path }/board/mainBoard" class="title">
 	              <h3><i class="fa fa-info-circle"></i> 공지사항</h3>
 	            </a>
 	            <c:forEach var="data" items="${notice }">
-	            	<p><a>${data.noSubject } (<fmt:formatDate value="${data.noRegDate}" pattern="yyyy-MM-dd" />)</a></p>
+	            	<p><a href="${path }/board/noticeInfo?num=${data.noticeId}">${data.noSubject } (<fmt:formatDate value="${data.noRegDate}" pattern="yyyy-MM-dd" />)</a></p>
 	            </c:forEach>
 	            
 	          </div>
