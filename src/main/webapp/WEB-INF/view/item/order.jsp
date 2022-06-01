@@ -95,16 +95,16 @@
 				</c:choose>
 
 				<!-- total 영역 -->
+				<input type="hidden" name="mileage" value="${mileage}">
+				<fmt:formatNumber type="number" var="total" pattern="###,###,###,###,###,###" value="${total}" />
+				<fmt:formatNumber type="number" var="mileage" pattern="###,###,###" value="${mileage}" />
 				<div class="card rounded-3 mb-4">
 					<div class="card-body p-4" style="text-align: right;">
-						<div id="total"><h4>총 금액: <fmt:formatNumber type="number" pattern="###,###,###,###,###,###" value="${total}" /> 원</h4></div>
-						<div id="mileage">						
-							적립예정 마일리지: <fmt:formatNumber type="number" pattern="###,###" value="${mileage}" /> 원
-							<input type="hidden" name="mileage" value="${mileage}">
-						</div>
+						<div id="total"><h4>총 금액:  ${total} 원</h4></div>
+						<div id="mileage">적립예정 마일리지: ${mileage} 원 </div>
 					</div>
 				</div>
-		
+				
 				<!-- 주문서 작성 영역 -->
  		        <div class="card mb-4 px-5 py-5">
                     <div class="mb-3">

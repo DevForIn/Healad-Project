@@ -45,6 +45,6 @@ public interface UserMapper {
 	@Select("select * from USER_ACCOUNT")
 	List<User> userList();
 
-	@Update("Update USER_ACCOUNT set Mileage=Mileage+#{Mileage} where USER_ID = #{userId}")
+	@Update("update USER_ACCOUNT set Mileage=Mileage+#{Mileage} where USER_ID = #{userId}")
 	void pointAdd(Map<String, Object> param);
 }

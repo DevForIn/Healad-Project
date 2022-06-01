@@ -35,7 +35,7 @@ public class SaleController {
 		ModelAndView mav = new ModelAndView("sale/purchase");
 		User user = (User) session.getAttribute("loginUser");
 		if("".equals(orderType)) orderType = "C";
-
+		if("".equals(mileage)) mileage="0";
 		if("C".equals(orderType)) {
 			System.out.println("user=" + user.getUserId());
 			List<Cart> items = cartService.getList(user.getUserId());			
