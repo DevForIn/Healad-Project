@@ -40,12 +40,10 @@ public class SaleController {
 			System.out.println("user=" + user.getUserId());
 			List<Cart> items = cartService.getList(user.getUserId());			
 			service.pointAdd(mileage,user.getUserId());
-			System.out.println("mileage=" + mileage);
 			saleService.purchase(items, sale, user.getUserId());
 		}
 		else {
 			saleService.purchase(cart, sale, user.getUserId());
-			System.out.println("mileage=" + mileage);
 			service.pointAdd(mileage,user.getUserId());
 		}
 		
