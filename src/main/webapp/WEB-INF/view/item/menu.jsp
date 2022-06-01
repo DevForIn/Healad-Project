@@ -62,7 +62,7 @@ function fnAddCart(itemId, itemName){
 		},
 		success : function(data) {
 			console.log('data', data)
-			alert(itemName + '이 추가되었습니다.');
+			alert(itemName + '가(이) 추가되었습니다.');
 		},
 	     error:function(request,status,error){
 	    	 alert('로그인한 사용자만 장바구니 추가가 가능합니다.');
