@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import dao.mapper.SaleItemMapper;
+import logic.Item;
 import logic.SaleItem;
 
 @Repository
@@ -25,6 +26,10 @@ public class SaleItemDao {
 
 	public List<SaleItem> list(Long saleId) {
 		return template.getMapper(cls).list(saleId);
+	}
+
+	public List<Item> getSaleItemsRank() {
+		return template.getMapper(cls).getSaleItemsRank();
 	}
 
 }

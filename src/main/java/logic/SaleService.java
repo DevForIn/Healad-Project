@@ -79,4 +79,8 @@ public class SaleService {
 		return list;
 	}
 
+	public List<Item> getSaleItemsRank() {
+		return saleItemDao.getSaleItemsRank();
+	}
+
 }
