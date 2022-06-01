@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import logic.BoardService;
 import logic.Notice;
+import logic.User;
 
 @RestController
 @RequestMapping("board")
@@ -93,11 +94,13 @@ public class BoardController {
 	}
 	
 	@RequestMapping("noticeInfo")
-	public ModelAndView noticeCall(Integer num) {
+	public ModelAndView noticeCall(Integer num, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
+		User loginUser = (User)session.getAttribute("loginUser");
 		if(num != null) {
 			Notice notice = boardService.noticeInfo(num);
-			boardService.cntAdd(num);	
+			if(!loginUser.getUserId().equals("admin"))
+				boardService.cntAdd(num);	
 			mav.addObject("notice",notice);
 		}
 		return mav;
