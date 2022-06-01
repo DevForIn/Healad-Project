@@ -61,10 +61,10 @@ public class UserDao {
 		return template.getMapper(cls).userList();
 	}
 
-	public void pointAdd(Integer point, String userId) {
+	public void pointAdd(String mileage, String userId) {
 		param.clear();
 		param.put("userId", userId);
-		param.put("Mileage", point);
+		param.put("Mileage", mileage);
 		template.getMapper(cls).pointAdd(param);
 	}	
 }

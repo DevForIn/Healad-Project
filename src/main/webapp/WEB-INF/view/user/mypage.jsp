@@ -46,8 +46,12 @@
 		</tr>
 		<tr>
 			<td>마일리지</td>
-			<td><c:if test="${user.mileage == 0 or user.mileage eq 'null'}">0 포인트</c:if>
-				<c:if test="${user.mileage != 0}">${user.mileage} 포인트</c:if></td>
+			<td>
+				<c:choose>
+					<c:when test="${user.mileage == 0 or empty user.mileage}">0 포인트</c:when>
+					<c:otherwise>${user.mileage} 포인트</c:otherwise>
+				</c:choose>
+			</td>
 		</tr>
 	</table>
 	<br>

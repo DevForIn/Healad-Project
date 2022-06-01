@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath }" />   
 <!DOCTYPE html>
 <html>
@@ -96,8 +97,11 @@
 				<!-- total 영역 -->
 				<div class="card rounded-3 mb-4">
 					<div class="card-body p-4" style="text-align: right;">
-						<div id="total"><h4>총 금액: ${total } 원</h4></div>
-						<div id="mileage">적립예정 마일리지: ${mileage } 원</div>
+						<div id="total"><h4>총 금액: <fmt:formatNumber type="number" pattern="###,###,###,###,###,###" value="${total}" /> 원</h4></div>
+						<div id="mileage">						
+						적립예정 마일리지: <fmt:formatNumber type="number" pattern="###,###" value="${mileage}" /> 원
+						<input type="hidden" name="mileage" value="${mileage}">
+						</div>
 					</div>
 				</div>
 		

@@ -31,22 +31,22 @@ public class SaleController {
 	private ShopService service;
 	
 	@RequestMapping("purchase")
-	public ModelAndView purchase(Cart cart, Sale sale, HttpSession session, String orderType,@Param("point")Integer point) {
+	public ModelAndView purchase(String mileage, Cart cart, Sale sale, HttpSession session, String orderType) {
 		ModelAndView mav = new ModelAndView("sale/purchase");
-		
 		User user = (User) session.getAttribute("loginUser");
 		if("".equals(orderType)) orderType = "C";
 
 		if("C".equals(orderType)) {
 			System.out.println("user=" + user.getUserId());
 			List<Cart> items = cartService.getList(user.getUserId());			
-			service.pointAdd(point,user.getUserId());
-			System.out.println(point);
+			service.pointAdd(mileage,user.getUserId());
+			System.out.println("mileage=" + mileage);
 			saleService.purchase(items, sale, user.getUserId());
 		}
 		else {
 			saleService.purchase(cart, sale, user.getUserId());
-			service.pointAdd(point,user.getUserId());
+			System.out.println("mileage=" + mileage);
+			service.pointAdd(mileage,user.getUserId());
 		}
 		
 		mav.addObject("orderType", orderType);
