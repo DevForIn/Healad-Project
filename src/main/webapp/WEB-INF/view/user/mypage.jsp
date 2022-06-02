@@ -46,11 +46,8 @@
 		</tr>
 		<tr>
 			<td>마일리지</td>
-			<td>
-				<c:choose>
-					<c:when test="${user.mileage == 0 or empty user.mileage}">0 포인트</c:when>
-					<c:otherwise>${user.mileage} 포인트</c:otherwise>
-				</c:choose>
+			<td><fmt:formatNumber value="${user.mileage}" pattern="###,###,###,###" /> Point
+				
 			</td>
 		</tr>
 	</table>
