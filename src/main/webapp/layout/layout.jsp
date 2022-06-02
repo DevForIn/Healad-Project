@@ -40,7 +40,7 @@ body { padding-top:40px;
 			</c:when>
 			<c:otherwise>
 				<a href="${path}/item/menu" class="w3-bar-item w3-button"><h3>Menu</h3></a>
-				<a href="${path}/board/mainBoard" class="w3-bar-item w3-button"><h3>Service</h3></a>
+				<a href="${path}/board/mainBoard" class="w3-bar-item w3-button"><h3>Notice</h3></a>
 				<c:if test="${empty sessionScope.loginUser}">
 					<a href="${path}/user/login" class="w3-bar-item w3-button"><h3>Login</h3></a>					
 				</c:if>  
