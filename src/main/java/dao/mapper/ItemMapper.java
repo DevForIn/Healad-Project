@@ -32,4 +32,9 @@ public interface ItemMapper {
 	@Update("update item set USE_YN=#{useYn} where ITEM_ID=#{itemId}")
 	void YNchange(Map<String, Object> param);
 
+	@Select("select * from item where use_yn = #{useYn}")
+	List<Item> itemUseList(Map<String, Object> param);
+	@Select("select * from item where use_yn = #{useYn} and item_cat_id=#{itemCatId} ")
+	List<Item> itemCatYN(Map<String, Object> param);
+
 }

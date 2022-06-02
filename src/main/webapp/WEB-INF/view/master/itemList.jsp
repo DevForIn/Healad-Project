@@ -58,7 +58,7 @@ function CI(){
 			</th>
 			<th>설명</th>
 			<th>IMAGE</th>
-			<th>사용여부(Y/N)</th>
+			<th>사용여부(<a href="itemList?ctn=${ctn}&sort=5">Y</a>/<a href="itemList?ctn=${ctn}&sort=6">N</a>)</th>
 
 		</tr>
 		<c:forEach items="${itemList}" var="item">

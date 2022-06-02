@@ -49,4 +49,27 @@ public class ItemDao {
 		param.put("itemId", itemId);		
 		template.getMapper(cls).YNchange(param);			
 	}
+
+	public List<Item> itemUseList(Integer sort) {
+		param.clear();
+		if(sort==5) {			
+			param.put("useYn", "Y");
+		}
+		if(sort==6) {
+			param.put("useYn", "N");
+		}
+		return template.getMapper(cls).itemUseList(param);
+	}
+
+	public List<Item> itemCatYN(Integer cat_no, Integer sort) {
+		param.clear();
+		param.put("itemCatId", cat_no);
+		if(sort==5) {			
+			param.put("useYn", "Y");
+		}
+		if(sort==6) {
+			param.put("useYn", "N");
+		}
+		return template.getMapper(cls).itemCatYN(param);
+	}
 }

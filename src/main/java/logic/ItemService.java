@@ -58,6 +58,14 @@ public class ItemService {
 
 	public void YNchange(Integer itemId, String useYn) {
 		itemDao.YNchange(itemId,useYn);	
+	}
+
+	public List<Item> itemUseList(Integer sort) {		
+		return itemDao.itemUseList(sort);
+	}
+
+	public List<Item> itemCatYN(Integer cat_no, Integer sort) {		
+		return itemDao.itemCatYN(cat_no,sort);
 	}	
 	
 }

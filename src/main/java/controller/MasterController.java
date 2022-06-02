@@ -81,19 +81,29 @@ public class MasterController {
 		ModelAndView mav = new ModelAndView();
 		List<Item> itemList = itemService.itemList();
 		if(ctn==null) ctn=0;
+		if(sort==null) sort=1;
 		switch(ctn) {
 		case 0 : itemList = itemService.itemList();
+					if(sort==5)itemList = itemService.itemUseList(sort);
+					if(sort==6)itemList = itemService.itemUseList(sort);
 				break;
 		case 1 : itemList = itemService.itemListCat(ctn);
+					if(sort==5) itemList = itemService.itemCatYN(ctn,sort);
+					if(sort==6) itemList = itemService.itemCatYN(ctn,sort);
 				break;
 		case 2 : itemList = itemService.itemListCat(ctn);
+					if(sort==5) itemList = itemService.itemCatYN(ctn,sort);
+					if(sort==6) itemList = itemService.itemCatYN(ctn,sort);
 				break;
 		case 3 : itemList = itemService.itemListCat(ctn);
+					if(sort==5) itemList = itemService.itemCatYN(ctn,sort);
+					if(sort==6) itemList = itemService.itemCatYN(ctn,sort);
 				break;
-		case 4 : itemList = itemService.itemListCat(ctn);
-				break;		
+		case 4 : itemList = itemService.itemListCat(ctn);	
+					if(sort==5) itemList = itemService.itemCatYN(ctn,sort);
+					if(sort==6) itemList = itemService.itemCatYN(ctn,sort);
+				break;
 		}
-		if(sort==null) sort=1;
 		switch(sort) {
 		case 1 : Collections.sort(itemList,(u1,u2) -> u1.getItemId().compareTo(u2.getItemId()));
 				break;
@@ -103,6 +113,7 @@ public class MasterController {
 				break;
 		case 4 : Collections.sort(itemList,(u1,u2) -> u2.getPrice().compareTo(u1.getPrice()));
 				break;
+			
 		}
 		mav.addObject("ctn",ctn);
 		mav.addObject("itemList",itemList);
