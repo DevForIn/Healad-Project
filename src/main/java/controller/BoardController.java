@@ -97,12 +97,21 @@ public class BoardController {
 	public ModelAndView noticeCall(Integer num, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		User loginUser = (User)session.getAttribute("loginUser");
-		if(num != null) {
-			Notice notice = boardService.noticeInfo(num);
-			if(!loginUser.getUserId().equals("admin"))
+		if(loginUser==null) {
+			if(num != null) {
+				Notice notice = boardService.noticeInfo(num);
 				boardService.cntAdd(num);	
-			mav.addObject("notice",notice);
-		}
+				mav.addObject("notice",notice);
+			}		
+		} else {
+			if(num != null) {
+				
+				Notice notice = boardService.noticeInfo(num);
+				if(!loginUser.getUserId().equals("admin"))
+					boardService.cntAdd(num);	
+				mav.addObject("notice",notice);
+			}	
+		}		
 		return mav;
 	}
 }
