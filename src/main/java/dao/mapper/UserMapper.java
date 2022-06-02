@@ -42,7 +42,7 @@ public interface UserMapper {
 	+ " where USER_ID = #{userId}")
 	void deleteUser(String userId);
 
-	@Select("select * from USER_ACCOUNT")
+	@Select("select * from USER_ACCOUNT order by JOIN_DATE")
 	List<User> userList();
 
 	@Update("update USER_ACCOUNT set Mileage=Mileage+#{Mileage} where USER_ID = #{userId}")

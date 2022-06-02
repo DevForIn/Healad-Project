@@ -63,13 +63,14 @@ public class MasterController {
 		}
 		if(sort==null) sort=0;
 		switch(sort) {
-		case 0 : Collections.sort(userList,(u1,u2) -> u1.getUserId().compareTo(u2.getUserId()));
+		case 0 : break;
+		case 1 : Collections.sort(userList,(u1,u2) -> u1.getUserId().compareTo(u2.getUserId()));
 				break;
-		case 1 : Collections.sort(userList,(u1,u2) -> u2.getUserId().compareTo(u1.getUserId()));
+		case 2 : Collections.sort(userList,(u1,u2) -> u2.getUserId().compareTo(u1.getUserId()));
 				break;
-		case 2 : Collections.sort(userList,(u1,u2) -> u1.getUserId().compareTo(u2.getUserId()));
+		case 3 : Collections.sort(userList,(u1,u2) -> u1.getUserId().compareTo(u2.getUserId()));
 				break;
-		case 3 : Collections.sort(userList,(u1,u2) -> u2.getUserId().compareTo(u1.getUserId()));
+		case 4 : Collections.sort(userList,(u1,u2) -> u2.getUserId().compareTo(u1.getUserId()));
 				break;
 		}
 		mav.addObject("userList",userList);
