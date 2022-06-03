@@ -33,7 +33,10 @@ td {
 	            <a href="#" class="title">
 	              <h3><i class="fa fa-comments-o"></i> 리뷰</h3>
 	            </a>
-	            <p>Shall open divide a one</p>
+	            <!-- 리뷰 조회 영역 -->
+	            <c:forEach var="data" items="${review }">
+	            	<p>[${data.itemName }] ${data.rvSubject } (<fmt:formatDate value="${data.rvRegDate}" pattern="yyyy-MM-dd" />)</p>
+	            </c:forEach>
 	          </div>
 	        </div>
 	

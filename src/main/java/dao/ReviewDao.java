@@ -1,6 +1,37 @@
 package dao;
 
-public class ReviewDao {/*
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import dao.mapper.ReviewMapper;
+import logic.Review;
+
+@Repository
+public class ReviewDao {
+	
+	@Autowired
+	private SqlSessionTemplate template;
+	private Map<String,Object> param = new HashMap<String,Object>();
+	private Class<ReviewMapper> cls = ReviewMapper.class;
+	
+	
+	public List<Review> list(int pageNum, int limit) {
+		param.clear();
+		int start = (pageNum - 1) * limit +1;
+		int end = start + limit -1;
+		param.put("start", start);
+		param.put("end", end);
+		return template.getMapper(cls).list(param);
+	}
+	
+	
+	
+	/*
 	@Autowired
 	private SqlSessionTemplate template;
 	private Map<String,Object> param = new HashMap<String,Object>();

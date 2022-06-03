@@ -2,13 +2,98 @@ package logic;
 
 import java.util.Date;
 
-import javax.validation.constraints.NotEmpty;
-
-import org.springframework.web.multipart.MultipartFile;
-
 
 public class Review {
-	private int num;
+	private int reviewSeq;
+	private String userId;
+	private int itemId;
+	private String rvSubject;
+	private String rvContent;
+	private String rvFileUrl;
+	private String rvIp;
+	private int score;
+	private Date rvRegDate;
+	private Date rvUpdtDate;
+	private int rvCheck;
+	
+	private String itemName;
+	
+	
+	public String getItemName() {
+		return itemName;
+	}
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+	public int getReviewSeq() {
+		return reviewSeq;
+	}
+	public void setReviewSeq(int reviewSeq) {
+		this.reviewSeq = reviewSeq;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public int getItemId() {
+		return itemId;
+	}
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
+	}
+	public String getRvSubject() {
+		return rvSubject;
+	}
+	public void setRvSubject(String rvSubject) {
+		this.rvSubject = rvSubject;
+	}
+	public String getRvContent() {
+		return rvContent;
+	}
+	public void setRvContent(String rvContent) {
+		this.rvContent = rvContent;
+	}
+	public String getRvFileUrl() {
+		return rvFileUrl;
+	}
+	public void setRvFileUrl(String rvFileUrl) {
+		this.rvFileUrl = rvFileUrl;
+	}
+	public String getRvIp() {
+		return rvIp;
+	}
+	public void setRvIp(String rvIp) {
+		this.rvIp = rvIp;
+	}
+	public int getScore() {
+		return score;
+	}
+	public void setScore(int score) {
+		this.score = score;
+	}
+	public Date getRvRegDate() {
+		return rvRegDate;
+	}
+	public void setRvRegDate(Date rvRegDate) {
+		this.rvRegDate = rvRegDate;
+	}
+	public Date getRvUpdtDate() {
+		return rvUpdtDate;
+	}
+	public void setRvUpdtDate(Date rvUpdtDate) {
+		this.rvUpdtDate = rvUpdtDate;
+	}
+	public int getRvCheck() {
+		return rvCheck;
+	}
+	public void setRvCheck(int rvCheck) {
+		this.rvCheck = rvCheck;
+	}
+	
+	
+	/*private int num;
 	private String rvid; //리뷰 아이디
 	private String userid; //user id
 	@NotEmpty(message="비밀번호를 입력하세요")
@@ -114,6 +199,6 @@ public class Review {
 				+ getRvregdate() + ", getRvupdate()=" + getRvupdate() + ", getRvreadcnt()=" + getRvreadcnt()
 				+ ", getRvscore()=" + getRvscore() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
 				+ ", toString()=" + super.toString() + "]";
-	}
+	}*/
 	
 }

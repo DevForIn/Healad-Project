@@ -1,6 +1,22 @@
 package dao.mapper;
 
-public interface ReviewMapper {/*
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Select;
+
+import logic.Review;
+
+public interface ReviewMapper {
+
+	@Select("select * from (select rownum rnum,REVIEW_SEQ, ITEM_NAME, USER_ID, ITEM_ID, RV_SUBJECT, RV_CONTENT, RV_FILE_URL, RV_IP, SCORE, RV_REG_DATE, RV_UPDT_DATE, RV_CHECK "
+			+ " from (select r.*, i.item_name from review r, item i where r.item_id = i.item_id order by review_seq))"
+			+ " where rnum >= #{start} and rnum <= #{end}")
+	List<Review> list(Map<String, Object> param);
+	
+	
+	
+	/*
 	@Select("select count(*) from board where rvid=#{rvid}")
 	int count(String boardid);
 	
