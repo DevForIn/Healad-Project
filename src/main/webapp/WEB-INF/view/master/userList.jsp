@@ -53,7 +53,14 @@
 				<td><a href="../user/modifyPW?id=${user.userId}"><strong>${user.pwd}</strong></a></td>
 				<td>${user.phoneNo}</td>
 				<td>${user.email}</td>
-				<td><fmt:formatDate value="${user.birthDate}" pattern="yyyy-MM-dd" /></td>
+				<td>
+				<c:choose>
+					<c:when test="${user.birthDate == null}"> - </c:when>
+					<c:otherwise>
+						<fmt:formatDate value="${user.birthDate}" pattern="yyyy-MM-dd" />
+					</c:otherwise>
+				</c:choose>
+				</td>
 				<td>${user.addr} ${user.addrDetail}</td>
 				<td><fmt:formatNumber value="${user.total}" pattern="###,###,###"/> 원</td>				
 				<td><fmt:formatNumber value="${user.mileage}" pattern="###,###,###"/> Point</td>				

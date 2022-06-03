@@ -61,9 +61,9 @@ function BirthDate(){
 					<h6 align="center"><spring:message code="${error.code }" /></h6>
 			 </c:forEach></font>
 		</spring:hasBindErrors>		
-	    <div class="main">
+	    <div class="main" style="padding: 0px 0;">
 	        <!-- Sign up form -->
-	        <section class="signup">
+	        <section class="signup" style="margin-bottom : 0px;">
 	            <div class="container">
 	                <div class="signup-content">
 	                    <div class="signup-form">
