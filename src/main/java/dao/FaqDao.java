@@ -19,12 +19,21 @@ public class FaqDao {
 	private Class<FaqMapper> cls = FaqMapper.class;
 	private Map<String,Object> param = new HashMap<String,Object>();
 
-	public List<Faq> fqalist() {
-		return template.getMapper(cls).faqlist();
+	public List<Faq> fqalist(Integer pageNum, int limit) {
+		param.clear();
+		int startrow = (pageNum - 1) * limit +1;
+		int endrow = startrow + limit -1;
+		param.put("startrow", startrow);
+		param.put("endrow", endrow);
+		return template.getMapper(cls).faqlist(param);
 	}
 
 	public Faq faqInfo(Integer faqId) {
 		return template.getMapper(cls).faqInfo(faqId);
+	}
+
+	public int faqCount() {
+		return template.getMapper(cls).faqCount();
 	}
 
 }

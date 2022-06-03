@@ -33,19 +33,22 @@ public class BoardController {
 		if(pageNum == null || pageNum.toString().equals("")) {
 			pageNum=1;
 		}		
-		int limit = 10;		
+		int limit = 10;			
 		
-		int count = boardService.count();		
+		int count = boardService.count();			
 		List<Notice> Noticelist = boardService.noticelist(pageNum,limit);		
+		
+		
 		int maxPage = (int)((double)count/limit + 0.95);
 		int startPage = (int)((pageNum/10.0 + 0.9) - 1) * 10 + 1;
 		int endPage = startPage + 9;
-		if(endPage > maxPage) endPage = maxPage;		
+		if(endPage > maxPage) endPage = maxPage;	
+		
 		mav.addObject("pageNum",pageNum);
 		mav.addObject("maxPage",maxPage);
 		mav.addObject("startPage",startPage);	
 		mav.addObject("endPage",endPage);	
-		mav.addObject("count",count); 	
+		mav.addObject("count",count); 
 		mav.addObject("Noticelist",Noticelist);
 		return mav;	
 	}

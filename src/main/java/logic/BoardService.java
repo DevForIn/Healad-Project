@@ -75,11 +75,15 @@ public class BoardService {
 		noticeDao.updateNotice(notice);		
 	}
 
-	public List<Faq> fqalist() {
-		return faqDao.fqalist();
+	public List<Faq> fqalist(Integer pageNum, int limit) {
+		return faqDao.fqalist(pageNum,limit);
 	}
 
 	public Faq faqInfo(Integer faqId) {
 		return faqDao.faqInfo(faqId);
+	}
+
+	public int faqCount() {
+		return faqDao.faqCount();
 	}	
 }

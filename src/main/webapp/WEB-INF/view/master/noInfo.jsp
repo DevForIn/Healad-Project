@@ -27,19 +27,28 @@
 </style>
 	<hr>
 	<div class="container">
-		<h2 align="center">FAQ_No.${faq.faqId} 상세</h2>
+		<h2 align="center">Notice_No.${notice.noticeId} 상세</h2>
 		<hr>
 		<table class="table table-hover">
 			<tr>
 				<th>제목:</th>
-				<td>${faq.QUESTION}</td>
+				<td>${notice.noSubject}</td>
+			</tr>
+			<tr>
+				<th>등록일:</th>
+				<td><fmt:formatDate	value="${notice.noRegDate}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
 			</tr>
 		</table>
 		<hr>
 		<table>
 			<tr height="250px">
-				<th>질의응답:</th>
-				<td>${faq.ANSWER}</td>
+				<th>내용:</th>
+				<td>${notice.noContent}</td>
+			</tr>
+			<tr height="250px">
+				<th>파일:</th>
+				<td colspan="3">${notice.noFile}<br> 
+				<img src="${path}/board/file/${notice.noFileUrl}" width="50%"></td>
 			</tr>			
 		</table>
 		<div id="center" align="center" style="padding: 3px;">

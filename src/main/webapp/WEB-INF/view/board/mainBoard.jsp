@@ -56,9 +56,13 @@
 				</tr>
 			</thead>
 			<tbody>
+			<c:set var="NoNum" value="${(pageNum-1)*10+1}"/>
 				<c:forEach var="N" items="${Noticelist}">
 					<tr>
-						<td>${N.noticeId}</td>
+						<td>							
+							${NoNum}
+							<c:set var="NoNum" value="${NoNum+1}"/>
+						</td>
 						<td><a href="noticeInfo?num=${N.noticeId}">${N.noSubject}</a>
 						</td>
 						<td><fmt:formatDate value="${N.noRegDate}" pattern="yyyy-MM-dd" var="rday" />

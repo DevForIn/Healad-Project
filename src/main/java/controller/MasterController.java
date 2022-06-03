@@ -156,29 +156,54 @@ public class MasterController {
 		return mav;
 	}
 	@GetMapping("masterBoard")
-	public ModelAndView masterBoard(@Param("pageNum")Integer pageNum,HttpSession session) {
+	public ModelAndView masterBoard(@Param("pageNum")Integer pageNum,@Param("faqPageNum")Integer faqPageNum,HttpSession session) {
 		ModelAndView mav = new ModelAndView();	
 
 		if(pageNum == null || pageNum.toString().equals("")) {
 			pageNum=1;
-		}		
-		int limit = 10;				
-		int count = boardService.count();		
-		List<Notice> MasterList = boardService.noticelist(pageNum,limit);
+		}
+		if(faqPageNum == null || faqPageNum.toString().equals("")) {
+			faqPageNum=1;
+		}
 		
+		int limit = 10;				
+		int count = boardService.count();	
+		int faqCount = boardService.faqCount();
+
+		List<Notice> MasterList = boardService.noticelist(pageNum,limit);
+		List<Faq> faqList = boardService.fqalist(faqPageNum,limit);
+		
+		int noticeNo = count - (pageNum -1) * limit;
 		int maxPage = (int)((double)count/limit + 0.95);
 		int startPage = (int)((pageNum/10.0 + 0.9) - 1) * 10 + 1;
 		int endPage = startPage + 9;
-		if(endPage > maxPage) endPage = maxPage;		
+		if(endPage > maxPage) endPage = maxPage;	
+		
+		int faqNo = faqCount - (faqPageNum -1) * limit;
+		int faqMaxPage = (int)((double)faqCount/limit + 0.95);
+		int faqStartPage = (int)((faqPageNum/10.0 + 0.9) - 1) * 10 + 1;
+		int faqEndPage = faqStartPage + 9;
+		if(faqEndPage > faqMaxPage) faqEndPage = faqMaxPage;	
+		
+		mav.addObject("faqPageNum",faqPageNum);
+		mav.addObject("faqMaxPage",faqMaxPage);
+		mav.addObject("faqStartPage",faqStartPage);	
+		mav.addObject("faqEndPage",faqEndPage);	
+		
 		mav.addObject("pageNum",pageNum);
 		mav.addObject("maxPage",maxPage);
 		mav.addObject("startPage",startPage);	
 		mav.addObject("endPage",endPage);	
-		mav.addObject("noCount",count); 	
-		mav.addObject("notice",MasterList);		
 		
-		List<Faq> faqList = boardService.fqalist();
+		mav.addObject("noCount",count); 
+		mav.addObject("faqCount",faqCount); 
+		
+		mav.addObject("noticeNo",noticeNo);
+		mav.addObject("faqNo",faqNo);
+		
+		mav.addObject("notice",MasterList);			
 		mav.addObject("faqList",faqList);
+		
 		return mav;		
 	}
 	
@@ -231,6 +256,13 @@ public class MasterController {
 		ModelAndView mav = new ModelAndView();
 		Faq dbFaq = boardService.faqInfo(id); 
 		mav.addObject("faq",dbFaq);
+		return mav;
+	}
+	@GetMapping("noInfo")
+	public  ModelAndView noInfo(Integer id, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		Notice dbnotice = boardService.noticeInfo(id); 
+		mav.addObject("notice",dbnotice);
 		return mav;
 	}
 }

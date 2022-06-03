@@ -19,7 +19,9 @@ public interface NoticeMapper {
 	@Select("select count(*) from NOTICE")
 	int count();
 
-	@Select("select * from NOTICE where NOTICE_ID >= #{start} and NOTICE_ID <= #{end}")
+	@Select("select * from (select rownum rnum,NOTICE_ID,NO_SUBJECT,NO_CONTENT,NO_READ_CNT,NO_FILE_URL,NO_REG_DATE "
+			+ " from (select * from notice order by notice_id))"
+			+ " where rnum >= #{start} and rnum <= #{end}")
 	List<Notice> list(Map<String, Object> param);
 
 	@Select("select * from NOTICE where NOTICE_ID = #{value}")
