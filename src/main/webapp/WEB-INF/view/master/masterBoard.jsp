@@ -66,11 +66,11 @@
 			<ul class="pagination justify-content-center">
 					<c:if test="${pageNum > 1 }">
 						<li class='page-item'>
-						<a class="page-link" href="masterBoard?pageNum=${pageNum-1}">Previous</a></li>
+						<a class="page-link" href="masterBoard?pageNum=${pageNum-1}&faqPageNum=${faqPageNum}">Previous</a></li>
 					</c:if>
 					<c:if test="${pageNum <= 1}">
 						<li class='page-item disabled'>
-						<a class="page-link"	href="masterBoard?pageNum=${pageNum-1}">Previous</a></li>
+						<a class="page-link"	href="masterBoard?pageNum=${pageNum-1}&faqPageNum=${faqPageNum}">Previous</a></li>
 					</c:if>
 					<c:forEach var="i" begin="${startPage}" end="${endPage}">
 						<c:if test="${i == pageNum}">
@@ -78,16 +78,16 @@
 							<a class="page-link" href="#">${i}</a></li>
 						</c:if>
 						<c:if test="${i != pageNum}">
-							<a class="page-link" href="masterBoard?pageNum=${i}">${i}</a>
+							<a class="page-link" href="masterBoard?pageNum=${i}&faqPageNum=${faqPageNum}">${i}</a>
 						</c:if>
 					</c:forEach>
 					<c:if test="${pageNum < maxPage}">
 						<li class='page-item'>
-						<a class="page-link" href="masterBoard?pageNum=${pageNum+1}">Next</a></li>
+						<a class="page-link" href="masterBoard?pageNum=${pageNum+1}&faqPageNum=${faqPageNum}">Next</a></li>
 					</c:if>
 					<c:if test="${pageNum >= maxPage}">
 						<li class='page-item disabled'>
-						<a class="page-link" href="masterBoard?pageNum=${pageNum+1}">Next</a></li>
+						<a class="page-link" href="masterBoard?pageNum=${pageNum+1}&faqPageNum=${faqPageNum}">Next</a></li>
 					</c:if>	
 			</ul>
 		</div>
@@ -118,11 +118,11 @@
 			<ul class="pagination justify-content-center">
 					<c:if test="${faqPageNum > 1 }">
 						<li class='page-item'>
-						<a class="page-link" href="masterBoard?faqPageNum=${faqPageNum-1}">Previous</a></li>
+						<a class="page-link" href="masterBoard?pageNum=${pageNum}&faqPageNum=${faqPageNum-1}">Previous</a></li>
 					</c:if>
 					<c:if test="${faqPageNum <= 1}">
 						<li class='page-item disabled'>
-						<a class="page-link"	href="masterBoard?faqPageNum=${faqPageNum-1}">Previous</a></li>
+						<a class="page-link"	href="masterBoard?pageNum=${pageNum}&faqPageNum=${faqPageNum-1}">Previous</a></li>
 					</c:if>
 					<c:forEach var="i" begin="${faqStartPage}" end="${faqEndPage}">
 						<c:if test="${i == faqPageNum}">
@@ -130,16 +130,16 @@
 							<a class="page-link" href="#">${i}</a></li>
 						</c:if>
 						<c:if test="${i != faqPageNum}">
-							<a class="page-link" href="masterBoard?faqPageNum=${i}">${i}</a>
+							<a class="page-link" href="masterBoard?pageNum=${pageNum}&faqPageNum=${i}">${i}</a>
 						</c:if>
 					</c:forEach>
 					<c:if test="${faqPageNum < faqMaxPage}">
 						<li class='page-item'>
-						<a class="page-link" href="masterBoard?faqPageNum=${faqPageNum+1}">Next</a></li>
+						<a class="page-link" href="masterBoard?pageNum=${pageNum}&faqPageNum=${faqPageNum+1}">Next</a></li>
 					</c:if>
 					<c:if test="${faqPageNum >= faqMaxPage}">
 						<li class='page-item disabled'>
-						<a class="page-link" href="masterBoard?faqPageNum=${faqPageNum+1}">Next</a></li>
+						<a class="page-link" href="masterBoard?pageNum=${pageNum}&faqPageNum=${faqPageNum+1}">Next</a></li>
 					</c:if>	
 			</ul>
 		</div>
