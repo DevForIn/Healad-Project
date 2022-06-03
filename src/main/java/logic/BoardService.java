@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import dao.FaqDao;
 import dao.NoticeDao;
 
 @Service
@@ -17,6 +18,9 @@ public class BoardService {
 	
 	@Autowired
 	NoticeDao noticeDao;
+	
+	@Autowired
+	FaqDao faqDao;
 
 	private void uploadFileCreate(MultipartFile file, HttpServletRequest request, String upath) {
 		String orgFile = file.getOriginalFilename();
@@ -70,5 +74,12 @@ public class BoardService {
 		}
 		noticeDao.updateNotice(notice);		
 	}
-	
+
+	public List<Faq> fqalist() {
+		return faqDao.fqalist();
+	}
+
+	public Faq faqInfo(Integer faqId) {
+		return faqDao.faqInfo(faqId);
+	}	
 }

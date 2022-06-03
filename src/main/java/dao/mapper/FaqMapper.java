@@ -1,17 +1,16 @@
 package dao.mapper;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Select;
+
+import logic.Faq;
+
 public interface FaqMapper {
-	/*
 
-	@Select("select count(*) from faq where fqid=#{fqid}")
-	int count(String fqid);
+	@Select("select * from FAQ order by FAQ_ID")
+	List<Faq> faqlist();
 
-	@Select("select * from"
-			+"(select fqid,question,answer,fqregdate from"
-			+"(select * from faq where faqid = #{fqid} order by fqregdate desc")
-	List<Faq> list(Map<String, Object> param);
-
-	@Select("select fqid,answer,question,fqregdate from faq where fqid=#{fqid}")
-	Faq selectOne(Integer num);
-*/
+	@Select("select * from FAQ where FAQ_ID=#{faqId}")
+	Faq faqInfo(Integer faqId);
 }

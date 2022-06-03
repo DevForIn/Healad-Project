@@ -37,12 +37,12 @@ CREATE TABLE CART
 	PRIMARY KEY (CART_ID)
 );
 
-
+drop
 CREATE TABLE FAQ
 (
 	FAQ_ID number NOT NULL,
 	QUESTION varchar2(50),
-	ANSWER varchar2(1000),
+	ANSWER varchar2(2000),
 	PRIMARY KEY (FAQ_ID)
 );
 

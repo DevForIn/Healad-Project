@@ -1,43 +1,33 @@
 package logic;
 
-import java.util.Date;
-
 public class Faq {
-	private int fqid; //id
-	private String question; //질문
-	private String answer; //답변
-	private Date fqregdate; //등록일자(?) 필요한지 모르겠음
+	private int faqId;	// FAQ Num
+	private String QUESTION;	// FAQ 질문 (제목)
+	private String ANSWER;		// FAQ 답변 (내용)
 	
-	public int getFqid() {
-		return fqid;
+	
+	public int getFaqId() {
+		return faqId;
 	}
-	public void setFqid(int fqid) {
-		this.fqid = fqid;
+	public void setFaqId(int faqId) {
+		this.faqId = faqId;
 	}
-	public String getQuestion() {
-		return question;
+	public String getQUESTION() {
+		return QUESTION;
 	}
-	public void setQuestion(String question) {
-		this.question = question;
+	public void setQUESTION(String qUESTION) {
+		QUESTION = qUESTION;
 	}
-	public String getAnswer() {
-		return answer;
+	public String getANSWER() {
+		return ANSWER;
 	}
-	public void setAnswer(String answer) {
-		this.answer = answer;
-	}
-	public Date getFqregdate() {
-		return fqregdate;
-	}
-	public void setFqregdate(Date fqregdate) {
-		this.fqregdate = fqregdate;
+	public void setANSWER(String aNSWER) {
+		ANSWER = aNSWER;
 	}
 	@Override
 	public String toString() {
-		return "Faq [fqid=" + fqid + ", question=" + question + ", answer=" + answer + ", fqregdate=" + fqregdate
-				+ ", getFqid()=" + getFqid() + ", getQuestion()=" + getQuestion() + ", getAnswer()=" + getAnswer()
-				+ ", getFqregdate()=" + getFqregdate() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ ", toString()=" + super.toString() + "]";
+		return "Faq [faqId=" + faqId + ", QUESTION=" + QUESTION + ", ANSWER=" + ANSWER + "]";
 	}
+	
 	
 }

@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import exception.BoardException;
 import logic.BoardService;
+import logic.Faq;
 import logic.Item;
 import logic.ItemService;
 import logic.Notice;
@@ -176,6 +177,8 @@ public class MasterController {
 		mav.addObject("noCount",count); 	
 		mav.addObject("notice",MasterList);		
 		
+		List<Faq> faqList = boardService.fqalist();
+		mav.addObject("faqList",faqList);
 		return mav;		
 	}
 	
@@ -221,6 +224,13 @@ public class MasterController {
 				break;	
 		}
 		mav.addObject("saleList",saleList);
+		return mav;
+	}
+	@GetMapping("faqInfo")
+	public  ModelAndView faqInfo(Integer id, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		Faq dbFaq = boardService.faqInfo(id); 
+		mav.addObject("faq",dbFaq);
 		return mav;
 	}
 }

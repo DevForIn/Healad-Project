@@ -34,7 +34,7 @@
 		</ul>
 	</div>
 	<div style="width: auto; float: left; padding:0px 5px;">
-		<table style="width: 600px;">
+		<table style="width: 820px;">
 		<tr>
 			<th colspan="7">HEALAD_공지 목록&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${noCount} 개</th>
 		</tr>
@@ -56,8 +56,9 @@
 				<td><a href="${path}/board/file/${notice.noFileUrl}">${notice.noFileUrl}</a></td>
 				<td><fmt:formatDate value="${notice.noRegDate}" pattern="yyyy-MM-dd" /></td>
 				<td><a href="modifyNotice?num=${notice.noticeId}"><strong>수정</strong></a><br>
+				<a href="modifyNotice?num=${faq.faqId}"><strong>삭제</strong></a><br>
 			</tr>
-		</c:forEach>	
+		</c:forEach>
 		<tr><th colspan="7"><a href="${path}/board/writeNotice">공지 작성</a></th></tr>
 	</table>
 	<div class="container">			
@@ -91,27 +92,56 @@
 		</div>
 	</div>
 	<div style="width: auto; float: left; padding:0px 5px;">
-	<table style="width: 400px;">
+	<table style="width: 700px;">
 		<tr>
 			<th colspan="12">HEALAD_FAQ 목록</th>
 		</tr>
-		<c:forEach items="">
-
-		</c:forEach>		
-	</table>
-	</div>
-	<div style="width: auto; float: left; padding:0px 5px;">
-	<table style="width: 200px;">
 		<tr>
-			<th colspan="12">HEALAD_Review 목록</th>
+			<th>FAQ ID</th>
+			<th>제목</th>
+			<th>Modify</th>
 		</tr>
-		<tr>
-
-		</tr>
-		<c:forEach items="${userList}" var="user">
-
-		</c:forEach>		
+		<c:forEach items="${faqList}" var="faq">
+			<tr>
+				<td>${faq.faqId}</td>				
+				<td>
+					<a href="faqInfo?id=${faq.faqId}" 	onclick="window.open(this.href, '_blank', 'top=100, left=500, width=900, height=750'); return false;">${faq.QUESTION}</a>			
+				</td>
+				<td><a href="modifyNotice?num=${faq.faqId}"><strong>수정</strong></a><br>
+				<a href="modifyNotice?num=${faq.faqId}"><strong>삭제</strong></a><br>
+			</tr>
+		</c:forEach>
+		<tr><th colspan="3"><a href="${path}/master/writeFAQ">FAQ 작성</a></th></tr>	
 	</table>
+		<div class="container">			
+			<ul class="pagination justify-content-center">
+					<c:if test="${faqPageNum > 1 }">
+						<li class='page-item'>
+						<a class="page-link" href="masterBoard?pageNum=${faqPageNum-1}">Previous</a></li>
+					</c:if>
+					<c:if test="${faqPageNum <= 1}">
+						<li class='page-item disabled'>
+						<a class="page-link"	href="masterBoard?pageNum=${faqPageNum-1}">Previous</a></li>
+					</c:if>
+					<c:forEach var="i" begin="${faqStartPage}" end="${faqEndPage}">
+						<c:if test="${i == faqPageNum}">
+							<li class='page-item active'>
+							<a class="page-link" href="#">${i}</a></li>
+						</c:if>
+						<c:if test="${i != faqPageNum}">
+							<a class="page-link" href="masterBoard?pageNum=${i}">${i}</a>
+						</c:if>
+					</c:forEach>
+					<c:if test="${faqPageNum < faqMaxPage}">
+						<li class='page-item'>
+						<a class="page-link" href="masterBoard?pageNum=${faqPageNum+1}">Next</a></li>
+					</c:if>
+					<c:if test="${faqPageNum >= faqMaxPage}">
+						<li class='page-item disabled'>
+						<a class="page-link" href="masterBoard?pageNum=${faqPageNum+1}">Next</a></li>
+					</c:if>	
+			</ul>
+		</div>
 	</div>
 </body>
 </html>

@@ -16,5 +16,6 @@ public class SiteMeshFilter extends ConfigurableSiteMeshFilter{
 	protected void applyCustomConfiguration(SiteMeshFilterBuilder builder) {
 		builder.addDecoratorPath("/*", "/layout/layout.jsp");
 		builder.addExcludedPath("/master/itemYN*");
+		builder.addExcludedPath("/master/faqInfo*");
 	}
 }
