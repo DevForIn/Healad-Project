@@ -37,7 +37,7 @@
 	<div style="width: auto; float: left; padding:0px 5px;">
 		<table style="width: 820px;">
 		<tr>
-			<th colspan="7">HEALAD_공지 목록&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${noCount} 개</th>
+			<th colspan="7">HEALAD_공지 목록&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;${noCount} 개</th>
 		</tr>
 		<tr>
 			<th>공지 ID</th>
@@ -97,7 +97,7 @@
 	<div style="width: auto; float: left; padding:0px 5px;">
 	<table style="width: 700px;">
 		<tr>
-			<th colspan="12">HEALAD_FAQ 목록&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${faqCount} 개</th>
+			<th colspan="12">HEALAD_FAQ 목록&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;${faqCount} 개</th>
 		</tr>
 		<tr>
 			<th>FAQ ID</th>
@@ -110,14 +110,14 @@
 				<td>
 <a href="faqInfo?id=${faq.faqId}" onclick="window.open(this.href, '_blank', 'top=100, left=500, width=900, height=750'); return false;"><strong>${faq.QUESTION}</strong></a>			
 				</td>
-				<td><a href="modifyNotice?num=${faq.faqId}"><strong>수정</strong></a><br>
+				<td><a href="modifyFaq?num=${faq.faqId}"><strong>수정</strong></a><br>
 								<a href="deleteBoard?faqId=${faq.faqId}" 
 						onclick="window.open(this.href, '_blank', 'top=280, left=700, width=480, height=200'); return false;">
 				<strong>삭제</strong></a><br>
 				</td>
 			</tr>
 		</c:forEach>
-		<tr><th colspan="3"><a href="${path}/master/writeFAQ">FAQ 작성</a></th></tr>	
+		<tr><th colspan="3"><a href="writeFaq">FAQ 작성</a></th></tr>	
 	</table>
 		<div class="container">			
 			<ul class="pagination justify-content-center">

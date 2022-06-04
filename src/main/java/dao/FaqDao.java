@@ -41,4 +41,13 @@ public class FaqDao {
 		
 	}
 
+	public void updateFaq(Faq faq) {
+		template.getMapper(cls).updateFaq(faq);
+		
+	}
+
+	public void faqWrite(Faq faq) {
+		template.getMapper(cls).faqWrite(faq);
+	}
+
 }

@@ -96,5 +96,14 @@ public class BoardService {
 	public void deleteNotice(Integer noticeId) {
 		noticeDao.deleteNotice(noticeId);
 		
+	}
+
+	public void updateFaq(Faq faq) {
+		faqDao.updateFaq(faq);
+		
+	}
+
+	public void faqWrite(Faq faq) {
+		faqDao.faqWrite(faq);
 	}	
 }

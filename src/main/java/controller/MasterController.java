@@ -42,7 +42,7 @@ public class MasterController {
 	
 	
 	@GetMapping("*")
-	public ModelAndView getUser() {
+	public ModelAndView getUser(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject(new User());	
 		return mav;	
@@ -212,13 +212,17 @@ public class MasterController {
 		ModelAndView mav = new ModelAndView();
 		if(num != null) {
 			Notice notice = boardService.noticeInfo(num);	
+			String textArea = notice.getNoContent();
+			textArea = textArea.replace("<br>", "\r\n");
+			notice.setNoContent(textArea);
 			mav.addObject("notice",notice);
 		}
+		
 		return mav;
 	}
 	
 	@PostMapping("modifyNotice")
-	public ModelAndView PostgetModifyNotice(@Valid Notice notice,Integer num, BindingResult bresult,HttpServletRequest request) {
+	public ModelAndView PostModifyNotice(@Valid Notice notice,Integer num, BindingResult bresult,HttpServletRequest request,HttpSession session) {
 		ModelAndView mav = new ModelAndView();		
 		notice.setNoticeId(num);
 		
@@ -227,6 +231,9 @@ public class MasterController {
 			return mav;			}
 	
 		try {
+			String textArea = notice.getNoContent();
+			textArea = textArea.replace("\r\n", "<br>");
+			notice.setNoContent(textArea);
 			notice.setNoFileUrl(request.getParameter("file2"));
 			boardService.updateNotice(notice, request);
 			mav.setViewName("redirect:masterBoard");
@@ -315,5 +322,52 @@ public class MasterController {
 		}
 		mav.addObject("chk",chk);
 		return mav;
+	}
+	
+	@GetMapping("modifyFaq")
+	public ModelAndView getModifyFaq(Integer num,HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		if(num != null) {
+			Faq faq = boardService.faqInfo(num);
+			String textArea = faq.getANSWER();
+			textArea = textArea.replace("<br>", "\r\n");
+			faq.setANSWER(textArea);
+			mav.addObject("faq",faq);
+		}		
+		return mav;
+	}
+	
+	@PostMapping("modifyFaq")
+	public ModelAndView PostModifyFaq(Faq faq,Integer num, HttpSession session) {
+		ModelAndView mav = new ModelAndView();		
+		faq.setFaqId(num);
+		String textArea = faq.getANSWER();
+		textArea = textArea.replace("\r\n", "<br>");
+		faq.setANSWER(textArea);
+		boardService.updateFaq(faq);
+		mav.setViewName("redirect:masterBoard");
+
+		return mav;
+	}
+	
+	@GetMapping("writeFaq")
+	public ModelAndView getWriteFaq(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("faq",new Faq());
+		
+		return mav;	
+	}
+	
+	@PostMapping("writeFaq")
+	public ModelAndView postWriteFaq(Faq faq,HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		
+		String textArea = faq.getANSWER();
+		textArea = textArea.replace("\r\n", "<br>");
+		faq.setANSWER(textArea);
+		boardService.faqWrite(faq);
+		
+		mav.setViewName("redirect:masterBoard");
+		return mav;		
 	}
 }

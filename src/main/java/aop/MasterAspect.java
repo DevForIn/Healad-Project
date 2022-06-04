@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 import exception.LoginException;
 import logic.User;
 
-@Component	// 객체화.
-@Aspect		// AOP 기능 객체
+@Component	
+@Aspect		
 public class MasterAspect {
 
 	@Around("execution(* controller.Master*.*(..)) && args(..,session)")
@@ -21,8 +21,8 @@ public class MasterAspect {
 		if(loginUser == null) {
 			throw new LoginException("Warning : SYSTEM 로그인 필요.","../user/login");
 		} else if(!loginUser.getUserId().equals("admin")) {
-			throw new LoginException("Warning : SYSTEM 권한 필요.","../user/login");
+			throw new LoginException("Warning : SYSTEM 권한 필요.","../");
 		}
-		return joinPoint.proceed();	// 다음 메서드 호출 -> UserController.loginCheckmain
+		return joinPoint.proceed();	
 	}
 }
