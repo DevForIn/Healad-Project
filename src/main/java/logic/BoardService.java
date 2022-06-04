@@ -85,5 +85,16 @@ public class BoardService {
 
 	public int faqCount() {
 		return faqDao.faqCount();
+	}
+
+
+	public void deleteFaq(Integer faqId) {
+		faqDao.deleteFaq(faqId);
+		
+	}
+
+	public void deleteNotice(Integer noticeId) {
+		noticeDao.deleteNotice(noticeId);
+		
 	}	
 }

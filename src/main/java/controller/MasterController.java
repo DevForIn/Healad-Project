@@ -208,7 +208,7 @@ public class MasterController {
 	}
 	
 	@GetMapping("modifyNotice")
-	public ModelAndView getModifyNotice(Integer num) {
+	public ModelAndView getModifyNotice(Integer num,HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		if(num != null) {
 			Notice notice = boardService.noticeInfo(num);	
@@ -263,6 +263,57 @@ public class MasterController {
 		ModelAndView mav = new ModelAndView();
 		Notice dbnotice = boardService.noticeInfo(id); 
 		mav.addObject("notice",dbnotice);
+		return mav;
+	}
+	@GetMapping("writeNotice")
+	public ModelAndView writeNotice(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("notice",new Notice());
+		
+		return mav;	
+	}
+	
+	@PostMapping("writeNotice")
+	public ModelAndView PostWrite(@Valid Notice notice,BindingResult bresult, HttpServletRequest request,HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		if(bresult.hasErrors()) {
+			mav.getModel().putAll(bresult.getModel());
+			return mav;	
+		}
+		String textArea = notice.getNoContent();
+		textArea = textArea.replace("\r\n", "<br>");
+		notice.setNoContent(textArea);
+		boardService.noticeWrite(notice,request);
+		mav.setViewName("redirect:masterBoard");
+		return mav;		
+	}
+	
+	@GetMapping("deleteBoard")
+	public ModelAndView getDeleteBoard(Integer noticeId,Integer faqId, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		Notice dbNotice = boardService.noticeInfo(noticeId);
+		Faq dbFaq = boardService.faqInfo(faqId);
+		mav.addObject("faq",dbFaq);
+		mav.addObject("notice",dbNotice);
+		return mav;
+	}
+	@PostMapping("deleteBoard")
+	public ModelAndView postDeleteBoard(Integer noticeId,Integer faqId,HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		String chk="";
+		if(noticeId == null) noticeId=0;
+		if(faqId == null) faqId=0;
+		try {
+			if(noticeId > 0)
+				boardService.deleteNotice(noticeId);
+			if(faqId > 0)
+				boardService.deleteFaq(faqId);			
+			
+			chk = "ok";
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		mav.addObject("chk",chk);
 		return mav;
 	}
 }

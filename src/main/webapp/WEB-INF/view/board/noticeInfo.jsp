@@ -32,9 +32,16 @@
 				<td colspan="3">${notice.noContent}</td>
 			</tr>
 			<tr>
-				<th>파일:</th>
-				<td colspan="3">${notice.noFile}<br> 
-				<img src="${path}/board/file/${notice.noFileUrl}" width="50%"></td>
+				<th>첨부파일:</th>
+				<c:choose>
+					<c:when test="${notice.noFileUrl == null or notice.noFileUrl == ''}">
+						<td colspan="3"> - </td> 
+					</c:when>
+					<c:otherwise>
+						<td colspan="3">${notice.noFile}<br> 
+						<img src="${path}/board/file/${notice.noFileUrl}" width="50%"></td>
+					</c:otherwise>
+				</c:choose>
 			</tr>
 		</table>
 		<div id="center" align="center" style="padding: 3px;">

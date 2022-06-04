@@ -57,10 +57,12 @@
 				<td><a href="${path}/board/file/${notice.noFileUrl}">${notice.noFileUrl}</a></td>
 				<td><fmt:formatDate value="${notice.noRegDate}" pattern="yyyy-MM-dd" /></td>
 				<td><a href="modifyNotice?num=${notice.noticeId}"><strong>수정</strong></a><br>
-				<a href="modifyNotice?num=${faq.faqId}"><strong>삭제</strong></a><br>
+				<a href="deleteBoard?noticeId=${notice.noticeId}" 
+						onclick="window.open(this.href, '_blank', 'top=280, left=700, width=480, height=200'); return false;">
+				<strong>삭제</strong></a><br>
 			</tr>
 		</c:forEach>
-		<tr><th colspan="7"><a href="${path}/board/writeNotice">공지 작성</a></th></tr>
+		<tr><th colspan="7"><a href="writeNotice">공지 작성</a></th></tr>
 	</table>
 	<div class="container">			
 			<ul class="pagination justify-content-center">
@@ -109,7 +111,10 @@
 <a href="faqInfo?id=${faq.faqId}" onclick="window.open(this.href, '_blank', 'top=100, left=500, width=900, height=750'); return false;"><strong>${faq.QUESTION}</strong></a>			
 				</td>
 				<td><a href="modifyNotice?num=${faq.faqId}"><strong>수정</strong></a><br>
-				<a href="modifyNotice?num=${faq.faqId}"><strong>삭제</strong></a><br>
+								<a href="deleteBoard?faqId=${faq.faqId}" 
+						onclick="window.open(this.href, '_blank', 'top=280, left=700, width=480, height=200'); return false;">
+				<strong>삭제</strong></a><br>
+				</td>
 			</tr>
 		</c:forEach>
 		<tr><th colspan="3"><a href="${path}/master/writeFAQ">FAQ 작성</a></th></tr>	

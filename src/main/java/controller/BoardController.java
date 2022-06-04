@@ -76,25 +76,7 @@ public class BoardController {
 		mav.addObject("Noticelist",Noticelist);
 		return mav;	
 	}
-	@GetMapping("writeNotice")
-	public ModelAndView writeNotice() {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("notice",new Notice());
-		
-		return mav;	
-	}
-	
-	@PostMapping("writeNotice")
-	public ModelAndView PostWrite(@Valid Notice notice,BindingResult bresult, HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView();
-		if(bresult.hasErrors()) {
-			mav.getModel().putAll(bresult.getModel());
-			return mav;	
-		}
-		boardService.noticeWrite(notice,request);
-		mav.setViewName("redirect:mainBoard");
-		return mav;		
-	}
+
 	
 	@RequestMapping("noticeInfo")
 	public ModelAndView noticeCall(Integer num, HttpSession session) {

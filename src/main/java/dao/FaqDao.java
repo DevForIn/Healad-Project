@@ -36,4 +36,9 @@ public class FaqDao {
 		return template.getMapper(cls).faqCount();
 	}
 
+	public void deleteFaq(Integer faqId) {
+		template.getMapper(cls).deleteFaq(faqId);
+		
+	}
+
 }

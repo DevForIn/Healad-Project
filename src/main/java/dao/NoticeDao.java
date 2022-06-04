@@ -74,4 +74,9 @@ public class NoticeDao {
 	public void updateNotice(Notice notice) {
 		template.getMapper(cls).updateNotice(notice);			
 	}
+
+	public void deleteNotice(Integer noticeId) {
+		template.getMapper(cls).deleteNotice(noticeId);	
+		
+	}
 }

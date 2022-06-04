@@ -3,6 +3,7 @@ package dao.mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 
 import logic.Faq;
@@ -18,4 +19,7 @@ public interface FaqMapper {
 
 	@Select("select count(*) from FAQ")
 	int faqCount();
+
+	@Delete("delete from FAQ where FAQ_ID = #{value}")
+	void deleteFaq(Integer faqId);
 }

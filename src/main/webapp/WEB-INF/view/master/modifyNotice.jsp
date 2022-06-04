@@ -44,7 +44,7 @@
 			<tr>
 				<td colspan="2" align="center"><a
 					href="javascript:document.updateform.submit()">[수정]</a>&nbsp; <a
-					href="list?boardid=${boardid}">[목록]</a></td>
+					href="masterBoard">[목록]</a></td>
 			</tr>
 		</table>
 	</form:form>

@@ -31,7 +31,7 @@
 			</tr>
 			<tr>
 				<td colspan="2"><a href="javascript:document.f.submit()">[공지 등록]</a>
-					<a href="mainBoard">[공지 목록]</a></td>
+					<a href="${path}/board/mainBoard">[공지 목록]</a></td>
 			</tr>
 		</table>
 	</form:form>

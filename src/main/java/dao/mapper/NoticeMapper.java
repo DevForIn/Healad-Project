@@ -3,6 +3,7 @@ package dao.mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -38,5 +39,8 @@ public interface NoticeMapper {
 
 	@Update("update NOTICE set NO_SUBJECT=#{noSubject},NO_CONTENT=#{noContent},NO_FILE_URL=#{noFileUrl} where NOTICE_ID=#{noticeId}")
 	void updateNotice(Notice notice);
+
+	@Delete("delete from NOTICE where NOTICE_ID = #{value}")
+	void deleteNotice(Integer noticeId);
 
 }
