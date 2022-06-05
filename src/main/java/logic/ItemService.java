@@ -57,8 +57,8 @@ public class ItemService {
 		itemDao.YNchange(itemId,useYn);	
 	}
 
-	public List<Item> itemUseList(Integer sort) {		
-		return itemDao.itemUseList(sort);
+	public List<Item> itemUseList(Integer pageNum, int limit, Integer useNum) {		
+		return itemDao.itemUseList(pageNum,limit,useNum);
 	}
 
 	public List<Item> itemCatYN(Integer cat_no, Integer sort) {		
@@ -67,6 +67,38 @@ public class ItemService {
 
 	public int count() {
 		return itemDao.count();
+	}
+
+	public List<Item> itemListsort(Integer pageNum, int limit, Integer sort) {
+		return itemDao.itemListsort(pageNum,limit,sort);
+	}
+
+	public int Ycount(Integer ctn) {
+		return itemDao.Ycount(ctn);
+	}
+
+	public int Ncount(Integer ctn) {
+		return itemDao.Ncount(ctn);
+	}
+
+	public int countCat(Integer ctn) {
+		return itemDao.countCat(ctn);
 	}	
+	public int countYall() {
+		return itemDao.countYall();
+	}
+	public int countNall() {
+		return itemDao.countNall();
+	}
+
+	public List<Item> itemListsortCat(Integer pageNum, int limit, Integer sort, Integer ctn) {
+		return itemDao.itemListsortCat(pageNum,limit,sort,ctn);
+	}
+
+	public List<Item> itemUseListCat(Integer pageNum, int limit, Integer useNum, Integer ctn) {
+		return itemDao.itemUseListCat(pageNum,limit,useNum,ctn);
+	}
+
+
 	
 }

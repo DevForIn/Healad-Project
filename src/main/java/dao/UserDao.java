@@ -57,14 +57,6 @@ public class UserDao {
 		template.getMapper(cls).deleteUser(userId);			
 	}
 
-	public List<User> userList(Integer pageNum, int limit) {
-		param.clear();
-		int start = (pageNum - 1) * limit +1;
-		int end = start + limit -1;
-		param.put("start", start);
-		param.put("end", end);
-		return template.getMapper(cls).userList(param);
-	}
 
 	public void pointAdd(String mileage, String userId) {
 		param.clear();
@@ -80,7 +72,16 @@ public class UserDao {
 	public int outCount() {
 		return template.getMapper(cls).outCount();
 	}
-
+		
+	public List<User> userList(Integer pageNum, int limit) {
+		param.clear();
+		int start = (pageNum - 1) * limit +1;
+		int end = start + limit -1;
+		param.put("start", start);
+		param.put("end", end);
+		return template.getMapper(cls).userList(param);
+	}
+	
 	public List<User> outuserList(Integer outpageNum, int limit) {
 		param.clear();
 		int start = (outpageNum - 1) * limit +1;
@@ -89,7 +90,7 @@ public class UserDao {
 		param.put("end", end);
 		return template.getMapper(cls).outuserList(param);
 	}
-
+	
 	public List<User> userListsort(Integer pageNum, int limit, Integer sort) {
 		param.clear();
 		String odb ="";

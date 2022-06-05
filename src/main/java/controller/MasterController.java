@@ -105,52 +105,120 @@ public class MasterController {
 		return mav;
 	}
 	@RequestMapping("itemList")
-	public ModelAndView itemList(@Param("pageNum")Integer pageNum,Integer sort,Integer ctn,HttpSession session) {
+	public ModelAndView itemList(@Param("pageNum")Integer pageNum,Integer useNum,Integer sort,Integer ctn,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		if(pageNum == null || pageNum.toString().equals("")) {
 			pageNum=1;
 		}		
-		int limit = 20;			
-		int count = itemService.count();	
-		
-		List<Item> itemList = itemService.itemList(pageNum,limit);
 		if(ctn==null) ctn=0;
-		if(sort==null) sort=1;
+		if(sort==null) sort=0;
+		if(useNum==null) useNum=0;
+		int limit = 20;			
+		int count = itemService.count();
+		
+		int countYall = itemService.countYall();
+		int countNall = itemService.countNall();
+
+		int countCat = itemService.countCat(ctn);
+		int Ycount = itemService.Ycount(ctn);
+		int Ncount = itemService.Ncount(ctn);
+		List<Item> itemList = itemService.itemList(pageNum,limit);
+
+				
 		switch(ctn) {
-		case 0 : itemList = itemService.itemList(pageNum,limit);
-					if(sort==3)itemList = itemService.itemUseList(sort);
-					if(sort==4)itemList = itemService.itemUseList(sort);
-				break;
+		case 0 : 	
+					if(sort==1) {
+						itemList = itemService.itemListsort(pageNum,limit,sort);
+					}
+					if(sort==2) {
+						itemList = itemService.itemListsort(pageNum,limit,sort);
+					}
+					if(useNum==1) {
+						itemList = itemService.itemUseList(pageNum,limit,useNum);
+						count = countYall;
+					}
+					if(useNum==2) {
+						itemList = itemService.itemUseList(pageNum,limit,useNum);
+						count = countNall;
+					}
+				break;		
 		case 1 : itemList = itemService.itemListCat(ctn);
-					if(sort==3) itemList = itemService.itemCatYN(ctn,sort);
-					if(sort==4) itemList = itemService.itemCatYN(ctn,sort);
-				break;
+				 count = countCat;
+					if(sort==1) {
+						itemList = itemService.itemListsortCat(pageNum,limit,sort,ctn);
+					}
+					if(sort==2) {
+						itemList = itemService.itemListsortCat(pageNum,limit,sort,ctn);
+					}
+					if(useNum==1) {
+						itemList = itemService.itemUseListCat(pageNum,limit,useNum,ctn);
+						count = Ycount;
+					}
+					if(useNum==2) {
+						itemList = itemService.itemUseListCat(pageNum,limit,useNum,ctn);
+						count = Ncount;
+					}
+				break;	
 		case 2 : itemList = itemService.itemListCat(ctn);
-					if(sort==3) itemList = itemService.itemCatYN(ctn,sort);
-					if(sort==4) itemList = itemService.itemCatYN(ctn,sort);
+		 count = countCat;
+					if(sort==1) {
+						itemList = itemService.itemListsortCat(pageNum,limit,sort,ctn);
+					}
+					if(sort==2) {
+						itemList = itemService.itemListsortCat(pageNum,limit,sort,ctn);
+					}
+					if(useNum==1) {
+						itemList = itemService.itemUseListCat(pageNum,limit,useNum,ctn);
+						count = Ycount;
+					}
+					if(useNum==2) {
+						itemList = itemService.itemUseListCat(pageNum,limit,useNum,ctn);
+						count = Ncount;
+					}
 				break;
 		case 3 : itemList = itemService.itemListCat(ctn);
-					if(sort==3) itemList = itemService.itemCatYN(ctn,sort);
-					if(sort==4) itemList = itemService.itemCatYN(ctn,sort);
-				break;
+				 count = countCat;
+					if(sort==1) {
+						itemList = itemService.itemListsortCat(pageNum,limit,sort,ctn);
+					}
+					if(sort==2) {
+						itemList = itemService.itemListsortCat(pageNum,limit,sort,ctn);
+					}
+					if(useNum==1) {
+						itemList = itemService.itemUseListCat(pageNum,limit,useNum,ctn);
+						count = Ycount;
+					}
+					if(useNum==2) {
+						itemList = itemService.itemUseListCat(pageNum,limit,useNum,ctn);
+						count = Ncount;
+					}
+				break;	
 		case 4 : itemList = itemService.itemListCat(ctn);	
-					if(sort==3) itemList = itemService.itemCatYN(ctn,sort);
-					if(sort==4) itemList = itemService.itemCatYN(ctn,sort);
+				 count = countCat;
+					if(sort==1) {
+						itemList = itemService.itemListsortCat(pageNum,limit,sort,ctn);
+					}
+					if(sort==2) {
+						itemList = itemService.itemListsortCat(pageNum,limit,sort,ctn);
+					}
+					if(useNum==1) {
+						itemList = itemService.itemUseListCat(pageNum,limit,useNum,ctn);
+						count = Ycount;
+					}
+					if(useNum==2) {
+						itemList = itemService.itemUseListCat(pageNum,limit,useNum,ctn);
+						count = Ncount;
+					}
 				break;
 		}
-		switch(sort) {
-		case 1 : Collections.sort(itemList,(u1,u2) -> u1.getPrice().compareTo(u2.getPrice()));
-				break;
-		case 2 : Collections.sort(itemList,(u1,u2) -> u2.getPrice().compareTo(u1.getPrice()));
-				break;
-			
-		}
+
 		
 		int maxPage = (int)((double)count/limit + 0.95);
 		int startPage = (int)((pageNum/10.0 + 0.9) - 1) * 10 + 1;
 		int endPage = startPage + 9;
 		if(endPage > maxPage) endPage = maxPage;	
-		
+		mav.addObject("useNum", useNum);
+		mav.addObject("sortnum", sort);
 		mav.addObject("pageNum",pageNum);
 		mav.addObject("maxPage",maxPage);
 		mav.addObject("startPage",startPage);	
