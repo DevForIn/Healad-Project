@@ -42,9 +42,29 @@ public interface UserMapper {
 	+ " where USER_ID = #{userId}")
 	void deleteUser(String userId);
 
-	@Select("select * from USER_ACCOUNT order by JOIN_DATE")
-	List<User> userList();
-
 	@Update("update USER_ACCOUNT set Mileage=Mileage+#{Mileage} where USER_ID = #{userId}")
 	void pointAdd(Map<String, Object> param);
+
+	@Select("select count(*) from USER_ACCOUNT where WITHDRAW_YN = 'N'")
+	int count();
+	
+	@Select("select * from ( select rownum rnum,USER_ID,PWD,USER_NAME,PHONE_NO,POST_CODE,"
+		+ " ADDR,ADDR_DETAIL,EMAIL,BIRTH_DATE,WITHDRAW_YN,WITHDRAW_DATE,JOIN_DATE,MILEAGE "
+		+ " from (select * from USER_ACCOUNT where WITHDRAW_YN = 'N' and USER_ID != 'admin' order by JOIN_DATE)) "
+		+ " where rnum >= #{start} and rnum <= #{end}")
+	List<User> userList(Map<String, Object> param);
+
+	@Select("select count(*) from USER_ACCOUNT where WITHDRAW_YN = 'Y'")
+	int outCount();
+	
+	@Select("select * from ( select rownum rnum,USER_ID,WITHDRAW_DATE "
+			+ " from (select * from USER_ACCOUNT where WITHDRAW_YN = 'Y')) "
+			+ " where rnum >= #{start} and rnum <= #{end}")
+	List<User> outuserList(Map<String, Object> param);
+
+	@Select("select * from ( select rownum rnum,USER_ID,PWD,USER_NAME,PHONE_NO,POST_CODE,"
+			+ " ADDR,ADDR_DETAIL,EMAIL,BIRTH_DATE,WITHDRAW_YN,WITHDRAW_DATE,JOIN_DATE,MILEAGE "
+			+ " from (select * from USER_ACCOUNT where WITHDRAW_YN = 'N' and USER_ID != 'admin' order by MILEAGE ${odb})) "
+			+ " where rnum >= #{start} and rnum <= #{end}")
+	List<User> userListsort(Map<String, Object> param);
 }

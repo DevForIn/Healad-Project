@@ -30,8 +30,13 @@ public class ItemDao {
 		return template.getMapper(cls).selectOne(itemId);
 	}
 
-	public List<Item> itemList() {
-		return template.getMapper(cls).itemList();
+	public List<Item> itemList(Integer pageNum, int limit) {
+		param.clear();
+		int start = (pageNum - 1) * limit +1;
+		int end = start + limit -1;
+		param.put("start", start);
+		param.put("end", end);
+		return template.getMapper(cls).itemList(param);
 	}
 
 	public List<Item> itemListCat(Integer cat_no) {
@@ -71,5 +76,9 @@ public class ItemDao {
 			param.put("useYn", "N");
 		}
 		return template.getMapper(cls).itemCatYN(param);
+	}
+
+	public int count() {
+		return template.getMapper(cls).count();
 	}
 }

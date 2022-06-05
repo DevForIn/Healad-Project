@@ -50,16 +50,8 @@ public class User {
 	
 	private Date withdrawDate;
 	
-	private int mileage;
-	
-	private int total;	
+	private Integer mileage;
 
-	public int getTotal() {
-		return total;
-	}
-	public void setTotal(int total) {
-		this.total = total;
-	}
 	public String getUserId() {
 		return userId;
 	}
@@ -132,7 +124,7 @@ public class User {
 	public void setWithdrawDate(Date withdrawDate) {
 		this.withdrawDate = withdrawDate;
 	}
-	public int getMileage() {
+	public Integer getMileage() {
 		return mileage;
 	}
 	public void setMileage(int mileage) {

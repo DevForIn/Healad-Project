@@ -15,6 +15,7 @@ function CI(){
 	location.href="itemList?ctn="+$("select[name=Cat_ID]").val();
 }
 </script>
+	<input type="hidden" name="pageNum" value="1"> 
 	<div class="a" style="background-color: #ffff80; height: 100%; width: 15%; float: left;">
 		<ul>
 			<li><a href="userList">User List</a></li>
@@ -48,17 +49,15 @@ function CI(){
 	                        	<option value="4">Drink</option>
 	                    </select></th>
 			<th>ITEM ID
-				<a href="itemList?ctn=${ctn}&sort=1">▲</a>
-				<a href="itemList?ctn=${ctn}&sort=2">▼</a>
 			</th>
 			<th>ITEM NAME</th>
 			<th>가격
-				<a href="itemList?ctn=${ctn}&sort=3">▲</a>
-				<a href="itemList?ctn=${ctn}&sort=4">▼</a>
+				<a href="itemList?ctn=${ctn}&sort=1">▲</a>
+				<a href="itemList?ctn=${ctn}&sort=2">▼</a>
 			</th>
 			<th>설명</th>
 			<th>IMAGE</th>
-			<th>사용여부(<a href="itemList?ctn=${ctn}&sort=5">Y</a>/<a href="itemList?ctn=${ctn}&sort=6">N</a>)</th>
+			<th>사용여부(<a href="itemList?ctn=${ctn}&sort=3">Y</a>/<a href="itemList?ctn=${ctn}&sort=4">N</a>)</th>
 
 		</tr>
 		<c:forEach items="${itemList}" var="item">
@@ -83,7 +82,37 @@ function CI(){
 				</td>			
 			</tr>
 		</c:forEach>		
-	</table>			
+	</table>
+		<div class="container">			
+			<ul class="pagination justify-content-center">
+					<c:if test="${pageNum > 1 }">
+						<li class='page-item'>
+						<a class="page-link" href="itemList?pageNum=${pageNum-1}">Previous</a></li>
+					</c:if>
+					<c:if test="${pageNum <= 1}">
+						<li class='page-item disabled'>
+						<a class="page-link"	href="itemList?pageNum=${pageNum-1}">Previous</a></li>
+					</c:if>
+					<c:forEach var="i" begin="${startPage}" end="${endPage}">
+						<c:if test="${i == pageNum}">
+							<li class='page-item active'>
+							<a class="page-link" href="#">${i}</a></li>
+						</c:if>
+						<c:if test="${i != pageNum}">
+							<a class="page-link" href="itemList?pageNum=${i}">${i}</a>
+						</c:if>
+					</c:forEach>
+					<c:if test="${pageNum < maxPage}">
+						<li class='page-item'>
+						<a class="page-link" href="itemList?pageNum=${pageNum+1}">Next</a></li>
+					</c:if>
+					<c:if test="${pageNum >= maxPage}">
+						<li class='page-item disabled'>
+						<a class="page-link" href="itemList?pageNum=${pageNum+1}">Next</a></li>
+					</c:if>	
+			</ul>
+		</div>
+	</div>			
 	</div>
 </body>
 </html>

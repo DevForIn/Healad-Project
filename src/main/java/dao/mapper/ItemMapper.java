@@ -19,8 +19,9 @@ public interface ItemMapper {
 			+ " from item where item_id = #{value}")
 	Item selectOne(Integer itemId);
 
-	@Select("select * from item")
-	List<Item> itemList();
+	@Select("select * from ( select rownum rnum, item_id , item_name, price, description, picture_url, use_yn, item_cat_id\r\n"
+			+ "from (select * from item order by item_id)) where rnum >= #{start} and rnum <= #{end}")
+	List<Item> itemList(Map<String, Object> param);
 	
 	@Select("select * from item where item_cat_id = #{value}")
 	List<Item> itemListCat(Integer cat_no);
@@ -36,5 +37,8 @@ public interface ItemMapper {
 	List<Item> itemUseList(Map<String, Object> param);
 	@Select("select * from item where use_yn = #{useYn} and item_cat_id=#{itemCatId} ")
 	List<Item> itemCatYN(Map<String, Object> param);
+
+	@Select("select count(*) from ITEM")
+	int count();
 
 }

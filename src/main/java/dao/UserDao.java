@@ -57,8 +57,13 @@ public class UserDao {
 		template.getMapper(cls).deleteUser(userId);			
 	}
 
-	public List<User> userList() {
-		return template.getMapper(cls).userList();
+	public List<User> userList(Integer pageNum, int limit) {
+		param.clear();
+		int start = (pageNum - 1) * limit +1;
+		int end = start + limit -1;
+		param.put("start", start);
+		param.put("end", end);
+		return template.getMapper(cls).userList(param);
 	}
 
 	public void pointAdd(String mileage, String userId) {
@@ -66,5 +71,40 @@ public class UserDao {
 		param.put("userId", userId);
 		param.put("Mileage", mileage);
 		template.getMapper(cls).pointAdd(param);
+	}
+
+	public int count() {
+		return template.getMapper(cls).count();
+	}
+
+	public int outCount() {
+		return template.getMapper(cls).outCount();
+	}
+
+	public List<User> outuserList(Integer outpageNum, int limit) {
+		param.clear();
+		int start = (outpageNum - 1) * limit +1;
+		int end = start + limit -1;
+		param.put("start", start);
+		param.put("end", end);
+		return template.getMapper(cls).outuserList(param);
+	}
+
+	public List<User> userListsort(Integer pageNum, int limit, Integer sort) {
+		param.clear();
+		String odb ="";
+		if(sort==1) {
+			odb = "desc";
+			param.put("odb", odb);
+		}
+		if(sort==2) {
+			odb = "asc";
+			param.put("odb", odb);
+		}
+		int start = (pageNum - 1) * limit +1;
+		int end = start + limit -1;
+		param.put("start", start);
+		param.put("end", end);
+		return template.getMapper(cls).userListsort(param);
 	}	
 }

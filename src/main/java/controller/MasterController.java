@@ -49,75 +49,116 @@ public class MasterController {
 	}
 
 	@RequestMapping({"userList","outUserList"})
-	public ModelAndView userList(Integer sort, HttpSession session) {
+	public ModelAndView userList(@Param("pageNum")Integer pageNum, @Param("outpageNum")Integer outpageNum,Integer sort, HttpSession session) {
 		ModelAndView mav = new ModelAndView();		
-		List<User> userList = service.userList();	
-		for(User us : userList) {
-			int total = 0;
-			if(us.getWithdrawYn().equals("N")) {
-			List<Sale> salelist = saleService.saleList(us.getUserId());
-			for(Sale si : salelist) {
-				total+=si.getTotal();				
-			}
-			us.setTotal(total);
-			}
-		}
+		if(pageNum == null || pageNum.toString().equals("")) {
+			pageNum=1;
+		}	
+		if(outpageNum == null || outpageNum.toString().equals("")) {
+			outpageNum=1;
+		}	
+		int limit = 20;	
+		int outLimit = 10;
+		int count = service.count();	
+		int outCount = service.outCount();
+		List<User> userList = service.userList(pageNum,limit);	
+		List<User> outuserList = service.outuserList(outpageNum,outLimit);	
+
 		if(sort==null) sort=0;
 		switch(sort) {
 		case 0 : break;
-		case 1 : Collections.sort(userList,(u1,u2) -> u1.getUserId().compareTo(u2.getUserId()));
+		case 1 : userList = service.userListsort(pageNum,limit,sort);	
 				break;
-		case 2 : Collections.sort(userList,(u1,u2) -> u2.getUserId().compareTo(u1.getUserId()));
-				break;
-		case 3 : Collections.sort(userList,(u1,u2) -> u1.getUserId().compareTo(u2.getUserId()));
-				break;
-		case 4 : Collections.sort(userList,(u1,u2) -> u2.getUserId().compareTo(u1.getUserId()));
+		case 2 : userList = service.userListsort(pageNum,limit,sort);	
 				break;
 		}
+		
+		int maxPage = (int)((double)count/limit + 0.95);
+		int startPage = (int)((pageNum/10.0 + 0.9) - 1) * 10 + 1;
+		int endPage = startPage + 9;
+		if(endPage > maxPage) endPage = maxPage;
+		
+		int outMaxPage = (int)((double)outCount/limit + 0.95);
+		int outStartPage = (int)((outpageNum/10.0 + 0.9) - 1) * 10 + 1;
+		int outEndPage = outStartPage + 9;
+		if(outEndPage > outMaxPage) outEndPage = outMaxPage;	
+		
+		mav.addObject("pageNum",pageNum);
+		mav.addObject("maxPage",maxPage);
+		mav.addObject("startPage",startPage);	
+		mav.addObject("endPage",endPage);	
+		
+		mav.addObject("outpageNum",outpageNum);
+		mav.addObject("outMaxPage",outMaxPage);
+		mav.addObject("outStartPage",outStartPage);	
+		mav.addObject("outEndPage",outEndPage);	
+		
+		
+		mav.addObject("sortnum", sort);
+		
+		mav.addObject("outCount",outCount);
+		mav.addObject("count",count);
 		mav.addObject("userList",userList);
+		mav.addObject("outuserList",outuserList);
+		
+		
 		return mav;
 	}
 	@RequestMapping("itemList")
-	public ModelAndView itemList(Integer sort,Integer ctn,HttpSession session) {
+	public ModelAndView itemList(@Param("pageNum")Integer pageNum,Integer sort,Integer ctn,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		List<Item> itemList = itemService.itemList();
+		if(pageNum == null || pageNum.toString().equals("")) {
+			pageNum=1;
+		}		
+		int limit = 20;			
+		int count = itemService.count();	
+		
+		List<Item> itemList = itemService.itemList(pageNum,limit);
 		if(ctn==null) ctn=0;
 		if(sort==null) sort=1;
 		switch(ctn) {
-		case 0 : itemList = itemService.itemList();
-					if(sort==5)itemList = itemService.itemUseList(sort);
-					if(sort==6)itemList = itemService.itemUseList(sort);
+		case 0 : itemList = itemService.itemList(pageNum,limit);
+					if(sort==3)itemList = itemService.itemUseList(sort);
+					if(sort==4)itemList = itemService.itemUseList(sort);
 				break;
 		case 1 : itemList = itemService.itemListCat(ctn);
-					if(sort==5) itemList = itemService.itemCatYN(ctn,sort);
-					if(sort==6) itemList = itemService.itemCatYN(ctn,sort);
+					if(sort==3) itemList = itemService.itemCatYN(ctn,sort);
+					if(sort==4) itemList = itemService.itemCatYN(ctn,sort);
 				break;
 		case 2 : itemList = itemService.itemListCat(ctn);
-					if(sort==5) itemList = itemService.itemCatYN(ctn,sort);
-					if(sort==6) itemList = itemService.itemCatYN(ctn,sort);
+					if(sort==3) itemList = itemService.itemCatYN(ctn,sort);
+					if(sort==4) itemList = itemService.itemCatYN(ctn,sort);
 				break;
 		case 3 : itemList = itemService.itemListCat(ctn);
-					if(sort==5) itemList = itemService.itemCatYN(ctn,sort);
-					if(sort==6) itemList = itemService.itemCatYN(ctn,sort);
+					if(sort==3) itemList = itemService.itemCatYN(ctn,sort);
+					if(sort==4) itemList = itemService.itemCatYN(ctn,sort);
 				break;
 		case 4 : itemList = itemService.itemListCat(ctn);	
-					if(sort==5) itemList = itemService.itemCatYN(ctn,sort);
-					if(sort==6) itemList = itemService.itemCatYN(ctn,sort);
+					if(sort==3) itemList = itemService.itemCatYN(ctn,sort);
+					if(sort==4) itemList = itemService.itemCatYN(ctn,sort);
 				break;
 		}
 		switch(sort) {
-		case 1 : Collections.sort(itemList,(u1,u2) -> u1.getItemId().compareTo(u2.getItemId()));
+		case 1 : Collections.sort(itemList,(u1,u2) -> u1.getPrice().compareTo(u2.getPrice()));
 				break;
-		case 2 : Collections.sort(itemList,(u1,u2) -> u2.getItemId().compareTo(u1.getItemId()));
-				break;
-		case 3 : Collections.sort(itemList,(u1,u2) -> u1.getPrice().compareTo(u2.getPrice()));
-				break;
-		case 4 : Collections.sort(itemList,(u1,u2) -> u2.getPrice().compareTo(u1.getPrice()));
+		case 2 : Collections.sort(itemList,(u1,u2) -> u2.getPrice().compareTo(u1.getPrice()));
 				break;
 			
 		}
+		
+		int maxPage = (int)((double)count/limit + 0.95);
+		int startPage = (int)((pageNum/10.0 + 0.9) - 1) * 10 + 1;
+		int endPage = startPage + 9;
+		if(endPage > maxPage) endPage = maxPage;	
+		
+		mav.addObject("pageNum",pageNum);
+		mav.addObject("maxPage",maxPage);
+		mav.addObject("startPage",startPage);	
+		mav.addObject("endPage",endPage);	
+		mav.addObject("count",count); 		
 		mav.addObject("ctn",ctn);
 		mav.addObject("itemList",itemList);
+		
 		return mav;
 	}
 	@GetMapping("newItem")

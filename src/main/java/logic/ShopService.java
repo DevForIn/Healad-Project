@@ -38,12 +38,28 @@ public class ShopService {
 		userDao.deleteUser(userId);				
 	}
 
-	public List<User> userList() {		
-		return  userDao.userList();
+	public List<User> userList(Integer pageNum, int limit) {		
+		return  userDao.userList(pageNum,limit);
 	}
 	public void pointAdd(String mileage, String userId) {
 		userDao.pointAdd(mileage,userId);	
 		
+	}
+
+	public int count() {
+		return userDao.count();
+	}
+
+	public int outCount() {
+		return userDao.outCount();
+	}
+
+	public List<User> outuserList(Integer outpageNum, int limit) {
+		return  userDao.outuserList(outpageNum,limit);
+	}
+
+	public List<User> userListsort(Integer pageNum, int limit, Integer sort) {
+		return  userDao.userListsort(pageNum,limit,sort);
 	}
 	
 }

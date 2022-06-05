@@ -14,6 +14,7 @@
 </script>
 </head>
 <body>
+	<input type="hidden" name="outpageNum" value="1"> 
 	<div class="a" style="background-color: #ffff80; height: 100%; width: 15%; float: left;">
 		<ul>
 			<li><a href="userList">User List</a></li>
@@ -24,27 +25,51 @@
 
 		</ul>
 	</div>
-	<div style="width: 60%; float: right;">
-	<table style="width: 500px;">
-		<tr>
-			<th colspan="3">HEALAD_탈퇴회원목록</th>
-		</tr>
-		<tr>
-			<th>ID <a href="outUserList?sort=2" class="noline">▲</a>
-				<a href="outUserList?sort=3" class="noline">▼</a></th>
-			<th>탈퇴여부</th>
-			<th>탈퇴날짜</th>
-		</tr>
-		<c:forEach items="${userList}" var="user">
-			<c:if test="${user.withdrawYn == 'Y'}">
+	<div style="width: auto; float: left; padding:0px 500px;">
+		<table style="width: 500px;">
 			<tr>
-				<td>${user.userId}</td>
-				<td>${user.withdrawYn}</td>
-				<td><fmt:formatDate value="${user.withdrawDate}" pattern="yyyy-MM-dd" /></td>
+				<th colspan="13">HEALAD_탈퇴회원목록&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;총 ${outCount} USER</th>
 			</tr>
-			</c:if>
-		</c:forEach>		
-	</table>
+			<tr>
+				<th>ID </th>
+				<th>탈퇴날짜</th>
+			</tr>
+			<c:forEach items="${outuserList}" var="user">
+				<tr>
+					<td>${user.userId}</td>
+					<td><fmt:formatDate value="${user.withdrawDate}" pattern="yyyy-MM-dd" /></td>
+				</tr>
+			</c:forEach>		
+		</table>
+		<div class="container" style="width: 110%; float: right;">			
+			<ul class="pagination justify-content-center">
+					<c:if test="${outpageNum > 1 }">
+						<li class='page-item'>
+						<a class="page-link" href="outUserList?outpageNum=${outpageNum-1}">Previous</a></li>
+					</c:if>
+					<c:if test="${outpageNum <= 1}">
+						<li class='page-item disabled'>
+						<a class="page-link" href="outUserList?outpageNum=${outpageNum-1}">Previous</a></li>
+					</c:if>
+					<c:forEach var="i" begin="${outStartPage}" end="${outEndPage}">
+						<c:if test="${i == outpageNum}">
+							<li class='page-item active'>
+							<a class="page-link" href="#">${i}</a></li>
+						</c:if>
+						<c:if test="${i != outpageNum}">
+							<a class="page-link" href="outUserList?outpageNum=${i}">${i}</a>
+						</c:if>
+					</c:forEach>
+					<c:if test="${outpageNum < outMaxPage}">
+						<li class='page-item'>
+						<a class="page-link" href="outUserList?outpageNum=${outpageNum+1}">Next</a></li>
+					</c:if>
+					<c:if test="${outpageNum >= outMaxPage}">
+						<li class='page-item disabled'>
+						<a class="page-link" href="outUserList?outpageNum=${outpageNum+1}">Next</a></li>
+					</c:if>	
+			</ul>
+		</div>
 	</div>
 </body>
 </html>
