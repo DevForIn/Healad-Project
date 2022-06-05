@@ -83,8 +83,12 @@ public class SaleService {
 		return saleItemDao.getSaleItemsRank();
 	}
 
-	public List<Sale> allList() {
-		return saleItemDao.allList();
+	public List<Sale> allList(Integer pageNum, int limit) {
+		return saleItemDao.allList(pageNum,limit);
+	}
+
+	public int count() {
+		return saleItemDao.count();
 	}
 
 }

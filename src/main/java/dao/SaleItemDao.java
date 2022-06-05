@@ -33,8 +33,17 @@ public class SaleItemDao {
 		return template.getMapper(cls).getSaleItemsRank();
 	}
 
-	public List<Sale> allList() {
-		return template.getMapper(cls).allList();
+	public List<Sale> allList(Integer pageNum, int limit) {
+		param.clear();
+		int start = (pageNum - 1) * limit +1;
+		int end = start + limit -1;
+		param.put("start", start);
+		param.put("end", end);
+		return template.getMapper(cls).allList(param);
+	}	
+
+	public int count() {
+		return template.getMapper(cls).count();
 	}
 
 }

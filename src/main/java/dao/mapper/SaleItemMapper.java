@@ -1,6 +1,7 @@
 package dao.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
@@ -36,7 +37,14 @@ public interface SaleItemMapper {
 			)
 	List<Item> getSaleItemsRank();
 
-	@Select("select * from SALE")
-	List<Sale> allList();
+	@Select("select * from (select rownum rnum,si.sum,s.* "
+			+ " from (select SALE_ID,sum(price) sum from sale_item "
+			+ " group by SALE_ID order by SALE_ID) si, sale s "
+			+ " where si.sale_id = s.sale_id) "
+			+ " where rnum >= #{start} and rnum <= #{end}")
+	List<Sale> allList(Map<String, Object> param);
+
+	@Select("select count(*) from sale")
+	int count();
 
 }

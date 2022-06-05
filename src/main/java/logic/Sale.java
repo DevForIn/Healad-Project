@@ -17,7 +17,16 @@ public class Sale {
 	private String remark;	
 	private List<SaleItem> itemList = new ArrayList<SaleItem>();
 
+	private int sum;
 	
+	public int getSum() {
+		return sum;
+	}
+
+	public void setSum(int sum) {
+		this.sum = sum;
+	}
+
 	public int getTotal() {
 		int sum=0;
 		for(SaleItem si : itemList) {
