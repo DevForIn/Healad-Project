@@ -28,7 +28,7 @@
 	<div style="width: auto; float: left; padding:0px 500px;">
 		<table style="width: 500px;">
 			<tr>
-				<th colspan="13">HEALAD_탈퇴회원목록&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;총 ${outCount} USER</th>
+				<th colspan="13">HEALAD_탈퇴회원목록&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;총 ${outCount} 회원</th>
 			</tr>
 			<tr>
 				<th>ID </th>

@@ -36,7 +36,7 @@ function CI(){
 	<div style="width: auto; float: right;">
 	<table style="width: 1500px;">
 		<tr>
-			<th colspan="6">HEALAD_상품</th>
+			<th colspan="6">HEALAD_상품&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;총 ${count} ITEM</th>
 			<th><a href="${path}/master/newItem"><font color="black">[ ITEM 추가 ]</font></a></th>
 		</tr>
 		<tr>

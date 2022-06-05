@@ -28,7 +28,7 @@
 	<div style="width: 82%; float: right;">
 	<table style="width: 1450px;">
 		<tr>
-			<th colspan="13">HEALAD_회원목록&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;총 ${count-1} USER</th>
+			<th colspan="13">HEALAD_회원목록&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;총 ${count-1} 회원</th>
 		</tr>
 		<tr>
 			<th>번호</th>

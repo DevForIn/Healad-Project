@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 import dao.mapper.ItemMapper;
 
 import logic.Item;
-import logic.User;
 
 @Repository
 public class ItemDao {

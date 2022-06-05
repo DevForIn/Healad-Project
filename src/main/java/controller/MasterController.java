@@ -354,7 +354,7 @@ public class MasterController {
 		return mav;
 	}
 	@RequestMapping("masterOrder")
-	public ModelAndView masterOrder(@Param("pageNum")Integer pageNum,Integer sort, HttpSession session) {
+	public ModelAndView masterOrder(@Param("pageNum")Integer pageNum, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		if(pageNum == null || pageNum.toString().equals("")) {
 			pageNum=1;
@@ -362,13 +362,6 @@ public class MasterController {
 		int limit = 10;
 		int count = saleService.count();
 		List<Sale> saleList  = saleService.allList(pageNum,limit);
-		if(sort==null) sort=1;
-		switch(sort) {
-		case 1 : Collections.sort(saleList,(u1,u2) -> u1.getSaleId().compareTo(u2.getSaleId()));
-				break;
-		case 2 : Collections.sort(saleList,(u1,u2) -> u2.getSaleId().compareTo(u1.getSaleId()));
-				break;	
-		}
 		
 		int maxPage = (int)((double)count/limit + 0.95);
 		int startPage = (int)((pageNum/10.0 + 0.9) - 1) * 10 + 1;

@@ -37,11 +37,11 @@ public interface SaleItemMapper {
 			)
 	List<Item> getSaleItemsRank();
 
-	@Select("select * from (select rownum rnum,si.sum,s.* "
-			+ " from (select SALE_ID,sum(price) sum from sale_item "
-			+ " group by SALE_ID order by SALE_ID) si, sale s "
-			+ " where si.sale_id = s.sale_id) "
-			+ " where rnum >= #{start} and rnum <= #{end}")
+	@Select("SELECT * from (SELECT rownum rnum,si.sum,s.* "
+			+ " FROM ( SELECT SALE_ID,sum(price) sum FROM SALE_ITEM "
+			+ " GROUP BY SALE_ID ) si, SALE s "
+			+ " WHERE si.SALE_ID = s.SALE_ID ) "
+			+ " WHERE rnum >= #{start} and rnum <= #{end}")
 	List<Sale> allList(Map<String, Object> param);
 
 	@Select("select count(*) from sale")
