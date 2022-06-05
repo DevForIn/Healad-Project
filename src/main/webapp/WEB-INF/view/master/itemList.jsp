@@ -62,7 +62,7 @@ function CI(){
 		</tr>
 		<c:forEach items="${itemList}" var="item">
 			<tr>
-				<td>
+				<td> 
 					<c:if test="${item.itemCatId == 1}">Salad</c:if>
 					<c:if test="${item.itemCatId == 2}">Topping</c:if>
 					<c:if test="${item.itemCatId == 3}">Dressing</c:if>
