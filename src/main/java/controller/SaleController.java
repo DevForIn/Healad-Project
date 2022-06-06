@@ -40,11 +40,13 @@ public class SaleController {
 			System.out.println("user=" + user.getUserId());
 			List<Cart> items = cartService.getList(user.getUserId());			
 			service.pointAdd(mileage,user.getUserId());
-			saleService.purchase(items, sale, user.getUserId());
+			long saleId = saleService.purchase(items, sale, user.getUserId());
+			mav.addObject("saleId", saleId);
 		}
 		else {
-			saleService.purchase(cart, sale, user.getUserId());
+			long saleId = saleService.purchase(cart, sale, user.getUserId());
 			service.pointAdd(mileage,user.getUserId());
+			mav.addObject("saleId", saleId);
 		}
 		
 		mav.addObject("orderType", orderType);

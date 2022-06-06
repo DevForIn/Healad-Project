@@ -18,7 +18,7 @@
 	         <div class="first d-flex justify-content-between align-items-center mb-3">
 	         	<div class="info">
 	                <span class="d-block name">주문이 완료되었습니다.</span>
-	                <span class="order">주문번호 - 4554645</span>
+	                <span class="order">주문번호 - ${saleId}</span>
 	            </div>
 	            <img src="https://i.imgur.com/NiAVkEw.png" width="40"/>
 	         </div>

@@ -25,7 +25,7 @@ public class SaleService {
 	@Autowired
 	ItemDao itemDao;
 	
-	public void purchase(List<Cart> items, Sale sale, String userId) {
+	public long purchase(List<Cart> items, Sale sale, String userId) {
 		// sale 데이터 등록
 		long saleId = saleDao.selectSeq();
 		sale.setSaleId(saleId);
@@ -45,9 +45,11 @@ public class SaleService {
 		// cart 삭제
 		cartDao.deleteByUserId(userId);
 		
+		return saleId;
+		
 	}
 
-	public void purchase(Cart cart, Sale sale, String userId) {
+	public long purchase(Cart cart, Sale sale, String userId) {
 		// sale 데이터 등록
 		long saleId = saleDao.selectSeq();
 		sale.setSaleId(saleId);
@@ -63,6 +65,8 @@ public class SaleService {
 		saleItem.setPrice(item.getPrice() * cart.getQuantity());
 		saleItem.setItemId(cart.getItemId());
 		saleItemDao.insert(saleItem);
+		
+		return saleId;
 	}
 
 	public List<Sale> saleList(String id) {
