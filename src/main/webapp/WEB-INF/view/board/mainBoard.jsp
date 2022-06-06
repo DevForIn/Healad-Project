@@ -14,9 +14,6 @@
 <body>
 	<div class="container">
 		<h2 align="center">H E A L A D _ 공지사항</h2>
-		<p align="right">
-			<c:if test="${count > 0 }"> ${count}건</c:if>
-		</p>
 		<form class="form-inline" action="mainBoard" method="post" name="sf" onsubmit="return ifNull()">
 			<div class="container justify-content-end text-center">
 				<input type="hidden" name="pageNum" value="1"> 
