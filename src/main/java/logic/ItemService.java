@@ -99,6 +99,10 @@ public class ItemService {
 		return itemDao.itemUseListCat(pageNum,limit,useNum,ctn);
 	}
 
+	public ItemScore getItemScore(Integer itemId) {
+		return itemDao.getItemScore(itemId);
+	}	
+
 
 	
 }

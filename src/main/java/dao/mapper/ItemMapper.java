@@ -74,6 +74,27 @@ public interface ItemMapper {
 			+ " from (select * from item where use_yn = #{useYn} and item_cat_id = #{itemCatId} order by price desc)) where rnum >= #{start} and rnum <= #{end}")
 	List<Item> itemUseListCat(Map<String, Object> param);
 
+	@Select("SELECT a.* "
+			+ "    , decode(cnt,0,0, score5/cnt) * 100 AS score5_rate "
+			+ "    , decode(cnt,0,0, score4/cnt) * 100 AS score4_rate "
+			+ "    , decode(cnt,0,0, score3/cnt) * 100 AS score3_rate "
+			+ "    , decode(cnt,0,0, score2/cnt) * 100 AS score2_rate "
+			+ "    , decode(cnt,0,0, score1/cnt) * 100 AS score1_rate "
+			+ "  FROM ( "
+			+ "	SELECT nvl(SUM(CASE WHEN score = 5 THEN 1 ELSE 0 END ),0) AS score5 "
+			+ "	      , nvl(SUM(CASE WHEN score = 4 THEN 1 ELSE 0 END ),0) AS score4 "
+			+ "	      , nvl(SUM(CASE WHEN score = 3 THEN 1 ELSE 0 END ),0) AS score3 "
+			+ "	      , nvl(SUM(CASE WHEN score = 2 THEN 1 ELSE 0 END ),0) AS score2 "
+			+ "	      , nvl(SUM(CASE WHEN score = 1 THEN 1 ELSE 0 END ),0) AS score1 "
+			+ "	      , count(1) AS cnt "
+			+ "	      , nvl(avg(score),0) AS avg_score "
+			+ "	  FROM REVIEW "
+			+ "	 WHERE item_id = #{itemId} "
+			+ " ) a "
+			)
+	ItemScore getItemScore(Integer itemId);
+
+
 
 
 }

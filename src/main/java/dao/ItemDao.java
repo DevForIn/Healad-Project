@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import dao.mapper.ItemMapper;
 
 import logic.Item;
+import logic.ItemScore;
 
 @Repository
 public class ItemDao {
@@ -159,6 +160,10 @@ public class ItemDao {
 		param.put("start", start);
 		param.put("end", end);
 		return template.getMapper(cls).itemUseListCat(param);
+	}
+
+	public ItemScore getItemScore(Integer itemId) {
+		return template.getMapper(cls).getItemScore(itemId);
 	}
 
 
