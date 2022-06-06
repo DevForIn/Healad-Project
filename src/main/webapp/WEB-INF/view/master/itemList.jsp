@@ -20,9 +20,10 @@ function CI(){
 		<ul>
 			<li><a href="userList">User List</a></li>
 			<li><a href="outUserList">OutUser List</a></li>
+			<li><a href="masterOrder">Order Status</a></li>
 			<li><a href="itemList" class="current">Item set</a></li>
 			<li><a href="masterBoard">Notice set</a></li>
-			<li><a href="masterOrder">Order Status</a></li>
+			
 		</ul><br><br><br><br><br>
 		<ul>
 			<li><a href="${path}/item/menu"><h3>Menu Page</h3></a></li>

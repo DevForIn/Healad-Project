@@ -21,9 +21,9 @@
 		<ul>
 			<li><a href="userList">User List</a></li>
 			<li><a href="outUserList">OutUser List</a></li>
-			<li><a href="itemList">Item set</a></li>
-			<li><a href="masterBoard"  class="current">Notice set</a></li>
 			<li><a href="masterOrder">Order Status</a></li>
+			<li><a href="itemList">Item set</a></li>
+			<li><a href="masterBoard" class="current">Notice set</a></li>
 		</ul><br><br><br><br><br>
 		<ul>
 			<li><a href="${path}/board/mainBoard"><h3>Board Page</h3></a></li>
