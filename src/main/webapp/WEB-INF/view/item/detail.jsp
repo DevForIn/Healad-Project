@@ -238,7 +238,7 @@ background:#dcdcdc;
 	
 <link rel="stylesheet" href="https://allyoucan.cloud/cdn/icofont/1.0.1/icofont.css" integrity="sha384-jbCTJB16Q17718YM9U22iJkhuGbS0Gd2LjaWb4YJEZToOPmnKDjySVa323U+W7Fv" crossorigin="anonymous">
 <div class="container">
-<div class="col-md-12">
+<div class="card" style="margin-top:10px;">
     <div class="offer-dedicated-body-left">
         <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade active show" id="pills-reviews" role="tabpanel" aria-labelledby="pills-reviews-tab">
