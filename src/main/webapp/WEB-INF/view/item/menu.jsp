@@ -20,7 +20,7 @@
 </head>
 <body>
 	<form id="frm" action="../item/order" method="post">
-		
+		<input type="hidden" id="orderType" name="orderType" value="">
 		<input type="hidden" id="itemId" name="itemId" value="">
 		<ul class="nav nav-tabs">
 		  <li class="nav-item">
@@ -51,6 +51,7 @@ fnSearchMenu('1');
 
 function fnOrder(itemId, itemName){
 	$('#itemId').val(itemId);
+	$('#orderType').val('D');
 	document.getElementById('frm').submit();
 	return false;
 }
