@@ -41,7 +41,7 @@
 				<th>주문일자</th>
 				<th>총주문금액</th>
 				<th>주소</th>
-				<th>Review</th>
+				<th>주문시 요청사항</th>
 			</tr>
 			<c:forEach items="${salelist}" var="sale" varStatus="stat">
 			<tr>

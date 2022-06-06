@@ -32,7 +32,7 @@
 			<th>사용자 닉네임</th>
 			<th>주문 금액</th>
 			<th>주소지</th>
-			<th>Review</th>
+			<th>주문시 요청사항</th>
 		</tr>
 		<c:forEach items="${saleList}" var="sale">
 			<tr>
