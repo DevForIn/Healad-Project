@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import logic.Item;
+import logic.ItemScore;
 
 public interface ItemMapper {
 	
@@ -21,7 +22,8 @@ public interface ItemMapper {
 
 	
 	@Select("select * from item where item_cat_id = #{value}")
-	List<Item> itemListCat(Integer cat_no);
+	List<Item> itemListCat(Integer cat_no);
+
 	@Insert("insert into item (ITEM_ID, ITEM_NAME, PRICE, "
 	+ " DESCRIPTION, PICTURE_URL, USE_YN, ITEM_CAT_ID)"
 	+ " values (SEQ_ITEM_ID.nextval, #{itemName},#{price},#{description},#{pictureUrl},'Y',#{itemCatId})")

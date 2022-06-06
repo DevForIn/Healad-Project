@@ -28,6 +28,27 @@ public class ReviewDao {
 		param.put("end", end);
 		return template.getMapper(cls).list(param);
 	}
+
+
+	public int count() {
+		return template.getMapper(cls).count();
+	}
+
+
+	public int countByItemId(Integer itemId) {
+		return template.getMapper(cls).countByItemId(itemId);
+	}
+
+
+	public List<Review> list(Integer pageNum, int limit, Integer itemId) {
+		param.clear();
+		int start = (pageNum - 1) * limit +1;
+		int end = start + limit -1;
+		param.put("start", start);
+		param.put("end", end);
+		param.put("itemId", itemId);
+		return template.getMapper(cls).list(param);
+	}
 	
 	
 	

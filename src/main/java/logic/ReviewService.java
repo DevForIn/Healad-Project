@@ -17,4 +17,16 @@ public class ReviewService {
 		return reviewDao.list(pageNum, limit);
 	}
 
+	public int count() {
+		return reviewDao.count();
+	}
+
+	public int countByItemId(Integer itemId) {
+		return reviewDao.countByItemId(itemId);
+	}
+
+	public List<Review> reviewlistByItemId(Integer pageNum, int limit, Integer itemId) {
+		return reviewDao.list(pageNum, limit, itemId);
+	}
+
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +14,10 @@ import org.springframework.web.servlet.ModelAndView;
 import logic.Cart;
 import logic.CartService;
 import logic.Item;
+import logic.ItemScore;
 import logic.ItemService;
+import logic.Review;
+import logic.ReviewService;
 import logic.User;
 
 @RestController
@@ -25,6 +29,9 @@ public class ItemController {
 	
 	@Autowired
 	private CartService cartService;
+	
+	@Autowired
+	private ReviewService reviewService;
 
 	@GetMapping("*") 	// 그외 모든 Get 방식 요청
 	public ModelAndView getItem() {
@@ -61,11 +68,37 @@ public class ItemController {
 
 	 
 	@RequestMapping("detail")
-	public ModelAndView detail(Integer itemId) {
+	public ModelAndView detail(Integer itemId, @Param("pageNum") Integer pageNum) {
 		ModelAndView mav = new ModelAndView();
 		// 아이템 아이디 기준 상세내용 조회
 		Item item = itemService.selectOne(itemId);
 		mav.addObject("item", item);
+		
+		// 리뷰 리스트 조회
+		if(pageNum == null || pageNum.toString().equals("")) {
+			pageNum=1;
+		}		
+		int limit = 10;		
+		int count = reviewService.countByItemId(itemId);			
+		List<Review> reviews = reviewService.reviewlistByItemId(pageNum,limit,itemId);		
+		
+		
+		int maxPage = (int)((double)count/limit + 0.95);
+		int startPage = (int)((pageNum/10.0 + 0.9) - 1) * 10 + 1;
+		int endPage = startPage + 9;
+		if(endPage > maxPage) endPage = maxPage;	
+		
+		mav.addObject("pageNum",pageNum);
+		mav.addObject("maxPage",maxPage);
+		mav.addObject("startPage",startPage);	
+		mav.addObject("endPage",endPage);	
+		mav.addObject("count",count); 
+		mav.addObject("reviews", reviews);
+		
+		// 리뷰 평점 조회
+		ItemScore score = itemService.getItemScore(itemId);
+		mav.addObject("score", score);
+		
 		return mav;	
 	}	
 	
