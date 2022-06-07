@@ -30,7 +30,7 @@
 			background-color: #FFFFFF;  }
 </style>
 	<div class="container">
-		<h2 align="center">H E A L A D _ 공지사항</h2><br>
+		<h2 align="center"> 공 지 게 시 판 </h2><br>
 		<table class="table table-hover">
 			<thead>
 				<tr>
