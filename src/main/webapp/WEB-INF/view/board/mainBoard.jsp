@@ -37,9 +37,9 @@
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th style="width: 10%;">공지 번호</th>
+					<th style="width: 10%;">No</th>
 					<th style="width: 50%;">제목</th>
-					<th style="width: 25%;">등록일</th>
+					<th style="width: 25%;">작성일</th>
 					<th style="width: 15%;">조회수</th>
 				</tr>
 			</thead>
