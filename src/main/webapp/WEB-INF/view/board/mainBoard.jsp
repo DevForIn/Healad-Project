@@ -12,44 +12,35 @@
 <title>Notice board</title>
 </head>
 <body>
+<style>
+	.left {
+	        text-align : left;
+		}
+	.table thead th {	
+			border: 3px solid silver;
+			border-collapse: collapse;  }	
+	th {    					
+ 			border-bottom: 2px solid #000000;
+			background-color:#c9c9c9;
+	        color : #000000;
+	        font-weight:bold;
+	        text-align:center;}
+	
+	.table td {
+		border:1px solid silver;;
+	}
+	td { 
+			background-color: #FFFFFF;  }
+</style>
 	<div class="container">
-		<h2 align="center">H E A L A D _ 공지사항</h2>
-		<form class="form-inline" action="mainBoard" method="post" name="sf" onsubmit="return ifNull()">
-			<div class="container justify-content-end text-center">
-				<input type="hidden" name="pageNum" value="1"> 
-				<select name="column" id="sel1" class="form-control">
-					<option value="">Option</option>
-					<option value="NO_SUBJECT">제목</option>
-					<option value="NO_CONTENT">내용</option>
-				</select>
-				<script>
-
-				document.sf.column.value = "${param.column}";
-					function ifNull(){
-						if($("select[name=column]").val() == "" && $("input[type=text]").val() == ""){	
-							return true;
-						}
-						else if($("select[name=column]").val() == "" || $("input[type=text]").val() == ""){
-							alert("검색항목을 선택해주세요.")							
-							return false;
-						}					 
-					}
-				</script>
-				<input class="form-control mr-sm-2" type="text" placeholder="Search"
-					name="find" value="${param.find}">
-				<button class="btn btn-success" type="submit">검색</button>
-			</div>
-		</form>
-		
-
+		<h2 align="center">H E A L A D _ 공지사항</h2><br>
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th>공지 번호</th>
-					<th>제목</th>
-					<th>등록일</th>
-					<th>파일</th>
-					<th>조회수</th>
+					<th style="width: 10%;">공지 번호</th>
+					<th style="width: 50%;">제목</th>
+					<th style="width: 25%;">등록일</th>
+					<th style="width: 15%;">조회수</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -60,7 +51,7 @@
 							${NoNum}
 							<c:set var="NoNum" value="${NoNum+1}"/>
 						</td>
-						<td><a href="noticeInfo?num=${N.noticeId}">${N.noSubject}</a>
+						<td class="left"><a href="noticeInfo?num=${N.noticeId}">${N.noSubject}</a>
 						</td>
 						<td><fmt:formatDate value="${N.noRegDate}" pattern="yyyy-MM-dd" var="rday" />
 						    <fmt:formatDate	value="${today}" pattern="yyyy-MM-dd" var="nday" /> 
@@ -71,7 +62,6 @@
 								<fmt:formatDate value="${N.noRegDate}" pattern="yy-MM-dd HH:mm:ss" />
 							</c:if>
 						</td>
-						<td><a href="${path}/board/file/${N.noFileUrl}">${N.noFileUrl}</a></td>
 						<td>${N.noReadCnt}</td>
 					</tr>
 				</c:forEach>
@@ -115,6 +105,33 @@
 				</c:choose>			
 			</ul>
 		</div>
+		<br><br>
+		<form class="form-inline" action="mainBoard" method="post" name="sf" onsubmit="return ifNull()">
+			<div class="container justify-content-end text-center">
+				<input type="hidden" name="pageNum" value="1"> 
+				<select name="column" id="sel1" class="form-control">
+					<option value="">Option</option>
+					<option value="NO_SUBJECT">제목</option>
+					<option value="NO_CONTENT">내용</option>
+				</select>
+				<script>
+
+				document.sf.column.value = "${param.column}";
+					function ifNull(){
+						if($("select[name=column]").val() == "" && $("input[type=text]").val() == ""){	
+							return true;
+						}
+						else if($("select[name=column]").val() == "" || $("input[type=text]").val() == ""){
+							alert("검색항목을 선택해주세요.")							
+							return false;
+						}					 
+					}
+				</script>
+				<input class="form-control mr-sm-2" type="text" placeholder="Search"
+					name="find" value="${param.find}">
+				<button class="btn btn-success" type="submit">검색</button>
+			</div>
+		</form>
 	</div>
 </body>
 </html>
