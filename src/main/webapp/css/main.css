@@ -27,6 +27,9 @@ caption {
 	font-size : 15px;
 	background-color: #FFFFFF;
 }
+.left {
+	        text-align : left;
+}
 /* MyPage */
 .a ul {
 	background-color : #ffff80;

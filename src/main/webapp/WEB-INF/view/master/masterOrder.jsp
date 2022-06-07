@@ -26,13 +26,13 @@
 			<th colspan="12">HEALAD_총 주문 현황&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;총 ${count} 건</th>
 		</tr>
 		<tr>
-			<th>주문일자</th>
-			<th>주문번호</th>
-			<th>사용자 ID</th>
-			<th>사용자 닉네임</th>
-			<th>주문 금액</th>
-			<th>주소지</th>
-			<th>주문시 요청사항</th>
+			<th style="width: 16%;">주문일자</th>
+			<th style="width: 6%;">주문번호</th>
+			<th style="width: 6%;">사용자 ID</th>
+			<th style="width: 11%;">사용자 닉네임</th>
+			<th style="width: 11%;">주문 금액</th>
+			<th style="width: 32%;">주소지</th>
+			<th style="width: 18%;">주문시 요청사항</th>
 		</tr>
 		<c:forEach items="${saleList}" var="sale">
 			<tr>
@@ -41,13 +41,13 @@
 				<td>${sale.userId}</td>
 				<td>${sale.saleUserName}</td>
 				<td><fmt:formatNumber value="${sale.sum}" pattern="###,###,###,###" />원</td>
-				<td>${sale.salePostCode}&nbsp;${sale.saleAddr}&nbsp;${sale.saleAddrDetail}</td>
-				<td>
+				<td class="left">${sale.salePostCode}&nbsp;${sale.saleAddr}&nbsp;${sale.saleAddrDetail}</td>
+				
 				<c:choose>
-					<c:when test="${sale.remark eq null}">( 없음 )</c:when>
-					<c:otherwise>${sale.remark}</c:otherwise>
+					<c:when test="${sale.remark eq null}"><td>( 없음 )</td></c:when>
+					<c:otherwise><td class="left">${sale.remark}</td></c:otherwise>
 				</c:choose>
-				</td>
+				
 		</c:forEach>		
 	</table>
 			<div class="container">			

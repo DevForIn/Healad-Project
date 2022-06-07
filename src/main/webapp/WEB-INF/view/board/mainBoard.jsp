@@ -13,9 +13,6 @@
 </head>
 <body>
 <style>
-	.left {
-	        text-align : left;
-		}
 	.table thead th {	
 			border: 3px solid silver;
 			border-collapse: collapse;  }	

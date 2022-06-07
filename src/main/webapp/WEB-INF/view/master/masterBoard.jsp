@@ -40,21 +40,21 @@
 			<th colspan="7">HEALAD_공지 목록&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;${noCount} 개</th>
 		</tr>
 		<tr>
-			<th>공지 ID</th>
-			<th>제목</th>
-			<th>조회수</th>
-			<th>첨부파일</th>
-			<th>등록일자</th>
-			<th>Modify</th>
+			<th style="width: 10%;">공지 ID</th>
+			<th style="width: 45%;">제목</th>
+			<th style="width: 10%;">조회수</th>
+			<th style="width: 10%;">첨부</th>
+			<th style="width: 15%;">등록일자</th>
+			<th style="width: 10%;">Modify</th>
 		</tr>
 		<c:forEach items="${notice}" var="notice">
 			<tr>
 				<td>${notice.noticeId}</td>
-				<td>
+				<td class="left">
 					<a href="noInfo?id=${notice.noticeId}" onclick="window.open(this.href, '_blank', 'top=100, left=500, width=900, height=750'); return false;"><strong>${notice.noSubject}</strong></a>
 				</td>
 				<td>${notice.noReadCnt}</td>
-				<td><a href="${path}/board/file/${notice.noFileUrl}">${notice.noFileUrl}</a></td>
+				<td><c:if test="${notice.noFileUrl== null }"> - </c:if><c:if test="${notice.noFileUrl!= null }"> O </c:if></td>
 				<td><fmt:formatDate value="${notice.noRegDate}" pattern="yyyy-MM-dd" /></td>
 				<td><a href="modifyNotice?num=${notice.noticeId}"><strong>수정</strong></a><br>
 				<a href="deleteBoard?noticeId=${notice.noticeId}" 
@@ -100,14 +100,14 @@
 			<th colspan="12">HEALAD_FAQ 목록&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;${faqCount} 개</th>
 		</tr>
 		<tr>
-			<th>FAQ ID</th>
-			<th>제목</th>
-			<th>Modify</th>
+			<th style="width: 10%;">FAQ ID</th>
+			<th style="width: 80%;">제목</th>
+			<th style="width: 10%;">Modify</th>
 		</tr>
 		<c:forEach items="${faqList}" var="faq">
 			<tr>
 				<td>${faq.faqId}</td>				
-				<td>
+				<td class="left">
 <a href="faqInfo?id=${faq.faqId}" onclick="window.open(this.href, '_blank', 'top=100, left=500, width=900, height=750'); return false;"><strong>${faq.QUESTION}</strong></a>			
 				</td>
 				<td><a href="modifyFaq?num=${faq.faqId}"><strong>수정</strong></a><br>

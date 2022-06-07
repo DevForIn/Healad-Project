@@ -73,7 +73,7 @@ function CI(){
 				<td>${item.itemId}</td>
 				<td>${item.itemName}</td>
 				<td><fmt:formatNumber value="${item.price}" />원</td>
-				<td>${item.description}</td>				
+				<td class="left">${item.description}</td>				
 				<td>
 				<a href="${path}/img/${item.pictureUrl}">${item.pictureUrl}</a></td>
 				<td>${item.useYn}			

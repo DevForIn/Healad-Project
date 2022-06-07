@@ -65,7 +65,7 @@
 					</c:otherwise>
 				</c:choose>
 				</td>
-				<td>${user.addr} ${user.addrDetail}</td>
+				<td class="left">${user.addr} ${user.addrDetail}</td>
 				<td><fmt:formatNumber value="${user.mileage*20}" pattern="###,###,###"/> 원</td>				
 				<td><fmt:formatNumber value="${user.mileage}" pattern="###,###,###"/> Point</td>				
 				<td><fmt:formatDate value="${user.joinDate}" pattern="yyyy-MM-dd" /></td>

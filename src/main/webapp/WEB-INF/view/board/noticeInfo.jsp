@@ -13,12 +13,15 @@
 </head>
 <body>
 <style>
+
 	.left {
 	        text-align : left;
 		}
 	.table thead th {	
 			border: 3px solid silver;
-			border-collapse: collapse;  }	
+			border-collapse: collapse;  }
+	body {
+			font-size:14px;}	
 	th {    					
  			border: 2px solid silver;
 			background-color:#c9c9c9;
@@ -58,9 +61,7 @@
 						<td colspan="3"> - </td> 
 					</c:when>
 					<c:otherwise>
-						<td colspan="3">${notice.noFile}<br> 
-						<img src="${path}/board/file/${notice.noFileUrl}" width="50%"><br><br>
-						<a href="${path}/board/file/${notice.noFileUrl}" download="${notice.noFileUrl}">첨부파일 다운로드</a></td>
+						<td colspan="3"><a href="${path}/board/file/${notice.noFileUrl}" download="${notice.noFileUrl}">다운로드 : ${notice.noFileUrl}</a></td>
 					</c:otherwise>
 				</c:choose>				
 			</tr>
