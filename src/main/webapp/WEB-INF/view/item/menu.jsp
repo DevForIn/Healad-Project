@@ -59,6 +59,7 @@ function fnOrder(itemId, itemName){
 function fnAddCart(itemId, itemName){
 	$.ajax({
 		url : "${path}/cart/add",
+		type:"POST",
 		data: {
 			'itemId': itemId,
 			'quantity': 1,

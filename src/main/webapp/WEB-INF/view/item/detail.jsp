@@ -196,7 +196,7 @@ background:#dcdcdc;
     height: 30px;
 }
 </style>
-	<form action="../item/order">
+	<form id="frm" autocomplete="off">
 	<input type="hidden" id="itemId" name="itemId" value="${item.itemId}">
 	<!-- order type (주문타입) D: 단건주문, C: 카트 주문  -->
 	<input type="hidden" name="orderType" value="D">
@@ -243,7 +243,7 @@ background:#dcdcdc;
 	                    <button class="btn btn-primary btn-rounded mr-1" onclick="fnAddCart('${item.itemId}','${item.itemName }')">
 	                        <i class="fa fa-shopping-cart"></i>
 	                    </button>
-	                    <button type="submit" class="btn btn-warning btn-rounded" ><i class="fa fa-truck"></i> 주문하기</button>
+	                    <button class="btn btn-warning btn-rounded" onclick="fnOrder()"><i class="fa fa-truck" ></i> 주문하기</button>
 	                    <button class="btn btn-dark btn-rounded" onclick="fnMoveList()">목록</button>
 	                </div>
 	            </div>
@@ -373,6 +373,12 @@ background:#dcdcdc;
 	</div>	
 	
 <script>
+function fnOrder(){
+	console.log('fnOrder');
+	$('#orderType').val('D');
+	document.getElementById('frm').action = "../item/order" ;
+	document.getElementById('frm').submit();
+}
 
 function fnSeeViewMore(){
 	
@@ -430,11 +436,14 @@ function fnAddCart(itemId, itemName){
 		url : "${path}/cart/add",
 		data: {
 			'itemId': itemId,
-			'quantity': 1,
+			'quantity': 1
 		},
+		type:"POST",
 		success : function(data) {
+			console.log('aaa',data);
 			alert(itemName + '가(이) 추가되었습니다.');
-			return;
+			// window.location.href='${path}/item/cart';
+			/// event.preventDefault();
 		},
 	    error:function(request,status,error){
 	    	 alert('로그인한 사용자만 장바구니 추가가 가능합니다.');
