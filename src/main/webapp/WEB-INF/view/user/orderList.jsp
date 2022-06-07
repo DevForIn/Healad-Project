@@ -34,18 +34,22 @@
 	<div style="width: 80%; float: right;">
 	<table style="width: 1400px;">
 			<tr>
-				<th colspan="5"><h3>[ ${user.userId} ]님의 주문 목록</h3></th>
+				<th colspan="6"><h3>[ ${user.userId} ]님의 주문 목록</h3></th>
 			</tr>
 			<tr>
+				<th>No</th>
 				<th>주문번호</th>
 				<th>주문일자</th>
 				<th>총주문금액</th>
 				<th>주소</th>
 				<th>주문시 요청사항</th>
 			</tr>
+			<c:set var="NoNum" value="1"/>
 			<c:forEach items="${salelist}" var="sale" varStatus="stat">
 			<tr>
-				<td><a href="javascript:list_disp('saleLine${stat.index}')">${sale.saleId}</a></td>
+				<td>${NoNum}
+					<c:set var="NoNum" value="${NoNum+1}"/></td>
+				<td><strong>[<a href="javascript:list_disp('saleLine${stat.index}')">${sale.saleId}</a>]</strong></td>
 				<td><fmt:formatDate value="${sale.saleDate}" pattern="yy-MM-dd (E) H시 m분" /></td>
 				<td><fmt:formatNumber pattern="###,###,###,###" value="${sale.total}"/>원</td>
 				<td>${sale.salePostCode}&nbsp;${sale.saleAddr}&nbsp;${sale.saleAddrDetail}</td>
@@ -57,7 +61,7 @@
 				</td>
 			</tr>
 			<tr id="saleLine${stat.index}" class="saleLine" style="display: none;">
-					<td colspan="5" align="center">
+					<td colspan="6" align="center">
 						<table>
 							<tr>
 								<th width="25%">상품명</th>
@@ -74,6 +78,7 @@
 						</table>
 					</td>
 				</tr>
+				
 			</c:forEach>
 		</table>
 	</div>	

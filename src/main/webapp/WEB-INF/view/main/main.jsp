@@ -76,7 +76,7 @@ td {
 	            <div class="product-img">
 	              <c:choose>
 	              	<c:when test="${!empty item.pictureUrl }">
-	              		<img class="img-fluid w-100" src="/healad/img/${item.pictureUrl }" alt="" style="height: 350px;" />
+	              		<a href="${path}/item/detail?itemId=${item.itemId }"><img class="img-fluid w-100" src="/healad/img/${item.pictureUrl }" alt="" style="height: 350px;" /></a>
 	              	</c:when>
 	              	<c:otherwise>
 	              		<img class="img-fluid w-100" src="../img/sal1.png" alt="" />
@@ -93,7 +93,7 @@ td {
 	            </div>
 	            <div class="product-btm">
 	              <a href="#" class="d-block">
-	                <h4>${item.itemName }</h4>
+	                <h4><a href="${path}/item/detail?itemId=${item.itemId }">${item.itemName }</h4>
 	              </a>
 	              <div class="mt-3">
 	                <span class="mr-4">
