@@ -203,7 +203,24 @@ background:#dcdcdc;
 	<div class="container">
 	    <div class="card">
 	        <div class="card-body">
-	            <h3 class="card-title">[${item.itemCatId}] ${item.itemName }</h3>
+	            <h3 class="card-title">
+	            	[<c:choose>
+	            		<c:when test="${item.itemCatId == 1}">
+	            		Salad
+	            		</c:when>
+	            		<c:when test="${item.itemCatId == 2}">
+	            		Topping
+	            		</c:when>
+	            		<c:when test="${item.itemCatId == 3}">
+	            		Dressing
+	            		</c:when>
+	            		<c:otherwise>
+	            		Drink
+	            		</c:otherwise>
+	            	</c:choose>
+	            	] 
+	            	${item.itemName }
+	            </h3>
 	            <div class="row">
 	                <div class="col-lg-5 col-md-5 col-sm-6">
 	                    <div class="white-box text-center">
@@ -221,7 +238,7 @@ background:#dcdcdc;
 	                    <h4 class="box-title mt-5">상세 설명</h4>
 	                    <p>${item.description }</p>
 	                    <h2 class="mt-5 mb-5">
-	                        가격 :  <fmt:formatNumber value="${item.price}"/>원<!-- <small class="text-success">(36%off)</small> -->
+	                        가격 :  <fmt:formatNumber value="${item.price}"/>원
 	                    </h2>
 	                    <button class="btn btn-primary btn-rounded mr-1" onclick="fnAddCart('${item.itemId}','${item.itemName }')">
 	                        <i class="fa fa-shopping-cart"></i>
@@ -235,124 +252,125 @@ background:#dcdcdc;
 	</div>
 	</form>
 	
-	
-<link rel="stylesheet" href="https://allyoucan.cloud/cdn/icofont/1.0.1/icofont.css" integrity="sha384-jbCTJB16Q17718YM9U22iJkhuGbS0Gd2LjaWb4YJEZToOPmnKDjySVa323U+W7Fv" crossorigin="anonymous">
-<div class="container">
-<div class="card" style="margin-top:10px;">
-    <div class="offer-dedicated-body-left">
-        <div class="tab-content" id="pills-tabContent">
-            <div class="tab-pane fade active show" id="pills-reviews" role="tabpanel" aria-labelledby="pills-reviews-tab">
-                <div class="bg-white rounded shadow-sm p-4 mb-4 clearfix graph-star-rating">
-                    <h5 class="mb-0 mb-4">리뷰 및 평점</h5>
-                    <div class="graph-star-rating-header">
-                        <div class="star-rating">
-                            <a href="#"><i class="icofont-ui-rating active"></i></a>
-                            <a href="#"><i class="icofont-ui-rating active"></i></a>
-                            <a href="#"><i class="icofont-ui-rating active"></i></a>
-                            <a href="#"><i class="icofont-ui-rating active"></i></a>
-                            <a href="#"><i class="icofont-ui-rating"></i></a> <b class="text-black ml-2">${count } 개의 리뷰</b>
-                        </div>
-                        <p class="text-black mb-4 mt-2">Rated ${score.avgScore} out of ${score.cnt }</p>
-                    </div>
-                    <div class="graph-star-rating-body">
-                        <div class="rating-list">
-                            <div class="rating-list-left text-black">
-                                5 Star
-                            </div>
-                            <div class="rating-list-center">
-                                <div class="progress">
-                                    <div style="width: ${score.score5Rate}%" aria-valuemax="5" aria-valuemin="0" aria-valuenow="5" role="progressbar" class="progress-bar bg-primary">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="rating-list-right text-black">${score.score5Rate}%</div>
-                        </div>
-                        <div class="rating-list">
-                            <div class="rating-list-left text-black">
-                                4 Star
-                            </div>
-                            <div class="rating-list-center">
-                                <div class="progress">
-                                    <div style="width: ${score.score4Rate}%" aria-valuemax="5" aria-valuemin="0" aria-valuenow="5" role="progressbar" class="progress-bar bg-primary">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="rating-list-right text-black">${score.score4Rate}%</div>
-                        </div>
-                        <div class="rating-list">
-                            <div class="rating-list-left text-black">
-                                3 Star
-                            </div>
-                            <div class="rating-list-center">
-                                <div class="progress">
-                                    <div style="width: ${score.score3Rate}%" aria-valuemax="5" aria-valuemin="0" aria-valuenow="5" role="progressbar" class="progress-bar bg-primary">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="rating-list-right text-black">${score.score3Rate}%</div>
-                        </div>
-                        <div class="rating-list">
-                            <div class="rating-list-left text-black">
-                                2 Star
-                            </div>
-                            <div class="rating-list-center">
-                                <div class="progress">
-                                    <div style="width: ${score.score2Rate}%" aria-valuemax="5" aria-valuemin="0" aria-valuenow="5" role="progressbar" class="progress-bar bg-primary">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="rating-list-right text-black">${score.score2Rate}%</div>
-                        </div>
-                    </div>
-                </div>
-                <div id="review"  class="bg-white rounded shadow-sm p-4 mb-4 mt-6 restaurant-detailed-ratings-and-reviews">
-                    <h5 class="mb-1">All Ratings and Reviews</h5>
-                    <c:if test="${empty reviews }">
-                    	<div class="reviews-members pt-4 pb-4">
-                    	<p>작성된 리뷰가 없습니다.</p>
-                    	</div>
-                    </c:if>
-                    <!-- review 반복 -->
-                    <c:forEach var="rv" items="${reviews }">
-	                    <div class="reviews-members pt-4 pb-4">
-	                        <div class="media">
-	                            <a href="#"><img alt="Generic placeholder image" src="http://bootdey.com/img/Content/avatar/avatar1.png" class="mr-3 rounded-pill"></a>
-	                            <div class="media-body">
-	                                <div class="reviews-members-header">
-	                                    <span class="star-rating float-right">
-	                                    	<c:if test="${rv.score >= 1 }"><i class="fa fa-star"></i></c:if>
-	                                    	<c:if test="${rv.score >= 2 }"><i class="fa fa-star"></i></c:if>
-	                                    	<c:if test="${rv.score >= 3 }"><i class="fa fa-star"></i></c:if>
-	                                    	<c:if test="${rv.score >= 4 }"><i class="fa fa-star"></i></c:if>
-	                                    	<c:if test="${rv.score >= 5 }"><i class="fa fa-star"></i></c:if>
-	                                    </span>
-	                                    <h6 class="mb-1"><a class="text-black" href="#">${rv.userId }</a></h6>
-	                                    <p class="text-gray">${rv.rvRegDate }</p>
-	                                </div>
-	                                <div class="reviews-members-body">
-	                                	<p>${rv.rvSubject }</p>
-	                                    <p>${rv.rvContent }</p>
-	                                </div>
-	                            </div>
-	                        </div>
-	                    </div>  
-	                    <hr>                  
-                    </c:forEach>
-
-                    <hr>
-                </div>
-                <!-- review 수가 5 이상일때 표시 -->
-                <c:if test="${count > 5}">
-	                <div class="bg-white rounded shadow-sm p-4 mb-4 mt-6 restaurant-detailed-ratings-and-reviews">
-	                	<input type="hidden" name="pageNum" id="pageNum" value="${pageNum }">
-	                	<a class="text-center w-100 d-block mt-4 font-weight-bold" style="cursor: pointer;" onclick="fnSeeViewMore()">See All Reviews</a>
-	            	</div>
-            	</c:if>
-            </div>
-        </div>
-    </div>
-</div>
-</div>	
+	<!--  리뷰 -->
+	<div class="container">
+		<div class="card" style="margin-top:10px;">
+		    <div class="offer-dedicated-body-left">
+		        <div class="tab-content" id="pills-tabContent">
+		            <div class="tab-pane fade active show" id="pills-reviews" role="tabpanel" aria-labelledby="pills-reviews-tab">
+		                <div class="bg-white rounded shadow-sm p-4 mb-4 clearfix graph-star-rating">
+		                    <h5 class="mb-0 mb-4">리뷰 및 평점</h5>
+		                    <div class="graph-star-rating-header">
+		                        <div class="star-rating">
+		                            <a href="#"><i class="icofont-ui-rating active"></i></a>
+		                            <a href="#"><i class="icofont-ui-rating active"></i></a>
+		                            <a href="#"><i class="icofont-ui-rating active"></i></a>
+		                            <a href="#"><i class="icofont-ui-rating active"></i></a>
+		                            <a href="#"><i class="icofont-ui-rating"></i></a> <b class="text-black ml-2">${count } 개의 리뷰</b>
+		                        </div>
+		                        <p class="text-black mb-4 mt-2">Rated ${score.avgScore} out of ${score.cnt }</p>
+		                    </div>
+		                    <div class="graph-star-rating-body">
+		                        <div class="rating-list">
+		                            <div class="rating-list-left text-black">
+		                                5 Star
+		                            </div>
+		                            <div class="rating-list-center">
+		                                <div class="progress">
+		                                    <div style="width: ${score.score5Rate}%" aria-valuemax="5" aria-valuemin="0" aria-valuenow="5" role="progressbar" class="progress-bar bg-primary">
+		                                    </div>
+		                                </div>
+		                            </div>
+		                            <div class="rating-list-right text-black">${score.score5Rate}%</div>
+		                        </div>
+		                        <div class="rating-list">
+		                            <div class="rating-list-left text-black">
+		                                4 Star
+		                            </div>
+		                            <div class="rating-list-center">
+		                                <div class="progress">
+		                                    <div style="width: ${score.score4Rate}%" aria-valuemax="5" aria-valuemin="0" aria-valuenow="5" role="progressbar" class="progress-bar bg-primary">
+		                                    </div>
+		                                </div>
+		                            </div>
+		                            <div class="rating-list-right text-black">${score.score4Rate}%</div>
+		                        </div>
+		                        <div class="rating-list">
+		                            <div class="rating-list-left text-black">
+		                                3 Star
+		                            </div>
+		                            <div class="rating-list-center">
+		                                <div class="progress">
+		                                    <div style="width: ${score.score3Rate}%" aria-valuemax="5" aria-valuemin="0" aria-valuenow="5" role="progressbar" class="progress-bar bg-primary">
+		                                    </div>
+		                                </div>
+		                            </div>
+		                            <div class="rating-list-right text-black">${score.score3Rate}%</div>
+		                        </div>
+		                        <div class="rating-list">
+		                            <div class="rating-list-left text-black">
+		                                2 Star
+		                            </div>
+		                            <div class="rating-list-center">
+		                                <div class="progress">
+		                                    <div style="width: ${score.score2Rate}%" aria-valuemax="5" aria-valuemin="0" aria-valuenow="5" role="progressbar" class="progress-bar bg-primary">
+		                                    </div>
+		                                </div>
+		                            </div>
+		                            <div class="rating-list-right text-black">${score.score2Rate}%</div>
+		                        </div>
+		                    </div>
+		                </div>
+		                
+		                <!-- review 조회 -->
+		                <div id="review"  class="bg-white rounded shadow-sm p-4 mb-4 mt-6 restaurant-detailed-ratings-and-reviews">
+		                    <h5 class="mb-1">All Ratings and Reviews</h5>
+		                    <c:if test="${empty reviews }">
+		                    	<div class="reviews-members pt-4 pb-4">
+		                    	<p>작성된 리뷰가 없습니다.</p>
+		                    	</div>
+		                    </c:if>
+		                    <!-- review 반복 -->
+		                    <c:forEach var="rv" items="${reviews }">
+			                    <div class="reviews-members pt-4 pb-4">
+			                        <div class="media">
+			                            <a href="#"><img alt="Generic placeholder image" src="http://bootdey.com/img/Content/avatar/avatar1.png" class="mr-3 rounded-pill"></a>
+			                            <div class="media-body">
+			                                <div class="reviews-members-header">
+			                                    <span class="star-rating float-right">
+			                                    	<c:if test="${rv.score >= 1 }"><i class="fa fa-star"></i></c:if>
+			                                    	<c:if test="${rv.score >= 2 }"><i class="fa fa-star"></i></c:if>
+			                                    	<c:if test="${rv.score >= 3 }"><i class="fa fa-star"></i></c:if>
+			                                    	<c:if test="${rv.score >= 4 }"><i class="fa fa-star"></i></c:if>
+			                                    	<c:if test="${rv.score >= 5 }"><i class="fa fa-star"></i></c:if>
+			                                    </span>
+			                                    <h6 class="mb-1"><a class="text-black" href="#">${rv.userId }</a></h6>
+			                                    <p class="text-gray">${rv.rvRegDate }</p>
+			                                </div>
+			                                <div class="reviews-members-body">
+			                                	<p>${rv.rvSubject }</p>
+			                                    <p>${rv.rvContent }</p>
+			                                </div>
+			                            </div>
+			                        </div>
+			                    </div>  
+			                    <hr>                  
+		                    </c:forEach>
+		
+		                    <hr>
+		                </div>
+		                <!-- review 수가 5 이상일때 표시 -->
+		                <c:if test="${count > 5}">
+			                <div class="bg-white rounded shadow-sm p-4 mb-4 mt-6 restaurant-detailed-ratings-and-reviews">
+			                	<input type="hidden" name="pageNum" id="pageNum" value="${pageNum }">
+			                	<a class="text-center w-100 d-block mt-4 font-weight-bold" style="cursor: pointer;" onclick="fnSeeViewMore()">See All Reviews</a>
+			            	</div>
+		            	</c:if>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+	</div>	
 	
 <script>
 
@@ -398,7 +416,6 @@ function fnSeeViewMore(){
 	    error:function(request,status,error){
 	    }
 	});		
-	// $('#review').append('<div class="reviews-members pt-4 pb-4">aaaa</div>');
 }
 
 function fnMoveList(){
@@ -417,6 +434,7 @@ function fnAddCart(itemId, itemName){
 		},
 		success : function(data) {
 			alert(itemName + '가(이) 추가되었습니다.');
+			return;
 		},
 	    error:function(request,status,error){
 	    	 alert('로그인한 사용자만 장바구니 추가가 가능합니다.');
