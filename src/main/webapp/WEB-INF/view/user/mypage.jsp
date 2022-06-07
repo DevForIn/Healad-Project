@@ -50,7 +50,7 @@
 			</td>
 		</tr>
 		<tr>
-			<th colspan="2">총 주문 금액 <br><br><h4><strong>[ <fmt:formatNumber value="${user.mileage*20}" pattern="###,###,###,###" /> 원 ] </strong></h4><br>이용해주셔서 감사합니다.</th>
+			<th colspan="2">총 주문 금액 <br><br><h4><strong>[&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatNumber value="${user.mileage*20}" pattern="###,###,###,###" /> 원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;] </strong></h4><br>이용해주셔서 감사합니다.</th>
 		</tr>
 	</table>
 	<br>

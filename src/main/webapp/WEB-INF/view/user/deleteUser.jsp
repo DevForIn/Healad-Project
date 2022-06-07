@@ -24,6 +24,7 @@
 		<tr>
 			<th colspan="2"><h3>[ ${user.userId}님 ] 탈퇴 확인</h3></th>
 		</tr>
+		<c:if test="${loginUser.userId == 'admin'}"><tr><th colspan="2">관리자일경우 System 계정의 Password 입력.</th></tr></c:if>
 		<tr>
 			<th><input type="hidden" name="userId" value="${param.id}">비밀번호</th> 
 			<td><input type="password" name="pwd"></td><tr>

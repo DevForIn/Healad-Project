@@ -53,6 +53,7 @@
 				<tr>
 					<th colspan="2"><h3>[ ${user.userId} ]님의 비밀번호 수정</h3></th>
 				</tr>
+				<c:if test="${loginUser.userId == 'admin'}"><tr><th colspan="2">관리자일경우 System 계정의 Password 입력.</th></tr></c:if>
 				<tr>
 					<td>현재 비밀번호</td>
 					<td><input type="password" name="pwd"></td>

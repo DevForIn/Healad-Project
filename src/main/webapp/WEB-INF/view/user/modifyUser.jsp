@@ -27,8 +27,8 @@
 	<input type="hidden" name="userId" value="${user.userId}">
  <table style="width:500px;">
 		<tr>
-			<th colspan="2"><h3>[ ${user.userId} ]님의 정보 수정</h3></th>
-		</tr>
+			<th colspan="2"><h3>[ ${user.userId} ]님의 정보 수정</h3></th></tr>
+			<c:if test="${loginUser.userId == 'admin'}"><tr><th colspan="2">관리자일경우 System 계정의 Password 입력.</th></tr></c:if>
     <tr><td>비밀번호확인</td><td><form:password path="pwd"  />
       <font color="red"><form:errors path="pwd" /></font></td></tr>
     <tr><td>닉네임</td><td><form:input path="userName" />
