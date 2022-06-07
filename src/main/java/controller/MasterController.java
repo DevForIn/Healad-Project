@@ -409,9 +409,6 @@ public class MasterController {
 			mav.getModel().putAll(bresult.getModel());
 			return mav;	
 		}
-		String textArea = notice.getNoContent();
-		textArea = textArea.replace("\r\n", "<br>");
-		notice.setNoContent(textArea);
 		boardService.noticeWrite(notice,request);
 		mav.setViewName("redirect:masterBoard");
 		return mav;		

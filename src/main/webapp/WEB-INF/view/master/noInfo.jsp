@@ -52,7 +52,7 @@
 						<td colspan="3"> - </td> 
 					</c:when>
 					<c:otherwise>
-						<td colspan="3">${notice.noFile}<br> 
+						<td colspan="3"> ${notice.noFileUrl}<br><br> 
 						<img src="${path}/board/file/${notice.noFileUrl}" width="50%"></td>
 					</c:otherwise>
 				</c:choose>

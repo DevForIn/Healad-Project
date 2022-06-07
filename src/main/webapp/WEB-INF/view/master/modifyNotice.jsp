@@ -25,8 +25,9 @@
 				<form:errors path="noSubject"	class="errortext" /></td>
 			</tr>
 			<tr>
-				<td>내용</td>
-				<td><form:textarea path="noContent" cols="67" rows="15" /> 
+				<td>내용</td>				
+				<td><form:textarea path="noContent" cols="67" rows="15" />
+				<script type="text/javascript">CKEDITOR.replace("noContent",{filebrowserImageUploadUrl:"imgupload"})</script>
 			</td>
 			</tr>
 			<tr>

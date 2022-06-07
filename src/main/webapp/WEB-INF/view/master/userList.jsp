@@ -39,7 +39,7 @@
 			<th>전화</th>
 			<th>E-mail</th>
 			<th>생년월일</th>
-			<th>주소</th>
+			<th style="width: 25%;">주소</th>
 			<th>총 주문 금액<a href="userList?pageNum=${pageNum}&sort=1" class="noline">▲</a>
 				<a href="userList?pageNum=${pageNum}&sort=2" class="noline">▼</a></th>
 			<th>마일리지</th>

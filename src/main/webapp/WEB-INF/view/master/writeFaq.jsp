@@ -10,7 +10,6 @@
 <title>FAQ 작성</title>
 </head>
 <body>
-<div class="loginF">
 	<form:form modelAttribute="faq" action="writeFaq" name="f">
 		<caption>FAQ 작성</caption>
 		<table>			
@@ -29,6 +28,5 @@
 			</tr>
 		</table>
 	</form:form>
-</div>
 </body>
 </html>

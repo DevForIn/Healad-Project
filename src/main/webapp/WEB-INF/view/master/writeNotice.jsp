@@ -10,7 +10,6 @@
 <title>공지 작성</title>
 </head>
 <body>
-<div class="loginF">
 	<form:form modelAttribute="notice" action="writeNotice" enctype="multipart/form-data" name="f">
 		<caption>공지 작성</caption>
 		<table>			
@@ -21,7 +20,9 @@
 			<tr>
 				<td>내용</td>
 				<td><form:textarea path="noContent" rows="15" cols="80" /> 
-				<script type="text/javascript">CKEDITOR.replace("noContent",{filebrowserImageUploadUrl:"imgupload"})</script>
+				  <script type="text/javascript">
+   					  CKEDITOR.replace("noContent",{ filebrowserImageUploadUrl : "imgupload"});
+ 				  </script>
 				<font color="red"><form:errors path="noContent" /></font></td>
 			</tr>
 			<tr>
@@ -34,6 +35,5 @@
 			</tr>
 		</table>
 	</form:form>
-</div>
 </body>
 </html>
