@@ -35,7 +35,7 @@ td {
 	            </a>
 	            <!-- 리뷰 조회 영역 -->
 	            <c:forEach var="data" items="${review }">
-	            	<p>[${data.itemName }] ${data.rvSubject } (<fmt:formatDate value="${data.rvRegDate}" pattern="yyyy-MM-dd" />)</p>
+	            	<a href="${path}/item/detail?itemId=${data.itemId }"><p>[${data.itemName }] ${data.rvSubject } (<fmt:formatDate value="${data.rvRegDate}" pattern="yyyy-MM-dd" />)</p></a>
 	            </c:forEach>
 	          </div>
 	        </div>
