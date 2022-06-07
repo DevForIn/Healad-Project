@@ -48,7 +48,7 @@
 				<td><a href="javascript:list_disp('saleLine${stat.index}')">${sale.saleId}</a></td>
 				<td><fmt:formatDate value="${sale.saleDate}" pattern="yy-MM-dd (E) H시 m분" /></td>
 				<td><fmt:formatNumber pattern="###,###,###,###" value="${sale.total}"/>원</td>
-				<td>${sale.saleAddr}+${sale.saleAddrDetail}+</td>
+				<td>${sale.salePostCode}&nbsp;${sale.saleAddr}&nbsp;${sale.saleAddrDetail}</td>
 				<td>
 				<c:choose>
 					<c:when test="${sale.remark eq null}">( X )</c:when>

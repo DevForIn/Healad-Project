@@ -40,7 +40,7 @@ public interface SaleItemMapper {
 	@Select("SELECT * from (SELECT rownum rnum,si.sum,s.* "
 			+ " FROM ( SELECT SALE_ID,sum(price) sum FROM SALE_ITEM "
 			+ " GROUP BY SALE_ID ) si, SALE s "
-			+ " WHERE si.SALE_ID = s.SALE_ID ) "
+			+ " WHERE si.SALE_ID = s.SALE_ID ORDER BY s.SALE_ID) "
 			+ " WHERE rnum >= #{start} and rnum <= #{end}")
 	List<Sale> allList(Map<String, Object> param);
 
