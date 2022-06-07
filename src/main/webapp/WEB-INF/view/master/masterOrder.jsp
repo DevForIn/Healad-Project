@@ -44,7 +44,7 @@
 				<td>${sale.salePostCode}&nbsp;${sale.saleAddr}&nbsp;${sale.saleAddrDetail}</td>
 				<td>
 				<c:choose>
-					<c:when test="${sale.remark eq null}">( X )</c:when>
+					<c:when test="${sale.remark eq null}">( 없음 )</c:when>
 					<c:otherwise>${sale.remark}</c:otherwise>
 				</c:choose>
 				</td>
