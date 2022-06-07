@@ -258,8 +258,7 @@ background:#dcdcdc;
 		    <div class="offer-dedicated-body-left">
 		        <div class="tab-content" id="pills-tabContent">
 		            <div class="tab-pane fade active show" id="pills-reviews" role="tabpanel" aria-labelledby="pills-reviews-tab">	                
-		                <!-- review 조회 -->
-		                <div id="review"  class="bg-white rounded shadow-sm p-4 mb-4 mt-6 restaurant-detailed-ratings-and-reviews">
+		                <div class="bg-white rounded shadow-sm p-4 mb-4 mt-6 restaurant-detailed-ratings-and-reviews">
 		                    <h5 class="mb-1">All F_A_Q</h5>
 		                     <p class="text-black mb-4 mt-2">- 자주하는 질의응답 - </p>
 		                     <hr>
