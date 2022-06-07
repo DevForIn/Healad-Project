@@ -21,9 +21,11 @@ function fin(){
 	<form method="post" action="deleteBoard" id="deleteBoardForm">
 		<input type="hidden" name="noticeId" value="${notice.noticeId}">
 		<input type="hidden" name="faqId" value="${faq.faqId}">
+		<input type="hidden" name="reviewSeq" value="${review.reviewSeq}">
 	<table style="width: 450px;">
 		<tr>
-			<th colspan="2"><h3>ID : ${notice.noticeId}${faq.faqId}번<br> 제목 : ${notice.noSubject} ${faq.QUESTION} <br> 해당 게시글을 삭제 하시겠습니까 ?</h3><br></th>
+			<th colspan="2"><h3>ID : ${review.reviewSeq}${notice.noticeId}${faq.faqId}번<br>
+			 제목 : ${notice.noSubject} ${faq.QUESTION} ${review.rvSubject} <br> 해당 항목을 삭제 하시겠습니까 ?</h3><br></th>
 		</tr>
 		<tr>
 			<td colspan="2" align="center"><br>

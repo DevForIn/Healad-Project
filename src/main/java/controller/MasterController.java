@@ -25,6 +25,8 @@ import logic.Faq;
 import logic.Item;
 import logic.ItemService;
 import logic.Notice;
+import logic.Review;
+import logic.ReviewService;
 import logic.Sale;
 import logic.SaleService;
 import logic.ShopService;
@@ -42,6 +44,8 @@ public class MasterController {
 	private BoardService boardService;
 	@Autowired
 	private SaleService saleService;
+	@Autowired
+	private ReviewService reviewService;
 	
 	
 	@GetMapping("*")
@@ -415,25 +419,30 @@ public class MasterController {
 	}
 	
 	@GetMapping("deleteBoard")
-	public ModelAndView getDeleteBoard(Integer noticeId,Integer faqId, HttpSession session) {
+	public ModelAndView getDeleteBoard(Integer reviewSeq,Integer noticeId,Integer faqId, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		Notice dbNotice = boardService.noticeInfo(noticeId);
 		Faq dbFaq = boardService.faqInfo(faqId);
+		Review dbReview = reviewService.reviewInfo(reviewSeq);
+		mav.addObject("review",dbReview);
 		mav.addObject("faq",dbFaq);
 		mav.addObject("notice",dbNotice);
 		return mav;
 	}
 	@PostMapping("deleteBoard")
-	public ModelAndView postDeleteBoard(Integer noticeId,Integer faqId,HttpSession session) {
+	public ModelAndView postDeleteBoard(Integer reviewSeq,Integer noticeId,Integer faqId,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		String chk="";
 		if(noticeId == null) noticeId=0;
 		if(faqId == null) faqId=0;
+		if(reviewSeq == null) reviewSeq=0;
 		try {
 			if(noticeId > 0)
 				boardService.deleteNotice(noticeId);
 			if(faqId > 0)
-				boardService.deleteFaq(faqId);			
+				boardService.deleteFaq(faqId);
+			if(reviewSeq > 0)
+				reviewService.deleteReview(reviewSeq);		
 			
 			chk = "ok";
 		}catch(Exception e) {
@@ -506,5 +515,29 @@ public class MasterController {
 		model.addAttribute("fileName",fileName);
 		model.addAttribute("CKEditorFuncNum",CKEditorFuncNum);
 		return "ckedit"; 	
+	}
+	@RequestMapping("reviewList")
+	public ModelAndView reviewList(@Param("pageNum")Integer pageNum, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		if(pageNum == null || pageNum.toString().equals("")) {
+			pageNum=1;
+		}
+		int limit = 10;
+		int count = reviewService.count();
+		List<Review> reviewList  = reviewService.list(pageNum,limit);
+		
+		int maxPage = (int)((double)count/limit + 0.95);
+		int startPage = (int)((pageNum/10.0 + 0.9) - 1) * 10 + 1;
+		int endPage = startPage + 9;
+		if(endPage > maxPage) endPage = maxPage;	
+		
+		mav.addObject("pageNum",pageNum);
+		mav.addObject("maxPage",maxPage);
+		mav.addObject("startPage",startPage);	
+		mav.addObject("endPage",endPage);	
+		mav.addObject("count",count);	
+		
+		mav.addObject("reviewList",reviewList);
+		return mav;
 	}
 }

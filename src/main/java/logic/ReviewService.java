@@ -29,4 +29,21 @@ public class ReviewService {
 		return reviewDao.list(pageNum, limit, itemId);
 	}
 
+	public List<Review> list(Integer pageNum, int limit) {
+		return reviewDao.masterList(pageNum,limit);
+	}
+
+	public Review reviewInfo(Integer reviewSeq) {
+		return reviewDao.reviewInfo(reviewSeq);
+	}
+
+	public void deleteReview(Integer reviewSeq) {
+		reviewDao.deleteReview(reviewSeq);
+		
+	}
+
+	public List<Review> reviewList(String id) {
+		return reviewDao.reviewList(id);
+	}
+
 }

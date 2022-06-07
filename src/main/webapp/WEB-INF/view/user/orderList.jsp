@@ -27,8 +27,8 @@
 <div class="a" style="background-color:#ffff80; height:100%; width:15%; float:left;">
 	<ul>
 		<li><a href="mypage?id=${loginUser.userId}" >My Profile</a></li>
-		<li><a href="orderList?id=${loginUser.userId}" class="current">Order List</a></li>
-		<li><a href="">My Review</a></li>
+		<li><a href="orderList?id=${loginUser.userId}"class="current">Order List</a></li>
+		<li><a href="review?id=${loginUser.userId}">My Review</a></li>
 	</ul>
 </div>
 	<div style="width: 80%; float: right;">

@@ -30,4 +30,7 @@ public interface FaqMapper {
 
 	@Insert("insert into FAQ (FAQ_ID,QUESTION,ANSWER) values (SEQ_FAQ_ID.nextval,#{QUESTION},#{ANSWER})")
 	void faqWrite(Faq faq);
+
+	@Select("select * from faq order by FAQ_ID")
+	List<Faq> itemFaqList();
 }

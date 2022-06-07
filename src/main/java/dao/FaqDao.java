@@ -50,4 +50,7 @@ public class FaqDao {
 		template.getMapper(cls).faqWrite(faq);
 	}
 
+	public List<Faq> itemFaqList() {
+		return template.getMapper(cls).itemFaqList();	
+	}
 }

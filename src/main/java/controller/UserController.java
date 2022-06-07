@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import exception.LoginException;
+import logic.Review;
+import logic.ReviewService;
 import logic.Sale;
 import logic.SaleService;
 import logic.ShopService;
@@ -31,6 +33,8 @@ public class UserController {
 	private ShopService service;
 	@Autowired
 	private SaleService saleService;
+	@Autowired
+	private ReviewService reviewService;
 	
 	@GetMapping("*")
 	public ModelAndView getUser() {
@@ -274,6 +278,15 @@ public class UserController {
 		List<Sale> salelist = saleService.saleList(id);	
 		mav.addObject("user",user);
 		mav.addObject("salelist",salelist);
+		return mav;
+	}
+	@RequestMapping("review")
+	public ModelAndView review(String id,HttpSession session) {		
+		ModelAndView mav = new ModelAndView();
+		User user = service.selectUser(id);
+		List<Review> reviewList = reviewService.reviewList(id);	
+		mav.addObject("user",user);
+		mav.addObject("reviewList",reviewList);
 		return mav;
 	}
 }

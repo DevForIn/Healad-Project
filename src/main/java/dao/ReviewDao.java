@@ -49,61 +49,33 @@ public class ReviewDao {
 		param.put("itemId", itemId);
 		return template.getMapper(cls).list(param);
 	}
-	
-	
-	
-	/*
-	@Autowired
-	private SqlSessionTemplate template;
-	private Map<String,Object> param = new HashMap<String,Object>();
-	private Class<ReviewMapper> cls = ReviewMapper.class;
-	
-	public int count(String rvid) {
-		return template.getMapper(cls).count(rvid);
-	}
-	public List<Review> list(Integer pageNum, int limit, String rvid) {
+
+
+	public List<Review> masterList(Integer pageNum, int limit) {
 		param.clear();
-		int startrow = (pageNum - 1) * limit + 1;
-		int endrow = startrow + limit - 1;
-		param.put("startrow", startrow);
-		param.put("endrow", endrow);
-		param.put("rvid", rvid);
-		return template.getMapper(cls).list(param);
+		int start = (pageNum - 1) * limit +1;
+		int end = start + limit -1;
+		param.put("start", start);
+		param.put("end", end);
+		return template.getMapper(cls).masterList(param);
 	}
-	public void write(Review review) {
-		int num = maxNum() +1; 
-		review.setNum(num);
-		
-		template.getMapper(cls).write(review);
+
+
+	public Review reviewInfo(Integer reviewSeq) {
+		return template.getMapper(cls).reviewInfo(reviewSeq);
 	}
-	private int maxNum() {
-		return template.getMapper(cls).maxNum();
+
+
+	public void deleteReview(Integer reviewSeq) {
+		template.getMapper(cls).deleteReview(reviewSeq);
 	}
-	public Review selectOne(Integer num) {
-		return template.getMapper(cls).selectOne(num);
-	}
-	public void readcntadd(Integer num) {
-		template.getMapper(cls).readcntadd(num);
-	}
-	public void update(Review review) {
-		template.getMapper(cls).update(review);
-		
-	}
-	public void grpStepAdd(Review review) {
-		template.getMapper(cls).grpStepAdd(review);
-		
-	}
-	public void reply(Review review) {
-		review.setNum(maxNum()+1);
-		review.setGrplevel(review.getGrplevel()+1);
-		review.setGrpstep(review.getGrpstep()+1); 
-		template.getMapper(cls).reply(review);
-		
+
+
+	public List<Review> reviewList(String id) {
+		return template.getMapper(cls).reviewList(id); 
 	}
 	
-	public void delete(int num) {
-		template.getMapper(cls).delete(num);
-		
-	}
-*/
+	
+	
+
 }

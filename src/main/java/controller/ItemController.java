@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import logic.BoardService;
 import logic.Cart;
 import logic.CartService;
+import logic.Faq;
 import logic.Item;
 import logic.ItemScore;
 import logic.ItemService;
@@ -32,6 +34,9 @@ public class ItemController {
 	
 	@Autowired
 	private ReviewService reviewService;
+	
+	@Autowired
+	private BoardService boardService;
 
 	@GetMapping("*") 	// 그외 모든 Get 방식 요청
 	public ModelAndView getItem() {
@@ -81,7 +86,8 @@ public class ItemController {
 		
 		int limit = 5;		
 		int count = reviewService.countByItemId(itemId);			
-		List<Review> reviews = reviewService.reviewlistByItemId(pageNum,limit,itemId);		
+		List<Review> reviews = reviewService.reviewlistByItemId(pageNum,limit,itemId);	
+		List<Faq> faqs = boardService.itemFaqList();	
 		
 		
 		int maxPage = (int)((double)count/limit + 0.95);
@@ -95,6 +101,7 @@ public class ItemController {
 		mav.addObject("endPage",endPage);	
 		mav.addObject("count",count); 
 		mav.addObject("reviews", reviews);
+		mav.addObject("faqs",faqs);
 		
 		// 리뷰 평점 조회
 		ItemScore score = itemService.getItemScore(itemId);

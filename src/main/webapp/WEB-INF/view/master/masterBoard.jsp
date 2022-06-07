@@ -22,6 +22,7 @@
 			<li><a href="userList">User List</a></li>
 			<li><a href="outUserList">OutUser List</a></li>
 			<li><a href="masterOrder">Order Status</a></li>
+			<li><a href="reviewList">Review List</a></li>
 			<li><a href="itemList">Item set</a></li>
 			<li><a href="masterBoard" class="current">Notice set</a></li>
 		</ul><br><br><br><br><br>

@@ -252,6 +252,48 @@ background:#dcdcdc;
 	</div>
 	</form>
 	
+	<!-- FAQ -->
+	<div class="container">
+		<div class="card" style="margin-top:10px;">
+		    <div class="offer-dedicated-body-left">
+		        <div class="tab-content" id="pills-tabContent">
+		            <div class="tab-pane fade active show" id="pills-reviews" role="tabpanel" aria-labelledby="pills-reviews-tab">	                
+		                <!-- review 조회 -->
+		                <div id="review"  class="bg-white rounded shadow-sm p-4 mb-4 mt-6 restaurant-detailed-ratings-and-reviews">
+		                    <h5 class="mb-1">All F_A_Q</h5>
+		                     <p class="text-black mb-4 mt-2">- 자주하는 질의응답 - </p>
+		                     <hr>
+		                    <c:forEach var="faqs" items="${faqs}" varStatus="stat">
+			                    <div class="reviews-members pt-4 pb-4">
+			                        <div class="media">
+			                            <div class="media-body">
+			                                <div class="reviews-members-header">			                                	
+			                                    <h6 class="mb-1"><a class="text-black" href="javascript:list_faq('faqLine${stat.index}')">
+			                                    ▼ ${faqs.QUESTION }</a></h6>			                                   
+			                                </div>	
+			                            </div>
+			                        </div>
+			                    </div>
+			                    <div id="faqLine${stat.index}" class="faqLine" style="display: none;">
+			                    <hr>
+			                   	 	<div class="reviews-members pt-4 pb-4">
+			                       		<div class="media">
+			                            	<div class="media-body">
+			                                    	<p class="text-gray">△&nbsp;&nbsp;&nbsp;&nbsp;${faqs.ANSWER }</p>		                                    
+			                                </div>
+			                            </div>
+			                        </div>
+			                    </div>    
+			                    <hr>                  
+		                    </c:forEach>		
+		                    <hr>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+	</div>	
+	
 	<!--  리뷰 -->
 	<div class="container">
 		<div class="card" style="margin-top:10px;">
@@ -373,6 +415,9 @@ background:#dcdcdc;
 	</div>	
 	
 <script>
+function list_faq(id){
+	$("#"+id).toggle()
+}
 function fnOrder(){
 	console.log('fnOrder');
 	$('#orderType').val('D');

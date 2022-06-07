@@ -20,6 +20,7 @@
 			<li><a href="userList">User List</a></li>
 			<li><a href="outUserList" class="current">OutUser List</a></li>
 			<li><a href="masterOrder">Order Status</a></li>
+			<li><a href="reviewList">Review List</a></li>
 			<li><a href="itemList">Item set</a></li>
 			<li><a href="masterBoard">Notice set</a></li>
 

@@ -105,5 +105,10 @@ public class BoardService {
 
 	public void faqWrite(Faq faq) {
 		faqDao.faqWrite(faq);
-	}	
+	}
+
+	public List<Faq> itemFaqList() {
+		return faqDao.itemFaqList();
+	}
+
 }
