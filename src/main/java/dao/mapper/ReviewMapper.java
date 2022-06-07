@@ -10,11 +10,14 @@ import logic.Review;
 public interface ReviewMapper {
 
 	//"<if test='itemId' != null > and item_id = #{itemId} </if>
-	@Select("select * from (select rownum rnum,REVIEW_SEQ, ITEM_NAME, USER_ID, ITEM_ID, RV_SUBJECT, RV_CONTENT, RV_FILE_URL, RV_IP, SCORE, RV_REG_DATE, RV_UPDT_DATE, RV_CHECK "
-			+ " from (select r.*, i.item_name from review r, item i where r.item_id = i.item_id "
-			+ " order by review_seq))"
-			+ " where rnum >= #{start} and rnum <= #{end}"
-			)
+	@Select({"<script>",
+		"select a.rnum, a.review_seq, a.item_name, a.user_id, a.item_id, a.rv_subject, a.rv_content, a.RV_FILE_URL, a.RV_IP, a.SCORE, a.RV_REG_DATE, a.RV_UPDT_DATE, a.RV_CHECK "
+		    + " from (select rownum rnum,REVIEW_SEQ, ITEM_NAME, USER_ID, ITEM_ID, RV_SUBJECT, RV_CONTENT, RV_FILE_URL, RV_IP, SCORE, RV_REG_DATE, RV_UPDT_DATE, RV_CHECK "
+			+ " from (select r.*, i.item_name from review r, item i "
+			+ " where r.item_id = i.item_id ",
+			"<if test='itemId != null' > and i.item_id = #{itemId}</if>",
+			" order by review_seq)) a where rnum >= #{start} and rnum &lt;= #{end}",
+	 "</script>"})
 	List<Review> list(Map<String, Object> param);
 
 	@Select("select count(*) from review")

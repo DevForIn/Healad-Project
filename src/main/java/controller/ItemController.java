@@ -77,15 +77,16 @@ public class ItemController {
 		// 리뷰 리스트 조회
 		if(pageNum == null || pageNum.toString().equals("")) {
 			pageNum=1;
-		}		
-		int limit = 10;		
+		}	
+		
+		int limit = 5;		
 		int count = reviewService.countByItemId(itemId);			
 		List<Review> reviews = reviewService.reviewlistByItemId(pageNum,limit,itemId);		
 		
 		
 		int maxPage = (int)((double)count/limit + 0.95);
-		int startPage = (int)((pageNum/10.0 + 0.9) - 1) * 10 + 1;
-		int endPage = startPage + 9;
+		int startPage = (int)((pageNum/5.0 + 0.9) - 1) * 5 + 1;
+		int endPage = startPage + 4;
 		if(endPage > maxPage) endPage = maxPage;	
 		
 		mav.addObject("pageNum",pageNum);
@@ -142,5 +143,10 @@ public class ItemController {
 		return mav;	
 	}
 	
-
+	@GetMapping("reviews")
+	public List<Review> reviews(Integer itemId, Integer pageNum) {
+		// 카테고리 조회조건이 안넘어왔을때 기본 카테고리 1 (샐러드)로 지정
+		List<Review> review = reviewService.reviewlistByItemId(pageNum, 5, itemId);
+		return review;	
+	}
 }

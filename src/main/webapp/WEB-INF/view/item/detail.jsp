@@ -197,7 +197,7 @@ background:#dcdcdc;
 }
 </style>
 	<form action="../item/order">
-	<input type="hidden" name="itemId" value="${item.itemId}">
+	<input type="hidden" id="itemId" name="itemId" value="${item.itemId}">
 	<!-- order type (주문타입) D: 단건주문, C: 카트 주문  -->
 	<input type="hidden" name="orderType" value="D">
 	<div class="container">
@@ -305,9 +305,13 @@ background:#dcdcdc;
                         </div>
                     </div>
                 </div>
-                <div class="bg-white rounded shadow-sm p-4 mb-4 mt-6 restaurant-detailed-ratings-and-reviews">
+                <div id="review"  class="bg-white rounded shadow-sm p-4 mb-4 mt-6 restaurant-detailed-ratings-and-reviews">
                     <h5 class="mb-1">All Ratings and Reviews</h5>
-                    
+                    <c:if test="${empty reviews }">
+                    	<div class="reviews-members pt-4 pb-4">
+                    	<p>작성된 리뷰가 없습니다.</p>
+                    	</div>
+                    </c:if>
                     <!-- review 반복 -->
                     <c:forEach var="rv" items="${reviews }">
 	                    <div class="reviews-members pt-4 pb-4">
@@ -336,8 +340,14 @@ background:#dcdcdc;
                     </c:forEach>
 
                     <hr>
-                    <a class="text-center w-100 d-block mt-4 font-weight-bold" href="#">See All Reviews</a>
                 </div>
+                <!-- review 수가 5 이상일때 표시 -->
+                <c:if test="${count > 5}">
+	                <div class="bg-white rounded shadow-sm p-4 mb-4 mt-6 restaurant-detailed-ratings-and-reviews">
+	                	<input type="hidden" name="pageNum" id="pageNum" value="${pageNum }">
+	                	<a class="text-center w-100 d-block mt-4 font-weight-bold" style="cursor: pointer;" onclick="fnSeeViewMore()">See All Reviews</a>
+	            	</div>
+            	</c:if>
             </div>
         </div>
     </div>
@@ -345,6 +355,51 @@ background:#dcdcdc;
 </div>	
 	
 <script>
+
+function fnSeeViewMore(){
+	
+	const itemId = $('#itemId').val();
+	var pageNum = Number($('#pageNum').val()) + 1;
+	
+	$.ajax({
+		url : "${path}/item/reviews",
+		data: {
+			'itemId': itemId,
+			'pageNum' : pageNum
+		},
+		success : function(datas) {
+			
+			console.log('datas.length',datas.length);
+			var contents  = '';
+			for(var i=0; i < datas.length; i++) {
+				console.log(datas[i])
+				contents += '<div class="reviews-members pt-4 pb-4">'
+				contents += '<div class="media"><a href="#"><img alt="Generic placeholder image" src="http://bootdey.com/img/Content/avatar/avatar1.png" class="mr-3 rounded-pill"></a><div class="media-body">'
+				contents += '<div class="reviews-members-header">';
+				contents += '<span class="star-rating float-right">';
+				if(datas[i].score >= 1) contents += '<i class="fa fa-star"></i> ';
+				if(datas[i].score >= 2) contents += '<i class="fa fa-star"></i> ';
+				if(datas[i].score >= 3) contents += '<i class="fa fa-star"></i> ';
+				if(datas[i].score >= 4) contents += '<i class="fa fa-star"></i> ';
+				if(datas[i].score >= 5) contents += '<i class="fa fa-star"></i> ';
+				contents += '</span>';
+				contents += '<h6 class="mb-1"><a class="text-black" href="#">'+ datas[i].userId + '</a></h6>';
+				contents += '<p class="text-gray">'+ moment(datas[i].rvRegDate).format('YYYY-MM-DD HH:mm:ss') + '</p>'
+				contents += '</div>';
+				contents += '<div class="reviews-members-body">';
+				contents += '<p>'+ datas[i].rvSubject +'</p>';
+				contents += '<p>'+ datas[i].rvContent +'</p>';
+				contents += '</div>';
+				contents += '</div></div></div>';
+			}
+			$('#review').append(contents);
+			$('#pageNum').val(pageNum);
+		},
+	    error:function(request,status,error){
+	    }
+	});		
+	// $('#review').append('<div class="reviews-members pt-4 pb-4">aaaa</div>');
+}
 
 function fnMoveList(){
 	window.location.href='${path}/item/menu';
