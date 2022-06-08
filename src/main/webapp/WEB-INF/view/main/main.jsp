@@ -123,6 +123,7 @@ function fnAddCart(itemId, itemName){
 			'itemId': itemId,
 			'quantity': 1,
 		},
+		type: "POST",
 		success : function(data) {
 			console.log('data', data)
 			alert(itemName + '가(이) 추가되었습니다.');
