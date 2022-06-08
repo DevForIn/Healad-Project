@@ -15,7 +15,7 @@
 <ul>
 	<li><a href="mypage?id=${loginUser.userId}" class="current">My Profile</a></li>
 	<li><a href="orderList?id=${loginUser.userId}">Order List</a></li>
-	<li><a href="">My Review</a></li>
+	<li><a href="review?id=${loginUser.userId}">My Review</a></li>
 </ul>
 </div>
 <div style="width:60%; float:right;" >
