@@ -1,12 +1,12 @@
 /* /webapp/css/main.css  */
 table {	width : 100%;	border-collapse: collapse;  }
 th,td {
-	border : 3px solid #BDC7FF;
+	border : 1px solid #adadad;
 	text-align: center;
 	padding : 8px;
 }
-th {background-color : #ffffd5;	color : #604949;}
-td { background-color: #D9F3FE;  }
+th {background-color : #007bff;	color : #ffffff;}
+td { background-color: #ffffff;  }
 input[type=text],input[type=password],textarea {	width : 100%;  }
 caption {
 	color : #111111;
@@ -53,7 +53,7 @@ caption {
 	background-color: #c8c800; 
 	color : white;
 }
-/* 로그인,아이디찾기,비밀번호찾기,회원가입 */
+/* 濡쒓렇�씤,�븘�씠�뵒李얘린,鍮꾨�踰덊샇李얘린,�쉶�썝媛��엯 */
 .loginF{
 	position : adbsolute;
     height: 10px;
