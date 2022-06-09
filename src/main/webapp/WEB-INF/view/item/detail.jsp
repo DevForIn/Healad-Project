@@ -301,7 +301,7 @@ background:#dcdcdc;
 		            <div class="tab-pane fade active show" id="pills-reviews" role="tabpanel" aria-labelledby="pills-reviews-tab">
 		                <div class="bg-white rounded shadow-sm p-4 mb-4 clearfix graph-star-rating">
 		                    <h5 class="mb-0 mb-4">리뷰 및 평점
-		                    <button class="btn btn-dark btn-rounded" onclick="location.href='writeReview?id=${item.itemId}'" style="position: relative; left:81%;">리뷰작성</button></h5>
+		                    <button class="btn btn-dark btn-rounded" onclick="fnWriteReview('${item.itemId}')" style="position: relative; left:81%;">리뷰작성</button></h5>
 		                    <div class="graph-star-rating-header">
 		                        <div class="star-rating">
 		                            <a href="#"><i class="icofont-ui-rating active"></i></a>
@@ -467,6 +467,11 @@ function fnSeeViewMore(){
 	    error:function(request,status,error){
 	    }
 	});		
+}
+function fnWriteReview(id){
+	var url = "${path}/item/writeReview?id=";
+	window.open(url+id,"Write_Review","width=1200, height=1000, top=50, left=500");
+	event.preventDefault();
 }
 function fnMoveList(){
 	window.location.href='${path}/item/menu';

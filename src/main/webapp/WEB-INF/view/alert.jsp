@@ -2,5 +2,9 @@
     pageEncoding="UTF-8"%>
 <script>
   alert("${message}");
-  location.href="${url}"
+  if("${url}"==="close"){
+	  window.close();
+  }
+  location.href="${url}"  
+
 </script>

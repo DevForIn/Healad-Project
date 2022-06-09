@@ -19,5 +19,6 @@ public class SiteMeshFilter extends ConfigurableSiteMeshFilter{
 		builder.addExcludedPath("/master/faqInfo*");
 		builder.addExcludedPath("/master/noInfo*");
 		builder.addExcludedPath("/master/deleteBoard*");
+		builder.addExcludedPath("/item/writeReview*");
 	}
 }

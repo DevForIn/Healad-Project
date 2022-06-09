@@ -38,4 +38,13 @@ public class UserLoginAspect {
 		}
 		return joinPoint.proceed();	// 다음 메서드 호출 -> UserController.idCheckmypage
 	}
+	
+	@Around("execution(* controller.User*.notLoginCheck*(..)) && args(..,session)")
+	public Object userNotLoginCheck(ProceedingJoinPoint joinPoint, HttpSession session) throws Throwable {
+		User loginUser = (User)session.getAttribute("loginUser");
+		if(loginUser != null) {
+			throw new LoginException("이미 로그인 상태입니다.!","../");
+		}
+		return joinPoint.proceed();	
+	}
 }

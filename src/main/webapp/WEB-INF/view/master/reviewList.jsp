@@ -76,7 +76,7 @@
 							<c:if test="${view.rvCheck == 1}">Y</c:if></td>
 						<td><a href="deleteBoard?reviewSeq=${view.reviewSeq}" 
 								onclick="window.open(this.href, '_blank', 'top=280, left=700, width=480, height=200'); return false;">
-						<strong>삭제</strong></a></td>
+						<font color="blue;"><strong>삭제</strong></font></a></td>
 					</tr>
 				</c:forEach>		
 			</table>	

@@ -44,7 +44,7 @@ public class UserController {
 	}	
 
 	@PostMapping("signUp")
-	public ModelAndView signUp(@Valid User user,BindingResult bresult,HttpServletRequest request) {
+	public ModelAndView notLoginChecksignUp(@Valid User user,BindingResult bresult,HttpServletRequest request,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 
 		if(bresult.hasErrors()) {

@@ -2,11 +2,13 @@ package controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -155,5 +157,33 @@ public class ItemController {
 		// 카테고리 조회조건이 안넘어왔을때 기본 카테고리 1 (샐러드)로 지정
 		List<Review> review = reviewService.reviewlistByItemId(pageNum, 5, itemId);
 		return review;	
+	}
+	
+	@GetMapping("writeReview")
+	public ModelAndView writeReview(Integer id, HttpServletRequest request,HttpSession session) {				
+		ModelAndView mav = new ModelAndView();
+		User user = (User) session.getAttribute("loginUser");
+		Item dbitem = itemService.selectOne(id);
+		Review review = new Review();
+		mav.addObject("item", dbitem);
+		mav.addObject("review", review);
+		
+		if(user == null || user.equals("")) {
+			String message= "로그인이 필요합니다. 팝업이 종료됩니다.";
+			String url="close";
+			mav.addObject("message",message);
+			mav.addObject("url",url);	
+			mav.setViewName("alert");
+			return mav;		
+		}
+
+		return mav;	
+	}
+	
+	@PostMapping("writeReview")
+	public ModelAndView postWriteReview(Integer itemId, HttpSession session) {				
+		ModelAndView mav = new ModelAndView();
+		
+		return mav;	
 	}
 }
