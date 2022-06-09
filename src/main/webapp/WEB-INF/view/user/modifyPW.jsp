@@ -38,41 +38,43 @@
 	   return true;
    }
 </script>
-	<div class="a"
-		style="background-color: #ffff80; height: 100%; width: 15%; float: left;">
-		<ul>
-			<li><a href="mypage?id=${loginUser.userId}" class="current">My Profile</a></li>
-			<li><a href="">Order List</a></li>
-			<li><a href="">My Review</a></li>
-		</ul>
+
+<div class="row">
+	<div class="col-3">
+		<a href="mypage?id=${loginUser.userId}" class="list-group-item list-group-item-action active">나의 프로필</a>
+		<a href="orderList?id=${loginUser.userId}"  class="list-group-item list-group-item-action">주문 목록</a>
+		<a href="review?id=${loginUser.userId}"  class="list-group-item list-group-item-action">나의 리뷰</a>	
 	</div>
-	<div style="width: 60%; float: right;">
-		<form action="modifyPW" method="post" name="f" onsubmit="return inchk(this)">
-		<input type="hidden" name="userId" value="${user.userId}">
-			<table style="width: 500px;">
-				<tr>
-					<th colspan="2"><h3>[ ${user.userId} ]님의 비밀번호 수정</h3></th>
-				</tr>
-				<c:if test="${loginUser.userId == 'admin'}"><tr><th colspan="2">관리자일경우 System 계정의 Password 입력.</th></tr></c:if>
-				<tr>
-					<td>현재 비밀번호</td>
-					<td><input type="password" name="pwd"></td>
-				</tr>
-				<tr>
-					<td>변경 비밀번호</td>
-					<td><input type="password" name="newpwd1"></td>
-				</tr>
-				<tr>
-					<td>변경 비밀번호 재입력</td>
-					<td><input type="password" name="newpwd2"></td>
-				</tr>
-				<tr>
-					<td colspan="2"><input type="submit" value="비밀번호 변경">
-					<a href="#" onclick="history.back()"><input type="button" value="돌아가기"></a>
-					</td>
-				</tr>
-			</table>
-		</form>
+	<div class="col-9">
+		<div style="width: 100%;">
+			<form action="modifyPW" method="post" name="f" onsubmit="return inchk(this)">
+			<input type="hidden" name="userId" value="${user.userId}">
+				<table style="width: 100%;">
+					<tr>
+						<th colspan="2"><h3>[ ${user.userId} ]님의 비밀번호 수정</h3></th>
+					</tr>
+					<c:if test="${loginUser.userId == 'admin'}"><tr><th colspan="2">관리자일경우 System 계정의 Password 입력.</th></tr></c:if>
+					<tr>
+						<td>현재 비밀번호</td>
+						<td><input type="password" name="pwd"></td>
+					</tr>
+					<tr>
+						<td>변경 비밀번호</td>
+						<td><input type="password" name="newpwd1"></td>
+					</tr>
+					<tr>
+						<td>변경 비밀번호 재입력</td>
+						<td><input type="password" name="newpwd2"></td>
+					</tr>
+					<tr>
+						<td colspan="2"><input type="submit" value="비밀번호 변경">
+						<a href="#" onclick="history.back()"><input type="button" value="돌아가기"></a>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>	
 	</div>
+</div>
 </body>
 </html>
