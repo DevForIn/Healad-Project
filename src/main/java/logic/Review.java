@@ -4,17 +4,17 @@ import java.util.Date;
 
 
 public class Review {
-	private int reviewSeq;
-	private String userId;
-	private int itemId;
-	private String rvSubject;
-	private String rvContent;
-	private String rvFileUrl;
-	private String rvIp;
-	private int score;
-	private Date rvRegDate;
-	private Date rvUpdtDate;
-	private int rvCheck;
+	private int reviewSeq;		// 시퀀스 No
+	private String userId;		// 리뷰 사용자 아이디
+	private int itemId;			// 리뷰 대상 아이템 아이디
+	private String rvSubject;	// 리뷰 제목
+	private String rvContent;	// 리뷰 내용
+	private String rvFileUrl;	// 리뷰 이미지
+	private String rvIp;		// 리뷰작성자 IP 주소
+	private int score;			// 평점
+	private Date rvRegDate;		// 리뷰 작성날짜
+	private Date rvUpdtDate;	// 리뷰 수정 날자 
+	private int rvCheck;		// 관리자 체크
 	
 	private String itemName;
 	

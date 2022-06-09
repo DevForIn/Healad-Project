@@ -30,7 +30,6 @@
 		</div>
 		<div class="col-9">
 			<table class="table" style="width: 100%;">
-				<thead>
 				<tr>
 					<th colspan="13">HEALAD_리뷰목록&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;총 ${count} 개</th>
 				</tr>
@@ -47,12 +46,11 @@
 					<th scope="col">매니저답변</th>
 					<th scope="col">Modify</th>
 				</tr>
-				</thead>
 				<c:forEach items="${reviewList}" var="view">	
 					<tr>
 						<td>${view.reviewSeq}</td>
 						<td>${view.userId}</td>
-						<td><a href="${path}/item/detail?itemId=${view.itemId}"><strong>[ ${view.itemId} ] </strong></a></td>
+						<td><a href="${path}/item/detail?itemId=${view.itemId}"><strong><font color="blue;">[ ${view.itemId} ] </font></strong></a></td>
 						<td>${view.rvSubject}</td>
 						<td>${view.rvContent}</td>
 						<td><c:if test="${view.rvFileUrl == null}"> - </c:if>

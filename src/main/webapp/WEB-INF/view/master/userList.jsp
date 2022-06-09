@@ -55,7 +55,7 @@
 							<c:set var="NoNum" value="${NoNum+1}"/></td>
 						<td>${user.userId}</td>
 						<td>${user.userName}</td>
-						<td><a href="../user/modifyPW?id=${user.userId}"><strong>${user.pwd}</strong></a></td>
+						<td><a href="../user/modifyPW?id=${user.userId}"><strong><font color="blue;">${user.pwd}</font></strong></a></td>
 						<td>${user.phoneNo}</td>
 						<td>${user.email}</td>
 						<td>

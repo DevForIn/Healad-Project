@@ -31,8 +31,7 @@ function CI(){
 		<div class="col-9">
 			<table style="width: 100%;">
 				<tr>
-					<th colspan="6">HEALAD_상품&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;총 ${count} ITEM</th>
-					<th><a href="${path}/master/newItem"><font color="black">[ ITEM 추가 ]</font></a></th>
+					<th colspan="7">HEALAD_상품&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;총 ${count} ITEM</th>
 				</tr>
 				<tr>
 					<th>카테고리  <select name="Cat_ID" onchange="CI()">
@@ -70,14 +69,15 @@ function CI(){
 						<td class="left">${item.description}</td>				
 						<td>
 						<a href="${path}/img/${item.pictureUrl}">${item.pictureUrl}</a></td>
-						<td>${item.useYn}			
+						<td><strong>${item.useYn}</strong>			
 							<a href="itemYN?id=${item.itemId}" 
 								onclick="window.open(this.href, '_blank', 'top=280, left=700, width=480, height=400'); return false;">
-							<c:if test="${item.useYn == 'Y'}"><strong>[활성화]</strong></c:if>
-							<c:if test="${item.useYn == 'N'}"><strong>[비활성화]</strong></c:if></a>
+							<c:if test="${item.useYn == 'Y'}"><strong><font color="blue;">[활성화]</font></strong></c:if>
+							<c:if test="${item.useYn == 'N'}"><strong><font color="blue;">[비활성화]</font></strong></c:if></a>
 						</td>			
 					</tr>
-				</c:forEach>		
+				</c:forEach>	
+				<tr><th colspan="7"><a href="newItem">[ ITEM 추가 ]</a></th></tr>	
 			</table>
 			
 			<div class="container" class="margin-top: 10px;">			

@@ -46,7 +46,8 @@
 				<tr>
 					<td>${notice.noticeId}</td>
 					<td class="left">
-						<a href="noInfo?id=${notice.noticeId}" onclick="window.open(this.href, '_blank', 'top=100, left=500, width=900, height=750'); return false;"><strong>${notice.noSubject}</strong></a>
+						<a href="noInfo?id=${notice.noticeId}" onclick="window.open(this.href, '_blank', 'top=100, left=500, width=900, height=750'); return false;">
+						<strong><font color="blue;">${notice.noSubject}</font></strong></a>
 					</td>
 					<td>${notice.noReadCnt}</td>
 					<td><c:if test="${notice.noFileUrl== null }"> - </c:if><c:if test="${notice.noFileUrl!= null }"> O </c:if></td>
@@ -105,7 +106,8 @@
 				<tr>
 					<td>${faq.faqId}</td>				
 					<td class="left">
-						<a href="faqInfo?id=${faq.faqId}" onclick="window.open(this.href, '_blank', 'top=100, left=500, width=900, height=750'); return false;"><strong>${faq.QUESTION}</strong></a>			
+						<a href="faqInfo?id=${faq.faqId}" onclick="window.open(this.href, '_blank', 'top=100, left=500, width=900, height=750'); return false;">
+						<strong><font color="blue;">${faq.QUESTION}</font></strong></a>			
 					</td>
 					<td><a href="modifyFaq?num=${faq.faqId}"><strong>수정</strong></a><br>
 									<a href="deleteBoard?faqId=${faq.faqId}" 
