@@ -28,9 +28,9 @@ public interface ReviewMapper {
 	@Select("select count(*) from review where item_id = #{itemId}")
 	int countByItemId(Integer itemId);
 
-	@Select("select * from (select rownum rnum,review_seq, user_id, item_id, rv_subject, "
+	@Select("select * from (select rownum rnum,review_seq, user_id, item_id, item_name, rv_subject, "
 			+ " rv_content,rv_file_url,rv_ip,score,rv_reg_date,rv_updt_date,"
-			+ " rv_check from (select * from review order by review_seq))"
+			+ " rv_check from (select r.*, i.item_name from review r, item i where r.item_id = i.item_id order by review_seq))"
 			+ "  where rnum >= #{start} and rnum <= #{end}")
 	List<Review> masterList(Map<String, Object> param);
 

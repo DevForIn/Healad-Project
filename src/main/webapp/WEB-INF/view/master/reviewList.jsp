@@ -50,7 +50,7 @@
 					<tr>
 						<td>${view.reviewSeq}</td>
 						<td>${view.userId}</td>
-						<td><a href="${path}/item/detail?itemId=${view.itemId}"><strong><font color="blue;">[ ${view.itemId} ] </font></strong></a></td>
+						<td><a href="${path}/item/detail?itemId=${view.itemId}"><strong><font color="blue;">[ ${view.itemId} ] ${view.itemName } </font></strong></a></td>
 						<td>${view.rvSubject}</td>
 						<td>${view.rvContent}</td>
 						<td><c:if test="${view.rvFileUrl == null}"> - </c:if>
